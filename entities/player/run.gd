@@ -1,0 +1,23 @@
+extends PlayerState
+
+
+func physics_process(delta: float) -> void:
+    if !player.is_on_floor():
+        emit_signal("state_change", self.name, "fall")
+
+    if Input.is_action_pressed("left"):
+        player.velocity.x = lerp(player.velocity.x, \
+            -player.WALK_SPEED, player.ACCEL)
+        player._sprite.flip_h = true
+    elif Input.is_action_pressed("right"):
+        player.velocity.x =  lerp(player.velocity.x, \
+            player.WALK_SPEED, player.ACCEL)
+        player._sprite.flip_h = false
+    else:
+        player.velocity.x = lerp(player.velocity.x, 0.0, player.ACCEL)
+        emit_signal("state_change", self.name, "idle")
+
+    if Input.is_action_just_pressed("jump"):
+        emit_signal("state_change", self.name, "jump")
+
+    player.move_and_slide()
