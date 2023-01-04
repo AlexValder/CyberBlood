@@ -16,6 +16,7 @@ func _on_player_ready():
         player_state.state_change.connect(_on_state_change)
 
     _current_state.on_entry()
+    _player.update_status(_current_state.name)
 
 
 func _physics_process(delta: float) -> void:
@@ -23,6 +24,7 @@ func _physics_process(delta: float) -> void:
 
 
 func _on_state_change(_old_state: String, new_state: String) -> void:
+    _player.update_status(new_state)
     _current_state.on_exit()
     _current_state = get_node(new_state)
     _current_state.on_entry()

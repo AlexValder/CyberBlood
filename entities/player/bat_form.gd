@@ -3,21 +3,12 @@ extends PlayerState
 
 func on_entry() -> void:
     super.on_entry()
-    player.velocity.y = -player.JUMP
+    player.ensure_collision("bat")
 
 
 func physics_process(delta: float) -> void:
-    player.velocity.y += delta * player.GRAVITY
-
-    if Input.is_action_just_pressed("melee"):
-        # TODO: air attack
-        emit_signal("state_change", self.name, "attack1")
-
     if Input.is_action_just_pressed("bat_form"):
-        emit_signal("state_change", self.name, "bat_form")
-
-    if Input.is_action_just_pressed("jump"):
-        emit_signal("state_change", self.name, "double_jump")
+        emit_signal("state_change", self.name, "idle")
 
     if Input.is_action_pressed("left"):
         player.velocity.x = lerp(player.velocity.x, \
@@ -30,7 +21,18 @@ func physics_process(delta: float) -> void:
     else:
         player.velocity.x = lerp(player.velocity.x, 0.0, player.ACCEL)
 
-    if player.velocity.y > 0:
-        emit_signal("state_change", self.name, "fall")
+    if Input.is_action_pressed("up"):
+        player.velocity.y = lerp(player.velocity.y, \
+            -player.WALK_SPEED, player.ACCEL)
+    elif Input.is_action_pressed("down"):
+        player.velocity.y = lerp(player.velocity.y, \
+            player.WALK_SPEED, player.ACCEL)
+    else:
+        player.velocity.y = lerp(player.velocity.y, 0.0, player.ACCEL)
 
     player.move_and_slide()
+
+
+func on_exit() -> void:
+    super.on_exit()
+    player.ensure_collision("human")

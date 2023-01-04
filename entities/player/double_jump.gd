@@ -31,6 +31,6 @@ func physics_process(delta: float) -> void:
         player.velocity.x = lerp(player.velocity.x, 0.0, player.ACCEL)
 
     if player.velocity.y > 0:
-        emit_signal("state_change", self.name, "fall")
+        emit_signal("state_change", self.name, "final_fall")
 
     player.move_and_slide()
