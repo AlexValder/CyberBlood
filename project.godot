@@ -9,6 +9,11 @@
 config_version=5
 
 _global_script_classes=[{
+"base": "ProgressBar",
+"class": &"HealthBar",
+"language": &"GDScript",
+"path": "res://entities/player/health_bar.gd"
+}, {
 "base": "CharacterBody2D",
 "class": &"Player",
 "language": &"GDScript",
@@ -25,6 +30,7 @@ _global_script_classes=[{
 "path": "res://entities/player/state_machine.gd"
 }]
 _global_script_class_icons={
+"HealthBar": "",
 "Player": "",
 "PlayerState": "",
 "PlayerStateMachine": ""
@@ -36,6 +42,10 @@ config/name="BloodyNight"
 run/main_scene="res://levels/test_level.tscn"
 config/features=PackedStringArray("4.0", "Forward Plus")
 config/icon="res://icon.svg"
+
+[autoload]
+
+GameManager="*res://scripts/game_manager.gd"
 
 [display]
 
@@ -85,8 +95,14 @@ melee={
 }
 bat_form={
 "deadzone": 0.5,
-"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":4194332,"unicode":0,"echo":false,"script":null)
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":49,"physical_keycode":0,"unicode":0,"echo":false,"script":null)
 , Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"button_index":10,"pressure":0.0,"pressed":false,"script":null)
+]
+}
+pause={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":4194305,"unicode":0,"echo":false,"script":null)
+, Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"button_index":6,"pressure":0.0,"pressed":false,"script":null)
 ]
 }
 

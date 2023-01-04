@@ -1,4 +1,4 @@
-[gd_scene load_steps=61 format=3 uid="uid://baq2prxwjg4qm"]
+[gd_scene load_steps=71 format=3 uid="uid://baq2prxwjg4qm"]
 
 [ext_resource type="Script" path="res://entities/player/player.gd" id="1_spune"]
 [ext_resource type="Texture2D" uid="uid://cjy71jbvm5o5c" path="res://assets/sprites/player_attack1.png" id="2_3ntaq"]
@@ -19,6 +19,8 @@
 [ext_resource type="Script" path="res://entities/player/final_fall.gd" id="13_igadn"]
 [ext_resource type="Script" path="res://entities/player/attack2.gd" id="14_y4qfo"]
 [ext_resource type="Script" path="res://entities/player/bat_form.gd" id="18_ibdsy"]
+[ext_resource type="Theme" uid="uid://brlh53bypvlrb" path="res://assets/gui/themes/default.tres" id="19_7otby"]
+[ext_resource type="Script" path="res://entities/player/health_bar.gd" id="21_5drpt"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_tx87j"]
 atlas = ExtResource("2_3ntaq")
@@ -224,8 +226,66 @@ animations = [{
 radius = 11.0
 height = 42.0
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_kb2w0"]
+radius = 6.99642
+height = 28.0069
+
+[sub_resource type="Animation" id="Animation_m2ocw"]
+resource_name = "damage_invincibility"
+length = 0.5
+loop_mode = 1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("sprite:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0.1), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_ccmy1"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("sprite:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_d1s4w"]
+_data = {
+"RESET": SubResource("Animation_ccmy1"),
+"damage_invincibility": SubResource("Animation_m2ocw")
+}
+
+[sub_resource type="LabelSettings" id="LabelSettings_2h0a3"]
+outline_size = 2
+outline_color = Color(0, 0, 0, 1)
+
 [sub_resource type="LabelSettings" id="LabelSettings_kpyct"]
 font_color = Color(1, 0, 0, 1)
+outline_size = 2
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_etbr7"]
+bg_color = Color(0.180392, 0.0117647, 0.0156863, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tirju"]
+bg_color = Color(1, 0.0901961, 0.0901961, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_oxudh"]
+font_size = 32
 
 [node name="player" type="CharacterBody2D"]
 collision_layer = 4
@@ -235,7 +295,7 @@ script = ExtResource("1_spune")
 [node name="sprite" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
 frames = SubResource("SpriteFrames_443fo")
-animation = &"idle"
+animation = &"bat_form"
 playing = true
 offset = Vector2(0, -22)
 
@@ -246,11 +306,19 @@ shape = SubResource("CapsuleShape2D_4bru6")
 [node name="shape_bat" type="CollisionShape2D" parent="."]
 position = Vector2(-1, -23)
 rotation = -1.57433
-shape = SubResource("CapsuleShape2D_4bru6")
+shape = SubResource("CapsuleShape2D_kb2w0")
 disabled = true
 
 [node name="camera" type="Camera2D" parent="."]
 current = true
+
+[node name="damage_timer" type="Timer" parent="."]
+one_shot = true
+
+[node name="player_effects" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_d1s4w")
+}
 
 [node name="state_machine" type="Node2D" parent="."]
 script = ExtResource("6_01c75")
@@ -284,15 +352,28 @@ script = ExtResource("18_ibdsy")
 
 [node name="GUI" type="CanvasLayer" parent="."]
 
-[node name="fps" type="Label" parent="GUI"]
+[node name="HUD" type="Control" parent="GUI"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("19_7otby")
+
+[node name="fps" type="Label" parent="GUI/HUD"]
+layout_mode = 0
 offset_left = 5.0
 offset_top = 5.0
 offset_right = 45.0
 offset_bottom = 31.0
+theme = ExtResource("19_7otby")
 text = "FPS: "
+label_settings = SubResource("LabelSettings_2h0a3")
 script = ExtResource("11_upq50")
 
-[node name="status" type="Label" parent="GUI"]
+[node name="status" type="Label" parent="GUI/HUD"]
+layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
@@ -300,8 +381,45 @@ offset_left = -20.0
 offset_right = 20.0
 offset_bottom = 23.0
 grow_horizontal = 2
+theme = ExtResource("19_7otby")
+text = "status"
 label_settings = SubResource("LabelSettings_kpyct")
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="health_bar" type="ProgressBar" parent="GUI/HUD"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(200, 10)
+layout_direction = 2
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 5.0
+offset_top = -30.0
+offset_right = 205.0
+offset_bottom = -3.0
+grow_vertical = 0
+theme_override_styles/background = SubResource("StyleBoxFlat_etbr7")
+theme_override_styles/fill = SubResource("StyleBoxFlat_tirju")
+step = 1.0
+value = 50.0
+show_percentage = false
+script = ExtResource("21_5drpt")
+
+[node name="value" type="Label" parent="GUI/HUD/health_bar"]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -11.5
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "0"
+label_settings = SubResource("LabelSettings_oxudh")
+horizontal_alignment = 1
+
+[connection signal="player_damaged" from="." to="GUI/HUD/health_bar" method="_on_character_damaged"]
 [connection signal="ready" from="." to="state_machine" method="_on_player_ready"]

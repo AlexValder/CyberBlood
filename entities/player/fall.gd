@@ -15,16 +15,7 @@ func physics_process(delta: float) -> void:
     if Input.is_action_just_pressed("jump"):
         emit_signal("state_change", self.name, "double_jump")
 
-    if Input.is_action_pressed("left"):
-        player.velocity.x = lerp(player.velocity.x, \
-            -player.WALK_SPEED, player.ACCEL)
-        player._sprite.flip_h = true
-    elif Input.is_action_pressed("right"):
-        player.velocity.x =  lerp(player.velocity.x, \
-            player.WALK_SPEED, player.ACCEL)
-        player._sprite.flip_h = false
-    else:
-        player.velocity.x = lerp(player.velocity.x, 0.0, player.ACCEL)
+    _check_horizontal_movement(delta, player.WALK_SPEED)
 
     player.velocity.y += delta * player.GRAVITY
     player.move_and_slide()
