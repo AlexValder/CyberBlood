@@ -1,4 +1,4 @@
-[gd_scene load_steps=71 format=3 uid="uid://baq2prxwjg4qm"]
+[gd_scene load_steps=72 format=3 uid="uid://baq2prxwjg4qm"]
 
 [ext_resource type="Script" path="res://entities/player/player.gd" id="1_spune"]
 [ext_resource type="Texture2D" uid="uid://cjy71jbvm5o5c" path="res://assets/sprites/player_attack1.png" id="2_3ntaq"]
@@ -20,6 +20,7 @@
 [ext_resource type="Script" path="res://entities/player/attack2.gd" id="14_y4qfo"]
 [ext_resource type="Script" path="res://entities/player/bat_form.gd" id="18_ibdsy"]
 [ext_resource type="Theme" uid="uid://brlh53bypvlrb" path="res://assets/gui/themes/default.tres" id="19_7otby"]
+[ext_resource type="Script" path="res://entities/player/help.gd" id="20_wfyyi"]
 [ext_resource type="Script" path="res://entities/player/health_bar.gd" id="21_5drpt"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_tx87j"]
@@ -209,7 +210,7 @@ animations = [{
 "frames": [SubResource("AtlasTexture_ckn4y"), SubResource("AtlasTexture_qa2op"), SubResource("AtlasTexture_f5etf"), SubResource("AtlasTexture_biy88"), SubResource("AtlasTexture_hexus"), SubResource("AtlasTexture_0gls7"), SubResource("AtlasTexture_5ugyr"), SubResource("AtlasTexture_d1hci")],
 "loop": true,
 "name": &"idle",
-"speed": 5.0
+"speed": 10.0
 }, {
 "frames": [SubResource("AtlasTexture_kpa6t"), SubResource("AtlasTexture_g4lmd")],
 "loop": false,
@@ -219,7 +220,7 @@ animations = [{
 "frames": [SubResource("AtlasTexture_lfj84"), SubResource("AtlasTexture_g8mq3"), SubResource("AtlasTexture_yfaee"), SubResource("AtlasTexture_p711n"), SubResource("AtlasTexture_wiefr"), SubResource("AtlasTexture_t2am2"), SubResource("AtlasTexture_p8km4"), SubResource("AtlasTexture_2k47q")],
 "loop": true,
 "name": &"run",
-"speed": 5.0
+"speed": 10.0
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_4bru6"]
@@ -227,8 +228,23 @@ radius = 11.0
 height = 42.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_kb2w0"]
-radius = 6.99642
-height = 28.0069
+radius = 5.99995
+height = 11.9999
+
+[sub_resource type="Animation" id="Animation_ccmy1"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("sprite:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
 
 [sub_resource type="Animation" id="Animation_m2ocw"]
 resource_name = "damage_invincibility"
@@ -246,21 +262,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0.1), Color(1, 1, 1, 1)]
-}
-
-[sub_resource type="Animation" id="Animation_ccmy1"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("sprite:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 1)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_d1s4w"]
@@ -304,13 +305,17 @@ position = Vector2(0, -22)
 shape = SubResource("CapsuleShape2D_4bru6")
 
 [node name="shape_bat" type="CollisionShape2D" parent="."]
-position = Vector2(-1, -23)
+position = Vector2(1.19209e-07, -23)
 rotation = -1.57433
 shape = SubResource("CapsuleShape2D_kb2w0")
 disabled = true
 
 [node name="camera" type="Camera2D" parent="."]
 current = true
+limit_left = 0
+limit_right = 1150
+limit_bottom = 500
+limit_smoothed = true
 
 [node name="damage_timer" type="Timer" parent="."]
 one_shot = true
@@ -353,6 +358,7 @@ script = ExtResource("18_ibdsy")
 [node name="GUI" type="CanvasLayer" parent="."]
 
 [node name="HUD" type="Control" parent="GUI"]
+texture_filter = 1
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -361,12 +367,72 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("19_7otby")
 
+[node name="cont" type="TabContainer" parent="GUI/HUD"]
+visible = false
+self_modulate = Color(0.54902, 0.172549, 0.333333, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 50.0
+offset_top = 50.0
+offset_right = -50.0
+offset_bottom = -50.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("20_wfyyi")
+
+[node name="Controls" type="VBoxContainer" parent="GUI/HUD/cont"]
+self_modulate = Color(0.54902, 0.172549, 0.333333, 1)
+layout_mode = 2
+theme = ExtResource("19_7otby")
+alignment = 1
+
+[node name="label01" type="Label" parent="GUI/HUD/cont/Controls"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+text = "WASD / D-pad - movement"
+horizontal_alignment = 1
+
+[node name="label02" type="Label" parent="GUI/HUD/cont/Controls"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+text = "Space / A - jump (there's a double jump)"
+horizontal_alignment = 1
+
+[node name="label03" type="Label" parent="GUI/HUD/cont/Controls"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+text = "LMB / X - attack (there's a simple combo)"
+horizontal_alignment = 1
+
+[node name="label04" type="Label" parent="GUI/HUD/cont/Controls"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+text = "Q - self-damage (you can die)"
+horizontal_alignment = 1
+
+[node name="label05" type="Label" parent="GUI/HUD/cont/Controls"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+text = "1 / LB - transformation"
+horizontal_alignment = 1
+
+[node name="label06" type="Label" parent="GUI/HUD/cont/Controls"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+text = "Esc / Start - quit the game"
+horizontal_alignment = 1
+
 [node name="fps" type="Label" parent="GUI/HUD"]
-layout_mode = 0
-offset_left = 5.0
-offset_top = 5.0
-offset_right = 45.0
-offset_bottom = 31.0
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -40.0
+offset_bottom = 26.0
+grow_horizontal = 0
 theme = ExtResource("19_7otby")
 text = "FPS: "
 label_settings = SubResource("LabelSettings_2h0a3")
@@ -389,25 +455,22 @@ vertical_alignment = 1
 
 [node name="health_bar" type="ProgressBar" parent="GUI/HUD"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(200, 10)
+custom_minimum_size = Vector2(200, 6)
 layout_direction = 2
-layout_mode = 1
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
+layout_mode = 0
 offset_left = 5.0
-offset_top = -30.0
+offset_top = 5.0
 offset_right = 205.0
-offset_bottom = -3.0
-grow_vertical = 0
+offset_bottom = 15.0
 theme_override_styles/background = SubResource("StyleBoxFlat_etbr7")
 theme_override_styles/fill = SubResource("StyleBoxFlat_tirju")
-step = 1.0
+step = 0.05
 value = 50.0
 show_percentage = false
 script = ExtResource("21_5drpt")
 
 [node name="value" type="Label" parent="GUI/HUD/health_bar"]
+z_index = 2
 layout_mode = 1
 anchors_preset = 14
 anchor_top = 0.5

@@ -4,13 +4,14 @@ class_name Player
 signal player_dead
 signal player_damaged(old_value, new_value)
 
-const GRAVITY := 320.0
+const GRAVITY := 350.0
 const WALK_SPEED := 120.0
 const FLY_SPEED := 200.0
 const JUMP := 210.0
 const ACCEL := 0.1
 
 @onready var _sprite := $sprite as AnimatedSprite2D
+@onready var _camera := $camera as Camera2D
 @onready var _status := $GUI/HUD/status as Label
 @onready var _timer := $damage_timer as Timer
 @onready var _player_anim := $player_effects as AnimationPlayer
@@ -56,6 +57,13 @@ func ensure_collision(form: String) -> void:
 
 func update_status(status: String) -> void:
     _status.text = status
+
+
+func set_limits(vec: Vector4) -> void:
+    _camera.limit_left = vec[0]
+    _camera.limit_top = vec[1]
+    _camera.limit_right = vec[2]
+    _camera.limit_bottom = vec[3]
 
 
 func _ready() -> void:

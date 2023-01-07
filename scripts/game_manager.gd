@@ -7,6 +7,7 @@ func reload_level() -> void:
 
 func _ready() -> void:
     self.process_mode = Node.PROCESS_MODE_ALWAYS
+    Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
 
 func _unhandled_input(event: InputEvent) -> void:
