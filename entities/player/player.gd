@@ -49,7 +49,10 @@ func damage(value: int) -> void:
 
     current_health -= value
     if current_health <= 0:
-        emit_signal("player_dead")
+        play_anim("death")
+        _sprite.animation_finished.connect(
+            func(): emit_signal("player_dead"), Object.CONNECT_ONE_SHOT
+        )
 
     _on_start_invicibility()
 
@@ -113,7 +116,6 @@ func set_limits(vec: Vector4i) -> void:
 
 func _ready() -> void:
     _timer.timeout.connect(_on_stop_invincibility, Object.CONNECT_PERSIST)
-    self.player_dead.connect(GameManager.reload_level, Object.CONNECT_ONE_SHOT)
 
     var health_bar := $"%health_bar" as HealthBar
     health_bar.max_value = max_health
@@ -163,9 +165,7 @@ func _check_space(h_space: float, v_space: float) -> bool:
 
     if result:
         horizontal = abs(self.global_position.x - result.position.x)
-
         params.to = self.global_position + Vector2(-2 * h_space, 0)
-
         result = space_state.intersect_ray(params)
 
         if result:
@@ -185,14 +185,11 @@ func _check_space(h_space: float, v_space: float) -> bool:
     # sum of both has to be no less than required
 
     params.to = self.global_position + Vector2(0, -2 * v_space)
-
     result = space_state.intersect_ray(params)
 
     if result:
         vertical = abs(self.global_position.y - result.position.y)
-
         params.to = self.global_position + Vector2(0, 2 * v_space)
-
         result = space_state.intersect_ray(params)
 
         if result:

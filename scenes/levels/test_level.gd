@@ -1,12 +1,6 @@
-extends Node2D
-class_name BaseLevel
+extends BaseLevel
 
 @onready var _tiles := $tilemap as TileMap
-@onready var _player := $player as Player
-
-
-func _ready() -> void:
-    _player.set_limits(get_extends())
 
 
 func get_extends() -> Vector4i:
@@ -18,3 +12,16 @@ func get_extends() -> Vector4i:
     var limit_bottom := int(limits.end.y * size.y)
 
     return Vector4i(limit_left, limit_top - 500, limit_right, limit_bottom)
+
+
+func _ready() -> void:
+    super._ready()
+    spawnpoints.append($spawnpoint)
+
+    add_child(GameManager.player)
+    GameManager.player.global_position = spawnpoints[0].global_position
+    GameManager.player.set_limits(get_extends())
+
+
+func _exit_tree() -> void:
+    remove_child(GameManager.player)

@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://b0jwbueb8beee"]
+[gd_scene load_steps=4 format=3 uid="uid://dk6hltv3ne5m4"]
 
 [ext_resource type="Script" path="res://entities/player/inventory/help.gd" id="2_2usdf"]
 [ext_resource type="Theme" uid="uid://brlh53bypvlrb" path="res://assets/gui/themes/default.tres" id="2_aq74w"]
+[ext_resource type="Script" path="res://entities/player/inventory/game_tab.gd" id="3_art0r"]
 
 [node name="inventory" type="TabContainer"]
 self_modulate = Color(0.54902, 0.172549, 0.333333, 1)
@@ -19,119 +20,74 @@ theme = ExtResource("2_aq74w")
 tab_alignment = 1
 script = ExtResource("2_2usdf")
 
-[node name="Game" type="GridContainer" parent="."]
+[node name="Game" type="CenterContainer" parent="."]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_top = 21.0
+script = ExtResource("3_art0r")
 
-[node name="Button" type="Button" parent="Game"]
-offset_left = 256.0
-offset_right = 284.0
-offset_bottom = 21.0
+[node name="grid" type="GridContainer" parent="Game"]
+offset_left = 218.0
+offset_top = 91.0
+offset_right = 321.0
+offset_bottom = 148.0
+
+[node name="fps" type="CheckBox" parent="Game/grid"]
+offset_right = 103.0
+offset_bottom = 24.0
+button_pressed = true
+text = "Show FPS"
+alignment = 1
+
+[node name="hsep" type="HSeparator" parent="Game/grid"]
+offset_top = 28.0
+offset_right = 103.0
+offset_bottom = 32.0
+
+[node name="quit" type="Button" parent="Game/grid"]
+offset_top = 36.0
+offset_right = 103.0
+offset_bottom = 57.0
 size_flags_horizontal = 6
 size_flags_vertical = 5
-text = "Quit"
-
-[node name="Button2" type="Button" parent="Game"]
-offset_left = 256.0
-offset_top = 25.0
-offset_right = 284.0
-offset_bottom = 46.0
-size_flags_horizontal = 6
-size_flags_vertical = 5
-text = "Quit"
-
-[node name="Button3" type="Button" parent="Game"]
-offset_left = 256.0
-offset_top = 50.0
-offset_right = 284.0
-offset_bottom = 71.0
-size_flags_horizontal = 6
-size_flags_vertical = 5
-text = "Quit"
-
-[node name="Button4" type="Button" parent="Game"]
-offset_left = 256.0
-offset_top = 75.0
-offset_right = 284.0
-offset_bottom = 96.0
-size_flags_horizontal = 6
-size_flags_vertical = 5
-text = "Quit"
-
-[node name="Button5" type="Button" parent="Game"]
-offset_left = 256.0
-offset_top = 100.0
-offset_right = 284.0
-offset_bottom = 121.0
-size_flags_horizontal = 6
-size_flags_vertical = 5
-text = "Quit"
-
-[node name="Button6" type="Button" parent="Game"]
-offset_left = 256.0
-offset_top = 125.0
-offset_right = 284.0
-offset_bottom = 146.0
-size_flags_horizontal = 6
-size_flags_vertical = 5
-text = "Quit"
+text = "Quit to Main Menu"
 
 [node name="Controls" type="VBoxContainer" parent="."]
 visible = false
 self_modulate = Color(0.54902, 0.172549, 0.333333, 1)
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = 21.0
 theme = ExtResource("2_aq74w")
 alignment = 1
 
 [node name="label01" type="Label" parent="Controls"]
-offset_top = 61.0
-offset_right = 540.0
-offset_bottom = 77.0
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 text = "WASD / D-pad - movement"
 horizontal_alignment = 1
 
 [node name="label02" type="Label" parent="Controls"]
-offset_top = 81.0
-offset_right = 540.0
-offset_bottom = 97.0
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 text = "Space / A - jump (there's a double jump)"
 horizontal_alignment = 1
 
 [node name="label03" type="Label" parent="Controls"]
-offset_top = 101.0
-offset_right = 540.0
-offset_bottom = 117.0
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 text = "LMB / X - attack (there's a simple combo)"
 horizontal_alignment = 1
 
 [node name="label04" type="Label" parent="Controls"]
-offset_top = 121.0
-offset_right = 540.0
-offset_bottom = 137.0
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 text = "Q - self-damage (you can die)"
 horizontal_alignment = 1
 
 [node name="label05" type="Label" parent="Controls"]
-offset_top = 141.0
-offset_right = 540.0
-offset_bottom = 157.0
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 text = "1 / LB - transformation"
 horizontal_alignment = 1
 
 [node name="label06" type="Label" parent="Controls"]
-offset_top = 161.0
-offset_right = 540.0
-offset_bottom = 177.0
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 text = "Esc / Start - quit the game"
 horizontal_alignment = 1
+
+[connection signal="toggled" from="Game/grid/fps" to="Game" method="_on_fps_toggled"]
+[connection signal="button_up" from="Game/grid/quit" to="Game" method="_on_quit_button_up"]

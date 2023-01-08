@@ -1,4 +1,4 @@
-[gd_scene load_steps=74 format=3 uid="uid://pobsrt7i43uy"]
+[gd_scene load_steps=81 format=3 uid="uid://pobsrt7i43uy"]
 
 [ext_resource type="Script" path="res://entities/player/player.gd" id="1_spune"]
 [ext_resource type="Texture2D" uid="uid://cjy71jbvm5o5c" path="res://assets/sprites/player_attack1.png" id="2_3ntaq"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://cc0cl24ubywtb" path="res://assets/sprites/player_attack2.png" id="3_comsr"]
 [ext_resource type="Texture2D" uid="uid://dgo7nj16hbdwu" path="res://assets/sprites/bat.png" id="4_7t3fk"]
 [ext_resource type="Texture2D" uid="uid://dfufgkdbdv8dy" path="res://assets/sprites/player_jump.png" id="4_s4fbr"]
+[ext_resource type="Texture2D" uid="uid://ds0i8v75frjod" path="res://assets/sprites/player_death.png" id="5_jt3yd"]
 [ext_resource type="Texture2D" uid="uid://dd6738360fs23" path="res://assets/sprites/player_idle.png" id="6_ncgbu"]
 [ext_resource type="Texture2D" uid="uid://bwy68incy5gav" path="res://assets/sprites/player_run.png" id="7_v6evl"]
 [ext_resource type="Script" path="res://entities/player/state_machine/state_machine.gd" id="10_ohsax"]
@@ -19,7 +20,7 @@
 [ext_resource type="Script" path="res://entities/player/state_machine/attack2.gd" id="18_eich7"]
 [ext_resource type="Theme" uid="uid://brlh53bypvlrb" path="res://assets/gui/themes/default.tres" id="19_7otby"]
 [ext_resource type="Script" path="res://entities/player/state_machine/bat_form.gd" id="19_gv58d"]
-[ext_resource type="PackedScene" uid="uid://b0jwbueb8beee" path="res://entities/player/inventory/inventory.tscn" id="20_uirxe"]
+[ext_resource type="PackedScene" uid="uid://dk6hltv3ne5m4" path="res://entities/player/inventory/inventory.tscn" id="20_uirxe"]
 [ext_resource type="Script" path="res://entities/player/hud/fps.gd" id="21_mk2i7"]
 [ext_resource type="Script" path="res://entities/player/hud/health_bar.gd" id="22_2246v"]
 [ext_resource type="Script" path="res://entities/player/hud/mana_bar.gd" id="23_th253"]
@@ -79,6 +80,30 @@ region = Rect2(0, 0, 32, 32)
 [sub_resource type="AtlasTexture" id="AtlasTexture_qp8u4"]
 atlas = ExtResource("4_7t3fk")
 region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mxuci"]
+atlas = ExtResource("5_jt3yd")
+region = Rect2(0, 0, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hxfxn"]
+atlas = ExtResource("5_jt3yd")
+region = Rect2(200, 0, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pg2fs"]
+atlas = ExtResource("5_jt3yd")
+region = Rect2(400, 0, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6yb78"]
+atlas = ExtResource("5_jt3yd")
+region = Rect2(600, 0, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k15xa"]
+atlas = ExtResource("5_jt3yd")
+region = Rect2(800, 0, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wdejj"]
+atlas = ExtResource("5_jt3yd")
+region = Rect2(1000, 0, 200, 200)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_kc1mp"]
 atlas = ExtResource("4_s4fbr")
@@ -192,6 +217,11 @@ animations = [{
 "loop": true,
 "name": &"bat_form",
 "speed": 5.0
+}, {
+"frames": [SubResource("AtlasTexture_mxuci"), SubResource("AtlasTexture_hxfxn"), SubResource("AtlasTexture_pg2fs"), SubResource("AtlasTexture_6yb78"), SubResource("AtlasTexture_k15xa"), SubResource("AtlasTexture_wdejj")],
+"loop": true,
+"name": &"death",
+"speed": 10.0
 }, {
 "frames": [SubResource("AtlasTexture_kc1mp"), SubResource("AtlasTexture_0750l")],
 "loop": false,
@@ -387,6 +417,50 @@ metadata/_edit_lock_ = true
 [node name="inventory" parent="GUI/HUD" instance=ExtResource("20_uirxe")]
 visible = false
 
+[node name="Game" parent="GUI/HUD/inventory" index="1"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 21.0
+
+[node name="grid" parent="GUI/HUD/inventory/Game" index="0"]
+layout_mode = 3
+offset_left = 218.0
+offset_top = 91.0
+offset_right = 321.0
+offset_bottom = 148.0
+
+[node name="fps" parent="GUI/HUD/inventory/Game/grid" index="0"]
+layout_mode = 3
+
+[node name="hsep" parent="GUI/HUD/inventory/Game/grid" index="1"]
+layout_mode = 3
+
+[node name="quit" parent="GUI/HUD/inventory/Game/grid" index="2"]
+layout_mode = 3
+
+[node name="Controls" parent="GUI/HUD/inventory" index="2"]
+layout_mode = 3
+
+[node name="label01" parent="GUI/HUD/inventory/Controls" index="0"]
+layout_mode = 3
+
+[node name="label02" parent="GUI/HUD/inventory/Controls" index="1"]
+layout_mode = 3
+
+[node name="label03" parent="GUI/HUD/inventory/Controls" index="2"]
+layout_mode = 3
+
+[node name="label04" parent="GUI/HUD/inventory/Controls" index="3"]
+layout_mode = 3
+
+[node name="label05" parent="GUI/HUD/inventory/Controls" index="4"]
+layout_mode = 3
+
+[node name="label06" parent="GUI/HUD/inventory/Controls" index="5"]
+layout_mode = 3
+
 [node name="fps" type="Label" parent="GUI/HUD"]
 anchors_preset = 1
 anchor_left = 1.0
@@ -465,3 +539,6 @@ horizontal_alignment = 1
 [connection signal="ready" from="." to="state_machine" method="_on_player_ready"]
 [connection signal="timeout" from="timers/recovery_value" to="." method="_on_recovery_value_timeout" binds= [1.0]]
 [connection signal="timeout" from="timers/recovery_value" to="GUI/HUD/vbox/mana_bar" method="_on_recovery_value_timeout" binds= [1.0]]
+[connection signal="toggled" from="GUI/HUD/inventory/Game/grid/fps" to="GUI/HUD/fps" method="_on_fps_toggled"]
+
+[editable path="GUI/HUD/inventory"]
