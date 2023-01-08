@@ -103,6 +103,22 @@ func ensure_collision(form: PlayerForms) -> void:
     move_and_slide()
 
 
+func reset() -> void:
+    var health_bar := $"%health_bar" as HealthBar
+    current_health = max_health
+    health_bar.value = max_health
+    health_bar.update()
+
+    var mana_bar := $"%mana_bar" as ManaBar
+    current_mana = max_mana
+    mana_bar.value = max_mana
+    mana_bar.update()
+
+    $state_machine.reset()
+    self.velocity = Vector2.ZERO
+    self._sprite.flip_h = false
+
+
 func update_status(status: String) -> void:
     _status.text = status
 
@@ -115,8 +131,6 @@ func set_limits(vec: Vector4i) -> void:
 
 
 func _ready() -> void:
-    _timer.timeout.connect(_on_stop_invincibility, Object.CONNECT_PERSIST)
-
     var health_bar := $"%health_bar" as HealthBar
     health_bar.max_value = max_health
     health_bar.value = current_health

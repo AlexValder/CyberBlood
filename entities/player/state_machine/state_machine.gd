@@ -5,6 +5,14 @@ class_name PlayerStateMachine
 @onready var _current_state := $idle as PlayerState
 
 
+func reset() -> void:
+    var state := $idle
+    _player.update_status(state.name)
+    _current_state.on_exit()
+    _current_state = state
+    _current_state.on_entry()
+
+
 func _ready() -> void:
     self.top_level = true
 

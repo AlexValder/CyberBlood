@@ -24,6 +24,7 @@ func reload_level() -> void:
 
 func quit_to_menu() -> void:
     _playing = false
+    player.reset()
     get_tree().paused = false
     get_tree().change_scene_to_file(LEVELS["menu"])
 
