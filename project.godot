@@ -14,10 +14,15 @@ _global_script_classes=[{
 "language": &"GDScript",
 "path": "res://levels/test_level.gd"
 }, {
-"base": "ProgressBar",
+"base": "ValueBar",
 "class": &"HealthBar",
 "language": &"GDScript",
-"path": "res://entities/player/health_bar.gd"
+"path": "res://entities/player/hud/health_bar.gd"
+}, {
+"base": "ValueBar",
+"class": &"ManaBar",
+"language": &"GDScript",
+"path": "res://entities/player/hud/mana_bar.gd"
 }, {
 "base": "CharacterBody2D",
 "class": &"Player",
@@ -27,19 +32,26 @@ _global_script_classes=[{
 "base": "Node",
 "class": &"PlayerState",
 "language": &"GDScript",
-"path": "res://entities/player/player_state.gd"
+"path": "res://entities/player/state_machine/player_state.gd"
 }, {
-"base": "Node",
+"base": "Node2D",
 "class": &"PlayerStateMachine",
 "language": &"GDScript",
-"path": "res://entities/player/state_machine.gd"
+"path": "res://entities/player/state_machine/state_machine.gd"
+}, {
+"base": "ProgressBar",
+"class": &"ValueBar",
+"language": &"GDScript",
+"path": "res://entities/player/hud/value_bar.gd"
 }]
 _global_script_class_icons={
 "BaseLevel": "",
 "HealthBar": "",
+"ManaBar": "",
 "Player": "",
 "PlayerState": "",
-"PlayerStateMachine": ""
+"PlayerStateMachine": "",
+"ValueBar": ""
 }
 
 [application]
@@ -52,14 +64,20 @@ config/icon="res://icon.svg"
 [autoload]
 
 GameManager="*res://scripts/game_manager.gd"
+Constants="*res://scripts/constants.gd"
+
+[debug]
+
+gdscript/warnings/integer_division=0
 
 [display]
 
 window/size/viewport_width=640
 window/size/viewport_height=360
 window/size/mode=3
+window/size/resizable=false
 window/size/borderless=true
-window/stretch/mode="viewport"
+window/stretch/mode="canvas_items"
 window/stretch/aspect="keep_height"
 
 [input]
@@ -109,12 +127,13 @@ bat_form={
 pause={
 "deadzone": 0.5,
 "events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":4194305,"unicode":0,"echo":false,"script":null)
-, Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"button_index":6,"pressure":0.0,"pressed":false,"script":null)
+, Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"button_index":6,"pressure":0.0,"pressed":true,"script":null)
 ]
 }
-help={
+inv={
 "deadzone": 0.5,
 "events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":4194306,"unicode":0,"echo":false,"script":null)
+, Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"button_index":4,"pressure":0.0,"pressed":false,"script":null)
 ]
 }
 
@@ -124,7 +143,3 @@ help={
 2d_physics/layer_2="environment"
 2d_physics/layer_3="player"
 2d_physics/layer_4="enemy"
-
-[rendering]
-
-environment/defaults/default_clear_color=Color(0, 0, 0, 1)

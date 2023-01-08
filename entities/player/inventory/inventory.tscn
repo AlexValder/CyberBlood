@@ -1,0 +1,137 @@
+[gd_scene load_steps=3 format=3 uid="uid://b0jwbueb8beee"]
+
+[ext_resource type="Script" path="res://entities/player/inventory/help.gd" id="2_2usdf"]
+[ext_resource type="Theme" uid="uid://brlh53bypvlrb" path="res://assets/gui/themes/default.tres" id="2_aq74w"]
+
+[node name="inventory" type="TabContainer"]
+self_modulate = Color(0.54902, 0.172549, 0.333333, 1)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 50.0
+offset_top = 50.0
+offset_right = -50.0
+offset_bottom = -50.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme = ExtResource("2_aq74w")
+tab_alignment = 1
+script = ExtResource("2_2usdf")
+
+[node name="Game" type="GridContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 21.0
+
+[node name="Button" type="Button" parent="Game"]
+offset_left = 256.0
+offset_right = 284.0
+offset_bottom = 21.0
+size_flags_horizontal = 6
+size_flags_vertical = 5
+text = "Quit"
+
+[node name="Button2" type="Button" parent="Game"]
+offset_left = 256.0
+offset_top = 25.0
+offset_right = 284.0
+offset_bottom = 46.0
+size_flags_horizontal = 6
+size_flags_vertical = 5
+text = "Quit"
+
+[node name="Button3" type="Button" parent="Game"]
+offset_left = 256.0
+offset_top = 50.0
+offset_right = 284.0
+offset_bottom = 71.0
+size_flags_horizontal = 6
+size_flags_vertical = 5
+text = "Quit"
+
+[node name="Button4" type="Button" parent="Game"]
+offset_left = 256.0
+offset_top = 75.0
+offset_right = 284.0
+offset_bottom = 96.0
+size_flags_horizontal = 6
+size_flags_vertical = 5
+text = "Quit"
+
+[node name="Button5" type="Button" parent="Game"]
+offset_left = 256.0
+offset_top = 100.0
+offset_right = 284.0
+offset_bottom = 121.0
+size_flags_horizontal = 6
+size_flags_vertical = 5
+text = "Quit"
+
+[node name="Button6" type="Button" parent="Game"]
+offset_left = 256.0
+offset_top = 125.0
+offset_right = 284.0
+offset_bottom = 146.0
+size_flags_horizontal = 6
+size_flags_vertical = 5
+text = "Quit"
+
+[node name="Controls" type="VBoxContainer" parent="."]
+visible = false
+self_modulate = Color(0.54902, 0.172549, 0.333333, 1)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 21.0
+theme = ExtResource("2_aq74w")
+alignment = 1
+
+[node name="label01" type="Label" parent="Controls"]
+offset_top = 61.0
+offset_right = 540.0
+offset_bottom = 77.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+text = "WASD / D-pad - movement"
+horizontal_alignment = 1
+
+[node name="label02" type="Label" parent="Controls"]
+offset_top = 81.0
+offset_right = 540.0
+offset_bottom = 97.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+text = "Space / A - jump (there's a double jump)"
+horizontal_alignment = 1
+
+[node name="label03" type="Label" parent="Controls"]
+offset_top = 101.0
+offset_right = 540.0
+offset_bottom = 117.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+text = "LMB / X - attack (there's a simple combo)"
+horizontal_alignment = 1
+
+[node name="label04" type="Label" parent="Controls"]
+offset_top = 121.0
+offset_right = 540.0
+offset_bottom = 137.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+text = "Q - self-damage (you can die)"
+horizontal_alignment = 1
+
+[node name="label05" type="Label" parent="Controls"]
+offset_top = 141.0
+offset_right = 540.0
+offset_bottom = 157.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+text = "1 / LB - transformation"
+horizontal_alignment = 1
+
+[node name="label06" type="Label" parent="Controls"]
+offset_top = 161.0
+offset_right = 540.0
+offset_bottom = 177.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+text = "Esc / Start - quit the game"
+horizontal_alignment = 1

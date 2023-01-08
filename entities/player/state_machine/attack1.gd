@@ -20,7 +20,7 @@ func _animation_done() -> void:
         emit_signal("state_change", self.name, "idle")
 
 
-func physics_process(delta: float) -> void:
+func physics_process(_delta: float) -> void:
     if Input.is_action_just_pressed("melee"):
         _next_attack = true
 

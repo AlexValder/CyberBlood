@@ -1,4 +1,4 @@
-extends Node
+extends Node2D
 class_name PlayerStateMachine
 
 @onready var _player := self.get_parent() as Player
@@ -23,8 +23,16 @@ func _physics_process(delta: float) -> void:
     _current_state.physics_process(delta)
 
 
-func _on_state_change(_old_state: String, new_state: String) -> void:
+func _on_state_change(old_state: String, new_state: String) -> void:
+    var state := get_node(new_state) as PlayerState
+    if state == null || !state.can_enter({"prev" = old_state}):
+        return
+
+    if !_current_state.can_leave():
+        return
+
     _player.update_status(new_state)
     _current_state.on_exit()
-    _current_state = get_node(new_state)
+    _current_state = state
     _current_state.on_entry()
+

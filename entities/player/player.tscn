@@ -1,4 +1,4 @@
-[gd_scene load_steps=72 format=3 uid="uid://baq2prxwjg4qm"]
+[gd_scene load_steps=74 format=3 uid="uid://pobsrt7i43uy"]
 
 [ext_resource type="Script" path="res://entities/player/player.gd" id="1_spune"]
 [ext_resource type="Texture2D" uid="uid://cjy71jbvm5o5c" path="res://assets/sprites/player_attack1.png" id="2_3ntaq"]
@@ -6,22 +6,23 @@
 [ext_resource type="Texture2D" uid="uid://cc0cl24ubywtb" path="res://assets/sprites/player_attack2.png" id="3_comsr"]
 [ext_resource type="Texture2D" uid="uid://dgo7nj16hbdwu" path="res://assets/sprites/bat.png" id="4_7t3fk"]
 [ext_resource type="Texture2D" uid="uid://dfufgkdbdv8dy" path="res://assets/sprites/player_jump.png" id="4_s4fbr"]
-[ext_resource type="Script" path="res://entities/player/state_machine.gd" id="6_01c75"]
 [ext_resource type="Texture2D" uid="uid://dd6738360fs23" path="res://assets/sprites/player_idle.png" id="6_ncgbu"]
-[ext_resource type="Script" path="res://entities/player/idle.gd" id="7_62k5t"]
 [ext_resource type="Texture2D" uid="uid://bwy68incy5gav" path="res://assets/sprites/player_run.png" id="7_v6evl"]
-[ext_resource type="Script" path="res://entities/player/run.gd" id="8_q7bsn"]
-[ext_resource type="Script" path="res://entities/player/jump.gd" id="9_wataa"]
-[ext_resource type="Script" path="res://entities/player/fall.gd" id="10_67p3u"]
-[ext_resource type="Script" path="res://entities/player/fps.gd" id="11_upq50"]
-[ext_resource type="Script" path="res://entities/player/double_jump.gd" id="12_tcp0b"]
-[ext_resource type="Script" path="res://entities/player/attack1.gd" id="13_1kchs"]
-[ext_resource type="Script" path="res://entities/player/final_fall.gd" id="13_igadn"]
-[ext_resource type="Script" path="res://entities/player/attack2.gd" id="14_y4qfo"]
-[ext_resource type="Script" path="res://entities/player/bat_form.gd" id="18_ibdsy"]
+[ext_resource type="Script" path="res://entities/player/state_machine/state_machine.gd" id="10_ohsax"]
+[ext_resource type="Script" path="res://entities/player/state_machine/idle.gd" id="11_7bvq5"]
+[ext_resource type="Script" path="res://entities/player/state_machine/run.gd" id="12_av1hs"]
+[ext_resource type="Script" path="res://entities/player/state_machine/jump.gd" id="13_644fc"]
+[ext_resource type="Script" path="res://entities/player/state_machine/double_jump.gd" id="14_3yvtw"]
+[ext_resource type="Script" path="res://entities/player/state_machine/fall.gd" id="15_7d756"]
+[ext_resource type="Script" path="res://entities/player/state_machine/final_fall.gd" id="16_vo0hw"]
+[ext_resource type="Script" path="res://entities/player/state_machine/attack1.gd" id="17_x42d2"]
+[ext_resource type="Script" path="res://entities/player/state_machine/attack2.gd" id="18_eich7"]
 [ext_resource type="Theme" uid="uid://brlh53bypvlrb" path="res://assets/gui/themes/default.tres" id="19_7otby"]
-[ext_resource type="Script" path="res://entities/player/help.gd" id="20_wfyyi"]
-[ext_resource type="Script" path="res://entities/player/health_bar.gd" id="21_5drpt"]
+[ext_resource type="Script" path="res://entities/player/state_machine/bat_form.gd" id="19_gv58d"]
+[ext_resource type="PackedScene" uid="uid://b0jwbueb8beee" path="res://entities/player/inventory/inventory.tscn" id="20_uirxe"]
+[ext_resource type="Script" path="res://entities/player/hud/fps.gd" id="21_mk2i7"]
+[ext_resource type="Script" path="res://entities/player/hud/health_bar.gd" id="22_2246v"]
+[ext_resource type="Script" path="res://entities/player/hud/mana_bar.gd" id="23_th253"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_tx87j"]
 atlas = ExtResource("2_3ntaq")
@@ -223,13 +224,13 @@ animations = [{
 "speed": 10.0
 }]
 
+[sub_resource type="LabelSettings" id="LabelSettings_ih6t3"]
+outline_size = 2
+outline_color = Color(0, 0, 0, 1)
+
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_4bru6"]
 radius = 11.0
 height = 42.0
-
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_kb2w0"]
-radius = 5.99995
-height = 11.9999
 
 [sub_resource type="Animation" id="Animation_ccmy1"]
 length = 0.001
@@ -274,11 +275,6 @@ _data = {
 outline_size = 2
 outline_color = Color(0, 0, 0, 1)
 
-[sub_resource type="LabelSettings" id="LabelSettings_kpyct"]
-font_color = Color(1, 0, 0, 1)
-outline_size = 2
-outline_color = Color(0, 0, 0, 1)
-
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_etbr7"]
 bg_color = Color(0.180392, 0.0117647, 0.0156863, 1)
 
@@ -288,6 +284,12 @@ bg_color = Color(1, 0.0901961, 0.0901961, 1)
 [sub_resource type="LabelSettings" id="LabelSettings_oxudh"]
 font_size = 32
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_v803q"]
+bg_color = Color(0.0901961, 0.00392157, 0.439216, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_e74yb"]
+bg_color = Color(0.0705882, 0, 1, 1)
+
 [node name="player" type="CharacterBody2D"]
 collision_layer = 4
 collision_mask = 11
@@ -295,30 +297,43 @@ script = ExtResource("1_spune")
 
 [node name="sprite" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
+position = Vector2(0, 22)
 frames = SubResource("SpriteFrames_443fo")
 animation = &"bat_form"
 playing = true
 offset = Vector2(0, -22)
 
-[node name="shape_human" type="CollisionShape2D" parent="."]
-position = Vector2(0, -22)
+[node name="status" type="Label" parent="sprite"]
+offset_left = -20.0
+offset_top = -7.0
+offset_right = 20.0
+offset_bottom = 16.0
+size_flags_vertical = 1
+theme = ExtResource("19_7otby")
+text = "status"
+label_settings = SubResource("LabelSettings_ih6t3")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="shape" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_4bru6")
 
-[node name="shape_bat" type="CollisionShape2D" parent="."]
-position = Vector2(1.19209e-07, -23)
-rotation = -1.57433
-shape = SubResource("CapsuleShape2D_kb2w0")
-disabled = true
-
 [node name="camera" type="Camera2D" parent="."]
+position = Vector2(0, 22)
 current = true
 limit_left = 0
 limit_right = 1150
 limit_bottom = 500
 limit_smoothed = true
 
-[node name="damage_timer" type="Timer" parent="."]
+[node name="timers" type="Node" parent="."]
+
+[node name="damage_timer" type="Timer" parent="timers"]
 one_shot = true
+
+[node name="recovery_value" type="Timer" parent="timers"]
+wait_time = 2.0
+autostart = true
 
 [node name="player_effects" type="AnimationPlayer" parent="."]
 libraries = {
@@ -326,38 +341,39 @@ libraries = {
 }
 
 [node name="state_machine" type="Node2D" parent="."]
-script = ExtResource("6_01c75")
+script = ExtResource("10_ohsax")
 
 [node name="idle" type="Node" parent="state_machine"]
-script = ExtResource("7_62k5t")
+script = ExtResource("11_7bvq5")
 
 [node name="run" type="Node" parent="state_machine"]
-script = ExtResource("8_q7bsn")
+script = ExtResource("12_av1hs")
 
 [node name="jump" type="Node" parent="state_machine"]
-script = ExtResource("9_wataa")
+script = ExtResource("13_644fc")
 
 [node name="double_jump" type="Node" parent="state_machine"]
-script = ExtResource("12_tcp0b")
+script = ExtResource("14_3yvtw")
 
 [node name="fall" type="Node" parent="state_machine"]
-script = ExtResource("10_67p3u")
+script = ExtResource("15_7d756")
 
 [node name="final_fall" type="Node" parent="state_machine"]
-script = ExtResource("13_igadn")
+script = ExtResource("16_vo0hw")
 
 [node name="attack1" type="Node" parent="state_machine"]
-script = ExtResource("13_1kchs")
+script = ExtResource("17_x42d2")
 
 [node name="attack2" type="Node" parent="state_machine"]
-script = ExtResource("14_y4qfo")
+script = ExtResource("18_eich7")
 
 [node name="bat_form" type="Node" parent="state_machine"]
-script = ExtResource("18_ibdsy")
+script = ExtResource("19_gv58d")
 
 [node name="GUI" type="CanvasLayer" parent="."]
 
 [node name="HUD" type="Control" parent="GUI"]
+process_mode = 3
 texture_filter = 1
 layout_mode = 3
 anchors_preset = 15
@@ -366,67 +382,12 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("19_7otby")
+metadata/_edit_lock_ = true
 
-[node name="cont" type="TabContainer" parent="GUI/HUD"]
+[node name="inventory" parent="GUI/HUD" instance=ExtResource("20_uirxe")]
 visible = false
-self_modulate = Color(0.54902, 0.172549, 0.333333, 1)
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 50.0
-offset_top = 50.0
-offset_right = -50.0
-offset_bottom = -50.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-script = ExtResource("20_wfyyi")
-
-[node name="Controls" type="VBoxContainer" parent="GUI/HUD/cont"]
-self_modulate = Color(0.54902, 0.172549, 0.333333, 1)
-layout_mode = 2
-theme = ExtResource("19_7otby")
-alignment = 1
-
-[node name="label01" type="Label" parent="GUI/HUD/cont/Controls"]
-layout_mode = 2
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-text = "WASD / D-pad - movement"
-horizontal_alignment = 1
-
-[node name="label02" type="Label" parent="GUI/HUD/cont/Controls"]
-layout_mode = 2
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-text = "Space / A - jump (there's a double jump)"
-horizontal_alignment = 1
-
-[node name="label03" type="Label" parent="GUI/HUD/cont/Controls"]
-layout_mode = 2
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-text = "LMB / X - attack (there's a simple combo)"
-horizontal_alignment = 1
-
-[node name="label04" type="Label" parent="GUI/HUD/cont/Controls"]
-layout_mode = 2
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-text = "Q - self-damage (you can die)"
-horizontal_alignment = 1
-
-[node name="label05" type="Label" parent="GUI/HUD/cont/Controls"]
-layout_mode = 2
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-text = "1 / LB - transformation"
-horizontal_alignment = 1
-
-[node name="label06" type="Label" parent="GUI/HUD/cont/Controls"]
-layout_mode = 2
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-text = "Esc / Start - quit the game"
-horizontal_alignment = 1
 
 [node name="fps" type="Label" parent="GUI/HUD"]
-layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
@@ -436,42 +397,30 @@ grow_horizontal = 0
 theme = ExtResource("19_7otby")
 text = "FPS: "
 label_settings = SubResource("LabelSettings_2h0a3")
-script = ExtResource("11_upq50")
+script = ExtResource("21_mk2i7")
 
-[node name="status" type="Label" parent="GUI/HUD"]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -20.0
-offset_right = 20.0
-offset_bottom = 23.0
-grow_horizontal = 2
-theme = ExtResource("19_7otby")
-text = "status"
-label_settings = SubResource("LabelSettings_kpyct")
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="health_bar" type="ProgressBar" parent="GUI/HUD"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(200, 6)
-layout_direction = 2
-layout_mode = 0
+[node name="vbox" type="VBoxContainer" parent="GUI/HUD"]
 offset_left = 5.0
 offset_top = 5.0
 offset_right = 205.0
-offset_bottom = 15.0
+offset_bottom = 45.0
+theme_override_constants/separation = 10
+
+[node name="health_bar" type="ProgressBar" parent="GUI/HUD/vbox"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(200, 6)
+layout_direction = 2
+offset_right = 200.0
+offset_bottom = 6.0
 theme_override_styles/background = SubResource("StyleBoxFlat_etbr7")
 theme_override_styles/fill = SubResource("StyleBoxFlat_tirju")
 step = 0.05
 value = 50.0
 show_percentage = false
-script = ExtResource("21_5drpt")
+script = ExtResource("22_2246v")
 
-[node name="value" type="Label" parent="GUI/HUD/health_bar"]
+[node name="value" type="Label" parent="GUI/HUD/vbox/health_bar"]
 z_index = 2
-layout_mode = 1
 anchors_preset = 14
 anchor_top = 0.5
 anchor_right = 1.0
@@ -484,5 +433,35 @@ text = "0"
 label_settings = SubResource("LabelSettings_oxudh")
 horizontal_alignment = 1
 
-[connection signal="player_damaged" from="." to="GUI/HUD/health_bar" method="_on_character_damaged"]
+[node name="mana_bar" type="ProgressBar" parent="GUI/HUD/vbox"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(200, 6)
+layout_direction = 2
+offset_top = 16.0
+offset_right = 200.0
+offset_bottom = 22.0
+theme_override_styles/background = SubResource("StyleBoxFlat_v803q")
+theme_override_styles/fill = SubResource("StyleBoxFlat_e74yb")
+step = 0.05
+show_percentage = false
+script = ExtResource("23_th253")
+
+[node name="value" type="Label" parent="GUI/HUD/vbox/mana_bar"]
+z_index = 2
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -11.5
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "0"
+label_settings = SubResource("LabelSettings_oxudh")
+horizontal_alignment = 1
+
+[connection signal="mana_spent" from="." to="GUI/HUD/vbox/mana_bar" method="_on_player_mana_spent"]
+[connection signal="player_damaged" from="." to="GUI/HUD/vbox/health_bar" method="_on_character_damaged"]
 [connection signal="ready" from="." to="state_machine" method="_on_player_ready"]
+[connection signal="timeout" from="timers/recovery_value" to="." method="_on_recovery_value_timeout" binds= [1.0]]
+[connection signal="timeout" from="timers/recovery_value" to="GUI/HUD/vbox/mana_bar" method="_on_recovery_value_timeout" binds= [1.0]]

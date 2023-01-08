@@ -1,12 +1,16 @@
 extends ProgressBar
-class_name HealthBar
+class_name ValueBar
 
 @onready var _value := $value as Label
 
 
-func set_max_value(value: int) -> void:
+func update() -> void:
+    _value.text = str(int(self.value))
+
+
+func set_max_value(new_value: int) -> void:
     var percentage = self.value / self.max_value
-    self.max_value = value
+    self.max_value = new_value
     set_current_value(self.max_value * percentage)
 
 
@@ -22,6 +26,3 @@ func _internal_set_value(new_value: float) -> void:
     self.value = new_value
     _value.text = str(int(new_value))
 
-
-func _on_character_damaged(_old_value: int, new_value: int) -> void:
-    set_current_value(new_value)
