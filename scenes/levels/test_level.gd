@@ -18,10 +18,5 @@ func _ready() -> void:
     super._ready()
     spawnpoints.append($spawnpoint)
 
-    add_child(GameManager.player)
     GameManager.player.global_position = spawnpoints[0].global_position
     GameManager.player.set_limits(get_extends())
-
-
-func _exit_tree() -> void:
-    remove_child(GameManager.player)

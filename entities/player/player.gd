@@ -7,6 +7,7 @@ enum PlayerForms {
 }
 
 signal player_dead
+signal player_hurt
 signal player_damaged(old_value, new_value)
 signal mana_spent(new_value)
 
@@ -16,16 +17,25 @@ const FLY_SPEED := 200.0
 const JUMP := 210.0
 const ACCEL := 0.1
 const HUMAN_SHAPE_SIZE := {
-    radius = 11 / 2,
-    height = 42 / 2,
+    radius = 12 / 2,
+    height = 44 / 2,
 }
 const BAT_SHAPE_SIZE := {
     radius = 6 / 2,
     height = 12 / 2,
 }
+const HUMAN_HURTBOX_SIZE := {
+    radius = 7,
+    height = 44,
+}
+const BAT_HURTBOX_SIZE := {
+    radius = 6,
+    height = 12,
+}
 
 @onready var _sprite := $sprite as AnimatedSprite2D
 @onready var _shape := $shape as CollisionShape2D
+@onready var _hurtbox := $hurtbox as HurtBox
 @onready var _camera := $camera as Camera2D
 @onready var _status := $sprite/status as Label
 @onready var _timer := $timers/damage_timer as Timer
@@ -44,17 +54,22 @@ func damage(value: int) -> void:
     if invincible:
         return
 
+    if current_health > value:
+        emit_signal("player_hurt")
+
     emit_signal("player_damaged", \
         current_health, max(0, current_health - value))
-
     current_health -= value
-    if current_health <= 0:
-        play_anim("death")
-        _sprite.animation_finished.connect(
-            func(): emit_signal("player_dead"), Object.CONNECT_ONE_SHOT
-        )
 
-    _on_start_invicibility()
+    if current_health <= 0:
+        player_dies()
+    else:
+        _on_start_invicibility()
+
+
+func player_dies() -> void:
+    emit_signal("player_dead")
+    play_anim("death")
 
 
 func can_transform(form: PlayerForms) -> bool:
@@ -93,30 +108,18 @@ func ensure_collision(form: PlayerForms) -> void:
         PlayerForms.HUMAN:
             _shape.shape.radius = HUMAN_SHAPE_SIZE.radius * 2
             _shape.shape.height = HUMAN_SHAPE_SIZE.height * 2
+            _hurtbox.shape.shape.radius = HUMAN_HURTBOX_SIZE.radius
+            _hurtbox.shape.shape.height = HUMAN_HURTBOX_SIZE.height
         PlayerForms.BAT:
             _shape.shape.radius = BAT_SHAPE_SIZE.radius * 2
             _shape.shape.height = BAT_SHAPE_SIZE.height * 2
+            _hurtbox.shape.shape.radius = BAT_HURTBOX_SIZE.radius
+            _hurtbox.shape.shape.height = BAT_HURTBOX_SIZE.height
         _:
             push_error("Unknown form: %s" % form)
 
     velocity.y += 1
     move_and_slide()
-
-
-func reset() -> void:
-    var health_bar := $"%health_bar" as HealthBar
-    current_health = max_health
-    health_bar.value = max_health
-    health_bar.update()
-
-    var mana_bar := $"%mana_bar" as ManaBar
-    current_mana = max_mana
-    mana_bar.value = max_mana
-    mana_bar.update()
-
-    $state_machine.reset()
-    self.velocity = Vector2.ZERO
-    self._sprite.flip_h = false
 
 
 func update_status(status: String) -> void:
@@ -141,9 +144,12 @@ func _ready() -> void:
     mana_bar.value = current_mana
     mana_bar.update()
 
+    _camera.current = true
+
 
 func _on_start_invicibility() -> void:
     self.invincible = true
+    await _sprite.animation_finished
     _timer.start(1)
     _player_anim.play("damage_invincibility")
 

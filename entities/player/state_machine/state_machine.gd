@@ -44,3 +44,19 @@ func _on_state_change(old_state: String, new_state: String) -> void:
     _current_state = state
     _current_state.on_entry()
 
+
+func _on_player_dead() -> void:
+    change_state("death")
+
+
+func _on_player_damaged() -> void:
+    change_state("hurt")
+
+
+func change_state(state_name: String) -> void:
+    var state := get_node(state_name) as PlayerState
+
+    _player.update_status(state.name)
+    _current_state.on_exit()
+    _current_state = state
+    _current_state.on_entry()
