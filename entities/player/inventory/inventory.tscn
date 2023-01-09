@@ -1,7 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://dk6hltv3ne5m4"]
+[gd_scene load_steps=4 format=3 uid="uid://roe360txy361"]
 
-[ext_resource type="Script" path="res://entities/player/inventory/help.gd" id="2_2usdf"]
 [ext_resource type="Theme" uid="uid://brlh53bypvlrb" path="res://assets/gui/themes/default.tres" id="2_aq74w"]
+[ext_resource type="Script" path="res://entities/player/inventory/inventory.gd" id="2_hiw33"]
 [ext_resource type="Script" path="res://entities/player/inventory/game_tab.gd" id="3_art0r"]
 
 [node name="inventory" type="TabContainer"]
@@ -18,7 +18,7 @@ grow_vertical = 2
 mouse_filter = 2
 theme = ExtResource("2_aq74w")
 tab_alignment = 1
-script = ExtResource("2_2usdf")
+script = ExtResource("2_hiw33")
 
 [node name="Game" type="CenterContainer" parent="."]
 anchors_preset = 15

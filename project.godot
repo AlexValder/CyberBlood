@@ -9,6 +9,11 @@
 config_version=5
 
 _global_script_classes=[{
+"base": "CharacterBody2D",
+"class": &"BaseEnemy",
+"language": &"GDScript",
+"path": "res://entities/enemies/skeleton.gd"
+}, {
 "base": "Node2D",
 "class": &"BaseLevel",
 "language": &"GDScript",
@@ -18,6 +23,16 @@ _global_script_classes=[{
 "class": &"HealthBar",
 "language": &"GDScript",
 "path": "res://entities/player/hud/health_bar.gd"
+}, {
+"base": "Area2D",
+"class": &"HitBox",
+"language": &"GDScript",
+"path": "res://entities/hitbox.gd"
+}, {
+"base": "Area2D",
+"class": &"HurtBox",
+"language": &"GDScript",
+"path": "res://entities/hurtbox.gd"
 }, {
 "base": "Control",
 "class": &"InventoryTab",
@@ -55,8 +70,11 @@ _global_script_classes=[{
 "path": "res://entities/player/hud/value_bar.gd"
 }]
 _global_script_class_icons={
+"BaseEnemy": "",
 "BaseLevel": "",
 "HealthBar": "",
+"HitBox": "",
+"HurtBox": "",
 "InventoryTab": "",
 "MainMenu": "",
 "ManaBar": "",
@@ -81,6 +99,7 @@ Settings="*res://scripts/settings.gd"
 
 [debug]
 
+gdscript/warnings/treat_warnings_as_errors=true
 gdscript/warnings/integer_division=0
 
 [display]
@@ -170,7 +189,10 @@ ui_left_tab={
 
 [layer_names]
 
-2d_physics/layer_1="background"
-2d_physics/layer_2="environment"
-2d_physics/layer_3="player"
-2d_physics/layer_4="enemy"
+2d_physics/layer_1="environment"
+2d_physics/layer_2="player"
+2d_physics/layer_3="enemy"
+2d_physics/layer_4="player_hurtbox"
+2d_physics/layer_5="enemy_hurtbox"
+2d_physics/layer_6="player_hitbox"
+2d_physics/layer_7="enemy_hitbox"
