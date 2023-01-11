@@ -5185,7 +5185,7 @@ metadata/_edit_lock_ = true
 [node name="enemies" type="Node" parent="."]
 
 [node name="skeleton" parent="enemies" instance=ExtResource("3_1sik4")]
-position = Vector2(364, 116)
+position = Vector2(362, 77)
 
 [node name="skeleton2" parent="enemies" instance=ExtResource("3_1sik4")]
 position = Vector2(476, 282)
@@ -5218,6 +5218,8 @@ position = Vector2(283, 697)
 
 [node name="skeleton11" parent="enemies" instance=ExtResource("3_1sik4")]
 position = Vector2(152, 690)
+enemy_name = "Fat Skeleton"
+max_health = 100
 
 [node name="prlxBg" type="ParallaxBackground" parent="."]
 scroll_ignore_camera_zoom = true

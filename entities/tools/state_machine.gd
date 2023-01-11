@@ -24,8 +24,8 @@ func change_state(state_name: String) -> void:
 func _init() -> void:
     var label := Label.new()
     label.name = "status"
-    label.anchors_preset = Control.PRESET_CENTER_TOP
     label.position.y = 20
+    label.grow_horizontal = Control.GROW_DIRECTION_BOTH
     label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
     label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
     label.label_settings = LabelSettings.new()
