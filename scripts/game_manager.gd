@@ -3,7 +3,7 @@ extends Node
 
 const LEVELS := {
     "menu": "res://scenes/main_menu.tscn",
-    "test": "res://scenes/levels/test_level.tscn",
+    "test": "res://scenes/levels/test_level/test_level.tscn",
 }
 
 var _playing := false

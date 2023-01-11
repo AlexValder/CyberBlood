@@ -40,7 +40,6 @@ func damage(value: int) -> void:
 
 func play_anim(anim_name: String) -> void:
     if sprite.frames.has_animation(anim_name):
-        print("ENEMY ANIM: %s" % anim_name)
         sprite.play(anim_name)
 
 
