@@ -1,4 +1,4 @@
-extends ValueBar
+extends LabeledValueBar
 class_name ManaBar
 
 

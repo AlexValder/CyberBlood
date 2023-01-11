@@ -1,6 +1,8 @@
 extends Area2D
 class_name HurtBox
 
+@export var is_enemy := true
+
 @onready var shape := $shape as CollisionShape2D
 @onready var _timer := $timer as Timer
 
@@ -8,18 +10,18 @@ var _last_hitbox: HitBox = null
 
 
 func _init() -> void:
-    self.collision_layer = 0b0
-    self.collision_mask = 0b10000
-
     var timer := Timer.new()
     timer.name = "timer"
     timer.one_shot = false
-    timer.wait_time = 1.0
+    timer.wait_time = 0.1
     timer.timeout.connect(_take_damage, CONNECT_PERSIST)
     self.add_child(timer)
 
 
 func _ready() -> void:
+    self.collision_layer = 8 if is_enemy else 16
+    self.collision_mask = 32 if is_enemy else 64
+
     self.area_entered.connect(_on_area_entered, CONNECT_PERSIST)
     self.area_exited.connect(_on_area_exited, CONNECT_PERSIST)
 
@@ -28,9 +30,14 @@ func _on_area_entered(hitbox: HitBox) -> void:
     if hitbox == null:
         return
 
+    var wr = weakref(hitbox)
+    if (!wr.get_ref()):
+        return
+
     _last_hitbox = hitbox
     _take_damage()
-    _timer.start()
+    if !is_enemy:
+        _timer.start()
 
 
 func _on_area_exited(hitbox: HitBox) -> void:

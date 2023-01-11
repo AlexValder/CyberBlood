@@ -21,34 +21,23 @@ tab_alignment = 1
 script = ExtResource("2_hiw33")
 
 [node name="Game" type="CenterContainer" parent="."]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = 21.0
+layout_mode = 2
 script = ExtResource("3_art0r")
 
 [node name="grid" type="GridContainer" parent="Game"]
-offset_left = 218.0
-offset_top = 91.0
-offset_right = 321.0
-offset_bottom = 148.0
+layout_mode = 2
 
 [node name="fps" type="CheckBox" parent="Game/grid"]
-offset_right = 103.0
-offset_bottom = 24.0
+layout_mode = 2
 button_pressed = true
 text = "Show FPS"
 alignment = 1
 
 [node name="hsep" type="HSeparator" parent="Game/grid"]
-offset_top = 28.0
-offset_right = 103.0
-offset_bottom = 32.0
+layout_mode = 2
 
 [node name="quit" type="Button" parent="Game/grid"]
-offset_top = 36.0
-offset_right = 103.0
-offset_bottom = 57.0
+layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 5
 text = "Quit to Main Menu"
@@ -56,38 +45,47 @@ text = "Quit to Main Menu"
 [node name="Controls" type="VBoxContainer" parent="."]
 visible = false
 self_modulate = Color(0.54902, 0.172549, 0.333333, 1)
+layout_mode = 2
 theme = ExtResource("2_aq74w")
 alignment = 1
 
 [node name="label01" type="Label" parent="Controls"]
+layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 text = "WASD / D-pad - movement"
 horizontal_alignment = 1
 
 [node name="label02" type="Label" parent="Controls"]
+layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 text = "Space / A - jump (there's a double jump)"
 horizontal_alignment = 1
 
 [node name="label03" type="Label" parent="Controls"]
+layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 text = "LMB / X - attack (there's a simple combo)"
 horizontal_alignment = 1
 
 [node name="label04" type="Label" parent="Controls"]
+layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 text = "Q - self-damage (you can die)"
 horizontal_alignment = 1
 
 [node name="label05" type="Label" parent="Controls"]
+layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 text = "1 / LB - transformation"
 horizontal_alignment = 1
 
 [node name="label06" type="Label" parent="Controls"]
+layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 text = "Esc / Start - quit the game"
 horizontal_alignment = 1
 
+[connection signal="tab_changed" from="." to="." method="_on_tab_changed"]
+[connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
 [connection signal="toggled" from="Game/grid/fps" to="Game" method="_on_fps_toggled"]
 [connection signal="button_up" from="Game/grid/quit" to="Game" method="_on_quit_button_up"]

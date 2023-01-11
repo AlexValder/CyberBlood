@@ -1,8 +1,8 @@
-[gd_scene load_steps=12 format=3 uid="uid://cfh7lpmp8lop7"]
+[gd_scene load_steps=12 format=3 uid="uid://bxuyqcqp1t513"]
 
 [ext_resource type="Script" path="res://scenes/levels/test_level.gd" id="1_rrm11"]
 [ext_resource type="Texture2D" uid="uid://wy6kqyx2jcwk" path="res://assets/textures/textures_test.png" id="2_45jdo"]
-[ext_resource type="PackedScene" uid="uid://b1b4i5n41y07u" path="res://entities/enemies/skeleton.tscn" id="3_1sik4"]
+[ext_resource type="PackedScene" uid="uid://bjo1s1p41e5q0" path="res://entities/enemies/skeleton/skeleton.tscn" id="3_1sik4"]
 [ext_resource type="Texture2D" uid="uid://cln4pod4sv5jm" path="res://assets/parallax/test_level/sky.png" id="4_nf1pb"]
 [ext_resource type="Texture2D" uid="uid://cqyp5igqnkan3" path="res://assets/parallax/test_level/far-clouds.png" id="5_nf6eh"]
 [ext_resource type="Texture2D" uid="uid://bddhe45qqwyyg" path="res://assets/parallax/test_level/near-clouds.png" id="6_1mc5j"]
@@ -5185,10 +5185,39 @@ metadata/_edit_lock_ = true
 [node name="enemies" type="Node" parent="."]
 
 [node name="skeleton" parent="enemies" instance=ExtResource("3_1sik4")]
-position = Vector2(202, 726)
+position = Vector2(364, 116)
 
 [node name="skeleton2" parent="enemies" instance=ExtResource("3_1sik4")]
-position = Vector2(383, 118)
+position = Vector2(476, 282)
+
+[node name="skeleton3" parent="enemies" instance=ExtResource("3_1sik4")]
+position = Vector2(722, 318)
+
+[node name="skeleton4" parent="enemies" instance=ExtResource("3_1sik4")]
+position = Vector2(775, 326)
+
+[node name="skeleton5" parent="enemies" instance=ExtResource("3_1sik4")]
+position = Vector2(642, 316)
+
+[node name="skeleton6" parent="enemies" instance=ExtResource("3_1sik4")]
+position = Vector2(1060, 323)
+enemy_name = "1-hit skeleton"
+max_health = 1
+
+[node name="skeleton7" parent="enemies" instance=ExtResource("3_1sik4")]
+position = Vector2(841, 706)
+
+[node name="skeleton8" parent="enemies" instance=ExtResource("3_1sik4")]
+position = Vector2(676, 701)
+
+[node name="skeleton9" parent="enemies" instance=ExtResource("3_1sik4")]
+position = Vector2(478, 691)
+
+[node name="skeleton10" parent="enemies" instance=ExtResource("3_1sik4")]
+position = Vector2(283, 697)
+
+[node name="skeleton11" parent="enemies" instance=ExtResource("3_1sik4")]
+position = Vector2(152, 690)
 
 [node name="prlxBg" type="ParallaxBackground" parent="."]
 scroll_ignore_camera_zoom = true
@@ -5197,6 +5226,7 @@ scroll_ignore_camera_zoom = true
 texture_filter = 1
 position = Vector2(0, 30)
 motion_scale = Vector2(0, 0.2)
+metadata/_edit_lock_ = true
 
 [node name="sky" type="Sprite2D" parent="prlxBg/sky"]
 texture_repeat = 2
@@ -5204,6 +5234,7 @@ position = Vector2(0, -95)
 scale = Vector2(2.2, 2.2)
 texture = ExtResource("4_nf1pb")
 centered = false
+metadata/_edit_lock_ = true
 
 [node name="clouds" type="Sprite2D" parent="prlxBg/sky"]
 texture_repeat = 2
@@ -5212,11 +5243,13 @@ texture = ExtResource("5_nf6eh")
 centered = false
 region_enabled = true
 region_rect = Rect2(0, 0, 1000, 240)
+metadata/_edit_lock_ = true
 
 [node name="sky2" type="ParallaxLayer" parent="prlxBg"]
 texture_filter = 1
 position = Vector2(0, 30)
 motion_scale = Vector2(0.05, 0.4)
+metadata/_edit_lock_ = true
 
 [node name="clouds_near" type="Sprite2D" parent="prlxBg/sky2"]
 texture_repeat = 2
@@ -5226,10 +5259,12 @@ centered = false
 offset = Vector2(0, 50)
 region_enabled = true
 region_rect = Rect2(0, 0, 1000, 240)
+metadata/_edit_lock_ = true
 
 [node name="mounts" type="ParallaxLayer" parent="prlxBg"]
 texture_filter = 1
 motion_scale = Vector2(0.1, 0.5)
+metadata/_edit_lock_ = true
 
 [node name="mountains" type="Sprite2D" parent="prlxBg/mounts"]
 texture_repeat = 2
@@ -5238,10 +5273,12 @@ texture = ExtResource("7_ruysf")
 centered = false
 region_enabled = true
 region_rect = Rect2(0, 0, 1000, 240)
+metadata/_edit_lock_ = true
 
 [node name="mounts2" type="ParallaxLayer" parent="prlxBg"]
 texture_filter = 1
 motion_scale = Vector2(0.2, 0.6)
+metadata/_edit_lock_ = true
 
 [node name="rocks" type="Sprite2D" parent="prlxBg/mounts2"]
 texture_repeat = 2
@@ -5250,10 +5287,12 @@ texture = ExtResource("8_ctj5v")
 centered = false
 region_enabled = true
 region_rect = Rect2(0, 0, 1000, 240)
+metadata/_edit_lock_ = true
 
 [node name="closer" type="ParallaxLayer" parent="prlxBg"]
 texture_filter = 1
 motion_scale = Vector2(0.5, 1)
+metadata/_edit_lock_ = true
 
 [node name="tress" type="Sprite2D" parent="prlxBg/closer"]
 texture_repeat = 2
@@ -5262,3 +5301,4 @@ texture = ExtResource("9_t33m6")
 centered = false
 region_enabled = true
 region_rect = Rect2(0, 0, 1000, 240)
+metadata/_edit_lock_ = true

@@ -12,14 +12,24 @@ _global_script_classes=[{
 "base": "CharacterBody2D",
 "class": &"BaseEnemy",
 "language": &"GDScript",
-"path": "res://entities/enemies/skeleton.gd"
+"path": "res://entities/enemies/skeleton/skeleton.gd"
 }, {
 "base": "Node2D",
 "class": &"BaseLevel",
 "language": &"GDScript",
 "path": "res://scenes/levels/base_level.gd"
 }, {
-"base": "ValueBar",
+"base": "State",
+"class": &"EnemyState",
+"language": &"GDScript",
+"path": "res://entities/enemies/enemy_state.gd"
+}, {
+"base": "StateMachine",
+"class": &"EnemyStateMachine",
+"language": &"GDScript",
+"path": "res://entities/enemies/enemy_state_machine.gd"
+}, {
+"base": "LabeledValueBar",
 "class": &"HealthBar",
 "language": &"GDScript",
 "path": "res://entities/player/hud/health_bar.gd"
@@ -27,24 +37,29 @@ _global_script_classes=[{
 "base": "Area2D",
 "class": &"HitBox",
 "language": &"GDScript",
-"path": "res://entities/hitbox.gd"
+"path": "res://entities/tools/hitbox.gd"
 }, {
 "base": "Area2D",
 "class": &"HurtBox",
 "language": &"GDScript",
-"path": "res://entities/hurtbox.gd"
+"path": "res://entities/tools/hurtbox.gd"
 }, {
 "base": "Control",
 "class": &"InventoryTab",
 "language": &"GDScript",
 "path": "res://entities/player/inventory/inv_tab.gd"
 }, {
+"base": "ValueBar",
+"class": &"LabeledValueBar",
+"language": &"GDScript",
+"path": "res://entities/tools/labeled_value_bar.gd"
+}, {
 "base": "Control",
 "class": &"MainMenu",
 "language": &"GDScript",
 "path": "res://scenes/main_menu.gd"
 }, {
-"base": "ValueBar",
+"base": "LabeledValueBar",
 "class": &"ManaBar",
 "language": &"GDScript",
 "path": "res://entities/player/hud/mana_bar.gd"
@@ -54,33 +69,48 @@ _global_script_classes=[{
 "language": &"GDScript",
 "path": "res://entities/player/player.gd"
 }, {
-"base": "Node",
+"base": "State",
 "class": &"PlayerState",
 "language": &"GDScript",
 "path": "res://entities/player/state_machine/player_state.gd"
 }, {
-"base": "Node2D",
+"base": "StateMachine",
 "class": &"PlayerStateMachine",
 "language": &"GDScript",
-"path": "res://entities/player/state_machine/state_machine.gd"
+"path": "res://entities/player/state_machine/player_state_machine.gd"
+}, {
+"base": "Node",
+"class": &"State",
+"language": &"GDScript",
+"path": "res://entities/tools/state.gd"
+}, {
+"base": "Node2D",
+"class": &"StateMachine",
+"language": &"GDScript",
+"path": "res://entities/tools/state_machine.gd"
 }, {
 "base": "ProgressBar",
 "class": &"ValueBar",
 "language": &"GDScript",
-"path": "res://entities/player/hud/value_bar.gd"
+"path": "res://entities/tools/value_bar.gd"
 }]
 _global_script_class_icons={
 "BaseEnemy": "",
 "BaseLevel": "",
+"EnemyState": "",
+"EnemyStateMachine": "",
 "HealthBar": "",
 "HitBox": "",
 "HurtBox": "",
 "InventoryTab": "",
+"LabeledValueBar": "",
 "MainMenu": "",
 "ManaBar": "",
 "Player": "",
 "PlayerState": "",
 "PlayerStateMachine": "",
+"State": "",
+"StateMachine": "",
 "ValueBar": ""
 }
 
@@ -99,7 +129,6 @@ Settings="*res://scripts/settings.gd"
 
 [debug]
 
-gdscript/warnings/treat_warnings_as_errors=true
 gdscript/warnings/integer_division=0
 
 [display]
@@ -111,6 +140,10 @@ window/size/resizable=false
 window/size/borderless=true
 window/stretch/mode="canvas_items"
 window/stretch/aspect="keep_height"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/AS2P/plugin.cfg")
 
 [input]
 
