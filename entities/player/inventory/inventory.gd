@@ -6,8 +6,6 @@ func _enter_tree() -> void:
 
 
 func _unhandled_input(event: InputEvent) -> void:
-    var tab_change := false
-
     if event.is_action_pressed("ui_cancel"):
         toggle()
     elif event.is_action_pressed("inv"):

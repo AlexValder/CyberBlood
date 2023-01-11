@@ -6,13 +6,10 @@
 
 [node name="inventory" type="TabContainer"]
 self_modulate = Color(0.54902, 0.172549, 0.333333, 1)
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 50.0
-offset_top = 50.0
-offset_right = -50.0
-offset_bottom = -50.0
+anchor_left = 0.078125
+anchor_top = 0.138889
+anchor_right = 0.921875
+anchor_bottom = 0.861111
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
