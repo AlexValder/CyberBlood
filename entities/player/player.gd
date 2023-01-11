@@ -33,13 +33,13 @@ const BAT_HURTBOX_SIZE := {
     height = 12,
 }
 
-@onready var _sprite := $sprite as AnimatedSprite2D
+@onready var sprite := $sprite as AnimatedSprite2D
+@onready var player_anim := $player_anim as AnimationPlayer
+@onready var _player_effects := $player_effects as AnimationPlayer
 @onready var _shape := $shape as CollisionShape2D
 @onready var _hurtbox := $hurtbox as HurtBox
 @onready var _camera := $camera as Camera2D
-@onready var _status := $sprite/status as Label
 @onready var _timer := $timers/damage_timer as Timer
-@onready var _player_anim := $player_effects as AnimationPlayer
 
 @export var max_health: int = 50
 @export var max_mana: float = 100.0
@@ -48,10 +48,15 @@ var current_health := max_health
 var current_mana := max_mana
 var mana_recovery_rate := 1.0
 var invincible := false
+var flip := false:
+    set(value):
+        flip = value
+        sprite.flip_h = value
+        $attack_hitboxes.scale.x = -1 if value else 1
 
 
 func damage(value: int) -> void:
-    if invincible:
+    if invincible or current_health <= 0:
         return
 
     if current_health > value:
@@ -69,7 +74,6 @@ func damage(value: int) -> void:
 
 func player_dies() -> void:
     emit_signal("player_dead")
-    play_anim("death")
 
 
 func can_transform(form: PlayerForms) -> bool:
@@ -95,12 +99,9 @@ func has_mana(value: int) -> bool:
         return false
 
 
-func play_anim(anim_name: String, use_assert: bool = false) -> void:
-    if use_assert:
-        assert(_sprite.frames.has_animation(anim_name), \
-            "animation not found: %s" % anim_name)
-
-    _sprite.play(anim_name)
+func play_anim(anim_name: String) -> void:
+    print("PLAYER ANIM: %s" % anim_name)
+    player_anim.play("player/" + anim_name)
 
 
 func ensure_collision(form: PlayerForms) -> void:
@@ -120,10 +121,6 @@ func ensure_collision(form: PlayerForms) -> void:
 
     velocity.y += 1
     move_and_slide()
-
-
-func update_status(status: String) -> void:
-    _status.text = status
 
 
 func set_limits(vec: Vector4i) -> void:
@@ -149,15 +146,15 @@ func _ready() -> void:
 
 func _on_start_invicibility() -> void:
     self.invincible = true
-    await _sprite.animation_finished
+    await player_anim.animation_finished
     _timer.start(1)
-    _player_anim.play("damage_invincibility")
+    _player_effects.play("player_effects/damage_invincibility")
 
 
 func _on_stop_invincibility() -> void:
     self.invincible = false
-    _player_anim.seek(0)
-    _player_anim.stop()
+    _player_effects.seek(0)
+    _player_effects.stop()
 
 
 func _on_recovery_value_timeout(rate: float) -> void:

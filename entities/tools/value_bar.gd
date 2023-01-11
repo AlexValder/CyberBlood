@@ -1,12 +1,6 @@
 extends ProgressBar
 class_name ValueBar
 
-@onready var _value := $value as Label
-
-
-func update() -> void:
-    _value.text = str(int(self.value))
-
 
 func set_max_value(new_value: int) -> void:
     var percentage = self.value / self.max_value
@@ -24,5 +18,3 @@ func set_current_value(new_value: float) -> void:
 
 func _internal_set_value(new_value: float) -> void:
     self.value = new_value
-    _value.text = str(int(new_value))
-

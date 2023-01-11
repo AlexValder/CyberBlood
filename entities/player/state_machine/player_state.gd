@@ -1,33 +1,7 @@
-extends Node
+extends State
 class_name PlayerState
 
-signal state_change(old_state, new_state)
-
-var player: Player = null
-
-
-func on_entry() -> void:
-    player.play_anim(self.name)
-
-
-func on_exit() -> void:
-    pass
-
-
-func can_enter(_dir: Dictionary) -> bool:
-    return true
-
-
-func can_leave() -> bool:
-    return true
-
-
-func process(_delta: float) -> void:
-    pass
-
-
-func physics_process(_delta: float) -> void:
-    pass
+@onready var player := self.owner as Player
 
 
 # Some of reused logic
@@ -36,10 +10,10 @@ func _check_horizontal_movement(
 
     if Input.is_action_pressed("left"):
         player.velocity.x = lerp(player.velocity.x, -speed, player.ACCEL)
-        player._sprite.flip_h = true
+        player.flip = true
     elif Input.is_action_pressed("right"):
         player.velocity.x =  lerp(player.velocity.x, speed, player.ACCEL)
-        player._sprite.flip_h = false
+        player.flip = false
     else:
         player.velocity.x = lerp(player.velocity.x, 0.0, player.ACCEL)
         if idle_state.length() > 0:

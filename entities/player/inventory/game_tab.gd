@@ -1,7 +1,7 @@
 extends InventoryTab
 
 
-func set_gamepad_focus() -> void:
+func grab_gamepad_focus() -> void:
     ($grid.get_child(0) as Control).grab_focus()
 
 
