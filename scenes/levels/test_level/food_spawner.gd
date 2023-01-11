@@ -10,6 +10,6 @@ func _on_body_entered(player: Player) -> void:
 
     assert(food_spawner != null)
 
-    var pickup := (load(PICKUP_PATH) as PackedScene).instantiate() as FoodPickup
+    var pickup := FoodPickup.get_pickup()
     pickup.global_position = food_spawner.global_position + Vector2.DOWN
-    add_sibling(pickup)
+    call_deferred("add_sibling", pickup)

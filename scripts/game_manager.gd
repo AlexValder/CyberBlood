@@ -49,6 +49,7 @@ func remove_player() -> void:
 func _ready() -> void:
     self.process_mode = Node.PROCESS_MODE_ALWAYS
     create_player()
+    randomize()
 
 
 func player_dies() -> void:

@@ -10,6 +10,12 @@ class_name FoodPickup
 var restores := 1
 var _time := 0.0
 
+
+static func get_pickup() -> FoodPickup:
+    const path := "res://entities/items/pickup.tscn"
+    return (load(path) as PackedScene).instantiate() as FoodPickup
+
+
 func _ready() -> void:
     var file := FileAccess.open("res://data/food.json", FileAccess.READ)
     var json := file.get_as_text()
@@ -18,7 +24,6 @@ func _ready() -> void:
 
     var item: Dictionary
     if _index == 0:
-        randomize()
         var actual_index := randi_range(0, 29)
         item = list[actual_index]
         _setup_value(actual_index)
