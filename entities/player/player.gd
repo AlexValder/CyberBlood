@@ -8,7 +8,7 @@ enum PlayerForms {
 
 signal player_dead
 signal player_hurt
-signal player_damaged(old_value, new_value)
+signal player_health_changed(old_value, new_value)
 signal mana_spent(new_value)
 
 const GRAVITY := 350.0
@@ -55,6 +55,12 @@ var flip := false:
         $attack_hitboxes.scale.x = -1 if value else 1
 
 
+func heal(value: int) -> void:
+    emit_signal("player_health_changed", \
+        current_health, min(max_health, current_health + value))
+    current_health = min(max_health, current_health + value)
+
+
 func damage(value: int) -> void:
     if invincible or current_health <= 0:
         return
@@ -62,9 +68,9 @@ func damage(value: int) -> void:
     if current_health > value:
         emit_signal("player_hurt")
 
-    emit_signal("player_damaged", \
+    emit_signal("player_health_changed", \
         current_health, max(0, current_health - value))
-    current_health -= value
+    current_health = max(0, current_health - value)
 
     if current_health <= 0:
         player_dies()
@@ -100,7 +106,6 @@ func has_mana(value: int) -> bool:
 
 
 func play_anim(anim_name: String) -> void:
-    print("PLAYER ANIM: %s" % anim_name)
     player_anim.play("player/" + anim_name)
 
 

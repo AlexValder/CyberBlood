@@ -1,7 +1,7 @@
 extends EnemyState
 
 
-func _process(_delta: float) -> void:
+func process(_delta: float) -> void:
     _enemy.sprite.flip_h =\
          _enemy.global_position.x > GameManager.player.global_position.x
 

@@ -3,7 +3,7 @@ extends Node
 
 const LEVELS := {
     "menu": "res://scenes/main_menu.tscn",
-    "test": "res://scenes/levels/test_level.tscn",
+    "test": "res://scenes/levels/test_level/test_level.tscn",
 }
 
 var _playing := false
@@ -49,6 +49,7 @@ func remove_player() -> void:
 func _ready() -> void:
     self.process_mode = Node.PROCESS_MODE_ALWAYS
     create_player()
+    randomize()
 
 
 func player_dies() -> void:

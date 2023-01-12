@@ -1,0 +1,122 @@
+[
+  {
+    "name": "cake1",
+    "costs": 10
+  },
+  {
+    "name": "cake2",
+    "costs": 15
+  },
+  {
+    "name": "cake3",
+    "costs": 15
+  },
+  {
+    "name": "cake4",
+    "costs": 20
+  },
+  {
+    "name": "cookie",
+    "costs": 5
+  },
+  {
+    "name": "donut",
+    "costs": 10
+  },
+  {
+    "name": "cupcake1",
+    "costs": 10
+  },
+  {
+    "name": "cupcake2",
+    "costs": 10
+  },
+  {
+    "name": "idk1",
+    "costs": 5
+  },
+  {
+    "name": "idk2",
+    "costs": 5
+  },
+  {
+    "name": "bread1",
+    "costs": 10
+  },
+  {
+    "name": "bread2",
+    "costs": 7
+  },
+  {
+    "name": "meat1",
+    "costs": 30
+  },
+  {
+    "name": "meat2",
+    "costs": 25
+  },
+  {
+    "name": "meat3",
+    "costs": 35
+  },
+  {
+    "name": "meat4",
+    "costs": 30
+  },
+  {
+    "name": "meat5",
+    "costs": 30
+  },
+  {
+    "name": "eggs",
+    "costs": 20
+  },
+  {
+    "name": "sandwich",
+    "costs": 15
+  },
+  {
+    "name": "burger",
+    "costs": 20
+  },
+  {
+    "name": "cheese",
+    "costs": 20
+  },
+  {
+    "name": "egg",
+    "costs": 5
+  },
+  {
+    "name": "ice_cream",
+    "costs": 10
+  },
+  {
+    "name": "salat1",
+    "costs": 25
+  },
+  {
+    "name": "salat2",
+    "costs": 25
+  },
+  {
+    "name": "salatte",
+    "costs": 15
+  },
+  {
+    "name": "pizza",
+    "costs": 35
+  },
+  {
+    "name": "coffee",
+    "costs": 5
+  },
+  {
+    "name": "sushi1",
+    "costs": 25
+  },
+  {
+    "name": "sushi2",
+    "costs": 25
+  }
+]
