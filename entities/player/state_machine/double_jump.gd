@@ -17,10 +17,14 @@ func physics_process(delta: float) -> void:
     if Input.is_action_just_pressed("bat_form"):
         emit_signal("state_change", self.name, "bat_form")
 
+    if Input.is_action_just_pressed("cat_form"):
+        emit_signal("state_change", self.name, "cat_idle")
+        player.ensure_collision(player.PlayerForms.CAT)
+
     if player.velocity.y > 0:
         emit_signal("state_change", self.name, "final_fall")
 
-    _check_horizontal_movement(delta, player.WALK_SPEED)
+    _check_horizontal_movement(player.WALK_SPEED)
     _add_gravity(delta)
 
     player.move_and_slide()

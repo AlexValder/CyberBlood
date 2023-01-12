@@ -16,16 +16,13 @@ func can_enter(dir: Dictionary) -> bool:
     return true
 
 
-func can_leave() -> bool:
-    return player.can_transform(player.PlayerForms.HUMAN)
-
-
-func physics_process(delta: float) -> void:
+func physics_process(_delta: float) -> void:
     if Input.is_action_just_pressed("bat_form"):
-        emit_signal("state_change", self.name, "idle")
+        if player.can_transform(player.PlayerForms.HUMAN):
+            emit_signal("state_change", self.name, "idle")
 
-    _check_horizontal_movement(delta, player.FLY_SPEED)
-    _check_vertical_movement(delta, player.FLY_SPEED)
+    _check_horizontal_movement(player.FLY_SPEED)
+    _check_vertical_movement(player.FLY_SPEED)
 
     player.move_and_slide()
 

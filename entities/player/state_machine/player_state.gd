@@ -6,7 +6,7 @@ class_name PlayerState
 
 # Some of reused logic
 func _check_horizontal_movement(
-    _delta: float, speed: float, idle_state: String = "") -> void:
+    speed: float, idle_state: String = "") -> void:
 
     if Input.is_action_pressed("left"):
         player.velocity.x = lerp(player.velocity.x, -speed, player.ACCEL)
@@ -21,7 +21,7 @@ func _check_horizontal_movement(
 
 
 func _check_vertical_movement(
-    _delta: float, speed: float, idle_state: String = "") -> void:
+    speed: float, idle_state: String = "") -> void:
 
     if Input.is_action_pressed("up"):
         player.velocity.y = lerp(player.velocity.y, -speed, player.ACCEL)

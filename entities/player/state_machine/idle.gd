@@ -8,6 +8,10 @@ func physics_process(_delta: float) -> void:
     if Input.is_action_just_pressed("bat_form"):
         emit_signal("state_change", self.name, "bat_form")
 
+    if Input.is_action_just_pressed("cat_form"):
+        emit_signal("state_change", self.name, "cat_idle")
+        player.ensure_collision(player.PlayerForms.CAT)
+
     if Input.is_action_just_pressed("melee"):
         emit_signal("state_change", self.name, "attack1")
 

@@ -4,6 +4,7 @@ class_name Player
 enum PlayerForms {
     HUMAN,
     BAT,
+    CAT,
 }
 
 signal player_dead
@@ -89,7 +90,7 @@ func can_transform(form: PlayerForms) -> bool:
                 HUMAN_SHAPE_SIZE.radius,
                 HUMAN_SHAPE_SIZE.height
             )
-        PlayerForms.BAT:
+        PlayerForms.BAT, PlayerForms.CAT:
             # the smallest form, no need to check for space
             return true
 
@@ -116,7 +117,7 @@ func ensure_collision(form: PlayerForms) -> void:
             _shape.shape.height = HUMAN_SHAPE_SIZE.height * 2
             _hurtbox.shape.shape.radius = HUMAN_HURTBOX_SIZE.radius
             _hurtbox.shape.shape.height = HUMAN_HURTBOX_SIZE.height
-        PlayerForms.BAT:
+        PlayerForms.BAT, PlayerForms.CAT:
             _shape.shape.radius = BAT_SHAPE_SIZE.radius * 2
             _shape.shape.height = BAT_SHAPE_SIZE.height * 2
             _hurtbox.shape.shape.radius = BAT_HURTBOX_SIZE.radius
@@ -124,7 +125,7 @@ func ensure_collision(form: PlayerForms) -> void:
         _:
             push_error("Unknown form: %s" % form)
 
-    velocity.y += 1
+    velocity.y += 2
     move_and_slide()
 
 
@@ -181,7 +182,7 @@ func _check_space(h_space: float, v_space: float) -> bool:
     params.to = self.global_position + Vector2(2 * h_space, 0)
     params.hit_from_inside = true
     params.exclude = [self.get_rid()]
-    params.collision_mask = 0b10
+    params.collision_mask = 0b1
 
     var result := space_state.intersect_ray(params)
 
