@@ -4,6 +4,7 @@ class_name FoodPickup
 ## 0 for random, 1-30 for specific item
 @export_range(0, 30, 1) var _index: int
 @export var frequency := 2.0
+@export_file("*.json") var file_data: String
 
 @onready var _sprite := $sprite as Sprite2D
 
@@ -17,7 +18,7 @@ static func get_pickup() -> FoodPickup:
 
 
 func _ready() -> void:
-    var file := FileAccess.open("res://data/food.json", FileAccess.READ)
+    var file := FileAccess.open(file_data, FileAccess.READ)
     var json := file.get_as_text()
     var list := JSON.parse_string(json)
     assert(typeof(list) == TYPE_ARRAY)
