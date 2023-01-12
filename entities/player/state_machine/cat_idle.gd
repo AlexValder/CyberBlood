@@ -1,4 +1,14 @@
-extends PlayerState
+extends CatFormState
+
+
+func can_enter(dir: Dictionary) -> bool:
+    if dir.has("prev") && (dir.prev as String).begins_with("cat_"):
+        return true
+
+    if !player.has_mana(Constants.CAT_FORM_COST):
+        return false
+
+    return true
 
 
 func physics_process(_delta: float) -> void:

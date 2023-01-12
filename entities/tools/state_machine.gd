@@ -13,12 +13,7 @@ func reset() -> void:
 
 
 func change_state(state_name: String) -> void:
-    var state := get_node(state_name) as State
-
-    _current_state.on_exit()
-    _status.text = state.name
-    _current_state = state
-    _current_state.on_entry()
+    _on_state_change(_current_state.name, state_name)
 
 
 func _init() -> void:
@@ -64,7 +59,7 @@ func _on_state_change(old_state: String, new_state: String) -> void:
     if state == null || !state.can_enter({"prev" = old_state}):
         return
 
-    if !_current_state.can_leave():
+    if !_current_state.can_leave({"next" = state.name}):
         return
 
     _status.text = state.name

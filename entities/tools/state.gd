@@ -17,7 +17,7 @@ func can_enter(_dir: Dictionary) -> bool:
     return true
 
 
-func can_leave() -> bool:
+func can_leave(_dir: Dictionary) -> bool:
     return true
 
 

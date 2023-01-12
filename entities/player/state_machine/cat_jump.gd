@@ -1,4 +1,4 @@
-extends PlayerState
+extends CatFormState
 
 
 func on_entry() -> void:

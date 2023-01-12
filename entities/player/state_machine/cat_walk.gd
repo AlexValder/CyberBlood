@@ -1,4 +1,4 @@
-extends PlayerState
+extends CatFormState
 
 
 func physics_process(_delta: float) -> void:
