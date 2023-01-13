@@ -16,6 +16,7 @@ tab_alignment = 1
 script = ExtResource("2_hiw33")
 
 [node name="Game" type="CenterContainer" parent="."]
+visible = false
 layout_mode = 2
 script = ExtResource("3_art0r")
 
@@ -38,7 +39,6 @@ size_flags_vertical = 5
 text = "Quit to Main Menu"
 
 [node name="Controls" type="VBoxContainer" parent="."]
-visible = false
 self_modulate = Color(0.54902, 0.172549, 0.333333, 1)
 layout_mode = 2
 theme = ExtResource("2_aq74w")
@@ -47,7 +47,7 @@ alignment = 1
 [node name="label01" type="Label" parent="Controls"]
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
-text = "WASD / D-pad - movement"
+text = "WASD / Left stick - movement"
 horizontal_alignment = 1
 
 [node name="label02" type="Label" parent="Controls"]
@@ -65,13 +65,13 @@ horizontal_alignment = 1
 [node name="label04" type="Label" parent="Controls"]
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
-text = "Q - self-damage (you can die)"
+text = "Q / Left - circle between forms"
 horizontal_alignment = 1
 
 [node name="label05" type="Label" parent="Controls"]
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
-text = "1 / LB - transformation"
+text = "E / LB - transformation"
 horizontal_alignment = 1
 
 [node name="label06" type="Label" parent="Controls"]

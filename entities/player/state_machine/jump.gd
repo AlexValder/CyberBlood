@@ -10,13 +10,6 @@ func physics_process(delta: float) -> void:
     if is_zero_approx(player.velocity.y) and !player.is_on_ceiling():
         emit_signal("state_change", self.name, "idle")
 
-    if Input.is_action_just_pressed("bat_form"):
-        emit_signal("state_change", self.name, "bat_form")
-
-    if Input.is_action_just_pressed("cat_form"):
-        emit_signal("state_change", self.name, "cat_idle")
-        player.ensure_collision(player.PlayerForms.CAT)
-
     if Input.is_action_just_pressed("melee"):
         # TODO: air attack
         emit_signal("state_change", self.name, "attack1")
@@ -31,3 +24,5 @@ func physics_process(delta: float) -> void:
     _add_gravity(delta)
 
     player.move_and_slide()
+
+    super.physics_process(delta)

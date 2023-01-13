@@ -1,16 +1,9 @@
 extends PlayerState
 
 
-func physics_process(_delta: float) -> void:
+func physics_process(delta: float) -> void:
     if !player.is_on_floor():
         emit_signal("state_change", self.name, "fall")
-
-    if Input.is_action_just_pressed("bat_form"):
-        emit_signal("state_change", self.name, "bat_form")
-
-    if Input.is_action_just_pressed("cat_form"):
-        emit_signal("state_change", self.name, "cat_idle")
-        player.ensure_collision(player.PlayerForms.CAT)
 
     if Input.is_action_just_pressed("melee"):
         emit_signal("state_change", self.name, "attack1")
@@ -21,3 +14,5 @@ func physics_process(_delta: float) -> void:
         emit_signal("state_change", self.name, "jump")
 
     player.move_and_slide()
+
+    super.physics_process(delta)

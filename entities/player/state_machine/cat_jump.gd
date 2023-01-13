@@ -7,13 +7,13 @@ func on_entry() -> void:
 
 
 func physics_process(delta: float) -> void:
+    super.physics_process(delta)
+
     if is_zero_approx(player.velocity.y) and !player.is_on_ceiling():
         emit_signal("state_change", self.name, "cat_idle")
 
-    if Input.is_action_just_pressed("cat_form"):
-        if player.can_transform(player.PlayerForms.HUMAN):
-            emit_signal("state_change", self.name, "idle")
-            player.ensure_collision(player.PlayerForms.HUMAN)
+    if Input.is_action_just_pressed("change_form"):
+        emit_signal("state_change", self.name, "idle")
 
     if player.velocity.y > 0:
         emit_signal("state_change", self.name, "cat_fall")

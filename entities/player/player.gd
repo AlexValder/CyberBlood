@@ -10,13 +10,15 @@ enum PlayerForms {
 signal player_dead
 signal player_hurt
 signal player_health_changed(old_value, new_value)
-signal mana_spent(new_value)
+signal mana_changed(new_value)
 
 const GRAVITY := 350.0
+const CAT_SPEED := 150.0
 const WALK_SPEED := 120.0
 const FLY_SPEED := 200.0
 const JUMP := 210.0
 const ACCEL := 0.1
+
 const HUMAN_SHAPE_SIZE := {
     radius = 12 / 2,
     height = 44 / 2,
@@ -41,6 +43,7 @@ const BAT_HURTBOX_SIZE := {
 @onready var _hurtbox := $hurtbox as HurtBox
 @onready var _camera := $camera as Camera2D
 @onready var _timer := $timers/damage_timer as Timer
+@onready var _selected_form := $"%selected_form" as Label
 
 @export var max_health: int = 50
 @export var max_mana: float = 100.0
@@ -54,6 +57,31 @@ var flip := false:
         flip = value
         sprite.flip_h = value
         $attack_hitboxes.scale.x = -1 if value else 1
+var _current_form := 0
+var _forms := [
+    PlayerForms.BAT,
+    PlayerForms.CAT,
+]
+
+
+func next_form() -> void:
+    _current_form += 1
+    if _current_form >= _forms.size():
+        _current_form = 0
+
+    _selected_form.text =\
+        "selected form: %s" % PlayerForms.keys()[_forms[_current_form]]
+
+
+func tranform_name() -> String:
+    match(_forms[_current_form]):
+        PlayerForms.BAT:
+            return "bat_form"
+        PlayerForms.CAT:
+            return "cat_idle"
+
+    push_error("Form unknown: %d" % _forms[_current_form])
+    return "idle"
 
 
 func heal(value: int) -> void:
@@ -98,12 +126,13 @@ func can_transform(form: PlayerForms) -> bool:
 
 
 func has_mana(value: int) -> bool:
-    if current_mana > value:
-        emit_signal("mana_spent", current_mana - value)
-        current_mana -= value
-        return true
-    else:
-        return false
+    return current_mana >= value
+
+
+func use_mana(value: int) -> void:
+    assert(has_mana(value))
+    emit_signal("mana_changed", current_mana - value)
+    current_mana -= value
 
 
 func play_anim(anim_name: String) -> void:

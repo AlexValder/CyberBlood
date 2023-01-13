@@ -9,13 +9,6 @@ func physics_process(delta: float) -> void:
         # TODO: air attack
         emit_signal("state_change", self.name, "attack1")
 
-    if Input.is_action_just_pressed("bat_form"):
-        emit_signal("state_change", self.name, "bat_form")
-
-    if Input.is_action_just_pressed("cat_form"):
-        emit_signal("state_change", self.name, "cat_idle")
-        player.ensure_collision(player.PlayerForms.CAT)
-
     if Input.is_action_just_pressed("jump"):
         emit_signal("state_change", self.name, "double_jump")
 
@@ -23,3 +16,5 @@ func physics_process(delta: float) -> void:
 
     player.velocity.y += delta * player.GRAVITY
     player.move_and_slide()
+
+    super.physics_process(delta)
