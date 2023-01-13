@@ -4,18 +4,21 @@ class_name Player
 enum PlayerForms {
     HUMAN,
     BAT,
+    CAT,
 }
 
 signal player_dead
 signal player_hurt
 signal player_health_changed(old_value, new_value)
-signal mana_spent(new_value)
+signal mana_changed(new_value)
 
 const GRAVITY := 350.0
+const CAT_SPEED := 150.0
 const WALK_SPEED := 120.0
 const FLY_SPEED := 200.0
 const JUMP := 210.0
 const ACCEL := 0.1
+
 const HUMAN_SHAPE_SIZE := {
     radius = 12 / 2,
     height = 44 / 2,
@@ -40,6 +43,7 @@ const BAT_HURTBOX_SIZE := {
 @onready var _hurtbox := $hurtbox as HurtBox
 @onready var _camera := $camera as Camera2D
 @onready var _timer := $timers/damage_timer as Timer
+@onready var _selected_form := $"%selected_form" as Label
 
 @export var max_health: int = 50
 @export var max_mana: float = 100.0
@@ -53,6 +57,31 @@ var flip := false:
         flip = value
         sprite.flip_h = value
         $attack_hitboxes.scale.x = -1 if value else 1
+var _current_form := 0
+var _forms := [
+    PlayerForms.BAT,
+    PlayerForms.CAT,
+]
+
+
+func next_form() -> void:
+    _current_form += 1
+    if _current_form >= _forms.size():
+        _current_form = 0
+
+    _selected_form.text =\
+        "selected form: %s" % PlayerForms.keys()[_forms[_current_form]]
+
+
+func tranform_name() -> String:
+    match(_forms[_current_form]):
+        PlayerForms.BAT:
+            return "bat_form"
+        PlayerForms.CAT:
+            return "cat_idle"
+
+    push_error("Form unknown: %d" % _forms[_current_form])
+    return "idle"
 
 
 func heal(value: int) -> void:
@@ -89,7 +118,7 @@ func can_transform(form: PlayerForms) -> bool:
                 HUMAN_SHAPE_SIZE.radius,
                 HUMAN_SHAPE_SIZE.height
             )
-        PlayerForms.BAT:
+        PlayerForms.BAT, PlayerForms.CAT:
             # the smallest form, no need to check for space
             return true
 
@@ -97,12 +126,13 @@ func can_transform(form: PlayerForms) -> bool:
 
 
 func has_mana(value: int) -> bool:
-    if current_mana > value:
-        emit_signal("mana_spent", current_mana - value)
-        current_mana -= value
-        return true
-    else:
-        return false
+    return current_mana >= value
+
+
+func use_mana(value: int) -> void:
+    assert(has_mana(value))
+    emit_signal("mana_changed", current_mana - value)
+    current_mana -= value
 
 
 func play_anim(anim_name: String) -> void:
@@ -116,7 +146,7 @@ func ensure_collision(form: PlayerForms) -> void:
             _shape.shape.height = HUMAN_SHAPE_SIZE.height * 2
             _hurtbox.shape.shape.radius = HUMAN_HURTBOX_SIZE.radius
             _hurtbox.shape.shape.height = HUMAN_HURTBOX_SIZE.height
-        PlayerForms.BAT:
+        PlayerForms.BAT, PlayerForms.CAT:
             _shape.shape.radius = BAT_SHAPE_SIZE.radius * 2
             _shape.shape.height = BAT_SHAPE_SIZE.height * 2
             _hurtbox.shape.shape.radius = BAT_HURTBOX_SIZE.radius
@@ -124,7 +154,7 @@ func ensure_collision(form: PlayerForms) -> void:
         _:
             push_error("Unknown form: %s" % form)
 
-    velocity.y += 1
+    velocity.y += 2
     move_and_slide()
 
 
@@ -181,7 +211,7 @@ func _check_space(h_space: float, v_space: float) -> bool:
     params.to = self.global_position + Vector2(2 * h_space, 0)
     params.hit_from_inside = true
     params.exclude = [self.get_rid()]
-    params.collision_mask = 0b10
+    params.collision_mask = 0b1
 
     var result := space_state.intersect_ray(params)
 

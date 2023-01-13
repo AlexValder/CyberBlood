@@ -9,10 +9,9 @@ func physics_process(delta: float) -> void:
         # TODO: air attack
         emit_signal("state_change", self.name, "attack1")
 
-    if Input.is_action_just_pressed("bat_form"):
-        emit_signal("state_change", self.name, "bat_form")
-
-    _check_horizontal_movement(delta, player.WALK_SPEED)
+    _check_horizontal_movement(player.WALK_SPEED)
     _add_gravity(delta)
 
     player.move_and_slide()
+
+    super.physics_process(delta)

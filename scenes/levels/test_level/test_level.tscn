@@ -5174,7 +5174,7 @@ font = ExtResource("5_rhpca")
 script = ExtResource("1_1po5d")
 
 [node name="spawnpoint" type="Marker2D" parent="."]
-position = Vector2(224, 113)
+position = Vector2(224, 117)
 
 [node name="tilemap" type="TileMap" parent="."]
 texture_filter = 1
@@ -5235,45 +5235,45 @@ position = Vector2(537, 9)
 
 [node name="enemies" type="Node" parent="."]
 
-[node name="skeleton2" parent="enemies" instance=ExtResource("4_dd4s5")]
-position = Vector2(476, 282)
+[node name="skeleton00" parent="enemies" instance=ExtResource("4_dd4s5")]
+position = Vector2(476, 283)
 spawn_pickup_chance = 100
 
-[node name="skeleton3" parent="enemies" instance=ExtResource("4_dd4s5")]
+[node name="skeleton01" parent="enemies" instance=ExtResource("4_dd4s5")]
 position = Vector2(722, 318)
 spawn_pickup_chance = 30
 
-[node name="skeleton4" parent="enemies" instance=ExtResource("4_dd4s5")]
+[node name="skeleton02" parent="enemies" instance=ExtResource("4_dd4s5")]
 position = Vector2(775, 326)
 spawn_pickup_chance = 30
 
-[node name="skeleton5" parent="enemies" instance=ExtResource("4_dd4s5")]
+[node name="skeleton03" parent="enemies" instance=ExtResource("4_dd4s5")]
 position = Vector2(642, 316)
 spawn_pickup_chance = 30
 
-[node name="skeleton6" parent="enemies" instance=ExtResource("4_dd4s5")]
+[node name="skeleton04" parent="enemies" instance=ExtResource("4_dd4s5")]
 position = Vector2(1060, 323)
 enemy_name = "1-hit skeleton"
 max_health = 1
 spawn_pickup_chance = 30
 
-[node name="skeleton7" parent="enemies" instance=ExtResource("4_dd4s5")]
+[node name="skeleton05" parent="enemies" instance=ExtResource("4_dd4s5")]
 position = Vector2(841, 706)
 spawn_pickup_chance = 30
 
-[node name="skeleton8" parent="enemies" instance=ExtResource("4_dd4s5")]
+[node name="skeleton06" parent="enemies" instance=ExtResource("4_dd4s5")]
 position = Vector2(676, 701)
 spawn_pickup_chance = 30
 
-[node name="skeleton9" parent="enemies" instance=ExtResource("4_dd4s5")]
+[node name="skeleton07" parent="enemies" instance=ExtResource("4_dd4s5")]
 position = Vector2(478, 691)
 spawn_pickup_chance = 30
 
-[node name="skeleton10" parent="enemies" instance=ExtResource("4_dd4s5")]
+[node name="skeleton08" parent="enemies" instance=ExtResource("4_dd4s5")]
 position = Vector2(283, 697)
 spawn_pickup_chance = 30
 
-[node name="skeleton11" parent="enemies" instance=ExtResource("4_dd4s5")]
+[node name="skeleton09" parent="enemies" instance=ExtResource("4_dd4s5")]
 position = Vector2(152, 690)
 enemy_name = "Fat Skeleton"
 max_health = 100
