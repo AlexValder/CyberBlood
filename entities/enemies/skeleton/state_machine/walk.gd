@@ -1,14 +1,13 @@
 extends EnemyState
 
-signal start_patrolling
+@export var _check_for_floor: RayCast2D
 
 
-func on_entry() -> void:
-    super.on_entry()
-    start_patrolling.emit()
+func _ready() -> void:
+    assert(_check_for_floor != null)
 
 
-func physics_process(_delta) -> void:
+func physics_process(_delta: float) -> void:
     if !_enemy.is_on_floor():
         state_change.emit(self.name, "fall")
 
@@ -16,4 +15,12 @@ func physics_process(_delta) -> void:
         var eyes := _enemy.eyes.global_position
         var player := GameManager.player.global_position
         if (eyes - player).length() < _enemy.SEES_PLAYER_AT:
+            pass
             state_change.emit(self.name, "watch")
+
+    if !_check_for_floor.is_colliding():
+        _enemy.flip = !_enemy.flip
+
+    _enemy.velocity.x = _enemy.WALK_SPEED * (-1 if _enemy.flip else 1)
+
+    _enemy.move_and_slide()

@@ -10,12 +10,24 @@ signal enemy_damaged(old_value, new_value)
 ## Chance of spawning random pickup upon death
 @export_range(0, 100, 0.1) var spawn_pickup_chance := 10
 
-@onready var sprite := $sprite as AnimatedSprite2D
-@onready var _health_bar := $vbox/health as ValueBar
-@onready var _player := GameManager.player
+@onready var anim_player := $anim_player as AnimationPlayer
 @onready var current_health := max_health
+@onready var _sprite := $sprite as AnimatedSprite2D
+@onready var _health_bar := $vbox/health as ValueBar
+@onready var eyes := $navigation/eyes as Marker2D
+@onready var flip := false:
+    set(value):
+        flip = value
+        _sprite.flip_h = value
+        $navigation.scale.x = -1 if value else 1
+        $attack_hitboxes.scale.x = -1 if value else 1
 
-var GRAVITY := 240.0
+const GRAVITY := 240.0
+const WALK_SPEED := 70.0
+const CHASE_SPEED := 100.0
+const SEES_PLAYER_AT := 200.0
+const KEEPS_SEEING := 400.0
+const ATTACK_DISTANCE := 70.0
 
 
 func damage(value: int) -> void:
@@ -23,10 +35,9 @@ func damage(value: int) -> void:
         return
 
     if current_health > value:
-        emit_signal("enemy_hurt")
+        enemy_hurt.emit()
 
-    emit_signal("enemy_damaged", \
-        current_health, max(0, current_health - value))
+    enemy_damaged.emit(current_health, max(0, current_health - value))
     current_health -= value
 
     if current_health <= 0:
@@ -34,16 +45,16 @@ func damage(value: int) -> void:
 
 
 func play_anim(anim_name: String) -> void:
-    if sprite.frames.has_animation(anim_name):
-        sprite.play(anim_name)
+    anim_player.play("skeleton/" + anim_name)
 
 
 func die() -> void:
     _try_spawn_pickup()
 
-    emit_signal("enemy_died")
+    enemy_died.emit()
     $hitbox/shape.queue_free()
-    await sprite.animation_finished
+    await anim_player.animation_finished
+    anim_player.stop(false)
     await get_tree().create_timer(1).timeout
     queue_free()
 
@@ -57,7 +68,6 @@ func _ready() -> void:
 
 func _try_spawn_pickup() -> void:
     var chance = randi_range(0, 99)
-    print("chance=%d, quota=%d" % [chance, spawn_pickup_chance])
     if chance <= spawn_pickup_chance:
         var pickup := FoodPickup.get_pickup()
         pickup.global_position = self.global_position

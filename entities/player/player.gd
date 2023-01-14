@@ -17,6 +17,7 @@ const CAT_SPEED := 150.0
 const WALK_SPEED := 120.0
 const FLY_SPEED := 200.0
 const JUMP := 210.0
+const CAT_JUMP := 260.0
 const ACCEL := 0.1
 
 const HUMAN_SHAPE_SIZE := {
@@ -38,11 +39,9 @@ const BAT_HURTBOX_SIZE := {
 
 @onready var sprite := $sprite as AnimatedSprite2D
 @onready var player_anim := $player_anim as AnimationPlayer
-@onready var _player_effects := $player_effects as AnimationPlayer
 @onready var _shape := $shape as CollisionShape2D
 @onready var _hurtbox := $hurtbox as HurtBox
 @onready var _camera := $camera as Camera2D
-@onready var _timer := $timers/damage_timer as Timer
 @onready var _selected_form := $"%selected_form" as Label
 
 @export var max_health: int = 50
@@ -51,7 +50,6 @@ const BAT_HURTBOX_SIZE := {
 var current_health := max_health
 var current_mana := max_mana
 var mana_recovery_rate := 1.0
-var invincible := false
 var flip := false:
     set(value):
         flip = value
@@ -74,7 +72,7 @@ func next_form() -> void:
 
 
 func tranform_name() -> String:
-    match(_forms[_current_form]):
+    match _forms[_current_form]:
         PlayerForms.BAT:
             return "bat_form"
         PlayerForms.CAT:
@@ -85,34 +83,31 @@ func tranform_name() -> String:
 
 
 func heal(value: int) -> void:
-    emit_signal("player_health_changed", \
+    player_health_changed.emit(
         current_health, min(max_health, current_health + value))
     current_health = min(max_health, current_health + value)
 
 
 func damage(value: int) -> void:
-    if invincible or current_health <= 0:
+    if current_health <= 0:
         return
 
     if current_health > value:
-        emit_signal("player_hurt")
+        player_hurt.emit()
 
-    emit_signal("player_health_changed", \
-        current_health, max(0, current_health - value))
+    player_health_changed.emit(current_health, max(0, current_health - value))
     current_health = max(0, current_health - value)
 
     if current_health <= 0:
         player_dies()
-    else:
-        _on_start_invicibility()
 
 
 func player_dies() -> void:
-    emit_signal("player_dead")
+    player_dead.emit()
 
 
 func can_transform(form: PlayerForms) -> bool:
-    match(form):
+    match form:
         PlayerForms.HUMAN:
             return _check_space(
                 HUMAN_SHAPE_SIZE.radius,
@@ -131,7 +126,7 @@ func has_mana(value: int) -> bool:
 
 func use_mana(value: int) -> void:
     assert(has_mana(value))
-    emit_signal("mana_changed", current_mana - value)
+    mana_changed.emit(current_mana - value)
     current_mana -= value
 
 
@@ -140,7 +135,7 @@ func play_anim(anim_name: String) -> void:
 
 
 func ensure_collision(form: PlayerForms) -> void:
-    match (form):
+    match form:
         PlayerForms.HUMAN:
             _shape.shape.radius = HUMAN_SHAPE_SIZE.radius * 2
             _shape.shape.height = HUMAN_SHAPE_SIZE.height * 2
@@ -177,19 +172,6 @@ func _ready() -> void:
     mana_bar.update()
 
     _camera.current = true
-
-
-func _on_start_invicibility() -> void:
-    self.invincible = true
-    await player_anim.animation_finished
-    _timer.start(1)
-    _player_effects.play("player_effects/damage_invincibility")
-
-
-func _on_stop_invincibility() -> void:
-    self.invincible = false
-    _player_effects.seek(0)
-    _player_effects.stop()
 
 
 func _on_recovery_value_timeout(rate: float) -> void:

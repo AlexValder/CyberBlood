@@ -58,7 +58,10 @@ func player_dies() -> void:
 
 
 func _notification(what: int) -> void:
-    match (what):
+    if Engine.is_editor_hint():
+        return
+
+    match what:
         NOTIFICATION_APPLICATION_FOCUS_OUT:
             _prev_state = get_tree().paused
             get_tree().paused = true
