@@ -12,6 +12,6 @@ func on_entry() -> void:
 
 func _animation_done(_anim: String) -> void:
     if player.is_on_floor():
-        emit_signal("state_change", self.name, "idle")
+        state_change.emit(self.name, "idle")
     else:
-        emit_signal("state_change", self.name, "final_fall")
+        state_change.emit(self.name, "final_fall")

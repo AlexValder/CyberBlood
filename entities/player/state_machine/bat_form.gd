@@ -32,7 +32,7 @@ func can_leave(dir: Dictionary) -> bool:
 
 func physics_process(_delta: float) -> void:
     if Input.is_action_just_pressed("change_form"):
-        emit_signal("state_change", self.name, "idle")
+        state_change.emit(self.name, "idle")
 
     _check_horizontal_movement(player.FLY_SPEED)
     _check_vertical_movement(player.FLY_SPEED)

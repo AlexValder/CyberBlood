@@ -3,11 +3,11 @@ extends PlayerState
 
 func physics_process(delta: float) -> void:
     if player.is_on_floor():
-        emit_signal("state_change", self.name, "idle")
+        state_change.emit(self.name, "idle")
 
     if Input.is_action_just_pressed("melee"):
         # TODO: air attack
-        emit_signal("state_change", self.name, "attack1")
+        state_change.emit(self.name, "attack1")
 
     _check_horizontal_movement(player.WALK_SPEED)
     _add_gravity(delta)

@@ -36,8 +36,9 @@ func _on_area_entered(hitbox: HitBox) -> void:
 
     _last_hitbox = hitbox
     _take_damage()
-    if !is_enemy:
-        _timer.start()
+    if !is_enemy && hitbox is LastingHitBox:
+        var interval := (hitbox as LastingHitBox).damage_interval
+        _timer.start(interval)
 
 
 func _on_area_exited(hitbox: HitBox) -> void:

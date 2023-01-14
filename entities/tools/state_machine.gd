@@ -55,7 +55,7 @@ func _physics_process(delta: float) -> void:
 
 
 func _on_state_change(old_state: String, new_state: String) -> void:
-    var state := get_node(new_state) as State
+    var state := get_node_or_null(new_state) as State
     if state == null || !state.can_enter({"prev" = old_state}):
         return
 

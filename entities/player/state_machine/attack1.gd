@@ -14,11 +14,11 @@ func on_entry() -> void:
 
 func _animation_done(_anim: String) -> void:
     if _next_attack:
-        emit_signal("state_change", self.name, "attack2")
+        state_change.emit(self.name, "attack2")
     elif !player.is_on_floor():
-        emit_signal("state_change", self.name, "final_fall")
+        state_change.emit(self.name, "final_fall")
     else:
-        emit_signal("state_change", self.name, "idle")
+        state_change.emit(self.name, "idle")
 
 
 func physics_process(_delta: float) -> void:
