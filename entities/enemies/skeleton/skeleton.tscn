@@ -518,6 +518,7 @@ script = ExtResource("20_wlf4c")
 script = ExtResource("21_0wmv4")
 
 [node name="vbox" type="VBoxContainer" parent="."]
+anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
