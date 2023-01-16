@@ -54,7 +54,7 @@ func die() -> void:
     enemy_died.emit()
     $hitbox/shape.queue_free()
     await anim_player.animation_finished
-    anim_player.stop(false)
+    anim_player.pause()
     await get_tree().create_timer(1).timeout
     queue_free()
 
