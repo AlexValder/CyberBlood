@@ -1,4 +1,4 @@
-[gd_scene load_steps=76 format=3 uid="uid://bjo1s1p41e5q0"]
+[gd_scene load_steps=77 format=3 uid="uid://bjo1s1p41e5q0"]
 
 [ext_resource type="Script" path="res://entities/enemies/skeleton/skeleton.gd" id="1_scjn5"]
 [ext_resource type="Texture2D" uid="uid://c7mjgj1m4msdg" path="res://assets/sprites/skeleton/attack1.png" id="2_c4jyl"]
@@ -25,6 +25,7 @@
 [ext_resource type="Script" path="res://entities/enemies/skeleton/state_machine/watch.gd" id="19_yluc4"]
 [ext_resource type="Script" path="res://entities/enemies/skeleton/state_machine/attack1.gd" id="20_wlf4c"]
 [ext_resource type="Script" path="res://entities/enemies/skeleton/state_machine/attack2.gd" id="21_0wmv4"]
+[ext_resource type="Script" path="res://entities/enemies/skeleton/state_machine/chase.gd" id="21_rov81"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_tfqcu"]
 atlas = ExtResource("2_c4jyl")
@@ -482,15 +483,19 @@ _check_for_floor = NodePath("../../navigation/ray_cast_for_floor")
 
 [node name="hurt" type="Node" parent="state_machine"]
 script = ExtResource("14_fhkn0")
+metadata/no_turn_on_obstacle = false
 
 [node name="death" type="Node" parent="state_machine"]
 script = ExtResource("15_jtmg2")
+metadata/no_turn_on_obstacle = false
 
 [node name="fall" type="Node" parent="state_machine"]
 script = ExtResource("16_kdtjt")
 
-[node name="watch" type="Node" parent="state_machine"]
+[node name="watch" type="Node" parent="state_machine" node_paths=PackedStringArray("_obstacle_area", "_check_for_floor")]
 script = ExtResource("19_yluc4")
+_obstacle_area = NodePath("../../navigation/hit_detection")
+_check_for_floor = NodePath("../../navigation/ray_cast_for_floor")
 
 [node name="forget_timer" type="Timer" parent="state_machine/watch"]
 wait_time = 4.0
@@ -499,6 +504,12 @@ one_shot = true
 [node name="attack_pause" type="Timer" parent="state_machine/watch"]
 wait_time = 0.25
 one_shot = true
+
+[node name="chase" type="Node" parent="state_machine" node_paths=PackedStringArray("_obstacle_area", "_check_for_floor")]
+script = ExtResource("21_rov81")
+_obstacle_area = NodePath("../../navigation/hit_detection")
+_check_for_floor = NodePath("../../navigation/ray_cast_for_floor")
+metadata/no_turn_on_obstacle = false
 
 [node name="attack1" type="Node" parent="state_machine"]
 script = ExtResource("20_wlf4c")

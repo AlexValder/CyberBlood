@@ -42,7 +42,8 @@ func _on_skeleton_enemy_hurt() -> void:
 
 
 func _on_obstacle_detected(_body) -> void:
-    _owner.flip = !_owner.flip
+    if !_current_state.has_meta("no_turn_on_obstacle"):
+        _owner.flip = !_owner.flip
 
 
 func _on_patrolling_timer_timeout() -> void:
