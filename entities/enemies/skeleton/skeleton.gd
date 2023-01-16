@@ -44,8 +44,8 @@ func damage(value: int) -> void:
         die()
 
 
-func play_anim(anim_name: String) -> void:
-    anim_player.play("skeleton/" + anim_name)
+func play_anim(anim_name: String, speed := 1.0) -> void:
+    anim_player.play("skeleton/" + anim_name, -1, speed)
 
 
 func die() -> void:
