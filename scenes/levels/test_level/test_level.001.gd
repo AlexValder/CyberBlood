@@ -12,11 +12,3 @@ func get_extends() -> Vector4i:
     var limit_bottom := int(limits.end.y * size.y)
 
     return Vector4i(limit_left, limit_top - 500, limit_right, limit_bottom)
-
-
-func _ready() -> void:
-    super._ready()
-    spawnpoints.append($spawnpoint)
-
-    GameManager.player.global_position = spawnpoints[0].global_position
-    GameManager.player.set_limits(get_extends())

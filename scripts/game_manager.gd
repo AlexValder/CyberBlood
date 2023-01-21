@@ -3,18 +3,23 @@ extends Node
 
 const LEVELS := {
     "menu": "res://scenes/main_menu.tscn",
-    "test": "res://scenes/levels/test_level/test_level.tscn",
+    "test": {
+        "001": "res://scenes/levels/test_level/test_level.001.tscn",
+        "002": "res://scenes/levels/test_level/test_level.002.tscn",
+    },
 }
+const FIRST_LEVEL := LEVELS["test"]["001"]
 
 var _playing := false
 var _prev_state := false
 
 var player_scene := preload("res://entities/player/player.tscn") as PackedScene
 var player: Player
+var last_room := ""
 
 
 func start_game() -> void:
-    get_tree().change_scene_to_file(LEVELS["test"])
+    get_tree().change_scene_to_file(FIRST_LEVEL)
     create_player()
     get_tree().root.add_child(player)
     _playing = true
@@ -22,13 +27,20 @@ func start_game() -> void:
 
 func reload_level() -> void:
     create_player()
+    last_room = ""
     get_tree().reload_current_scene()
     get_tree().root.add_child(player)
+
+
+func change_room(trigger: RoomTransitionTrigger) -> void:
+    last_room = trigger.fromId
+    get_tree().change_scene_to_file(trigger.get_room_path())
 
 
 func quit_to_menu() -> void:
     _playing = false
     remove_player()
+    last_room = ""
     get_tree().paused = false
     get_tree().change_scene_to_file(LEVELS["menu"])
 
