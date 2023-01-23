@@ -27,6 +27,7 @@ func _init() -> void:
     label.label_settings.outline_size = 2
     label.label_settings.outline_color = Color.BLACK
     label.theme = load("res://assets/gui/themes/default.tres")
+    label.z_index = 100
     add_child(label)
 
 
