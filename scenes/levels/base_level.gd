@@ -11,6 +11,7 @@ func get_extends() -> Vector4i:
 
 
 func setup(dict: Dictionary = {}) -> void:
+    Logger.trace("Loaded level %s" % self.name)
     GameManager.player.set_limits(get_extends())
 
     if dict.has("prev_room"):
