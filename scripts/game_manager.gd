@@ -63,6 +63,14 @@ func _ready() -> void:
     create_player()
     randomize()
 
+    var console_logger := BloodyLogger.default_console_writer()
+    console_logger.min_level = BloodyLogger.DEBUG
+    Logger.add_writer(console_logger)
+    if !OS.is_debug_build():
+        var logger := BloodyLogger.default_error_file_writer()
+        logger.filename = "user://logs/error"
+        Logger.add_writer(logger)
+
 
 func player_dies() -> void:
     await get_tree().create_timer(3).timeout

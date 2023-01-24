@@ -76,7 +76,7 @@ func _save_settings() -> void:
 func _load_settings() -> void:
     if _config.get_value("game", "version", null) != DEFAULTS["game"]["version"]:
         # outdated, fuck it
-        print("Version in config file is either absent or doesn't match")
+        Logger.warn("Version in config file is either absent or doesn't match")
         _set_defaults()
         return
 

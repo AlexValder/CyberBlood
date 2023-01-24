@@ -24,3 +24,6 @@ mono_crash.*.json
 build/
 settings.ini
 addons/*
+!addons/bloody_logger
+addons/bloody_logger/*
+!addons/bloody_logger/plugin.cfg
