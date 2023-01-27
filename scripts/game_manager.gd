@@ -58,6 +58,11 @@ func remove_player() -> void:
         player = null
 
 
+func player_dies() -> void:
+    await get_tree().create_timer(3).timeout
+    reload_level()
+
+
 func _ready() -> void:
     self.process_mode = Node.PROCESS_MODE_ALWAYS
     create_player()
@@ -72,9 +77,11 @@ func _ready() -> void:
         Logger.add_writer(logger)
 
 
-func player_dies() -> void:
-    await get_tree().create_timer(3).timeout
-    reload_level()
+func _unhandled_input(event: InputEvent) -> void:
+    if event.is_action_released("screenshot"):
+        var image := get_viewport().get_texture().get_image()
+        var path := _get_screenshot_path()
+        image.save_png(path)
 
 
 func _notification(what: int) -> void:
@@ -87,3 +94,11 @@ func _notification(what: int) -> void:
             get_tree().paused = true
         NOTIFICATION_APPLICATION_FOCUS_IN:
             get_tree().paused = _prev_state
+
+
+func _get_screenshot_path() -> String:
+    const template :=\
+        "user://screenshots/screenshot-%f.png"
+    var time := Time.get_unix_time_from_system()
+
+    return template % time
