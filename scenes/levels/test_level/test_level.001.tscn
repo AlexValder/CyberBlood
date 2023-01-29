@@ -98,7 +98,6 @@ texture = SubResource("GradientTexture2D_yyauj")
 
 [node name="anim_player" type="AnimationPlayer" parent="teleport"]
 autoplay = "loop"
-playback_speed = 0.5
 libraries = {
 "": SubResource("AnimationLibrary_4mmat")
 }

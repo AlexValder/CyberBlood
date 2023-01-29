@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://roe360txy361"]
+[gd_scene load_steps=5 format=3 uid="uid://roe360txy361"]
 
 [ext_resource type="Theme" uid="uid://brlh53bypvlrb" path="res://assets/gui/themes/default.tres" id="2_aq74w"]
 [ext_resource type="Script" path="res://entities/player/inventory/inventory.gd" id="2_hiw33"]
 [ext_resource type="Script" path="res://entities/player/inventory/game_tab.gd" id="3_art0r"]
+[ext_resource type="Script" path="res://entities/player/inventory/dev_tag.gd" id="4_ionlx"]
 
 [node name="inventory" type="TabContainer"]
 self_modulate = Color(0.54902, 0.172549, 0.333333, 1)
@@ -81,7 +82,63 @@ theme_override_colors/font_color = Color(1, 1, 1, 1)
 text = "Esc / Start - quit the game"
 horizontal_alignment = 1
 
+[node name="DevTab" type="ScrollContainer" parent="."]
+visible = false
+layout_mode = 2
+follow_focus = true
+script = ExtResource("4_ionlx")
+
+[node name="grid" type="GridContainer" parent="DevTab"]
+texture_filter = 1
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 6
+theme_override_constants/h_separation = 20
+theme_override_constants/v_separation = 20
+columns = 2
+
+[node name="change_level_button" type="Button" parent="DevTab/grid"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Switch to level"
+
+[node name="levels_options" type="OptionButton" parent="DevTab/grid"]
+texture_filter = 1
+layout_mode = 2
+size_flags_horizontal = 3
+item_count = 5
+popup/item_0/text = "placeholder"
+popup/item_0/id = 0
+popup/item_0/separator = true
+popup/item_1/text = "00"
+popup/item_1/id = 1
+popup/item_2/text = "01"
+popup/item_2/id = 2
+popup/item_3/text = "02"
+popup/item_3/id = 3
+popup/item_4/text = "03"
+popup/item_4/id = 4
+
+[node name="open_folder_button" type="Button" parent="DevTab/grid"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Open user:// folder"
+
+[node name="open_saves_button" type="Button" parent="DevTab/grid"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Open saves folder"
+
+[node name="show_debug_box" type="CheckBox" parent="DevTab/grid"]
+layout_mode = 2
+button_pressed = true
+text = "Show Debug Info"
+
 [connection signal="tab_changed" from="." to="." method="_on_tab_changed"]
 [connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
 [connection signal="toggled" from="Game/grid/fps" to="Game" method="_on_fps_toggled"]
 [connection signal="button_up" from="Game/grid/quit" to="Game" method="_on_quit_button_up"]
+[connection signal="button_up" from="DevTab/grid/change_level_button" to="DevTab" method="_on_change_level_button_released"]
+[connection signal="button_up" from="DevTab/grid/open_folder_button" to="DevTab" method="_on_open_folder_button_released"]
+[connection signal="button_up" from="DevTab/grid/open_saves_button" to="DevTab" method="_on_open_saves_button_released"]
+[connection signal="toggled" from="DevTab/grid/show_debug_box" to="DevTab" method="_on_show_debug_box_toggled"]

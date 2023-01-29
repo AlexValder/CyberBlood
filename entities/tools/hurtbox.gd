@@ -2,6 +2,7 @@ extends Area2D
 class_name HurtBox
 
 @export var is_enemy := true
+@export var custom_owner: Node
 
 @onready var shape := $shape as CollisionShape2D
 @onready var _timer := $timer as Timer
@@ -54,7 +55,8 @@ func _take_damage() -> void:
         push_warning("No last hitbox")
         return
 
-    if self.owner.has_method("damage"):
-        self.owner.damage(_last_hitbox.damage)
+    var actor := self.owner if custom_owner == null else custom_owner
+    if actor.has_method("damage"):
+        actor.damage(_last_hitbox.damage)
     else:
-        push_warning("owner %s can't be damaged" % self.owner.name)
+        push_warning("owner %s can't be damaged" % actor.name)

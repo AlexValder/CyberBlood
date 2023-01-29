@@ -16,7 +16,7 @@ func change_state(state_name: String) -> void:
     _on_state_change(_current_state.name, state_name)
 
 
-func _init() -> void:
+func _add_label() -> void:
     var label := Label.new()
     label.name = "status"
     label.position.y = 20
@@ -29,6 +29,25 @@ func _init() -> void:
     label.theme = load("res://assets/gui/themes/default.tres")
     label.z_index = 100
     add_child(label)
+    _status = label
+
+
+func _remove_label() -> void:
+    var node := get_node_or_null("status")
+    if node != null:
+        _status = null
+        remove_child(node)
+        node.queue_free()
+
+
+func _init() -> void:
+    if !GameManager.debug_disabled && GameManager.should_show_debug():
+        _add_label()
+    else:
+        _remove_label()
+
+    GameManager.debug_toggled\
+        .connect(func(debug): _add_label() if debug else _remove_label())
 
 
 func _ready() -> void:
@@ -43,7 +62,8 @@ func _on_owner_ready() -> void:
         state.state_change.connect(_on_state_change)
 
     _current_state = $idle
-    _status.text = _current_state.name
+    if _status != null:
+        _status.text = _current_state.name
     _current_state.on_entry()
 
 
@@ -63,7 +83,8 @@ func _on_state_change(old_state: String, new_state: String) -> void:
     if !_current_state.can_leave({"next" = state.name}):
         return
 
-    _status.text = state.name
+    if _status != null:
+        _status.text = state.name
     _current_state.on_exit()
     _current_state = state
     _current_state.on_entry()

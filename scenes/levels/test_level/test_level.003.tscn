@@ -86,7 +86,6 @@ texture = SubResource("GradientTexture2D_rxhif")
 
 [node name="anim_player" type="AnimationPlayer" parent="tilemap/teleport"]
 autoplay = "loop"
-playback_speed = 0.5
 libraries = {
 "": SubResource("AnimationLibrary_4mmat")
 }
@@ -101,6 +100,9 @@ theme_override_font_sizes/font_size = 32
 text = "That is a portal to first location"
 
 [node name="spawnpoints" type="Node" parent="."]
+
+[node name="initial" type="Marker2D" parent="spawnpoints"]
+position = Vector2(238, 49)
 
 [node name="test_level_002" type="Marker2D" parent="spawnpoints"]
 position = Vector2(11, 72)

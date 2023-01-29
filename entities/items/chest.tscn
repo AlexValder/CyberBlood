@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://bxefd1aypq3pg"]
+
+[ext_resource type="Texture2D" uid="uid://bka671n6ghhv1" path="res://assets/sprites/items/chest.png" id="1_j0td8"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c1dv3"]
+atlas = ExtResource("1_j0td8")
+region = Rect2(0, 0, 48, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tkb4y"]
+size = Vector2(26, 19)
+
+[node name="chest" type="Node2D"]
+texture_filter = 1
+
+[node name="sprite" type="Sprite2D" parent="."]
+texture = SubResource("AtlasTexture_c1dv3")
+
+[node name="static_body" type="StaticBody2D" parent="."]
+collision_mask = 134
+
+[node name="shape" type="CollisionShape2D" parent="static_body"]
+position = Vector2(0, 2.5)
+shape = SubResource("RectangleShape2D_tkb4y")
+one_way_collision = true

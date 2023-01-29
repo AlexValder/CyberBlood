@@ -40,6 +40,8 @@ window/stretch/scale=3.0
 
 [editor]
 
+naming/node_name_num_separator=2
+naming/node_name_casing=1
 node_naming/name_casing=2
 
 [editor_plugins]
@@ -142,3 +144,7 @@ screenshot={
 2d_physics/layer_6="player_hitbox"
 2d_physics/layer_7="enemy_hitbox"
 2d_physics/layer_8="pickups"
+
+[rendering]
+
+environment/defaults/default_clear_color=Color(0, 0, 0, 1)

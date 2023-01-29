@@ -26,6 +26,9 @@ layer_1/tile_data = PackedInt32Array(131071, 196608, 7, 65536, 196608, 7, 65537,
 
 [node name="spawnpoints" type="Node" parent="."]
 
+[node name="initial" type="Marker2D" parent="spawnpoints"]
+position = Vector2(210, 84)
+
 [node name="test_level_001" type="Marker2D" parent="spawnpoints"]
 position = Vector2(-48, 56)
 
