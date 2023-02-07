@@ -15,7 +15,7 @@ theme = ExtResource("1_amntk")
 script = ExtResource("2_mh6gu")
 
 [node name="bg" type="ColorRect" parent="."]
-anchors_preset = 15
+layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
@@ -24,7 +24,7 @@ color = Color(0, 0.380392, 0.376471, 1)
 
 [node name="vbox" type="VBoxContainer" parent="."]
 custom_minimum_size = Vector2(120, 0)
-anchors_preset = -1
+layout_mode = 0
 anchor_left = 0.4
 anchor_right = 0.6
 anchor_bottom = 1.0
@@ -36,16 +36,34 @@ alignment = 1
 
 [node name="play" type="Button" parent="vbox"]
 unique_name_in_owner = true
-offset_top = 157.0
-offset_right = 120.0
-offset_bottom = 178.0
+layout_mode = 2
 text = "Start"
 
 [node name="quit" type="Button" parent="vbox"]
-offset_top = 182.0
-offset_right = 120.0
-offset_bottom = 203.0
+layout_mode = 2
 text = "Quit"
+
+[node name="version" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -13.0
+offset_right = 40.0
+grow_vertical = 0
+
+[node name="copyright" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -40.0
+offset_top = -13.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "© Potato Studio, 2023"
 
 [connection signal="button_up" from="vbox/play" to="." method="_on_play_button_up"]
 [connection signal="button_up" from="vbox/quit" to="." method="_on_quit_button_up"]

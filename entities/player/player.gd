@@ -16,26 +16,9 @@ const GRAVITY := 350.0
 const CAT_SPEED := 150.0
 const WALK_SPEED := 120.0
 const FLY_SPEED := 200.0
-const JUMP := 210.0
+const JUMP := 215.0
 const CAT_JUMP := 260.0
 const ACCEL := 0.1
-
-const HUMAN_SHAPE_SIZE := {
-    radius = 12 / 2,
-    height = 44 / 2,
-}
-const BAT_SHAPE_SIZE := {
-    radius = 6 / 2,
-    height = 12 / 2,
-}
-const HUMAN_HURTBOX_SIZE := {
-    radius = 7,
-    height = 44,
-}
-const BAT_HURTBOX_SIZE := {
-    radius = 6,
-    height = 12,
-}
 
 @onready var sprite := $sprite as AnimatedSprite2D
 @onready var player_anim := $player_anim as AnimationPlayer
@@ -102,6 +85,18 @@ func damage(value: int) -> void:
         player_dies()
 
 
+func start_drop_down() -> void:
+    Logger.debug("Starting drop down")
+    set_collision_mask_value(9, false)
+    get_tree().create_timer(0.5, true, true)\
+        .timeout.connect(stop_drop_down, CONNECT_ONE_SHOT)
+
+
+func stop_drop_down() -> void:
+    Logger.debug("Stopping drop down")
+    set_collision_mask_value(9, true)
+
+
 func player_dies() -> void:
     player_dead.emit()
 
@@ -109,9 +104,10 @@ func player_dies() -> void:
 func can_transform(form: PlayerForms) -> bool:
     match form:
         PlayerForms.HUMAN:
+            var metadata = get_meta("human_shape_size") as Vector2
             return _check_space(
-                HUMAN_SHAPE_SIZE.radius,
-                HUMAN_SHAPE_SIZE.height
+                metadata.x,
+                metadata.y
             )
         PlayerForms.BAT, PlayerForms.CAT:
             # the smallest form, no need to check for space
@@ -135,19 +131,25 @@ func play_anim(anim_name: String) -> void:
 
 
 func ensure_collision(form: PlayerForms) -> void:
+    var shape: Vector2
+    var hurtbox: Vector2
     match form:
         PlayerForms.HUMAN:
-            _shape.shape.radius = HUMAN_SHAPE_SIZE.radius * 2
-            _shape.shape.height = HUMAN_SHAPE_SIZE.height * 2
-            _hurtbox.shape.shape.radius = HUMAN_HURTBOX_SIZE.radius
-            _hurtbox.shape.shape.height = HUMAN_HURTBOX_SIZE.height
+            shape = get_meta("human_shape_size")
+            hurtbox = get_meta("human_hurtbox_size")
+
         PlayerForms.BAT, PlayerForms.CAT:
-            _shape.shape.radius = BAT_SHAPE_SIZE.radius * 2
-            _shape.shape.height = BAT_SHAPE_SIZE.height * 2
-            _hurtbox.shape.shape.radius = BAT_HURTBOX_SIZE.radius
-            _hurtbox.shape.shape.height = BAT_HURTBOX_SIZE.height
+            shape = get_meta("bat_shape_size")
+            hurtbox = get_meta("bat_hurtbox_size")
         _:
             push_error("Unknown form: %s" % form)
+            shape = Vector2.ZERO
+            hurtbox = Vector2.ZERO
+
+    _shape.shape.radius = shape.x * 2
+    _shape.shape.height = shape.y * 2
+    _hurtbox.shape.shape.radius = hurtbox.x
+    _hurtbox.shape.shape.height = hurtbox.y
 
     velocity.y += 2
     move_and_slide()
@@ -171,7 +173,7 @@ func _ready() -> void:
     mana_bar.value = current_mana
     mana_bar.update()
 
-    _camera.current = true
+    _camera.make_current()
 
 
 func _on_recovery_value_timeout(rate: float) -> void:

@@ -20,7 +20,7 @@ static func get_pickup() -> FoodPickup:
 func _ready() -> void:
     var file := FileAccess.open(file_data, FileAccess.READ)
     var json := file.get_as_text()
-    var list := JSON.parse_string(json)
+    var list = JSON.parse_string(json)
     assert(typeof(list) == TYPE_ARRAY)
 
     var item: Dictionary

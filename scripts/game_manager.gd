@@ -17,11 +17,11 @@ var _prev_state := false
 var player_scene := preload("res://entities/player/player.tscn") as PackedScene
 var player: Player
 var debug_disabled: bool = !should_show_debug():
-    set(value):
+    set(_value):
         return
     get:
         return debug_disabled
-var last_room := ""
+var last_room := []
 
 
 func start_game() -> void:
@@ -33,13 +33,13 @@ func start_game() -> void:
 
 func reload_level() -> void:
     create_player()
-    last_room = ""
+    last_room = []
     get_tree().reload_current_scene()
     get_tree().root.add_child(player)
 
 
 func dev_change_room(biome: String, id: String) -> void:
-    last_room = ""
+    last_room = []
 
     var path := "res://scenes/levels/{biome}/{biome}.{id}.tscn".format({
         "biome" = biome,
@@ -50,14 +50,14 @@ func dev_change_room(biome: String, id: String) -> void:
 
 
 func change_room(trigger: RoomTransitionTrigger) -> void:
-    last_room = trigger.fromId
+    last_room = [trigger.fromId, trigger.entryId]
     get_tree().change_scene_to_file(trigger.get_room_path())
 
 
 func quit_to_menu() -> void:
     _playing = false
     remove_player()
-    last_room = ""
+    last_room = []
     get_tree().paused = false
     get_tree().change_scene_to_file(LEVELS["menu"])
 

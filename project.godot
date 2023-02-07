@@ -15,6 +15,7 @@ run/main_scene="res://scenes/main_menu.tscn"
 config/custom_user_dir_name="CyberBlood"
 config/features=PackedStringArray("4.0", "Forward Plus")
 config/icon="res://icon.svg"
+config/version="0.0.0.7"
 
 [autoload]
 
@@ -144,6 +145,12 @@ screenshot={
 2d_physics/layer_6="player_hitbox"
 2d_physics/layer_7="enemy_hitbox"
 2d_physics/layer_8="pickups"
+2d_physics/layer_9="fall_through"
+
+[physics]
+
+2d/physics_engine="GodotPhysics2D"
+common/enable_object_picking=false
 
 [rendering]
 

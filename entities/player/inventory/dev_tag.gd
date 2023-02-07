@@ -1,6 +1,5 @@
 extends InventoryTab
 
-@onready var _grid := $grid as GridContainer
 @onready var _levels_options := $grid/levels_options as OptionButton
 
 
@@ -36,7 +35,7 @@ func _on_change_level_button_released() -> void:
     var biome := selected_level.substr(0, selected_level.length() - 4)
     var id := selected_level.substr(selected_level.length() - 3)
 
-    Logger.error("Biome=%s, id=%s" % [biome, id])
+    Logger.debug("Switch to: Biome=%s, id=%s" % [biome, id])
 
     GameManager.dev_change_room(biome, id)
 

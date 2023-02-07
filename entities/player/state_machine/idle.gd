@@ -9,7 +9,11 @@ func physics_process(delta: float) -> void:
         state_change.emit(self.name, "attack1")
 
     if Input.is_action_just_pressed("jump"):
-        state_change.emit(self.name, "jump")
+        if Input.is_action_pressed("down"):
+            player.start_drop_down()
+            state_change.emit(self.name, "fall")
+        else:
+            state_change.emit(self.name, "jump")
 
     if Input.is_action_pressed("left"):
         state_change.emit(self.name, "run")

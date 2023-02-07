@@ -12,7 +12,7 @@ func on_entry() -> void:
 
 func _animation_done(_anim: String) -> void:
     var eyes := _enemy.global_position
-    var player := GameManager.player.global_position
+    var player := GameManager.player.global_position as Vector2
     var distance := (eyes - player).length()
 
     if distance <= _enemy.ATTACK_DISTANCE:

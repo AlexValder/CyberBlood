@@ -398,9 +398,8 @@ enemy_name = "Skeleton"
 max_health = 10
 
 [node name="sprite" type="AnimatedSprite2D" parent="."]
-frames = SubResource("SpriteFrames_it3it")
+sprite_frames = SubResource("SpriteFrames_it3it")
 animation = &"attack2"
-playing = true
 
 [node name="hitbox" type="Area2D" parent="."]
 script = ExtResource("10_5gru8")

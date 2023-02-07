@@ -22,11 +22,12 @@ func get_extends() -> Vector4i:
 
 
 func setup(dict: Dictionary = {}) -> void:
-    Logger.trace("Loaded level %s" % self.name)
+    Logger.debug("Loaded level %s" % self.name)
     GameManager.player.set_limits(get_extends())
 
-    if dict.has("prev_room"):
-        GameManager.player.global_position = _get_spawn(dict.prev_room)
+    if dict.has("prev_room") && dict.has("entry_id"):
+        GameManager.player.global_position =\
+            _get_spawn(dict.prev_room, dict.entry_id)
     else:
         GameManager.player.global_position = _initial_spawn.global_position
 
@@ -34,13 +35,20 @@ func setup(dict: Dictionary = {}) -> void:
 func _ready() -> void:
     Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
-    if GameManager.last_room.length() > 0:
-        setup({"prev_room" = GameManager.last_room})
+    if GameManager.last_room.size() > 0:
+        setup({
+            "prev_room" = GameManager.last_room[0],
+            "entry_id" = GameManager.last_room[1],
+        })
     else:
         setup()
 
 
-func _get_spawn(roomId: String) -> Vector2:
-    assert(_spawnpoints.has_node(roomId))
+func _get_spawn(roomId: String, entryId: String) -> Vector2:
+    var node: Node2D
+    if entryId == null || entryId.length() == 0:
+        node = _spawnpoints.get_node(roomId)
+    else:
+        node = _spawnpoints.get_node("%s_%s" % [roomId, entryId])
 
-    return (_spawnpoints.get_node(roomId) as Node2D).global_position
+    return node.global_position

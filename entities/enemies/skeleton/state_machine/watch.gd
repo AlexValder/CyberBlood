@@ -32,7 +32,7 @@ func can_enter(dir: Dictionary) -> bool:
 func process(_delta: float) -> void:
     if _sees:
         var enemy := owner.global_position.x as float
-        var player := GameManager.player.global_position.x
+        var player := GameManager.player.global_position.x as float
         if (abs(enemy - player) >= 0.01):
             owner.flip = enemy > player
 
@@ -45,7 +45,7 @@ func physics_process(delta: float) -> void:
         return
 
     var eyes := _enemy.eyes.global_position
-    var player := GameManager.player.global_position
+    var player := GameManager.player.global_position as Vector2
     var distance := (eyes - player).length()
 
     if distance <= _enemy.ATTACK_DISTANCE && !_attacking:
