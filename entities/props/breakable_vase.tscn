@@ -1,0 +1,30 @@
+[gd_scene load_steps=7 format=3 uid="uid://c3x3w1vgeu0ak"]
+
+[ext_resource type="PackedScene" uid="uid://c55p2ydhex3ih" path="res://entities/tools/breakable.tscn" id="1_1gkyg"]
+[ext_resource type="Script" path="res://entities/props/breakable_vase.gd" id="2_aorrx"]
+[ext_resource type="Shader" path="res://assets/shaders/was_hit.gdshader" id="2_k3dca"]
+[ext_resource type="Texture2D" uid="uid://bs2qnhu50u1ja" path="res://assets/sprites/items/vase.png" id="3_4dl1x"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_27phm"]
+resource_local_to_scene = true
+shader = ExtResource("2_k3dca")
+shader_parameter/tint = Color(1, 1, 1, 1)
+shader_parameter/mixture = 0.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nj4aa"]
+size = Vector2(16, 38)
+
+[node name="breakable" instance=ExtResource("1_1gkyg")]
+script = ExtResource("2_aorrx")
+
+[node name="sprite" parent="." index="0"]
+material = SubResource("ShaderMaterial_27phm")
+
+[node name="sprite" type="Sprite2D" parent="sprite" index="0"]
+position = Vector2(0, -22.5)
+scale = Vector2(1, 0.9375)
+texture = ExtResource("3_4dl1x")
+
+[node name="shape" parent="hurtbox" index="0"]
+position = Vector2(0, -19)
+shape = SubResource("RectangleShape2D_nj4aa")

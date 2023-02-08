@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://0wy8e14v3mgr"]
+[gd_scene load_steps=9 format=3 uid="uid://0wy8e14v3mgr"]
 
 [ext_resource type="Script" path="res://scenes/levels/outskirts/outskirts.003.gd" id="1_rralb"]
 [ext_resource type="TileSet" uid="uid://b3k13y1c7g1ax" path="res://assets/tilesets/test_level.tres" id="2_cd3d3"]
 [ext_resource type="Script" path="res://scenes/levels/room_transition_trigger.gd" id="3_lhg3o"]
+[ext_resource type="PackedScene" uid="uid://c3x3w1vgeu0ak" path="res://entities/props/breakable_vase.tscn" id="4_wn0pp"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_03meh"]
 size = Vector2(8, 48)
@@ -129,3 +130,14 @@ roomId = "013"
 
 [node name="shape" type="CollisionShape2D" parent="room_transitions/outskirts_013"]
 shape = SubResource("RectangleShape2D_6g6fa")
+
+[node name="env" type="Node" parent="."]
+
+[node name="vase_00" parent="env" instance=ExtResource("4_wn0pp")]
+position = Vector2(261, 384)
+
+[node name="vase_01" parent="env" instance=ExtResource("4_wn0pp")]
+position = Vector2(281, 384)
+
+[node name="vase_02" parent="env" instance=ExtResource("4_wn0pp")]
+position = Vector2(301, 384)

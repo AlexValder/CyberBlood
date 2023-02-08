@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://c0375hw80pca0"]
+[gd_scene load_steps=9 format=3 uid="uid://c0375hw80pca0"]
 
 [ext_resource type="Script" path="res://scenes/levels/outskirts/outskirts.002.gd" id="1_siwby"]
 [ext_resource type="TileSet" uid="uid://b3k13y1c7g1ax" path="res://assets/tilesets/test_level.tres" id="2_bw1et"]
 [ext_resource type="Script" path="res://scenes/levels/room_transition_trigger.gd" id="3_gxcsg"]
 [ext_resource type="PackedScene" uid="uid://bxefd1aypq3pg" path="res://entities/items/chest.tscn" id="4_gvg72"]
+[ext_resource type="PackedScene" uid="uid://c3jwxmhqq0oog" path="res://entities/items/health_upgrade.tscn" id="5_4yws2"]
 [ext_resource type="PackedScene" uid="uid://bjo1s1p41e5q0" path="res://entities/enemies/skeleton/skeleton.tscn" id="5_kth2x"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ita5c"]
@@ -95,6 +96,9 @@ position = Vector2(1246, 180)
 
 [node name="chest02" parent="env" instance=ExtResource("4_gvg72")]
 position = Vector2(1288, 180)
+
+[node name="health_upgrade" parent="env" instance=ExtResource("5_4yws2")]
+position = Vector2(709, 776)
 
 [node name="enemies" type="Node" parent="."]
 

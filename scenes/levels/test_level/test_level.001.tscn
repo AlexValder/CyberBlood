@@ -1,8 +1,8 @@
-[gd_scene load_steps=22 format=3 uid="uid://yapvpv58y2h0"]
+[gd_scene load_steps=22 format=3]
 
 [ext_resource type="Script" path="res://scenes/levels/test_level/test_level.001.gd" id="1_0r26u"]
 [ext_resource type="TileSet" uid="uid://b3k13y1c7g1ax" path="res://assets/tilesets/test_level.tres" id="2_yxa60"]
-[ext_resource type="PackedScene" uid="uid://b0gwnq53sji8h" path="res://entities/items/pickup.tscn" id="3_fgdrh"]
+[ext_resource type="PackedScene" uid="uid://b0gwnq53sji8h" path="res://entities/items/food_pickup.tscn" id="3_fgdrh"]
 [ext_resource type="Script" path="res://scenes/levels/test_level/food_spawner.gd" id="4_b06wj"]
 [ext_resource type="FontFile" uid="uid://dgw8oojx04n8d" path="res://assets/gui/fonts/m3x6.ttf" id="5_otcsy"]
 [ext_resource type="PackedScene" uid="uid://bjo1s1p41e5q0" path="res://entities/enemies/skeleton/skeleton.tscn" id="6_wnu8g"]

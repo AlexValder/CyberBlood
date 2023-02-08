@@ -64,6 +64,3 @@ custom_owner = NodePath("")
 libraries = {
 "": SubResource("AnimationLibrary_g458c")
 }
-
-[connection signal="area_entered" from="hurtbox" to="." method="_on_break"]
-[connection signal="body_entered" from="hurtbox" to="." method="_on_break"]
