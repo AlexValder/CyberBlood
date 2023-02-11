@@ -136,8 +136,6 @@ func _unhandled_input(event: InputEvent) -> void:
         var image := get_viewport().get_texture().get_image()
         var path := _get_screenshot_path()
         image.save_png(path)
-    elif event.is_action_pressed("cheat_save"):
-        save_game()
 
 
 func _notification(what: int) -> void:

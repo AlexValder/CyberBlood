@@ -50,3 +50,7 @@ func _on_open_saves_button_released() -> void:
 
 func _on_show_debug_box_toggled(button_pressed: bool) -> void:
     GameManager.toggle_debug_info(button_pressed)
+
+
+func _on_save_game_button_up() -> void:
+    GameManager.save_game()
