@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://bu1rk36l4kidj"]
+[gd_scene load_steps=7 format=3]
 
 [ext_resource type="Texture2D" uid="uid://cbyhap0qstl6m" path="res://assets/sprites/items/food.png" id="1_fl6vw"]
 [ext_resource type="Script" path="res://entities/items/food_pickup.gd" id="1_hqxtr"]

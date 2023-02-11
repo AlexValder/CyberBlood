@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://c55p2ydhex3ih"]
+[gd_scene load_steps=8 format=3]
 
 [ext_resource type="Script" path="res://entities/tools/breakable.gd" id="1_y4kil"]
 [ext_resource type="Shader" path="res://assets/shaders/was_hit.gdshader" id="2_6num2"]

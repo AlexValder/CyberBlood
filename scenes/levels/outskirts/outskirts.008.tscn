@@ -1,10 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://bqmr15rq3y1c5"]
+[gd_scene load_steps=6 format=3 uid="uid://bqmr15rq3y1c5"]
 
 [ext_resource type="Script" path="res://scenes/levels/base_level.gd" id="1_u0uy8"]
 [ext_resource type="TileSet" uid="uid://b3k13y1c7g1ax" path="res://assets/tilesets/test_level.tres" id="2_7bsnx"]
 [ext_resource type="PackedScene" uid="uid://bxefd1aypq3pg" path="res://entities/items/chest.tscn" id="3_3d2je"]
 [ext_resource type="Script" path="res://scenes/levels/room_transition_trigger.gd" id="3_e1oar"]
-[ext_resource type="PackedScene" uid="uid://bjo1s1p41e5q0" path="res://entities/enemies/skeleton/skeleton.tscn" id="4_ep2oc"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3yjqf"]
 size = Vector2(48, 10)
@@ -12,6 +11,8 @@ size = Vector2(48, 10)
 [node name="outskirts_008" type="Node2D"]
 texture_filter = 1
 script = ExtResource("1_u0uy8")
+biome = "outskirts"
+id = "008"
 
 [node name="tilemap" type="TileMap" parent="."]
 texture_filter = 1
@@ -85,20 +86,3 @@ position = Vector2(1747, 244)
 
 [node name="chest_07" parent="env" instance=ExtResource("3_3d2je")]
 position = Vector2(556, 692)
-
-[node name="enemies" type="Node" parent="."]
-
-[node name="skeleton_00" parent="enemies" instance=ExtResource("4_ep2oc")]
-position = Vector2(336, 374)
-
-[node name="skeleton_01" parent="enemies" instance=ExtResource("4_ep2oc")]
-position = Vector2(1669, 629)
-
-[node name="skeleton_02" parent="enemies" instance=ExtResource("4_ep2oc")]
-position = Vector2(1568, 630)
-
-[node name="skeleton_03" parent="enemies" instance=ExtResource("4_ep2oc")]
-position = Vector2(1473, 839)
-
-[node name="skeleton_04" parent="enemies" instance=ExtResource("4_ep2oc")]
-position = Vector2(222, 676)

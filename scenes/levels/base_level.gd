@@ -1,10 +1,11 @@
 extends Node2D
 class_name BaseLevel
 
-
 @onready var _tiles := $tilemap as TileMap
 @onready var _spawnpoints := $spawnpoints as Node
 @onready var _initial_spawn := _spawnpoints.get_node_or_null("initial") as Marker2D
+@export var biome := ""
+@export var id := ""
 
 
 func get_extends() -> Vector4i:
@@ -30,6 +31,10 @@ func setup(dict: Dictionary = {}) -> void:
             _get_spawn(dict.prev_room, dict.entry_id)
     else:
         GameManager.player.global_position = _initial_spawn.global_position
+
+
+func get_save_name() -> String:
+    return "%s_%s" % [biome, id]
 
 
 func _ready() -> void:

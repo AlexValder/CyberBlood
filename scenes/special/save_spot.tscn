@@ -1,0 +1,3 @@
+[gd_scene format=3 uid="uid://b8vguogqr14wv"]
+
+[node name="save_spot" type="Node2D"]

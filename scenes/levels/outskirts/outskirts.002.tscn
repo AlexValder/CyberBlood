@@ -1,11 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://c0375hw80pca0"]
+[gd_scene load_steps=8 format=3 uid="uid://c0375hw80pca0"]
 
 [ext_resource type="Script" path="res://scenes/levels/outskirts/outskirts.002.gd" id="1_siwby"]
 [ext_resource type="TileSet" uid="uid://b3k13y1c7g1ax" path="res://assets/tilesets/test_level.tres" id="2_bw1et"]
 [ext_resource type="Script" path="res://scenes/levels/room_transition_trigger.gd" id="3_gxcsg"]
 [ext_resource type="PackedScene" uid="uid://bxefd1aypq3pg" path="res://entities/items/chest.tscn" id="4_gvg72"]
-[ext_resource type="PackedScene" uid="uid://c3jwxmhqq0oog" path="res://entities/items/health_upgrade.tscn" id="5_4yws2"]
-[ext_resource type="PackedScene" uid="uid://bjo1s1p41e5q0" path="res://entities/enemies/skeleton/skeleton.tscn" id="5_kth2x"]
+[ext_resource type="PackedScene" path="res://entities/items/health_upgrade.tscn" id="5_4yws2"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ita5c"]
 size = Vector2(7, 48)
@@ -15,6 +14,8 @@ size = Vector2(256, 112)
 
 [node name="outskirts_002" type="Node2D"]
 script = ExtResource("1_siwby")
+biome = "outskirts"
+id = "002"
 
 [node name="tilemap" type="TileMap" parent="."]
 texture_filter = 1
@@ -101,33 +102,6 @@ position = Vector2(1288, 180)
 position = Vector2(709, 776)
 
 [node name="enemies" type="Node" parent="."]
-
-[node name="skeleton_00" parent="enemies" instance=ExtResource("5_kth2x")]
-position = Vector2(579, 257)
-
-[node name="skeleton_01" parent="enemies" instance=ExtResource("5_kth2x")]
-position = Vector2(446, 220)
-
-[node name="skeleton_02" parent="enemies" instance=ExtResource("5_kth2x")]
-position = Vector2(1162, 171)
-
-[node name="skeleton_03" parent="enemies" instance=ExtResource("5_kth2x")]
-position = Vector2(952, 431)
-
-[node name="skeleton_04" parent="enemies" instance=ExtResource("5_kth2x")]
-position = Vector2(854, 702)
-
-[node name="skeleton_05" parent="enemies" instance=ExtResource("5_kth2x")]
-position = Vector2(1194, 751)
-
-[node name="skeleton_06" parent="enemies" instance=ExtResource("5_kth2x")]
-position = Vector2(1500, 748)
-
-[node name="skeleton_07" parent="enemies" instance=ExtResource("5_kth2x")]
-position = Vector2(1778, 753)
-
-[node name="skeleton_08" parent="enemies" instance=ExtResource("5_kth2x")]
-position = Vector2(2045, 748)
 
 [connection signal="body_entered" from="secret_area" to="." method="_on_secret_area_body_entered"]
 [connection signal="body_exited" from="secret_area" to="." method="_on_secret_area_body_exited"]

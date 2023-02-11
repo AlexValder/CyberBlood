@@ -3,16 +3,14 @@ extends Node
 signal debug_toggled(debug)
 
 const LEVELS := {
-    "menu": "res://scenes/main_menu.tscn",
-    "outskirts": {
-        "000": "res://scenes/levels/outskirts/outskirts.000.tscn",
-        "001": "res://scenes/levels/outskirts/outskirts.001.tscn",
-    },
+    "menu": "res://scenes/ui/main_menu.tscn",
+    "outskirts": "res://scenes/levels/outskirts/outskirts.%03d.tscn",
 }
-const FIRST_LEVEL := LEVELS["outskirts"]["000"]
+const FIRST_LEVEL := LEVELS["outskirts"] % 0
 
 var _playing := false
 var _prev_state := false
+var _save_index := -1
 
 var player_scene := preload("res://entities/player/player.tscn") as PackedScene
 var player: Player
@@ -24,9 +22,23 @@ var debug_disabled: bool = !should_show_debug():
 var last_room := []
 
 
-func start_game() -> void:
-    get_tree().change_scene_to_file(FIRST_LEVEL)
+func start_game(index: int) -> void:
+    _save_index = index
+
     create_player()
+
+    if SavesManager.save_exists(_save_index):
+        var data := SavesManager.get_save(_save_index)
+        PlayerSave.apply_save(data, player)
+        var biome := data.map.biome as String
+        var id := data.map.id as String
+
+        var file_path := "res://scenes/levels/{biome}/{biome}.{id}.tscn"\
+            .format({"biome" = biome, "id" = id})
+        get_tree().change_scene_to_file(file_path)
+    else:
+        get_tree().change_scene_to_file(FIRST_LEVEL)
+
     get_tree().root.add_child(player)
     _playing = true
 
@@ -36,6 +48,14 @@ func reload_level() -> void:
     last_room = []
     get_tree().reload_current_scene()
     get_tree().root.add_child(player)
+
+
+func save_game() -> void:
+    if player == null || !_playing:
+        return
+
+    var level := get_tree().current_scene as BaseLevel
+    SavesManager.save_state(_save_index, player, level)
 
 
 func dev_change_room(biome: String, id: String) -> void:
@@ -116,17 +136,22 @@ func _unhandled_input(event: InputEvent) -> void:
         var image := get_viewport().get_texture().get_image()
         var path := _get_screenshot_path()
         image.save_png(path)
+    elif event.is_action_pressed("cheat_save"):
+        save_game()
 
 
 func _notification(what: int) -> void:
-    if Engine.is_editor_hint():
-        return
-
     match what:
         NOTIFICATION_APPLICATION_FOCUS_OUT:
+            if Engine.is_editor_hint():
+                return
+
             _prev_state = get_tree().paused
             get_tree().paused = true
         NOTIFICATION_APPLICATION_FOCUS_IN:
+            if Engine.is_editor_hint():
+                return
+
             get_tree().paused = _prev_state
 
 

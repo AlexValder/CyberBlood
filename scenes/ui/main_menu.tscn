@@ -1,0 +1,240 @@
+[gd_scene load_steps=4 format=3 uid="uid://cpocsx316ce5q"]
+
+[ext_resource type="Theme" uid="uid://brlh53bypvlrb" path="res://assets/gui/themes/default.tres" id="1_ivq4l"]
+[ext_resource type="Script" path="res://scenes/ui/main_menu.gd" id="2_sort7"]
+[ext_resource type="Script" path="res://scenes/ui/saves_menu.gd" id="3_yyuuo"]
+
+[node name="root" type="Control"]
+texture_filter = 1
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_ivq4l")
+script = ExtResource("2_sort7")
+
+[node name="bg" type="ColorRect" parent="."]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0.380392, 0.376471, 1)
+
+[node name="main" type="VBoxContainer" parent="."]
+visible = false
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 0
+anchor_left = 0.4
+anchor_right = 0.6
+anchor_bottom = 1.0
+offset_left = 1.0
+offset_right = -7.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="play" type="Button" parent="main"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Start"
+
+[node name="quit" type="Button" parent="main"]
+layout_mode = 2
+text = "Quit"
+
+[node name="version" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -13.0
+offset_right = 40.0
+grow_vertical = 0
+
+[node name="copyright" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -40.0
+offset_top = -13.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "© Potato Studio, 2023"
+
+[node name="saves" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.15
+anchor_top = 0.15
+anchor_right = 0.85
+anchor_bottom = 0.85
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 30
+alignment = 1
+script = ExtResource("3_yyuuo")
+
+[node name="grid" type="GridContainer" parent="saves"]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_constants/h_separation = 20
+columns = 2
+
+[node name="hbox_00" type="HBoxContainer" parent="saves/grid"]
+layout_mode = 2
+
+[node name="button" type="Button" parent="saves/grid/hbox_00"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Save 1"
+
+[node name="del" type="Button" parent="saves/grid/hbox_00"]
+layout_mode = 2
+text = "X"
+
+[node name="hbox_01" type="HBoxContainer" parent="saves/grid"]
+layout_mode = 2
+
+[node name="button" type="Button" parent="saves/grid/hbox_01"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Save 1"
+
+[node name="del" type="Button" parent="saves/grid/hbox_01"]
+layout_mode = 2
+text = "X"
+
+[node name="panel_00" type="PanelContainer" parent="saves/grid"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="vbox" type="VBoxContainer" parent="saves/grid/panel_00"]
+layout_mode = 2
+alignment = 1
+
+[node name="last_place" type="Label" parent="saves/grid/panel_00/vbox"]
+layout_mode = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="last_time" type="Label" parent="saves/grid/panel_00/vbox"]
+layout_mode = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="percentage" type="Label" parent="saves/grid/panel_00/vbox"]
+layout_mode = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="panel_01" type="PanelContainer" parent="saves/grid"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="vbox" type="VBoxContainer" parent="saves/grid/panel_01"]
+layout_mode = 2
+alignment = 1
+
+[node name="last_place" type="Label" parent="saves/grid/panel_01/vbox"]
+layout_mode = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="last_time" type="Label" parent="saves/grid/panel_01/vbox"]
+layout_mode = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="percentage" type="Label" parent="saves/grid/panel_01/vbox"]
+layout_mode = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="hbox_02" type="HBoxContainer" parent="saves/grid"]
+layout_mode = 2
+
+[node name="button" type="Button" parent="saves/grid/hbox_02"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Save 1"
+
+[node name="del" type="Button" parent="saves/grid/hbox_02"]
+layout_mode = 2
+text = "X"
+
+[node name="hbox_03" type="HBoxContainer" parent="saves/grid"]
+layout_mode = 2
+
+[node name="button" type="Button" parent="saves/grid/hbox_03"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Save 1"
+
+[node name="del" type="Button" parent="saves/grid/hbox_03"]
+layout_mode = 2
+text = "X"
+
+[node name="panel_02" type="PanelContainer" parent="saves/grid"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="vbox" type="VBoxContainer" parent="saves/grid/panel_02"]
+layout_mode = 2
+alignment = 1
+
+[node name="last_place" type="Label" parent="saves/grid/panel_02/vbox"]
+layout_mode = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="last_time" type="Label" parent="saves/grid/panel_02/vbox"]
+layout_mode = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="percentage" type="Label" parent="saves/grid/panel_02/vbox"]
+layout_mode = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="panel_03" type="PanelContainer" parent="saves/grid"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="vbox" type="VBoxContainer" parent="saves/grid/panel_03"]
+layout_mode = 2
+alignment = 1
+
+[node name="last_place" type="Label" parent="saves/grid/panel_03/vbox"]
+layout_mode = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="last_time" type="Label" parent="saves/grid/panel_03/vbox"]
+layout_mode = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="percentage" type="Label" parent="saves/grid/panel_03/vbox"]
+layout_mode = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="back" type="Button" parent="saves"]
+self_modulate = Color(1, 0, 0, 1)
+layout_mode = 2
+text = "Back"
+
+[connection signal="button_up" from="main/play" to="." method="_on_play_button_up"]
+[connection signal="button_up" from="main/quit" to="." method="_on_quit_button_up"]
+[connection signal="button_up" from="saves/back" to="." method="_on_back_button_up"]
