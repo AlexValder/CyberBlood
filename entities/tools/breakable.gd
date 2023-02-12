@@ -1,6 +1,8 @@
 extends Node2D
 class_name Breakable
 
+signal breakable_broken
+
 @onready var _anim_player := $anim_player as AnimationPlayer
 @export_range(1, 20) var required_hits := 1
 @export var has_health := false
@@ -13,6 +15,7 @@ func _ready() -> void:
 
 func action_on_break() -> void:
     Logger.debug("Broke %s" % get_parent().name)
+    breakable_broken.emit()
 
 
 func play_anim(anim: String) -> bool:

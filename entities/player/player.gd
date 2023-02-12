@@ -26,6 +26,7 @@ const ACCEL := 0.1
 @onready var _hurtbox := $hurtbox as HurtBox
 @onready var _camera := $camera as Camera2D
 @onready var _selected_form := $"%selected_form" as Label
+@onready var _reach_area := $reachable as Area2D
 
 @export var max_health: int = 50
 @export var max_mana: float = 100.0
@@ -180,6 +181,16 @@ func _ready() -> void:
     mana_bar.update()
 
     _camera.make_current()
+
+
+func _unhandled_input(event: InputEvent) -> void:
+    if event.is_action_released("interact"):
+        var areas := _reach_area.get_overlapping_areas()
+        for area in areas:
+            var parent := area.get_parent()
+            if parent.has_method("interact"):
+                parent.interact()
+                break
 
 
 func _on_recovery_value_timeout(rate: float) -> void:

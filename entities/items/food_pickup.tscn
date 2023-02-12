@@ -1,11 +1,11 @@
-[gd_scene load_steps=7 format=3]
+[gd_scene load_steps=7 format=3 uid="uid://bq1a54kry2chn"]
 
 [ext_resource type="Texture2D" uid="uid://cbyhap0qstl6m" path="res://assets/sprites/items/food.png" id="1_fl6vw"]
 [ext_resource type="Script" path="res://entities/items/food_pickup.gd" id="1_hqxtr"]
-[ext_resource type="PackedScene" uid="uid://cic6fiha10wti" path="res://entities/tools/pickup.tscn" id="1_lxbun"]
+[ext_resource type="PackedScene" path="res://entities/tools/pickup.tscn" id="1_lxbun"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_5cvpf"]
-radius = 8.0
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kxlbf"]
+size = Vector2(15, 14)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_aasse"]
 resource_local_to_scene = true
@@ -22,7 +22,8 @@ _index = 0
 file_data = "res://data/food.json"
 
 [node name="shape" parent="." index="0"]
-shape = SubResource("CircleShape2D_5cvpf")
+position = Vector2(-0.5, 0)
+shape = SubResource("RectangleShape2D_kxlbf")
 
 [node name="sprite" parent="." index="1"]
 texture = SubResource("AtlasTexture_aasse")

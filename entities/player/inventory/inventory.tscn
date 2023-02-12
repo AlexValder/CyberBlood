@@ -41,7 +41,6 @@ size_flags_vertical = 5
 text = "Quit to Main Menu"
 
 [node name="Controls" type="VBoxContainer" parent="."]
-visible = false
 self_modulate = Color(0.54902, 0.172549, 0.333333, 1)
 layout_mode = 2
 theme = ExtResource("2_aq74w")
@@ -66,6 +65,7 @@ text = "LMB / X - attack (there's a simple combo)"
 horizontal_alignment = 1
 
 [node name="label04" type="Label" parent="Controls"]
+visible = false
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 text = "Q / LT - circle between forms"
@@ -74,7 +74,13 @@ horizontal_alignment = 1
 [node name="label05" type="Label" parent="Controls"]
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
-text = "E / LB - transformation"
+text = "MMB / LB - transformation"
+horizontal_alignment = 1
+
+[node name="label07" type="Label" parent="Controls"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+text = "E / B - interact"
 horizontal_alignment = 1
 
 [node name="label06" type="Label" parent="Controls"]
@@ -84,6 +90,7 @@ text = "Esc / Start - quit the game"
 horizontal_alignment = 1
 
 [node name="DevTab" type="ScrollContainer" parent="."]
+visible = false
 layout_mode = 2
 follow_focus = true
 script = ExtResource("4_ionlx")

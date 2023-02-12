@@ -1,4 +1,4 @@
-[gd_scene load_steps=108 format=3 uid="uid://dooql4yvspt51"]
+[gd_scene load_steps=109 format=3 uid="uid://dooql4yvspt51"]
 
 [ext_resource type="Script" path="res://entities/player/player.gd" id="1_spune"]
 [ext_resource type="Texture2D" uid="uid://cjy71jbvm5o5c" path="res://assets/sprites/player/player_attack1.png" id="2_pdbal"]
@@ -565,6 +565,9 @@ resource_local_to_scene = true
 radius = 12.0
 height = 44.0
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_eui4v"]
+size = Vector2(54, 53)
+
 [sub_resource type="LabelSettings" id="LabelSettings_vummm"]
 outline_size = 2
 outline_color = Color(0, 0, 0, 1)
@@ -701,6 +704,14 @@ script = ExtResource("30_mx1dt")
 
 [node name="cat_fall" type="Node" parent="state_machine"]
 script = ExtResource("31_3t60f")
+
+[node name="reachable" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 128
+
+[node name="shape" type="CollisionShape2D" parent="reachable"]
+position = Vector2(9, -4.5)
+shape = SubResource("RectangleShape2D_eui4v")
 
 [node name="GUI" type="CanvasLayer" parent="."]
 

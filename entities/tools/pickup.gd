@@ -1,6 +1,8 @@
 extends RigidBody2D
 class_name Pickup
 
+signal picked_up
+
 @export var frequency := 2.0
 
 @onready var _sprite := $sprite as Sprite2D

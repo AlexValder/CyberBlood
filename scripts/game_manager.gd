@@ -11,6 +11,7 @@ const FIRST_LEVEL := LEVELS["outskirts"] % 0
 var _playing := false
 var _prev_state := false
 var _save_index := -1
+var save_data: PlayerSave
 
 var player_scene := preload("res://entities/player/player.tscn") as PackedScene
 var player: Player
@@ -28,15 +29,17 @@ func start_game(index: int) -> void:
     create_player()
 
     if SavesManager.save_exists(_save_index):
-        var data := SavesManager.get_save(_save_index)
-        PlayerSave.apply_save(data, player)
-        var biome := data.map.biome as String
-        var id := data.map.id as String
+        save_data = SavesManager.get_save(_save_index)
+        save_data.apply_player_data(player)
+        var biome := save_data.map.biome as String
+        var id := save_data.map.id as String
 
         var file_path := "res://scenes/levels/{biome}/{biome}.{id}.tscn"\
             .format({"biome" = biome, "id" = id})
         get_tree().change_scene_to_file(file_path)
     else:
+        save_data = PlayerSave.new()
+        save_data.update_player_data(player)
         get_tree().change_scene_to_file(FIRST_LEVEL)
 
     get_tree().root.add_child(player)
@@ -50,12 +53,19 @@ func reload_level() -> void:
     get_tree().root.add_child(player)
 
 
-func save_game() -> void:
+func save_game(current_room := true) -> void:
     if player == null || !_playing:
         return
 
-    var level := get_tree().current_scene as BaseLevel
-    SavesManager.save_state(_save_index, player, level)
+    save_data.update_player_data(player)
+
+    if current_room:
+        var level := get_tree().current_scene as BaseLevel
+        save_data.map.biome = level.biome
+        save_data.map.id = level.id
+        save_data.map.current = level.get_save_name()
+
+    SavesManager.save_state(_save_index, save_data)
 
 
 func dev_change_room(biome: String, id: String) -> void:
@@ -77,6 +87,8 @@ func change_room(trigger: RoomTransitionTrigger) -> void:
 func quit_to_menu() -> void:
     _playing = false
     remove_player()
+    save_data = null
+    _save_index = -1
     last_room = []
     get_tree().paused = false
     get_tree().change_scene_to_file(LEVELS["menu"])

@@ -15,7 +15,7 @@ var quests := {
 }
 var map := {
     "current" : "",
-    "outskirts": [],
+    "outskirts": {},
 }
 
 static func create_save(p: Player, level: BaseLevel) -> PlayerSave:
@@ -58,11 +58,38 @@ static func from_dictionary(dict: Dictionary) -> PlayerSave:
     return state
 
 
-static func apply_save(state: PlayerSave, p: Player) -> void:
-    p.max_health = max(state.player.max_health, p.max_health)
-    p.current_health = max(state.player.max_health, p.max_health)
-    p.max_mana = max(state.player.max_mana, p.max_mana)
-    p.current_mana = max(state.player.max_mana, p.max_mana)
+func push_map_change(
+    biome: String, id: String, change: String, value: String) -> void:
+
+    if !map.has(biome):
+        map[biome] = {}
+
+    if !map[biome].has(id):
+        map[biome][id] = {}
+
+    map[biome][id][change] = value
+
+
+func get_map_change(biome: String, id: String, change: String) -> Variant:
+    if !map.has(biome):
+        return null
+
+    if !map[biome].has(id):
+        return null
+
+    return map[biome][id].get(change)
+
+
+func apply_player_data(p: Player) -> void:
+    p.max_health = max(self.player.max_health, p.max_health)
+    p.current_health = max(self.player.max_health, p.max_health)
+    p.max_mana = max(self.player.max_mana, p.max_mana)
+    p.current_mana = max(self.player.max_mana, p.max_mana)
+
+
+func update_player_data(p: Player) -> void:
+    self.player.max_health = p.max_health
+    self.player.max_mana = p.max_mana
 
 
 func to_dict() -> Dictionary:

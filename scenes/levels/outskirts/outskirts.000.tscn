@@ -50,6 +50,9 @@ text = "Under construction"
 [node name="initial" type="Marker2D" parent="spawnpoints"]
 position = Vector2(208, 0)
 
+[node name="outskirts_001" type="Marker2D" parent="spawnpoints"]
+position = Vector2(208, 678)
+
 [node name="invisible_wall_00" type="StaticBody2D" parent="."]
 position = Vector2(616, -80)
 

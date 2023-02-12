@@ -12,11 +12,9 @@ static func save_exists(index: int) -> bool:
 static func get_all_save_data() -> Array[Dictionary]:
     var arr := []
 
-    var i := 0
-    while i < SAVE_COUNT:
+    for i in SAVE_COUNT:
         var dict := get_save_meta(i)
         arr.append(dict)
-        i += 1
 
     return arr
 
@@ -57,11 +55,10 @@ static func get_save_meta(index: int) -> Dictionary:
     return dict
 
 
-static func save_state(index: int, player: Player, level: BaseLevel) -> void:
+static func save_state(index: int, save: PlayerSave) -> void:
     Logger.debug("Saved state %d" % index)
 
-    var state := PlayerSave.create_save(player, level)
-    var string := JSON.stringify(state.to_dict(), "  ")
+    var string := JSON.stringify(save.to_dict(), "  ")
     var file_path := PATH % index
     if !FileAccess.file_exists(file_path):
         FileAccess.open(file_path, FileAccess.WRITE)
@@ -69,6 +66,11 @@ static func save_state(index: int, player: Player, level: BaseLevel) -> void:
     var file := FileAccess.open(file_path, FileAccess.READ_WRITE)
     file.store_string(string)
     file.flush()
+
+
+static func create_save(index: int, player: Player, level: BaseLevel) -> void:
+    var save := PlayerSave.create_save(player, level)
+    save_state(index, save)
 
 
 static func load_state(index: int, player: Player) -> void:

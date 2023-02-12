@@ -1,24 +1,111 @@
-[gd_scene load_steps=4 format=3 uid="uid://bxefd1aypq3pg"]
+[gd_scene load_steps=13 format=3 uid="uid://bxefd1aypq3pg"]
 
+[ext_resource type="Script" path="res://entities/items/chest.gd" id="1_4iilo"]
 [ext_resource type="Texture2D" uid="uid://bka671n6ghhv1" path="res://assets/sprites/items/chest.png" id="1_j0td8"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_c1dv3"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_5cnvp"]
 atlas = ExtResource("1_j0td8")
 region = Rect2(0, 0, 48, 32)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_3hpec"]
+atlas = ExtResource("1_j0td8")
+region = Rect2(48, 0, 48, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2ar05"]
+atlas = ExtResource("1_j0td8")
+region = Rect2(96, 0, 48, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4i03t"]
+atlas = ExtResource("1_j0td8")
+region = Rect2(144, 0, 48, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_wglrb"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5cnvp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3hpec")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2ar05")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4i03t")
+}],
+"loop": false,
+"name": &"default",
+"speed": 0.0
+}]
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tkb4y"]
-size = Vector2(26, 19)
+size = Vector2(26, 15)
+
+[sub_resource type="Animation" id="Animation_324dr"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_f2sxl"]
+resource_name = "open"
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.25, 0.4, 0.55, 0.7, 0.85),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 1, 2, 1, 3]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_pa6ao"]
+_data = {
+"RESET": SubResource("Animation_324dr"),
+"open": SubResource("Animation_f2sxl")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bthc6"]
+size = Vector2(32, 54)
 
 [node name="chest" type="Node2D"]
 texture_filter = 1
+script = ExtResource("1_4iilo")
 
-[node name="sprite" type="Sprite2D" parent="."]
-texture = SubResource("AtlasTexture_c1dv3")
+[node name="sprite" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_wglrb")
 
 [node name="static_body" type="StaticBody2D" parent="."]
 collision_mask = 134
 
 [node name="shape" type="CollisionShape2D" parent="static_body"]
-position = Vector2(0, 2.5)
+position = Vector2(0, 4.5)
 shape = SubResource("RectangleShape2D_tkb4y")
 one_way_collision = true
+
+[node name="anim_player" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_pa6ao")
+}
+
+[node name="interactable" type="Area2D" parent="."]
+collision_layer = 128
+collision_mask = 2
+
+[node name="shape" type="CollisionShape2D" parent="interactable"]
+position = Vector2(0, -15)
+shape = SubResource("RectangleShape2D_bthc6")

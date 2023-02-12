@@ -21,10 +21,9 @@ func _ready() -> void:
 
 
 func _populate_panels() -> void:
-    var i := 0
     var count := SavesManager.SAVE_COUNT # currently 4
 
-    while i < count:
+    for i in count:
         var dict := SavesManager.get_save_meta(i)
         var place := _panels[i].get_node("last_place") as Label
         var time := _panels[i].get_node("last_time") as Label
@@ -33,21 +32,18 @@ func _populate_panels() -> void:
         place.text = dict.get("last_place", "").capitalize()
         time.text = dict.get("last_time", "<EMPTY>")
         percent.text = dict.get("percentage", "")
-        i += 1
 
 
 func _setup_buttons() -> void:
-    var i := 0
     var count := SavesManager.SAVE_COUNT
 
-    while i < count:
+    for i in count:
         var button := _buttons[i]
         button.text = "Save %d" % (i + 1)
         button.button_up.connect(GameManager.start_game.bind(i))
 
         (get_node("grid/hbox_0%d/del" % i) as Button)\
             .button_up.connect(_clear_save.bind(i))
-        i += 1
 
 
 func _clear_save(index: int) -> void:

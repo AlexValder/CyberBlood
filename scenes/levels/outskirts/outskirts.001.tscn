@@ -128,6 +128,7 @@ collision_mask = 2
 [node name="shape" type="CollisionShape2D" parent="corridor_hide"]
 shape = SubResource("RectangleShape2D_5awg1")
 
+[connection signal="breakable_broken" from="tilemap/breakable_wall" to="." method="_on_breakable_wall_broken"]
 [connection signal="body_entered" from="corridor_hide" to="." method="_on_corridor_hide_body_entered"]
 [connection signal="body_exited" from="corridor_hide" to="." method="_on_corridor_hide_body_exited"]
 
