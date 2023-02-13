@@ -9,6 +9,12 @@ func physics_process(delta: float) -> void:
         # TODO: air attack
         state_change.emit(self.name, "attack1")
 
+    if Input.is_action_just_pressed("up"):
+        state_change.emit(self.name, "climbing")
+
+    if Input.is_action_just_pressed("down"):
+        state_change.emit(self.name, "climbing")
+
     _check_horizontal_movement(player.WALK_SPEED)
     _add_gravity(delta)
 

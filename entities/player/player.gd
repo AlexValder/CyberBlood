@@ -22,11 +22,13 @@ const ACCEL := 0.1
 
 @onready var sprite := $sprite as AnimatedSprite2D
 @onready var player_anim := $player_anim as AnimationPlayer
+@onready var ladder_point := $ladder_point as Node2D
 @onready var _shape := $shape as CollisionShape2D
 @onready var _hurtbox := $hurtbox as HurtBox
 @onready var _camera := $camera as Camera2D
 @onready var _selected_form := $"%selected_form" as Label
 @onready var _reach_area := $reachable as Area2D
+@onready var _climb_area := $climb_area as Area2D
 
 @export var max_health: int = 50
 @export var max_mana: float = 100.0
@@ -167,6 +169,15 @@ func set_limits(vec: Vector4i) -> void:
     _camera.limit_top = vec[1]
     _camera.limit_right = vec[2]
     _camera.limit_bottom = vec[3]
+
+
+func get_ladder() -> Ladder:
+    var areas := _climb_area.get_overlapping_areas()
+    for area in areas:
+        if area is Ladder:
+            return area as Ladder
+
+    return null
 
 
 func _ready() -> void:

@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://bc6jghk2v0g1f"]
 
-[ext_resource type="Script" path="res://scenes/levels/base_level.gd" id="1_jo2w8"]
+[ext_resource type="Script" path="res://scenes/levels/outskirts/outskirts.012.gd" id="1_wpvog"]
 [ext_resource type="TileSet" uid="uid://b3k13y1c7g1ax" path="res://assets/tilesets/test_level.tres" id="2_xs05h"]
 [ext_resource type="Script" path="res://scenes/levels/room_transition_trigger.gd" id="3_skv7v"]
 
@@ -12,9 +12,7 @@ size = Vector2(8, 48)
 
 [node name="outskirts_012" type="Node2D"]
 texture_filter = 1
-script = ExtResource("1_jo2w8")
-biome = "outskirts"
-id = "012"
+script = ExtResource("1_wpvog")
 
 [node name="tilemap" type="TileMap" parent="."]
 texture_filter = 1

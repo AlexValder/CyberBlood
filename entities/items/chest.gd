@@ -36,6 +36,6 @@ func spawn_food(count: int) -> void:
         add_sibling(pickup)
 
 
-func spawn_money(count: int) -> void:
+func spawn_money(_count: int) -> void:
     pass
     # TODO: implement money

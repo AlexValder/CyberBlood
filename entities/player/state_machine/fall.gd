@@ -12,6 +12,12 @@ func physics_process(delta: float) -> void:
     if Input.is_action_just_pressed("jump"):
         state_change.emit(self.name, "double_jump")
 
+    if Input.is_action_just_pressed("up"):
+        state_change.emit(self.name, "climbing")
+
+    if Input.is_action_just_pressed("down"):
+        state_change.emit(self.name, "climbing")
+
     _check_horizontal_movement(player.WALK_SPEED)
 
     player.velocity.y += delta * player.GRAVITY

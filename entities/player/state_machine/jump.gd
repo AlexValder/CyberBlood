@@ -17,6 +17,12 @@ func physics_process(delta: float) -> void:
     if Input.is_action_just_pressed("jump"):
         state_change.emit(self.name, "double_jump")
 
+    if Input.is_action_just_pressed("up"):
+        state_change.emit(self.name, "climbing")
+
+    if Input.is_action_just_pressed("down"):
+        state_change.emit(self.name, "climbing")
+
     if player.velocity.y > 0:
         state_change.emit(self.name, "fall")
 

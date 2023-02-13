@@ -15,6 +15,12 @@ func physics_process(delta: float) -> void:
         else:
             state_change.emit(self.name, "jump")
 
+    if Input.is_action_just_pressed("up"):
+        state_change.emit(self.name, "climbing")
+
+    if Input.is_action_just_pressed("down"):
+        state_change.emit(self.name, "climbing")
+
     if Input.is_action_pressed("left"):
         state_change.emit(self.name, "run")
 
