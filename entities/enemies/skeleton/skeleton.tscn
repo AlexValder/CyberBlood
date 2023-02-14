@@ -1,4 +1,4 @@
-[gd_scene load_steps=77 format=3]
+[gd_scene load_steps=77 format=3 uid="uid://lk4w2osu85mu"]
 
 [ext_resource type="Script" path="res://entities/enemies/skeleton/skeleton.gd" id="1_scjn5"]
 [ext_resource type="Texture2D" uid="uid://c7mjgj1m4msdg" path="res://assets/sprites/skeleton/attack1.png" id="2_c4jyl"]

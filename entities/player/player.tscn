@@ -1,4 +1,4 @@
-[gd_scene load_steps=111 format=3 uid="uid://dooql4yvspt51"]
+[gd_scene load_steps=114 format=3 uid="uid://dooql4yvspt51"]
 
 [ext_resource type="Script" path="res://entities/player/player.gd" id="1_spune"]
 [ext_resource type="Texture2D" uid="uid://cjy71jbvm5o5c" path="res://assets/sprites/player/player_attack1.png" id="2_pdbal"]
@@ -36,6 +36,7 @@
 [ext_resource type="Script" path="res://entities/player/state_machine/cat_jump.gd" id="30_mx1dt"]
 [ext_resource type="Script" path="res://entities/player/state_machine/cat_fall.gd" id="31_3t60f"]
 [ext_resource type="Script" path="res://entities/player/state_machine/climbing.gd" id="31_hjw76"]
+[ext_resource type="Script" path="res://entities/player/hud/money_bar.gd" id="37_b7hqt"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_eui4v"]
 size = Vector2(54, 53)
@@ -591,6 +592,12 @@ bg_color = Color(0.0901961, 0.00392157, 0.439216, 1)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7fxjf"]
 bg_color = Color(0.0705882, 0, 1, 1)
 
+[sub_resource type="LabelSettings" id="LabelSettings_763cv"]
+font_size = 32
+
+[sub_resource type="LabelSettings" id="LabelSettings_xhfyu"]
+font_size = 32
+
 [node name="player" type="CharacterBody2D"]
 z_index = 1
 collision_layer = 2
@@ -656,7 +663,7 @@ position = Vector2(0, 12)
 [node name="sprite" type="AnimatedSprite2D" parent="."]
 z_index = 5
 texture_filter = 1
-position = Vector2(4, 22)
+position = Vector2(0, 22)
 sprite_frames = SubResource("SpriteFrames_aejgj")
 animation = &"attack1"
 offset = Vector2(0, -22)
@@ -827,6 +834,26 @@ text = "0"
 label_settings = SubResource("LabelSettings_pxxtw")
 horizontal_alignment = 1
 
+[node name="money_bar" type="HBoxContainer" parent="GUI/HUD/vbox"]
+unique_name_in_owner = true
+layout_mode = 2
+script = ExtResource("37_b7hqt")
+
+[node name="total" type="Label" parent="GUI/HUD/vbox/money_bar"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "$ %d"
+label_settings = SubResource("LabelSettings_763cv")
+vertical_alignment = 1
+
+[node name="adding" type="Label" parent="GUI/HUD/vbox/money_bar"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+text = "+ 0"
+label_settings = SubResource("LabelSettings_xhfyu")
+horizontal_alignment = 2
+vertical_alignment = 1
+
 [node name="selected_form" type="Label" parent="GUI/HUD"]
 unique_name_in_owner = true
 layout_mode = 1
@@ -840,10 +867,6 @@ offset_bottom = -5.0
 grow_vertical = 0
 text = "selected form: BAT"
 
-[connection signal="mana_changed" from="." to="GUI/HUD/vbox/mana_bar" method="_on_player_mana_changed"]
-[connection signal="player_dead" from="." to="state_machine" method="_on_player_dead"]
-[connection signal="player_health_changed" from="." to="GUI/HUD/vbox/health_bar" method="_on_character_health_change"]
-[connection signal="player_hurt" from="." to="state_machine" method="_on_player_damaged"]
 [connection signal="timeout" from="timers/recovery_value" to="." method="_on_recovery_value_timeout" binds= [1.0]]
 [connection signal="timeout" from="timers/recovery_value" to="GUI/HUD/vbox/mana_bar" method="_on_recovery_value_timeout" binds= [1.0]]
 [connection signal="toggled" from="GUI/HUD/inventory/Game/grid/fps" to="GUI/HUD/fps" method="_on_fps_toggled"]

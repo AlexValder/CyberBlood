@@ -4,11 +4,6 @@ extends BaseLevel
 @onready var _tween: Tween
 
 
-func _init() -> void:
-    self.biome = "outskirts"
-    self.id = "001"
-
-
 func _ready() -> void:
     super._ready()
     var wall = GameManager.save_data.get_map_change(biome, id, "wall")

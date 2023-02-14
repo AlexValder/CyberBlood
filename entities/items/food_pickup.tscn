@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://cbyhap0qstl6m" path="res://assets/sprites/items/food.png" id="1_fl6vw"]
 [ext_resource type="Script" path="res://entities/items/food_pickup.gd" id="1_hqxtr"]
-[ext_resource type="PackedScene" path="res://entities/tools/pickup.tscn" id="1_lxbun"]
+[ext_resource type="PackedScene" uid="uid://dmrpmcj8412fu" path="res://entities/tools/pickup.tscn" id="1_lxbun"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kxlbf"]
 size = Vector2(15, 14)
@@ -16,7 +16,6 @@ region = Rect2(0, 0, 16, 16)
 radius = 8.0
 
 [node name="pickup" instance=ExtResource("1_lxbun")]
-collision_mask = 257
 script = ExtResource("1_hqxtr")
 _index = 0
 file_data = "res://data/food.json"

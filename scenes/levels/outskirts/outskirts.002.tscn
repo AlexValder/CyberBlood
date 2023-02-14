@@ -1,9 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://c0375hw80pca0"]
+[gd_scene load_steps=8 format=3 uid="uid://boo4n3lwipjua"]
 
 [ext_resource type="Script" path="res://scenes/levels/outskirts/outskirts.002.gd" id="1_siwby"]
 [ext_resource type="TileSet" uid="uid://b3k13y1c7g1ax" path="res://assets/tilesets/test_level.tres" id="2_bw1et"]
 [ext_resource type="Script" path="res://scenes/levels/room_transition_trigger.gd" id="3_gxcsg"]
-[ext_resource type="PackedScene" uid="uid://bxefd1aypq3pg" path="res://entities/items/chest.tscn" id="4_gvg72"]
+[ext_resource type="PackedScene" uid="uid://dgl3bhcduh1j0" path="res://entities/props/chest.tscn" id="4_gvg72"]
 [ext_resource type="PackedScene" uid="uid://doatqussduypd" path="res://entities/items/health_upgrade.tscn" id="5_4yws2"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ita5c"]
@@ -14,6 +14,8 @@ size = Vector2(256, 112)
 
 [node name="outskirts_002" type="Node2D"]
 script = ExtResource("1_siwby")
+biome = "outskirts"
+id = "002"
 
 [node name="tilemap" type="TileMap" parent="."]
 texture_filter = 1
@@ -39,6 +41,7 @@ layer_2/tile_data = PackedInt32Array(589894, 262144, 65537, 655430, 262144, 6553
 metadata/_edit_lock_ = true
 
 [node name="secret_area" type="TileMap" parent="tilemap"]
+visible = false
 tile_set = ExtResource("2_bw1et")
 collision_animatable = true
 format = 2
@@ -90,29 +93,30 @@ shape = SubResource("RectangleShape2D_tynpi")
 [node name="chest00" parent="env" instance=ExtResource("4_gvg72")]
 position = Vector2(1204, 180)
 contains = {
-"food": 2,
-"money": 0,
+"food": 0,
+"money": 34,
 "special": {}
 }
 
 [node name="chest01" parent="env" instance=ExtResource("4_gvg72")]
 position = Vector2(1246, 180)
 contains = {
-"food": 1,
-"money": 0,
+"food": 0,
+"money": 126,
 "special": {}
 }
 
 [node name="chest02" parent="env" instance=ExtResource("4_gvg72")]
 position = Vector2(1288, 180)
 contains = {
-"food": 1,
+"food": 2,
 "money": 0,
 "special": {}
 }
 
 [node name="health_upgrade" parent="env" instance=ExtResource("5_4yws2")]
 position = Vector2(709, 776)
+collision_layer = 128
 
 [node name="enemies" type="Node" parent="."]
 

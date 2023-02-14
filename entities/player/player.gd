@@ -28,6 +28,7 @@ const ACCEL := 0.1
 @onready var _hurtbox := $areas/hurtbox as HurtBox
 @onready var _camera := $camera as Camera2D
 @onready var _selected_form := $"%selected_form" as Label
+@onready var _money_bar = $"%money_bar"
 @onready var _reach_area := $areas/reachable as Area2D
 @onready var _climb_area := $areas/climb_area as Area2D
 
@@ -36,12 +37,13 @@ const ACCEL := 0.1
 
 var current_health := max_health
 var current_mana := max_mana
+var money := 0
 var mana_recovery_rate := 1.0
 var flip := false:
     set(value):
         flip = value
         sprite.flip_h = value
-        $areas/attack_hitboxes.scale.x = -1 if value else 1
+        $areas.scale.x = -1 if value else 1
 var _current_form := 0
 var _forms := [
     PlayerForms.BAT,
@@ -93,6 +95,21 @@ func damage(value: int) -> void:
 
     if current_health <= 0:
         player_dies()
+
+
+func set_money(count: int) -> void:
+    money = count
+    _money_bar.set_money(count)
+
+
+func add_money(count: int) -> void:
+    money += count
+    _money_bar.add_money(count)
+
+
+func spend_money(count: int) -> void:
+    money -= count
+    _money_bar.remove_money(count)
 
 
 func start_drop_down() -> void:
@@ -193,6 +210,8 @@ func _ready() -> void:
     mana_bar.update()
 
     _camera.make_current()
+
+    _money_bar.set_money(money)
 
 
 func _unhandled_input(event: InputEvent) -> void:

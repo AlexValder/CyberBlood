@@ -13,6 +13,8 @@ size = Vector2(48, 8)
 [node name="outskirts_007" type="Node2D"]
 texture_filter = 1
 script = ExtResource("1_8s4cr")
+biome = "outskirts"
+id = "007"
 
 [node name="tilemap" type="TileMap" parent="."]
 texture_filter = 1

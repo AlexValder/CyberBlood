@@ -1,11 +1,12 @@
 extends Node2D
 class_name BaseLevel
 
+@export var biome := ""
+@export var id := ""
+
 @onready var _tiles := $tilemap as TileMap
 @onready var _spawnpoints := $spawnpoints as Node
 @onready var _initial_spawn := _spawnpoints.get_node_or_null("initial") as Marker2D
-var biome := ""
-var id := ""
 
 
 func get_extends() -> Vector4i:

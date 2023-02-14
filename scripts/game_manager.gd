@@ -4,9 +4,9 @@ signal debug_toggled(debug)
 
 const LEVELS := {
     "menu": "res://scenes/ui/main_menu.tscn",
-    "outskirts": "res://scenes/levels/outskirts/outskirts.%03d.tscn",
+    "outskirts": "res://scenes/levels/outskirts/outskirts.000.tscn",
 }
-const FIRST_LEVEL := LEVELS["outskirts"] % 0
+const FIRST_LEVEL := LEVELS["outskirts"]
 
 var _playing := false
 var _prev_state := false

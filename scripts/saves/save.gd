@@ -6,6 +6,7 @@ var index := 0
 var player := {
     "max_health": 0.0,
     "max_mana": 0.0,
+    "money": 0,
     "inventory": [],
 }
 var quests := {
@@ -23,6 +24,7 @@ static func create_save(p: Player, level: BaseLevel) -> PlayerSave:
 
     state.player.max_health = p.max_health
     state.player.max_mana = p.max_mana
+    state.player.money = p.money
     state.player.inventory = []
 
     state.quests.active = []
@@ -45,6 +47,7 @@ static func from_dictionary(dict: Dictionary) -> PlayerSave:
     if dict.has("player"):
         state.player.max_health = dict.player.max_health
         state.player.max_mana = dict.player.max_mana
+        state.player.money = dict.player.money
         state.player.inventory = []
 
     if dict.has("quests"):
@@ -85,11 +88,13 @@ func apply_player_data(p: Player) -> void:
     p.current_health = max(self.player.max_health, p.max_health)
     p.max_mana = max(self.player.max_mana, p.max_mana)
     p.current_mana = max(self.player.max_mana, p.max_mana)
+    p.money = self.player.money
 
 
 func update_player_data(p: Player) -> void:
     self.player.max_health = p.max_health
     self.player.max_mana = p.max_mana
+    self.player.money = p.money
 
 
 func to_dict() -> Dictionary:

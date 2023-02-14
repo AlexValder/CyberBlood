@@ -1,9 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://clrlch8fhohkv"]
+[gd_scene load_steps=7 format=3 uid="uid://dbnevlbegu8t4"]
 
 [ext_resource type="Script" path="res://scenes/levels/outskirts/outskirts.009.gd" id="1_o1bfc"]
 [ext_resource type="TileSet" uid="uid://b3k13y1c7g1ax" path="res://assets/tilesets/test_level.tres" id="2_gely6"]
 [ext_resource type="Script" path="res://scenes/levels/room_transition_trigger.gd" id="3_r571c"]
-[ext_resource type="PackedScene" uid="uid://bxefd1aypq3pg" path="res://entities/items/chest.tscn" id="4_h5dak"]
+[ext_resource type="PackedScene" uid="uid://dgl3bhcduh1j0" path="res://entities/props/chest.tscn" id="4_h5dak"]
 [ext_resource type="PackedScene" path="res://entities/enemies/skeleton/skeleton.tscn" id="5_l6g5h"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cfu07"]
@@ -12,6 +12,8 @@ size = Vector2(11, 80)
 [node name="outskirts_009" type="Node2D"]
 texture_filter = 1
 script = ExtResource("1_o1bfc")
+biome = "outskirts"
+id = "009"
 
 [node name="tilemap" type="TileMap" parent="."]
 texture_filter = 1

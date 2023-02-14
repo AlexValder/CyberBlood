@@ -10,6 +10,8 @@ size = Vector2(20, 48)
 [node name="test_level_002" type="Node2D"]
 texture_filter = 1
 script = ExtResource("1_lyo0h")
+biome = "test_level"
+id = "002"
 
 [node name="tilemap" type="TileMap" parent="."]
 tile_set = ExtResource("2_lm8mj")

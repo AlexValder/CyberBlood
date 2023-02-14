@@ -31,11 +31,16 @@ func disable() -> void:
 func spawn_food(count: int) -> void:
     for i in count:
         var pickup := FoodPickup.get_pickup()
-        pickup.global_position = self.global_position
-        pickup.global_position.x += randf_range(-5.0, 5.0)
         add_sibling(pickup)
+        pickup.global_position = self.global_position
+        pickup.apply_central_impulse(
+            Vector2(randf_range(-150.0, 150.0), -150.0))
 
 
-func spawn_money(_count: int) -> void:
-    pass
-    # TODO: implement money
+func spawn_money(count: int) -> void:
+    var pickups := MoneyPickup.get_pickup(count)
+    for pickup in pickups:
+        add_sibling(pickup)
+        pickup.global_position = self.global_position
+        pickup.apply_central_impulse(
+            Vector2(randf_range(-150.0, 150.0), -150.0))

@@ -4,28 +4,20 @@ extends BaseLevel
 @onready var _tween: Tween
 
 
-func _init() -> void:
-    self.biome = "outskirts"
-    self.id = "002"
-
-
 func _ready() -> void:
     super._ready()
     var hp = GameManager.save_data.get_map_change(biome, id, "hp_upgrade")
     if hp == "1":
         $env/health_upgrade.queue_free()
 
-    var chest00 = GameManager.save_data.get_map_change(biome, id, "chest00")
-    if chest00 == "1":
-        $env/chest00.disable()
+    var env := $env.get_children()
+    for item in env:
+        if !(item is Interactable):
+            continue
 
-    var chest01 = GameManager.save_data.get_map_change(biome, id, "chest01")
-    if chest01 == "1":
-        $env/chest01.disable()
-
-    var chest02 = GameManager.save_data.get_map_change(biome, id, "chest02")
-    if chest02 == "1":
-        $env/chest02.disable()
+        var rec = GameManager.save_data.get_map_change(biome, id, item.name)
+        if rec == "1":
+            (item as Interactable).disable()
 
 func _on_secret_area_body_entered(player: Player) -> void:
     if player == null:

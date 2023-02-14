@@ -48,7 +48,7 @@ node_naming/name_casing=2
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/bloody_logger/plugin.cfg", "res://addons/Todo_Manager/plugin.cfg")
+enabled=PackedStringArray("res://addons/bloody_logger/plugin.cfg")
 
 [input]
 

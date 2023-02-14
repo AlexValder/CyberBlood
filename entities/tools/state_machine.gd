@@ -2,7 +2,7 @@ extends Node2D
 class_name StateMachine
 
 @onready var _current_state := $idle as State
-@onready var _status := $status as Label
+@onready var _status := get_node_or_null("status") as Label
 
 
 func reset() -> void:

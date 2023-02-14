@@ -8,7 +8,9 @@ signal enemy_damaged(old_value, new_value)
 @export var enemy_name := "enemy"
 @export var max_health := 20
 ## Chance of spawning random pickup upon death
-@export_range(0, 100, 0.1) var spawn_pickup_chance := 10
+@export_range(0, 100, 0.1) var spawn_food_chance := 10
+@export_range(0, 100, 0.1) var spawn_money_chance := 90
+@export var cost := 5
 
 @onready var anim_player := $anim_player as AnimationPlayer
 @onready var current_health := max_health
@@ -68,7 +70,12 @@ func _ready() -> void:
 
 func _try_spawn_pickup() -> void:
     var chance = randi_range(0, 99)
-    if chance <= spawn_pickup_chance:
+    if chance <= min(spawn_food_chance, spawn_money_chance):
         var pickup := FoodPickup.get_pickup()
         pickup.global_position = self.global_position
         call_deferred("add_sibling", pickup)
+    elif chance <= max(spawn_food_chance, spawn_money_chance):
+        var pickups := MoneyPickup.get_pickup(cost)
+        for pickup in pickups:
+            pickup.global_position = self.global_position
+            call_deferred("add_sibling", pickup)

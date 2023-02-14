@@ -1,22 +1,22 @@
-[gd_scene load_steps=13 format=3 uid="uid://bxefd1aypq3pg"]
+[gd_scene load_steps=13 format=3 uid="uid://dgl3bhcduh1j0"]
 
-[ext_resource type="Script" path="res://entities/items/chest.gd" id="1_4iilo"]
-[ext_resource type="Texture2D" uid="uid://bka671n6ghhv1" path="res://assets/sprites/items/chest.png" id="1_j0td8"]
+[ext_resource type="Script" path="res://entities/props/chest.gd" id="1_1dpcc"]
+[ext_resource type="Texture2D" uid="uid://bka671n6ghhv1" path="res://assets/sprites/items/chest.png" id="2_w6k44"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5cnvp"]
-atlas = ExtResource("1_j0td8")
+atlas = ExtResource("2_w6k44")
 region = Rect2(0, 0, 48, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3hpec"]
-atlas = ExtResource("1_j0td8")
+atlas = ExtResource("2_w6k44")
 region = Rect2(48, 0, 48, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2ar05"]
-atlas = ExtResource("1_j0td8")
+atlas = ExtResource("2_w6k44")
 region = Rect2(96, 0, 48, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4i03t"]
-atlas = ExtResource("1_j0td8")
+atlas = ExtResource("2_w6k44")
 region = Rect2(144, 0, 48, 32)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_wglrb"]
@@ -84,7 +84,7 @@ size = Vector2(32, 54)
 
 [node name="chest" type="Node2D"]
 texture_filter = 1
-script = ExtResource("1_4iilo")
+script = ExtResource("1_1dpcc")
 
 [node name="sprite" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_wglrb")
