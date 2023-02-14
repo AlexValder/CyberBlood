@@ -3,9 +3,21 @@ class_name Ladder
 
 signal off_ladder
 
+@export var facing_left := false
+
+@onready var _node := $shape as CollisionShape2D
+@onready var _shape := _node.shape as RectangleShape2D
+
 var _player: Player
 var _top: float
 var _bottom: float
+
+
+func get_player_center() -> float:
+    if facing_left:
+        return _node.global_position.x + _shape.size.x
+    else:
+        return _node.global_position.x - _shape.size.x
 
 
 func _init() -> void:
@@ -13,11 +25,8 @@ func _init() -> void:
 
 
 func _ready() -> void:
-    var node := $shape as CollisionShape2D
-    var shape := node.shape as RectangleShape2D
-
-    _top = node.global_position.y - shape.size.y / 2
-    _bottom = _top + shape.size.y
+    _top = _node.global_position.y - _shape.size.y / 2
+    _bottom = _top + _shape.size.y
 
 
 func _physics_process(_delta: float) -> void:

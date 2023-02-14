@@ -136,8 +136,12 @@ shape = SubResource("RectangleShape2D_wvqxl")
 [node name="sprite" parent="env/ladder_00" index="1"]
 layer_0/tile_data = PackedInt32Array(-1, 1114112, 18, 65535, 1114112, 18, 131071, 1114112, 18, 196607, 1114112, 18, 262143, 1114112, 18, 327679, 1114112, 18)
 
+[node name="center" parent="env/ladder_00" index="2"]
+position = Vector2(-10, 0)
+
 [node name="ladder_01" parent="env" instance=ExtResource("5_phahi")]
 position = Vector2(880, 166)
+facing_left = true
 
 [node name="shape" parent="env/ladder_01" index="0"]
 position = Vector2(-8, 176)
@@ -145,6 +149,9 @@ shape = SubResource("RectangleShape2D_0mfx0")
 
 [node name="sprite" parent="env/ladder_01" index="1"]
 layer_0/tile_data = PackedInt32Array(-1, 1114112, 18, 65535, 1114112, 18, 131071, 1114112, 18, 196607, 1114112, 18, 262143, 1114112, 18, 327679, 1114112, 18, 393215, 1114112, 18, 458751, 1114112, 18, 524287, 1114112, 18, 589823, 1114112, 18, 655359, 1114112, 18, 720895, 1114112, 18, 786431, 1114112, 18, 851967, 1114112, 18, 917503, 1114112, 18, 983039, 1114112, 18, 1048575, 1114112, 18, 1114111, 1114112, 18, 1179647, 1114112, 18, 1245183, 1114112, 18, 1310719, 1114112, 18, 1376255, 1114112, 18, 1441791, 1114112, 18, 1507327, 1114112, 18)
+
+[node name="center" parent="env/ladder_01" index="2"]
+position = Vector2(-6, 0)
 
 [node name="ladder_02" parent="env" instance=ExtResource("5_phahi")]
 position = Vector2(912, 566)
@@ -156,6 +163,9 @@ shape = SubResource("RectangleShape2D_x24vp")
 [node name="sprite" parent="env/ladder_02" index="1"]
 layer_0/tile_data = PackedInt32Array(-1, 1114112, 18, 65535, 1114112, 18, 131071, 1114112, 18, 196607, 1114112, 18, 262143, 1114112, 18, 327679, 1114112, 18, 393215, 1114112, 18, 458751, 1114112, 18)
 
+[node name="center" parent="env/ladder_02" index="2"]
+position = Vector2(-10, 0)
+
 [node name="ladder_03" parent="env" instance=ExtResource("5_phahi")]
 position = Vector2(912, 774)
 
@@ -166,8 +176,12 @@ shape = SubResource("RectangleShape2D_pox1k")
 [node name="sprite" parent="env/ladder_03" index="1"]
 layer_0/tile_data = PackedInt32Array(-1, 1114112, 18, 65535, 1114112, 18, 131071, 1114112, 18, 196607, 1114112, 18, 262143, 1114112, 18, 327679, 1114112, 18, 393215, 1114112, 18, 458751, 1114112, 18, 524287, 1114112, 18, 589823, 1114112, 18, 655359, 1114112, 18, 720895, 1114112, 18, 786431, 1114112, 18, 851967, 1114112, 18, 917503, 1114112, 18)
 
+[node name="center" parent="env/ladder_03" index="2"]
+position = Vector2(-10, 0)
+
 [node name="ladder_04" parent="env" instance=ExtResource("5_phahi")]
 position = Vector2(1392, 566)
+facing_left = true
 
 [node name="shape" parent="env/ladder_04" index="0"]
 position = Vector2(-8, 24)
@@ -176,8 +190,12 @@ shape = SubResource("RectangleShape2D_t36gi")
 [node name="sprite" parent="env/ladder_04" index="1"]
 layer_0/tile_data = PackedInt32Array(-1, 1114112, 18, 65535, 1114112, 18, 131071, 1114112, 18, 196607, 1114112, 18, 262143, 1114112, 18)
 
+[node name="center" parent="env/ladder_04" index="2"]
+position = Vector2(-6, 0)
+
 [node name="ladder_05" parent="env" instance=ExtResource("5_phahi")]
 position = Vector2(1328, 774)
+facing_left = true
 
 [node name="shape" parent="env/ladder_05" index="0"]
 position = Vector2(-8, 24)
@@ -186,8 +204,12 @@ shape = SubResource("RectangleShape2D_87ui1")
 [node name="sprite" parent="env/ladder_05" index="1"]
 layer_0/tile_data = PackedInt32Array(-1, 1114112, 18, 65535, 1114112, 18, 131071, 1114112, 18, 196607, 1114112, 18, 262143, 1114112, 18)
 
+[node name="center" parent="env/ladder_05" index="2"]
+position = Vector2(-6, 0)
+
 [node name="ladder_06" parent="env" instance=ExtResource("5_phahi")]
 position = Vector2(1648, 870)
+facing_left = true
 
 [node name="shape" parent="env/ladder_06" index="0"]
 position = Vector2(-8, 56)
@@ -196,8 +218,12 @@ shape = SubResource("RectangleShape2D_2iqgv")
 [node name="sprite" parent="env/ladder_06" index="1"]
 layer_0/tile_data = PackedInt32Array(-1, 1114112, 18, 65535, 1114112, 18, 131071, 1114112, 18, 196607, 1114112, 18, 262143, 1114112, 18, 327679, 1114112, 18, 393215, 1114112, 18, 458751, 1114112, 18, 524287, 1114112, 18)
 
+[node name="center" parent="env/ladder_06" index="2"]
+position = Vector2(-6, 0)
+
 [node name="ladder_07" parent="env" instance=ExtResource("5_phahi")]
 position = Vector2(208, 710)
+facing_left = true
 
 [node name="shape" parent="env/ladder_07" index="0"]
 position = Vector2(-8, 136)
@@ -205,6 +231,9 @@ shape = SubResource("RectangleShape2D_fgj2u")
 
 [node name="sprite" parent="env/ladder_07" index="1"]
 layer_0/tile_data = PackedInt32Array(-1, 1114112, 18, 65535, 1114112, 18, 131071, 1114112, 18, 196607, 1114112, 18, 262143, 1114112, 18, 327679, 1114112, 18, 393215, 1114112, 18, 458751, 1114112, 18, 524287, 1114112, 18, 589823, 1114112, 18, 655359, 1114112, 18, 720895, 1114112, 18, 786431, 1114112, 18, 851967, 1114112, 18, 917503, 1114112, 18, 983039, 1114112, 18, 1048575, 1114112, 18, 1114111, 1114112, 18, 1179647, 1114112, 18)
+
+[node name="center" parent="env/ladder_07" index="2"]
+position = Vector2(-6, 0)
 
 [node name="ladder_08" parent="env" instance=ExtResource("5_phahi")]
 position = Vector2(1216, 262)
@@ -216,6 +245,9 @@ shape = SubResource("RectangleShape2D_v1pi5")
 [node name="sprite" parent="env/ladder_08" index="1"]
 layer_0/tile_data = PackedInt32Array(-1, 1114112, 18, 65535, 1114112, 18, 131071, 1114112, 18, 196607, 1114112, 18, 262143, 1114112, 18, 327679, 1114112, 18, 393215, 1114112, 18, 458751, 1114112, 18)
 
+[node name="center" parent="env/ladder_08" index="2"]
+position = Vector2(-10, 0)
+
 [node name="ladder_09" parent="env" instance=ExtResource("5_phahi")]
 position = Vector2(1504, 102)
 
@@ -225,6 +257,9 @@ shape = SubResource("RectangleShape2D_06koq")
 
 [node name="sprite" parent="env/ladder_09" index="1"]
 layer_0/tile_data = PackedInt32Array(-1, 1114112, 18, 65535, 1114112, 18, 131071, 1114112, 18, 196607, 1114112, 18, 262143, 1114112, 18, 327679, 1114112, 18, 393215, 1114112, 18, 458751, 1114112, 18, 524287, 1114112, 18)
+
+[node name="center" parent="env/ladder_09" index="2"]
+position = Vector2(-10, 0)
 
 [editable path="env/ladder_00"]
 [editable path="env/ladder_01"]

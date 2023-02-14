@@ -15,6 +15,7 @@ signal mana_changed(new_value)
 const GRAVITY := 350.0
 const CAT_SPEED := 150.0
 const WALK_SPEED := 120.0
+const CLIMB_SPEED := 90.0
 const FLY_SPEED := 200.0
 const JUMP := 215.0
 const CAT_JUMP := 260.0
@@ -22,13 +23,13 @@ const ACCEL := 0.1
 
 @onready var sprite := $sprite as AnimatedSprite2D
 @onready var player_anim := $player_anim as AnimationPlayer
-@onready var ladder_point := $ladder_point as Node2D
+@onready var ladder_point := $areas/ladder_point as Node2D
 @onready var _shape := $shape as CollisionShape2D
-@onready var _hurtbox := $hurtbox as HurtBox
+@onready var _hurtbox := $areas/hurtbox as HurtBox
 @onready var _camera := $camera as Camera2D
 @onready var _selected_form := $"%selected_form" as Label
-@onready var _reach_area := $reachable as Area2D
-@onready var _climb_area := $climb_area as Area2D
+@onready var _reach_area := $areas/reachable as Area2D
+@onready var _climb_area := $areas/climb_area as Area2D
 
 @export var max_health: int = 50
 @export var max_mana: float = 100.0
@@ -40,7 +41,7 @@ var flip := false:
     set(value):
         flip = value
         sprite.flip_h = value
-        $attack_hitboxes.scale.x = -1 if value else 1
+        $areas/attack_hitboxes.scale.x = -1 if value else 1
 var _current_form := 0
 var _forms := [
     PlayerForms.BAT,
