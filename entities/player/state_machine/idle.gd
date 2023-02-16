@@ -2,6 +2,8 @@ extends PlayerState
 
 
 func physics_process(delta: float) -> void:
+    if !_process: return
+
     if !player.is_on_floor():
         state_change.emit(self.name, "fall")
 

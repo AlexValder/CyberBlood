@@ -685,6 +685,7 @@ wait_time = 2.0
 autostart = true
 
 [node name="player_anim" type="AnimationPlayer" parent="."]
+playback_process_mode = 0
 libraries = {
 "player": ExtResource("13_0r7r0")
 }
@@ -867,6 +868,10 @@ offset_bottom = -5.0
 grow_vertical = 0
 text = "selected form: BAT"
 
+[connection signal="mana_changed" from="." to="GUI/HUD/vbox/mana_bar" method="_on_player_mana_changed"]
+[connection signal="player_dead" from="." to="state_machine" method="_on_player_dead"]
+[connection signal="player_health_changed" from="." to="GUI/HUD/vbox/health_bar" method="_on_character_health_change"]
+[connection signal="player_hurt" from="." to="state_machine" method="_on_player_damaged"]
 [connection signal="timeout" from="timers/recovery_value" to="." method="_on_recovery_value_timeout" binds= [1.0]]
 [connection signal="timeout" from="timers/recovery_value" to="GUI/HUD/vbox/mana_bar" method="_on_recovery_value_timeout" binds= [1.0]]
 [connection signal="toggled" from="GUI/HUD/inventory/Game/grid/fps" to="GUI/HUD/fps" method="_on_fps_toggled"]

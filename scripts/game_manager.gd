@@ -48,6 +48,7 @@ func start_game(index: int) -> void:
 
 func reload_level() -> void:
     create_player()
+    save_data.apply_player_data(player)
     last_room = []
     get_tree().reload_current_scene()
     get_tree().root.add_child(player)

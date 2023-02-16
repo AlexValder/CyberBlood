@@ -82,4 +82,6 @@ static func remove_save_file(index: int) -> void:
     Logger.debug("Removing save file #%d" % index)
 
     var path := OS.get_user_data_dir() + "/saves/save_%d.save" % index
-    OS.move_to_trash(path)
+
+    if FileAccess.file_exists(path):
+        OS.move_to_trash(path)

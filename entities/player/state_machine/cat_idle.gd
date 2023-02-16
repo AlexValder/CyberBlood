@@ -15,6 +15,8 @@ func can_enter(dir: Dictionary) -> bool:
 
 
 func physics_process(delta: float) -> void:
+    if !_process: return
+
     super.physics_process(delta)
 
     if !player.is_on_floor():

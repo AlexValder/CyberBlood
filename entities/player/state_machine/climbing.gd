@@ -5,6 +5,7 @@ var _getting_up := true
 
 
 func on_entry() -> void:
+    _process = true
     player.play_anim("idle")
     player.velocity = Vector2.ZERO
     player.set_collision_mask_value(9, false)
@@ -37,12 +38,7 @@ func can_enter(_dic: Dictionary) -> bool:
 
 
 func physics_process(_delta: float) -> void:
-    if Input.is_action_just_pressed("jump"):
-        state_change.emit(self.name, "jump")
-    elif Input.is_action_just_pressed("left"):
-        state_change.emit(self.name, "idle")
-    elif Input.is_action_just_pressed("right"):
-        state_change.emit(self.name, "idle")
+    if !_process: return
 
     var speed = player.velocity.length() * -signf(player.velocity.y)
     player.player_anim.speed_scale = speed / player.CLIMB_SPEED
@@ -50,10 +46,18 @@ func physics_process(_delta: float) -> void:
     if !_getting_up:
         _check_vertical_movement(player.CLIMB_SPEED)
 
+    if Input.is_action_just_pressed("jump"):
+        state_change.emit(self.name, "jump")
+    elif Input.is_action_just_pressed("left"):
+        state_change.emit(self.name, "idle")
+    elif Input.is_action_just_pressed("right"):
+        state_change.emit(self.name, "idle")
+
     player.move_and_slide()
 
 
 func on_exit() -> void:
+    super.on_exit()
     player.player_anim.speed_scale = 1.0
     _ladder = null
     player.set_collision_mask_value(9, true)

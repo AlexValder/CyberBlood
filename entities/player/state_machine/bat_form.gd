@@ -31,6 +31,8 @@ func can_leave(dir: Dictionary) -> bool:
 
 
 func physics_process(_delta: float) -> void:
+    if !_process: return
+
     if Input.is_action_just_pressed("change_form"):
         state_change.emit(self.name, "idle")
 
