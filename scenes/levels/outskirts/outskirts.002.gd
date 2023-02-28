@@ -1,7 +1,6 @@
 extends BaseLevel
 
 @onready var _secret_area := $tilemap/secret_area as TileMap
-@onready var _tween: Tween
 
 
 func _ready() -> void:
@@ -10,14 +9,6 @@ func _ready() -> void:
     if hp == "1":
         $env/health_upgrade.queue_free()
 
-    var env := $env.get_children()
-    for item in env:
-        if !(item is Interactable):
-            continue
-
-        var rec = GameManager.save_data.get_map_change(biome, id, item.name)
-        if rec == "1":
-            (item as Interactable).disable()
 
 func _on_secret_area_body_entered(player: Player) -> void:
     if player == null:
@@ -41,7 +32,3 @@ func _on_secret_area_body_exited(player: Player) -> void:
 
 func _on_health_upgrade_picked_up() -> void:
     GameManager.save_data.push_map_change(biome, id, "hp_upgrade", "1")
-
-
-func _on_chest_interacted(index: String) -> void:
-    GameManager.save_data.push_map_change(biome, id, "chest%s" % index, "1")

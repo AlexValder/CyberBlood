@@ -33,4 +33,7 @@ func physics_process(delta: float) -> void:
 
     player.move_and_slide()
 
+    if !is_zero_approx(player.get_platform_velocity().y):
+        state_change.emit(self.name, "idle")
+
     super.physics_process(delta)

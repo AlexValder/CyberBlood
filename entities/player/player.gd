@@ -71,6 +71,28 @@ func tranform_name() -> String:
     return "idle"
 
 
+func disable_collision() -> void:
+    if _shape != null:
+        _shape.disabled = true
+
+    var areas := get_node_or_null("areas")
+    if areas == null: return
+    for child in areas.get_children():
+        if child.has_method("set_disabled"):
+            child.set_disabled(true)
+
+
+func enable_collision() -> void:
+    if _shape != null:
+        _shape.disabled = false
+
+    var areas := get_node_or_null("areas")
+    if areas == null: return
+    for child in areas.get_children():
+        if child.has_method("set_disabled"):
+            child.set_disabled(false)
+
+
 func increase_health(by: int) -> void:
     max_health += by
     player_health_changed.emit(current_health, max_health)
@@ -110,6 +132,22 @@ func add_money(count: int) -> void:
 func spend_money(count: int) -> void:
     money -= count
     _money_bar.remove_money(count)
+
+
+func can_drop_down() -> bool:
+    var space_state := get_world_2d().direct_space_state
+    # use global coordinates, not local to node
+    var params := PhysicsRayQueryParameters2D.new()
+    var from := self.global_position
+    var to := self.global_position
+    to.y += get_meta("human_shape_size").y + 1
+    params.from = from
+    params.to = to
+    params.hit_from_inside = false
+    params.collide_with_areas = true
+    params.collision_mask = 0b100000000
+    var result := space_state.intersect_ray(params)
+    return !result.is_empty()
 
 
 func start_drop_down() -> void:
@@ -237,7 +275,7 @@ func _check_space(h_space: float, v_space: float) -> bool:
     # if not, remember how much we have and check the same to the right
     # sum of both has to be no less than required
 
-    var space_state := get_world_2d().get_direct_space_state()
+    var space_state := get_world_2d().direct_space_state
     var params: = PhysicsRayQueryParameters2D.new()
     params.from = self.global_position
     params.to = self.global_position + Vector2(2 * h_space, 0)

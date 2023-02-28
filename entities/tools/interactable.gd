@@ -1,7 +1,7 @@
 extends Node
 class_name Interactable
 
-signal interacted
+signal interacted(is_on_load)
 
 
 func interact() -> void:

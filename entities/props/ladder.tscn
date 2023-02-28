@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://entities/props/ladder.gd" id="1_8hnyr"]
 [ext_resource type="TileSet" uid="uid://b3k13y1c7g1ax" path="res://assets/tilesets/test_level.tres" id="1_46kay"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_x0vcs"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_knpks"]
 resource_local_to_scene = true
 
 [node name="ladder" type="Area2D"]
@@ -13,7 +13,7 @@ collision_mask = 2
 script = ExtResource("1_8hnyr")
 
 [node name="shape" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_x0vcs")
+shape = SubResource("RectangleShape2D_knpks")
 
 [node name="sprite" type="TileMap" parent="."]
 tile_set = ExtResource("1_46kay")

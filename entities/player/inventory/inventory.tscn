@@ -58,6 +58,12 @@ theme_override_colors/font_color = Color(1, 1, 1, 1)
 text = "Space / A - jump (there's a double jump)"
 horizontal_alignment = 1
 
+[node name="label09" type="Label" parent="Controls"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+text = "Space+S / A+Down - jump down"
+horizontal_alignment = 1
+
 [node name="label03" type="Label" parent="Controls"]
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
@@ -75,6 +81,12 @@ horizontal_alignment = 1
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 text = "MMB / LB - transformation"
+horizontal_alignment = 1
+
+[node name="label08" type="Label" parent="Controls"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+text = "Mouse Wheel / LT - form selection"
 horizontal_alignment = 1
 
 [node name="label07" type="Label" parent="Controls"]

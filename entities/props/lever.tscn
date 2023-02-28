@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://ki2ga45a5qj0"]
+
+[ext_resource type="Texture2D" uid="uid://r50kan2ckx8i" path="res://assets/sprites/items/lever_base.png" id="1_uhxma"]
+[ext_resource type="Script" path="res://entities/props/lever.gd" id="2_8cepp"]
+[ext_resource type="Texture2D" uid="uid://dbf8xnosattfq" path="res://assets/sprites/items/lever_handle.png" id="3_1x7dh"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2ubmy"]
+size = Vector2(93.3334, 86.3334)
+
+[node name="base" type="Sprite2D"]
+texture_filter = 1
+position = Vector2(0, -9)
+scale = Vector2(0.428571, 0.428571)
+texture = ExtResource("1_uhxma")
+script = ExtResource("2_8cepp")
+
+[node name="handle" type="Sprite2D" parent="."]
+show_behind_parent = true
+position = Vector2(0, 18.6667)
+rotation = -1.0472
+texture = ExtResource("3_1x7dh")
+offset = Vector2(0, -60)
+
+[node name="interactable" type="Area2D" parent="."]
+collision_layer = 128
+collision_mask = 2
+
+[node name="shape" type="CollisionShape2D" parent="interactable"]
+position = Vector2(-7.00001, -22.1667)
+shape = SubResource("RectangleShape2D_2ubmy")

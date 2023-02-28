@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://bc6jghk2v0g1f"]
+[gd_scene load_steps=7 format=3 uid="uid://bc6jghk2v0g1f"]
 
 [ext_resource type="Script" path="res://scenes/levels/outskirts/outskirts.012.gd" id="1_wpvog"]
 [ext_resource type="TileSet" uid="uid://b3k13y1c7g1ax" path="res://assets/tilesets/test_level.tres" id="2_xs05h"]
@@ -9,6 +9,9 @@ size = Vector2(8, 80)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_b8av5"]
 size = Vector2(8, 48)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_x0k7n"]
+size = Vector2(11, 48)
 
 [node name="outskirts_012" type="Node2D"]
 texture_filter = 1
@@ -110,3 +113,10 @@ shape = SubResource("RectangleShape2D_b8av5")
 [node name="enemies" type="Node" parent="."]
 
 [node name="env" type="Node" parent="."]
+
+[node name="barrier" type="StaticBody2D" parent="env"]
+position = Vector2(779, 73)
+
+[node name="shape" type="CollisionShape2D" parent="env/barrier"]
+position = Vector2(-5, -1)
+shape = SubResource("RectangleShape2D_x0k7n")

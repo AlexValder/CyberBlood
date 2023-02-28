@@ -1,4 +1,4 @@
-[gd_scene load_steps=114 format=3 uid="uid://dooql4yvspt51"]
+[gd_scene load_steps=113 format=3 uid="uid://dooql4yvspt51"]
 
 [ext_resource type="Script" path="res://entities/player/player.gd" id="1_spune"]
 [ext_resource type="Texture2D" uid="uid://cjy71jbvm5o5c" path="res://assets/sprites/player/player_attack1.png" id="2_pdbal"]
@@ -18,7 +18,6 @@
 [ext_resource type="Script" path="res://entities/player/state_machine/player_state_machine.gd" id="12_m10jh"]
 [ext_resource type="AnimationLibrary" uid="uid://cnrmytbtaho83" path="res://assets/animations/player.res" id="13_0r7r0"]
 [ext_resource type="Script" path="res://entities/player/state_machine/jump.gd" id="13_644fc"]
-[ext_resource type="Script" path="res://entities/player/state_machine/double_jump.gd" id="14_3yvtw"]
 [ext_resource type="Script" path="res://entities/player/state_machine/fall.gd" id="15_7d756"]
 [ext_resource type="Script" path="res://entities/player/state_machine/final_fall.gd" id="16_vo0hw"]
 [ext_resource type="Script" path="res://entities/player/state_machine/attack1.gd" id="17_x42d2"]
@@ -603,6 +602,8 @@ z_index = 1
 collision_layer = 2
 collision_mask = 257
 collision_priority = 5.0
+floor_constant_speed = true
+floor_snap_length = 0.5
 script = ExtResource("1_spune")
 metadata/human_shape_size = Vector2(6, 22)
 metadata/bat_shape_size = Vector2(3, 7)
@@ -670,6 +671,7 @@ offset = Vector2(0, -22)
 
 [node name="shape" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_u0rr4")
+disabled = true
 
 [node name="camera" type="Camera2D" parent="."]
 position = Vector2(0, 22)
@@ -704,9 +706,6 @@ script = ExtResource("31_hjw76")
 
 [node name="jump" type="Node" parent="state_machine"]
 script = ExtResource("13_644fc")
-
-[node name="double_jump" type="Node" parent="state_machine"]
-script = ExtResource("14_3yvtw")
 
 [node name="fall" type="Node" parent="state_machine"]
 script = ExtResource("15_7d756")

@@ -1,6 +1,11 @@
 extends PlayerState
 
 
+func on_entry() -> void:
+    super.on_entry()
+    player.velocity = Vector2.ZERO
+
+
 func physics_process(delta: float) -> void:
     if !_process: return
 
@@ -11,7 +16,7 @@ func physics_process(delta: float) -> void:
         state_change.emit(self.name, "attack1")
 
     if Input.is_action_just_pressed("jump"):
-        if Input.is_action_pressed("down"):
+        if Input.is_action_pressed("down") && player.can_drop_down():
             player.start_drop_down()
             state_change.emit(self.name, "fall")
         else:
@@ -29,4 +34,5 @@ func physics_process(delta: float) -> void:
     if Input.is_action_pressed("right"):
         state_change.emit(self.name, "run")
 
+    player.move_and_slide()
     super.physics_process(delta)

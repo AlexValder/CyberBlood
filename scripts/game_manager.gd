@@ -28,21 +28,22 @@ func start_game(index: int) -> void:
 
     create_player()
 
+    var level: String
     if SavesManager.save_exists(_save_index):
         save_data = SavesManager.get_save(_save_index)
         save_data.apply_player_data(player)
         var biome := save_data.map.biome as String
         var id := save_data.map.id as String
 
-        var file_path := "res://scenes/levels/{biome}/{biome}.{id}.tscn"\
+        level = "res://scenes/levels/{biome}/{biome}.{id}.tscn"\
             .format({"biome" = biome, "id" = id})
-        get_tree().change_scene_to_file(file_path)
     else:
         save_data = PlayerSave.new()
         save_data.update_player_data(player)
-        get_tree().change_scene_to_file(FIRST_LEVEL)
+        level = FIRST_LEVEL
 
     get_tree().root.add_child(player)
+    get_tree().change_scene_to_file(level)
     _playing = true
 
 
