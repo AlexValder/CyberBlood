@@ -1,7 +1,8 @@
 extends Area2D
 class_name HurtBox
 
-@export var is_enemy := true
+@export var damaged_by_player := false
+@export var damaged_by_enemy := true
 @export var custom_owner: Node
 
 @onready var shape := $shape as CollisionShape2D
@@ -20,8 +21,10 @@ func _init() -> void:
 
 
 func _ready() -> void:
-    self.collision_layer = 8 if is_enemy else 16
-    self.collision_mask = 32 if is_enemy else 64
+    self.set_collision_layer_value(4, damaged_by_enemy)
+    self.set_collision_layer_value(5, damaged_by_player)
+    self.set_collision_mask_value(6, damaged_by_player)
+    self.set_collision_mask_value(7, damaged_by_enemy)
 
     self.area_entered.connect(_on_area_entered, CONNECT_PERSIST)
     self.area_exited.connect(_on_area_exited, CONNECT_PERSIST)
@@ -35,9 +38,15 @@ func _on_area_entered(hitbox: HitBox) -> void:
     if (!wr.get_ref()):
         return
 
+    var can_damage = damaged_by_enemy && hitbox.damages_player \
+        || damaged_by_player && hitbox.damages_enemy
+
+    if !can_damage:
+        return
+
     _last_hitbox = hitbox
     _take_damage()
-    if !is_enemy && hitbox is LastingHitBox:
+    if damaged_by_enemy && hitbox is LastingHitBox:
         var interval := (hitbox as LastingHitBox).damage_interval
         _timer.start(interval)
 

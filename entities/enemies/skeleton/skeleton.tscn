@@ -413,6 +413,8 @@ debug_color = Color(0.898039, 0.270588, 0.427451, 0.419608)
 
 [node name="hurtbox" type="Area2D" parent="."]
 script = ExtResource("11_3grk0")
+damaged_by_player = true
+damaged_by_enemy = false
 
 [node name="shape" type="CollisionShape2D" parent="hurtbox"]
 position = Vector2(3.5, 1)
@@ -435,6 +437,7 @@ disabled = true
 [node name="attack2" type="Area2D" parent="attack_hitboxes"]
 collision_layer = 64
 collision_mask = 8
+monitoring = false
 script = ExtResource("10_318o1")
 damage = 25
 

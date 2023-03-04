@@ -628,11 +628,11 @@ collision_mask = 256
 position = Vector2(-4, 0)
 shape = SubResource("RectangleShape2D_hbsry")
 
-[node name="hurtbox" type="Area2D" parent="areas"]
+[node name="hurtbox" type="Area2D" parent="areas" node_paths=PackedStringArray("custom_owner")]
 collision_layer = 0
 collision_mask = 0
 script = ExtResource("11_irdsx")
-is_enemy = false
+custom_owner = NodePath("../..")
 
 [node name="shape" type="CollisionShape2D" parent="areas/hurtbox"]
 shape = SubResource("CapsuleShape2D_62iio")
@@ -641,18 +641,22 @@ debug_color = Color(0.960784, 0, 0.509804, 0.419608)
 [node name="attack_hitboxes" type="Node2D" parent="areas"]
 
 [node name="attack1" type="Area2D" parent="areas/attack_hitboxes"]
+monitoring = false
 script = ExtResource("12_1wwyk")
 damage = 5
-is_enemy = false
+damages_enemy = true
+damages_player = false
 
 [node name="shape" type="CollisionPolygon2D" parent="areas/attack_hitboxes/attack1"]
 polygon = PackedVector2Array(-18, -43, -1, -24, 4, 18, 33, 18, 65, 10, 83, 0, 89, -11, 88, -21, 78, -32, 59, -41, 20, -48)
 disabled = true
 
 [node name="attack2" type="Area2D" parent="areas/attack_hitboxes"]
+monitoring = false
 script = ExtResource("12_1wwyk")
 damage = 7
-is_enemy = false
+damages_enemy = true
+damages_player = false
 
 [node name="shape" type="CollisionPolygon2D" parent="areas/attack_hitboxes/attack2"]
 polygon = PackedVector2Array(-11, -17, -15, -11, -15, -4, -5, 6, 10, 12, 28, 16, 51, 16, 73, 12, 89, 3, 94, -4, 94, -12, 88, -20, 75, -27, 56, -31)
