@@ -49,6 +49,7 @@ var _forms := [
     PlayerForms.BAT,
     PlayerForms.CAT,
 ]
+var inventory := []
 
 
 func next_form() -> void:
@@ -234,6 +235,18 @@ func get_ladder() -> Ladder:
             return area as Ladder
 
     return null
+
+
+func add_item_to_inv(item: String) -> void:
+    inventory.push_back(item)
+
+
+func remove_item_to_inv(item: String) -> void:
+    inventory.erase(item)
+
+
+func has_item_in_inv(item: String) -> bool:
+    return inventory.has(item)
 
 
 func _ready() -> void:

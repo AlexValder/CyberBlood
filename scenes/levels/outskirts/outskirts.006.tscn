@@ -1,8 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://ghgorx3bcopq"]
+[gd_scene load_steps=6 format=3 uid="uid://ghgorx3bcopq"]
 
 [ext_resource type="Script" path="res://scenes/levels/outskirts/outskirts.006.gd" id="1_now0a"]
 [ext_resource type="TileSet" uid="uid://b3k13y1c7g1ax" path="res://assets/tilesets/test_level.tres" id="2_khfeh"]
 [ext_resource type="Script" path="res://scenes/levels/room_transition_trigger.gd" id="3_03eq5"]
+[ext_resource type="PackedScene" uid="uid://dvgdfojwi0xln" path="res://entities/items/key.tscn" id="4_0qp66"]
+[ext_resource type="PackedScene" uid="uid://6c0p0rgqbnwr" path="res://scenes/levels/key_hole.tscn" id="5_4do03"]
 
 [node name="outskirts_006" type="Node2D"]
 texture_filter = 1
@@ -62,3 +64,19 @@ roomId = "005"
 polygon = PackedVector2Array(-60, 15, -60, -5, 60, -5, 60, 15, 56, -3, -56, -3)
 
 [node name="env" type="Node" parent="."]
+
+[node name="key_00" parent="env" instance=ExtResource("4_0qp66")]
+position = Vector2(1164, 326)
+key_id = "outskirts_tomb_key"
+color_hint = Color(0.313726, 0.992157, 0.945098, 1)
+
+[node name="key_hole" parent="env" instance=ExtResource("5_4do03")]
+position = Vector2(568, 315)
+key_id = "outskirts_gate_key"
+
+[node name="shape" parent="env/key_hole/interactable" index="0"]
+position = Vector2(0, -3)
+
+[connection signal="picked_up" from="env/key_00" to="." method="_on_key_picked_up" binds= ["outskirts_tomb_key"]]
+
+[editable path="env/key_hole"]

@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://dbyk0lq4defd3"]
+[gd_scene load_steps=7 format=3 uid="uid://dbyk0lq4defd3"]
 
 [ext_resource type="Script" path="res://scenes/levels/outskirts/outskirts.010.gd" id="1_ck78r"]
 [ext_resource type="TileSet" uid="uid://b3k13y1c7g1ax" path="res://assets/tilesets/test_level.tres" id="2_h5twg"]
 [ext_resource type="Script" path="res://scenes/levels/room_transition_trigger.gd" id="3_knuxf"]
+[ext_resource type="PackedScene" uid="uid://dvgdfojwi0xln" path="res://entities/items/key.tscn" id="4_qwo10"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1yvfd"]
 size = Vector2(8, 80)
@@ -42,7 +43,7 @@ layer_3/enabled = true
 layer_3/modulate = Color(1, 1, 1, 1)
 layer_3/y_sort_enabled = false
 layer_3/y_sort_origin = 0
-layer_3/z_index = 3
+layer_3/z_index = 10
 layer_3/tile_data = PackedInt32Array(1769514, 131072, 12, 1769515, 65536, 12, 1769516, 65536, 12, 1769517, 131072, 12, 1769518, 131072, 12, 1769519, 131072, 12, 1769520, 131072, 12, 1769521, 65536, 12, 1769522, 65536, 12, 1769523, 65536, 12)
 metadata/_edit_lock_ = true
 
@@ -81,3 +82,10 @@ shape = SubResource("RectangleShape2D_82pjs")
 [node name="enemies" type="Node" parent="."]
 
 [node name="env" type="Node" parent="."]
+
+[node name="key_00" parent="env" instance=ExtResource("4_qwo10")]
+position = Vector2(455, 401)
+key_id = "outskirts_gate_key"
+color_hint = Color(1, 0.862745, 0.517647, 1)
+
+[connection signal="picked_up" from="env/key_00" to="." method="_on_key_picked_up" binds= ["outskirts_gate_key"]]

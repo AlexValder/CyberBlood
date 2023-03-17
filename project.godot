@@ -24,6 +24,7 @@ Logger="*res://addons/bloody_logger/logger.gd"
 GameManager="*res://scripts/game_manager.gd"
 Constants="*res://scripts/constants.gd"
 Settings="*res://scripts/settings.gd"
+Database="*res://scripts/database.gd"
 
 [debug]
 
@@ -48,7 +49,7 @@ version_control/autoload_on_startup=true
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/bloody_logger/plugin.cfg", "res://addons/Todo_Manager/plugin.cfg", "res://addons/AS2P/plugin.cfg")
+enabled=PackedStringArray("res://addons/bloody_logger/plugin.cfg", "res://addons/Todo_Manager/plugin.cfg", "res://addons/AS2P/plugin.cfg", "res://addons/godot-sqlite/plugin.cfg")
 
 [input]
 

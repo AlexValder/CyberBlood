@@ -48,7 +48,7 @@ static func from_dictionary(dict: Dictionary) -> PlayerSave:
         state.player.max_health = dict.player.max_health
         state.player.max_mana = dict.player.max_mana
         state.player.money = dict.player.money
-        state.player.inventory = []
+        state.player.inventory = dict.player.inventory.duplicate()
 
     if dict.has("quests"):
         state.quests.active = []
@@ -89,12 +89,14 @@ func apply_player_data(p: Player) -> void:
     p.max_mana = max(self.player.max_mana, p.max_mana)
     p.current_mana = max(self.player.max_mana, p.max_mana)
     p.money = self.player.money
+    p.inventory = self.player.inventory.duplicate()
 
 
 func update_player_data(p: Player) -> void:
     self.player.max_health = p.max_health
     self.player.max_mana = p.max_mana
     self.player.money = p.money
+    self.player.inventory = p.inventory.duplicate()
 
 
 func to_dict() -> Dictionary:

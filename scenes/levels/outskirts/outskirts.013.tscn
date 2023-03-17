@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://t6md2vlsdy13"]
+[gd_scene load_steps=11 format=3 uid="uid://b3a3ru7rn83mi"]
 
 [ext_resource type="Script" path="res://scenes/levels/outskirts/outskirts.013.gd" id="1_qyjsk"]
 [ext_resource type="TileSet" uid="uid://b3k13y1c7g1ax" path="res://assets/tilesets/test_level.tres" id="2_yst6j"]

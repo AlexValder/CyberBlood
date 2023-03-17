@@ -24,7 +24,7 @@
 [ext_resource type="Script" path="res://entities/player/state_machine/attack2.gd" id="18_eich7"]
 [ext_resource type="Theme" uid="uid://brlh53bypvlrb" path="res://assets/gui/themes/default.tres" id="19_7otby"]
 [ext_resource type="Script" path="res://entities/player/state_machine/bat_form.gd" id="19_gv58d"]
-[ext_resource type="PackedScene" uid="uid://roe360txy361" path="res://entities/player/inventory/inventory.tscn" id="20_uirxe"]
+[ext_resource type="PackedScene" uid="uid://ro156l6j1t77" path="res://entities/player/inventory/inventory.tscn" id="20_uirxe"]
 [ext_resource type="Script" path="res://entities/player/hud/fps.gd" id="21_mk2i7"]
 [ext_resource type="Script" path="res://entities/player/state_machine/death.gd" id="22_48krb"]
 [ext_resource type="Script" path="res://entities/player/hud/health_bar.gd" id="22_2246v"]
@@ -761,6 +761,7 @@ metadata/_edit_lock_ = true
 [node name="inventory" parent="GUI/HUD" instance=ExtResource("20_uirxe")]
 visible = false
 layout_mode = 1
+anchors_preset = -1
 anchor_left = 0.1
 anchor_top = 0.1
 anchor_right = 0.9
@@ -877,6 +878,5 @@ text = "selected form: BAT"
 [connection signal="player_hurt" from="." to="state_machine" method="_on_player_damaged"]
 [connection signal="timeout" from="timers/recovery_value" to="." method="_on_recovery_value_timeout" binds= [1.0]]
 [connection signal="timeout" from="timers/recovery_value" to="GUI/HUD/vbox/mana_bar" method="_on_recovery_value_timeout" binds= [1.0]]
-[connection signal="toggled" from="GUI/HUD/inventory/Game/grid/fps" to="GUI/HUD/fps" method="_on_fps_toggled"]
 
 [editable path="GUI/HUD/inventory"]

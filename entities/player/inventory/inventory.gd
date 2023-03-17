@@ -1,29 +1,6 @@
-extends TabContainer
+extends Control
 
-
-func _enter_tree() -> void:
-    self.visible = false
-
-
-func _unhandled_input(event: InputEvent) -> void:
-    if event.is_action_pressed("inv"):
-        toggle()
-    elif event.is_action_pressed("ui_right_tab"):
-        if self.current_tab == self.get_child_count() - 1:
-            self.current_tab = 0
-        else:
-            self.current_tab += 1
-    elif event.is_action_pressed("ui_left_tab"):
-        if self.current_tab == 0:
-            self.current_tab = self.get_child_count() - 1
-        else:
-            self.current_tab -= 1
-
-
-func _on_tab_changed(tabId: int) -> void:
-    var tab := self.get_child(tabId) as InventoryTab
-    if tab:
-        tab.grab_gamepad_focus()
+@onready var _controls_popup := $controls as PopupPanel
 
 
 func toggle() -> void:
@@ -36,6 +13,24 @@ func toggle() -> void:
         Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
 
-func _on_visibility_changed() -> void:
-    if self.visible:
-        _on_tab_changed(self.current_tab)
+func _ready() -> void:
+    _controls_popup.visible = false
+
+
+func _on_popup_close_button_up(popup_name: String) -> void:
+    var popup := get_node(popup_name) as Popup
+    popup.hide()
+
+
+func _on_popup_open_button_up(popup_name: String) -> void:
+    var popup := get_node(popup_name) as Popup
+    popup.popup_centered()
+
+
+func _enter_tree() -> void:
+    self.visible = false
+
+
+func _unhandled_input(event: InputEvent) -> void:
+    if event.is_action_pressed("inv"):
+        toggle()

@@ -84,151 +84,160 @@ script = ExtResource("3_yyuuo")
 layout_mode = 2
 size_flags_vertical = 4
 theme_override_constants/h_separation = 20
+theme_override_constants/v_separation = 20
 columns = 2
 
-[node name="hbox_00" type="HBoxContainer" parent="saves/grid"]
+[node name="vbox_00" type="VBoxContainer" parent="saves/grid"]
 layout_mode = 2
+size_flags_horizontal = 3
 
-[node name="button" type="Button" parent="saves/grid/hbox_00"]
+[node name="button" type="Button" parent="saves/grid/vbox_00"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Save 1"
 
-[node name="del" type="Button" parent="saves/grid/hbox_00"]
+[node name="panel" type="PanelContainer" parent="saves/grid/vbox_00"]
 layout_mode = 2
-text = "X"
+size_flags_horizontal = 3
+size_flags_vertical = 3
 
-[node name="hbox_01" type="HBoxContainer" parent="saves/grid"]
+[node name="vbox" type="VBoxContainer" parent="saves/grid/vbox_00/panel"]
 layout_mode = 2
+alignment = 1
 
-[node name="button" type="Button" parent="saves/grid/hbox_01"]
+[node name="last_place" type="Label" parent="saves/grid/vbox_00/panel/vbox"]
+layout_mode = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="last_time" type="Label" parent="saves/grid/vbox_00/panel/vbox"]
+layout_mode = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="percentage" type="Label" parent="saves/grid/vbox_00/panel/vbox"]
+layout_mode = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="del" type="Button" parent="saves/grid/vbox_00"]
+self_modulate = Color(1, 0.164706, 0.529412, 1)
+layout_mode = 2
+text = "Remove"
+
+[node name="vbox_01" type="VBoxContainer" parent="saves/grid"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="button" type="Button" parent="saves/grid/vbox_01"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Save 1"
 
-[node name="del" type="Button" parent="saves/grid/hbox_01"]
-layout_mode = 2
-text = "X"
-
-[node name="panel_00" type="PanelContainer" parent="saves/grid"]
+[node name="panel" type="PanelContainer" parent="saves/grid/vbox_01"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="vbox" type="VBoxContainer" parent="saves/grid/panel_00"]
+[node name="vbox" type="VBoxContainer" parent="saves/grid/vbox_01/panel"]
 layout_mode = 2
 alignment = 1
 
-[node name="last_place" type="Label" parent="saves/grid/panel_00/vbox"]
+[node name="last_place" type="Label" parent="saves/grid/vbox_01/panel/vbox"]
 layout_mode = 2
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="last_time" type="Label" parent="saves/grid/panel_00/vbox"]
+[node name="last_time" type="Label" parent="saves/grid/vbox_01/panel/vbox"]
 layout_mode = 2
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="percentage" type="Label" parent="saves/grid/panel_00/vbox"]
+[node name="percentage" type="Label" parent="saves/grid/vbox_01/panel/vbox"]
 layout_mode = 2
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="panel_01" type="PanelContainer" parent="saves/grid"]
+[node name="del" type="Button" parent="saves/grid/vbox_01"]
+self_modulate = Color(1, 0.164706, 0.529412, 1)
+layout_mode = 2
+text = "Remove"
+
+[node name="vbox_02" type="VBoxContainer" parent="saves/grid"]
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_vertical = 3
 
-[node name="vbox" type="VBoxContainer" parent="saves/grid/panel_01"]
-layout_mode = 2
-alignment = 1
-
-[node name="last_place" type="Label" parent="saves/grid/panel_01/vbox"]
-layout_mode = 2
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="last_time" type="Label" parent="saves/grid/panel_01/vbox"]
-layout_mode = 2
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="percentage" type="Label" parent="saves/grid/panel_01/vbox"]
-layout_mode = 2
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="hbox_02" type="HBoxContainer" parent="saves/grid"]
-layout_mode = 2
-
-[node name="button" type="Button" parent="saves/grid/hbox_02"]
+[node name="button" type="Button" parent="saves/grid/vbox_02"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Save 1"
 
-[node name="del" type="Button" parent="saves/grid/hbox_02"]
+[node name="panel" type="PanelContainer" parent="saves/grid/vbox_02"]
 layout_mode = 2
-text = "X"
+size_flags_horizontal = 3
+size_flags_vertical = 3
 
-[node name="hbox_03" type="HBoxContainer" parent="saves/grid"]
+[node name="vbox" type="VBoxContainer" parent="saves/grid/vbox_02/panel"]
 layout_mode = 2
+alignment = 1
 
-[node name="button" type="Button" parent="saves/grid/hbox_03"]
+[node name="last_place" type="Label" parent="saves/grid/vbox_02/panel/vbox"]
+layout_mode = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="last_time" type="Label" parent="saves/grid/vbox_02/panel/vbox"]
+layout_mode = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="percentage" type="Label" parent="saves/grid/vbox_02/panel/vbox"]
+layout_mode = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="del" type="Button" parent="saves/grid/vbox_02"]
+self_modulate = Color(1, 0.164706, 0.529412, 1)
+layout_mode = 2
+text = "Remove"
+
+[node name="vbox_03" type="VBoxContainer" parent="saves/grid"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="button" type="Button" parent="saves/grid/vbox_03"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Save 1"
 
-[node name="del" type="Button" parent="saves/grid/hbox_03"]
-layout_mode = 2
-text = "X"
-
-[node name="panel_02" type="PanelContainer" parent="saves/grid"]
+[node name="panel" type="PanelContainer" parent="saves/grid/vbox_03"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="vbox" type="VBoxContainer" parent="saves/grid/panel_02"]
+[node name="vbox" type="VBoxContainer" parent="saves/grid/vbox_03/panel"]
 layout_mode = 2
 alignment = 1
 
-[node name="last_place" type="Label" parent="saves/grid/panel_02/vbox"]
+[node name="last_place" type="Label" parent="saves/grid/vbox_03/panel/vbox"]
 layout_mode = 2
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="last_time" type="Label" parent="saves/grid/panel_02/vbox"]
+[node name="last_time" type="Label" parent="saves/grid/vbox_03/panel/vbox"]
 layout_mode = 2
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="percentage" type="Label" parent="saves/grid/panel_02/vbox"]
+[node name="percentage" type="Label" parent="saves/grid/vbox_03/panel/vbox"]
 layout_mode = 2
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="panel_03" type="PanelContainer" parent="saves/grid"]
+[node name="del" type="Button" parent="saves/grid/vbox_03"]
+self_modulate = Color(1, 0.164706, 0.529412, 1)
 layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="vbox" type="VBoxContainer" parent="saves/grid/panel_03"]
-layout_mode = 2
-alignment = 1
-
-[node name="last_place" type="Label" parent="saves/grid/panel_03/vbox"]
-layout_mode = 2
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="last_time" type="Label" parent="saves/grid/panel_03/vbox"]
-layout_mode = 2
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="percentage" type="Label" parent="saves/grid/panel_03/vbox"]
-layout_mode = 2
-horizontal_alignment = 1
-vertical_alignment = 1
+text = "Remove"
 
 [node name="back" type="Button" parent="saves"]
 self_modulate = Color(1, 0, 0, 1)
@@ -237,4 +246,5 @@ text = "Back"
 
 [connection signal="button_up" from="main/play" to="." method="_on_play_button_up"]
 [connection signal="button_up" from="main/quit" to="." method="_on_quit_button_up"]
+[connection signal="visibility_changed" from="saves" to="saves" method="_on_visibility_changed"]
 [connection signal="button_up" from="saves/back" to="." method="_on_back_button_up"]

@@ -101,6 +101,9 @@ use_parent_material = true
 position = Vector2(-1, 16)
 texture = SubResource("AtlasTexture_ggtpb")
 
+[node name="hurtbox" parent="tilemap/breakable_wall" index="1"]
+damaged_by_player = true
+
 [node name="shape" parent="tilemap/breakable_wall/hurtbox" index="0"]
 position = Vector2(-1, 0)
 shape = SubResource("RectangleShape2D_cilxs")

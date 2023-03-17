@@ -43,13 +43,16 @@ func collect_interactables() -> void:
             continue
 
         var rec = GameManager.save_data.get_map_change(biome, id, inter.name)
+        var iname: String
+        var index: String
         if rec == "1":
             inter.disable()
         elif inter.name.begins_with("chest") \
             || inter.name.begins_with("lever"):
-            var iname := inter.name.substr(0, 5)
-            var index := inter.name.substr(5)
-            inter.interacted.connect(_on_prop_interacted.bind(iname, index))
+            iname = inter.name.substr(0, 5)
+            index = inter.name.substr(5)
+
+        inter.interacted.connect(_on_prop_interacted.bind(iname, index))
 
 
 func _ready() -> void:
@@ -82,6 +85,10 @@ func _get_spawn(roomId: String, entryId: String) -> Vector2:
 func _on_prop_interacted(iname: String, index: String) -> void:
     GameManager.save_data.push_map_change(
         biome, id, "%s%s" % [iname, index], "1")
+
+
+func _on_key_picked_up(key_id: String) -> void:
+    GameManager.save_data.push_map_change(biome, id, key_id, "1")
 
 
 func _on_corridor_hide_body_entered(player: Player, path: NodePath) -> void:

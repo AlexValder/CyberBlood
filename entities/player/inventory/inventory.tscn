@@ -1,113 +1,154 @@
-[gd_scene load_steps=5 format=3 uid="uid://roe360txy361"]
+[gd_scene load_steps=12 format=3 uid="uid://ro156l6j1t77"]
 
 [ext_resource type="Theme" uid="uid://brlh53bypvlrb" path="res://assets/gui/themes/default.tres" id="2_aq74w"]
 [ext_resource type="Script" path="res://entities/player/inventory/inventory.gd" id="2_hiw33"]
+[ext_resource type="Script" path="res://entities/player/inventory/inventory_tabs.gd" id="2_y0taj"]
 [ext_resource type="Script" path="res://entities/player/inventory/game_tab.gd" id="3_art0r"]
 [ext_resource type="Script" path="res://entities/player/inventory/dev_tag.gd" id="4_ionlx"]
+[ext_resource type="Script" path="res://entities/player/inventory/inv_table_tab.gd" id="4_py8qt"]
 
-[node name="inventory" type="TabContainer"]
-self_modulate = Color(0.54902, 0.172549, 0.333333, 1)
-anchors_preset = -1
-anchor_left = 0.078125
-anchor_top = 0.138889
-anchor_right = 0.921875
-anchor_bottom = 0.861111
-mouse_filter = 2
-theme = ExtResource("2_aq74w")
-tab_alignment = 1
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_28ck1"]
+content_margin_left = 5.0
+content_margin_top = 5.0
+content_margin_right = 5.0
+content_margin_bottom = 5.0
+bg_color = Color(0.0784314, 0.0313726, 0.0352941, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="LabelSettings" id="LabelSettings_47qm0"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_5y4ma"]
+font_size = 24
+font_color = Color(1, 1, 0.368627, 1)
+
+[sub_resource type="GDScript" id="GDScript_xlayb"]
+script/source = "extends PopupPanel
+
+
+func _on_about_to_popup() -> void:
+    var child := $vbox/close as Control
+    child.grab_focus()
+
+
+func _unhandled_input(event: InputEvent) -> void:
+    if event.is_action_released(\"inv\"):
+        hide()
+"
+
+[sub_resource type="LabelSettings" id="LabelSettings_ut83r"]
+font_size = 32
+
+[node name="inventory" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("2_hiw33")
 
-[node name="Game" type="CenterContainer" parent="."]
+[node name="tabs" type="TabContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_28ck1")
+tab_alignment = 1
+script = ExtResource("2_y0taj")
+
+[node name="Inventory" type="ScrollContainer" parent="tabs"]
 layout_mode = 2
+follow_focus = true
+script = ExtResource("4_py8qt")
+
+[node name="hbox" type="VBoxContainer" parent="tabs/Inventory"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+alignment = 1
+
+[node name="hbox" type="VBoxContainer" parent="tabs/Inventory/hbox"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+alignment = 1
+
+[node name="title" type="Label" parent="tabs/Inventory/hbox/hbox"]
+layout_mode = 2
+text = "Items"
+label_settings = SubResource("LabelSettings_47qm0")
+horizontal_alignment = 1
+
+[node name="items" type="GridContainer" parent="tabs/Inventory/hbox/hbox"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 3
+columns = 10
+
+[node name="panel" type="PanelContainer" parent="tabs/Inventory/hbox"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="vbox" type="VBoxContainer" parent="tabs/Inventory/hbox/panel"]
+layout_mode = 2
+alignment = 1
+
+[node name="title" type="Label" parent="tabs/Inventory/hbox/panel/vbox"]
+layout_mode = 2
+label_settings = SubResource("LabelSettings_5y4ma")
+horizontal_alignment = 1
+
+[node name="desc" type="Label" parent="tabs/Inventory/hbox/panel/vbox"]
+layout_mode = 2
+size_flags_vertical = 1
+text = "DESC"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="Game" type="ScrollContainer" parent="tabs"]
+visible = false
+layout_mode = 2
+follow_focus = true
 script = ExtResource("3_art0r")
 
-[node name="grid" type="GridContainer" parent="Game"]
+[node name="grid" type="VBoxContainer" parent="tabs/Game"]
 layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 3
+alignment = 1
 
-[node name="fps" type="CheckBox" parent="Game/grid"]
+[node name="fps" type="CheckBox" parent="tabs/Game/grid"]
 layout_mode = 2
 button_pressed = true
 text = "Show FPS"
 alignment = 1
 
-[node name="hsep" type="HSeparator" parent="Game/grid"]
+[node name="hsep" type="HSeparator" parent="tabs/Game/grid"]
 layout_mode = 2
 
-[node name="quit" type="Button" parent="Game/grid"]
+[node name="controls" type="Button" parent="tabs/Game/grid"]
+layout_mode = 2
+text = "Show Controls"
+
+[node name="quit" type="Button" parent="tabs/Game/grid"]
 layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 5
 text = "Quit to Main Menu"
 
-[node name="Controls" type="VBoxContainer" parent="."]
-visible = false
-self_modulate = Color(0.54902, 0.172549, 0.333333, 1)
-layout_mode = 2
-theme = ExtResource("2_aq74w")
-alignment = 1
-
-[node name="label01" type="Label" parent="Controls"]
-layout_mode = 2
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-text = "WASD / Left stick - movement"
-horizontal_alignment = 1
-
-[node name="label02" type="Label" parent="Controls"]
-layout_mode = 2
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-text = "Space / A - jump (there's a double jump)"
-horizontal_alignment = 1
-
-[node name="label09" type="Label" parent="Controls"]
-layout_mode = 2
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-text = "Space+S / A+Down - jump down"
-horizontal_alignment = 1
-
-[node name="label03" type="Label" parent="Controls"]
-layout_mode = 2
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-text = "LMB / X - attack (there's a simple combo)"
-horizontal_alignment = 1
-
-[node name="label04" type="Label" parent="Controls"]
-visible = false
-layout_mode = 2
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-text = "Q / LT - circle between forms"
-horizontal_alignment = 1
-
-[node name="label05" type="Label" parent="Controls"]
-layout_mode = 2
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-text = "MMB / LB - transformation"
-horizontal_alignment = 1
-
-[node name="label08" type="Label" parent="Controls"]
-layout_mode = 2
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-text = "Mouse Wheel / LT - form selection"
-horizontal_alignment = 1
-
-[node name="label07" type="Label" parent="Controls"]
-layout_mode = 2
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-text = "E / B - interact"
-horizontal_alignment = 1
-
-[node name="label06" type="Label" parent="Controls"]
-layout_mode = 2
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-text = "Esc / Start - quit the game"
-horizontal_alignment = 1
-
-[node name="DevTab" type="ScrollContainer" parent="."]
+[node name="DevTab" type="ScrollContainer" parent="tabs"]
 visible = false
 layout_mode = 2
 follow_focus = true
 script = ExtResource("4_ionlx")
 
-[node name="grid" type="GridContainer" parent="DevTab"]
+[node name="grid" type="GridContainer" parent="tabs/DevTab"]
 texture_filter = 1
 layout_mode = 2
 size_flags_horizontal = 6
@@ -116,12 +157,12 @@ theme_override_constants/h_separation = 20
 theme_override_constants/v_separation = 20
 columns = 2
 
-[node name="change_level_button" type="Button" parent="DevTab/grid"]
+[node name="change_level_button" type="Button" parent="tabs/DevTab/grid"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Switch to level"
 
-[node name="levels_options" type="OptionButton" parent="DevTab/grid"]
+[node name="levels_options" type="OptionButton" parent="tabs/DevTab/grid"]
 texture_filter = 1
 layout_mode = 2
 size_flags_horizontal = 3
@@ -138,31 +179,120 @@ popup/item_3/id = 3
 popup/item_4/text = "03"
 popup/item_4/id = 4
 
-[node name="open_folder_button" type="Button" parent="DevTab/grid"]
+[node name="open_folder_button" type="Button" parent="tabs/DevTab/grid"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Open user:// folder"
 
-[node name="open_saves_button" type="Button" parent="DevTab/grid"]
+[node name="open_saves_button" type="Button" parent="tabs/DevTab/grid"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Open saves folder"
 
-[node name="show_debug_box" type="CheckBox" parent="DevTab/grid"]
+[node name="show_debug_box" type="CheckBox" parent="tabs/DevTab/grid"]
 layout_mode = 2
 button_pressed = true
 text = "Show Debug Info"
 
-[node name="save_game" type="Button" parent="DevTab/grid"]
+[node name="save_game" type="Button" parent="tabs/DevTab/grid"]
 layout_mode = 2
 text = "Save Game"
 
-[connection signal="tab_changed" from="." to="." method="_on_tab_changed"]
-[connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
-[connection signal="toggled" from="Game/grid/fps" to="Game" method="_on_fps_toggled"]
-[connection signal="button_up" from="Game/grid/quit" to="Game" method="_on_quit_button_up"]
-[connection signal="button_up" from="DevTab/grid/change_level_button" to="DevTab" method="_on_change_level_button_released"]
-[connection signal="button_up" from="DevTab/grid/open_folder_button" to="DevTab" method="_on_open_folder_button_released"]
-[connection signal="button_up" from="DevTab/grid/open_saves_button" to="DevTab" method="_on_open_saves_button_released"]
-[connection signal="toggled" from="DevTab/grid/show_debug_box" to="DevTab" method="_on_show_debug_box_toggled"]
-[connection signal="button_up" from="DevTab/grid/save_game" to="DevTab" method="_on_save_game_button_up"]
+[node name="controls" type="PopupPanel" parent="."]
+disable_3d = true
+initial_position = 2
+title = "Controls"
+size = Vector2i(227, 242)
+extend_to_title = true
+content_scale_mode = 1
+content_scale_aspect = 3
+theme = ExtResource("2_aq74w")
+script = SubResource("GDScript_xlayb")
+
+[node name="vbox" type="VBoxContainer" parent="controls"]
+self_modulate = Color(0.54902, 0.172549, 0.333333, 1)
+texture_filter = 1
+offset_left = 4.0
+offset_top = 4.0
+offset_right = 223.0
+offset_bottom = 238.0
+theme = ExtResource("2_aq74w")
+alignment = 1
+
+[node name="label00" type="Label" parent="controls/vbox"]
+layout_mode = 2
+text = "CONTROLS"
+label_settings = SubResource("LabelSettings_ut83r")
+horizontal_alignment = 1
+
+[node name="label01" type="Label" parent="controls/vbox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+text = "WASD / Left stick - movement"
+horizontal_alignment = 1
+
+[node name="label02" type="Label" parent="controls/vbox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+text = "Space / A - jump (there's a double jump)"
+horizontal_alignment = 1
+
+[node name="label09" type="Label" parent="controls/vbox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+text = "Space+S / A+Down - jump down"
+horizontal_alignment = 1
+
+[node name="label03" type="Label" parent="controls/vbox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+text = "LMB / X - attack (there's a simple combo)"
+horizontal_alignment = 1
+
+[node name="label04" type="Label" parent="controls/vbox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+text = "Q / LT - circle between forms"
+horizontal_alignment = 1
+
+[node name="label05" type="Label" parent="controls/vbox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+text = "MMB / LB - transformation"
+horizontal_alignment = 1
+
+[node name="label08" type="Label" parent="controls/vbox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+text = "Mouse Wheel / LT - form selection"
+horizontal_alignment = 1
+
+[node name="label07" type="Label" parent="controls/vbox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+text = "E / B - interact"
+horizontal_alignment = 1
+
+[node name="label06" type="Label" parent="controls/vbox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+text = "Esc / Start - quit the game"
+horizontal_alignment = 1
+
+[node name="close" type="Button" parent="controls/vbox"]
+layout_mode = 2
+text = "close"
+
+[connection signal="tab_changed" from="tabs" to="tabs" method="_on_tab_changed"]
+[connection signal="visibility_changed" from="tabs" to="tabs" method="_on_visibility_changed"]
+[connection signal="visibility_changed" from="tabs/Inventory" to="tabs/Inventory" method="_on_visibility_changed"]
+[connection signal="toggled" from="tabs/Game/grid/fps" to="tabs/Game" method="_on_fps_toggled"]
+[connection signal="button_up" from="tabs/Game/grid/controls" to="." method="_on_popup_open_button_up" binds= ["controls"]]
+[connection signal="button_up" from="tabs/Game/grid/quit" to="tabs/Game" method="_on_quit_button_up"]
+[connection signal="button_up" from="tabs/DevTab/grid/change_level_button" to="tabs/DevTab" method="_on_change_level_button_released"]
+[connection signal="button_up" from="tabs/DevTab/grid/open_folder_button" to="tabs/DevTab" method="_on_open_folder_button_released"]
+[connection signal="button_up" from="tabs/DevTab/grid/open_saves_button" to="tabs/DevTab" method="_on_open_saves_button_released"]
+[connection signal="toggled" from="tabs/DevTab/grid/show_debug_box" to="tabs/DevTab" method="_on_show_debug_box_toggled"]
+[connection signal="button_up" from="tabs/DevTab/grid/save_game" to="tabs/DevTab" method="_on_save_game_button_up"]
+[connection signal="about_to_popup" from="controls" to="controls" method="_on_about_to_popup"]
+[connection signal="button_up" from="controls/vbox/close" to="." method="_on_popup_close_button_up" binds= ["controls"]]
