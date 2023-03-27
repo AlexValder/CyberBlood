@@ -1,4 +1,5 @@
 extends Interactable
+class_name Lever
 
 @onready var _handle := $handle as Node2D
 

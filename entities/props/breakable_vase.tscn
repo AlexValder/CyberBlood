@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3]
+[gd_scene load_steps=7 format=3 uid="uid://c8043u3m848vk"]
 
 [ext_resource type="PackedScene" path="res://entities/tools/breakable.tscn" id="1_1gkyg"]
 [ext_resource type="Script" path="res://entities/props/breakable_vase.gd" id="2_aorrx"]
@@ -24,6 +24,10 @@ material = SubResource("ShaderMaterial_27phm")
 position = Vector2(0, -22.5)
 scale = Vector2(1, 0.9375)
 texture = ExtResource("3_4dl1x")
+
+[node name="hurtbox" parent="." index="1"]
+damaged_by_player = true
+damaged_by_enemy = false
 
 [node name="shape" parent="hurtbox" index="0"]
 position = Vector2(0, -19)

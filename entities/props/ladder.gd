@@ -13,6 +13,10 @@ var _top: float
 var _bottom: float
 
 
+func get_center() -> float:
+    return _node.global_position.x
+
+
 func get_player_center() -> float:
     if facing_left:
         return _node.global_position.x + _shape.size.x
