@@ -1,11 +1,11 @@
-[gd_scene load_steps=22 format=3 uid="uid://yapvpv58y2h0"]
+[gd_scene load_steps=22 format=3 uid="uid://birkcbjniu6gu"]
 
 [ext_resource type="Script" path="res://scenes/levels/test_level/test_level.001.gd" id="1_0r26u"]
 [ext_resource type="TileSet" uid="uid://b3k13y1c7g1ax" path="res://assets/tilesets/test_level.tres" id="2_yxa60"]
-[ext_resource type="PackedScene" uid="uid://b0gwnq53sji8h" path="res://entities/items/pickup.tscn" id="3_fgdrh"]
+[ext_resource type="PackedScene" uid="uid://bq1a54kry2chn" path="res://entities/items/food_pickup.tscn" id="3_fgdrh"]
 [ext_resource type="Script" path="res://scenes/levels/test_level/food_spawner.gd" id="4_b06wj"]
 [ext_resource type="FontFile" uid="uid://dgw8oojx04n8d" path="res://assets/gui/fonts/m3x6.ttf" id="5_otcsy"]
-[ext_resource type="PackedScene" uid="uid://bjo1s1p41e5q0" path="res://entities/enemies/skeleton/skeleton.tscn" id="6_wnu8g"]
+[ext_resource type="PackedScene" path="res://entities/enemies/skeleton/skeleton.tscn" id="6_wnu8g"]
 [ext_resource type="Texture2D" uid="uid://cln4pod4sv5jm" path="res://assets/parallax/test_level/sky.png" id="7_hynif"]
 [ext_resource type="Script" path="res://scenes/levels/room_transition_trigger.gd" id="7_q03bs"]
 [ext_resource type="Texture2D" uid="uid://cqyp5igqnkan3" path="res://assets/parallax/test_level/far-clouds.png" id="8_pd4ot"]
@@ -75,6 +75,8 @@ size = Vector2(20, 48)
 
 [node name="test_level_001" type="Node2D"]
 script = ExtResource("1_0r26u")
+biome = "test_level"
+id = "001"
 
 [node name="tilemap" type="TileMap" parent="."]
 texture_filter = 1
@@ -98,7 +100,6 @@ texture = SubResource("GradientTexture2D_yyauj")
 
 [node name="anim_player" type="AnimationPlayer" parent="teleport"]
 autoplay = "loop"
-playback_speed = 0.5
 libraries = {
 "": SubResource("AnimationLibrary_4mmat")
 }

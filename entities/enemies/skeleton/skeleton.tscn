@@ -1,4 +1,4 @@
-[gd_scene load_steps=77 format=3 uid="uid://bjo1s1p41e5q0"]
+[gd_scene load_steps=77 format=3 uid="uid://lk4w2osu85mu"]
 
 [ext_resource type="Script" path="res://entities/enemies/skeleton/skeleton.gd" id="1_scjn5"]
 [ext_resource type="Texture2D" uid="uid://c7mjgj1m4msdg" path="res://assets/sprites/skeleton/attack1.png" id="2_c4jyl"]
@@ -398,9 +398,8 @@ enemy_name = "Skeleton"
 max_health = 10
 
 [node name="sprite" type="AnimatedSprite2D" parent="."]
-frames = SubResource("SpriteFrames_it3it")
+sprite_frames = SubResource("SpriteFrames_it3it")
 animation = &"attack2"
-playing = true
 
 [node name="hitbox" type="Area2D" parent="."]
 script = ExtResource("10_5gru8")
@@ -414,6 +413,8 @@ debug_color = Color(0.898039, 0.270588, 0.427451, 0.419608)
 
 [node name="hurtbox" type="Area2D" parent="."]
 script = ExtResource("11_3grk0")
+damaged_by_player = true
+damaged_by_enemy = false
 
 [node name="shape" type="CollisionShape2D" parent="hurtbox"]
 position = Vector2(3.5, 1)
@@ -436,6 +437,7 @@ disabled = true
 [node name="attack2" type="Area2D" parent="attack_hitboxes"]
 collision_layer = 64
 collision_mask = 8
+monitoring = false
 script = ExtResource("10_318o1")
 damage = 25
 

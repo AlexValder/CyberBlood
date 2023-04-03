@@ -10,6 +10,7 @@ func _ready() -> void:
 
 
 func _on_quit_button_up() -> void:
+    GameManager.save_game(false)
     GameManager.quit_to_menu()
 
 

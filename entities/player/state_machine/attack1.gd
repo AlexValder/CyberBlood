@@ -9,7 +9,7 @@ func on_entry() -> void:
         player.player_anim.animation_finished \
             .connect(_animation_done, CONNECT_ONE_SHOT)
 
-    player.velocity = Vector2.ZERO
+    player.velocity.x = 0
 
 
 func _animation_done(_anim: String) -> void:
@@ -21,10 +21,16 @@ func _animation_done(_anim: String) -> void:
         state_change.emit(self.name, "idle")
 
 
-func physics_process(_delta: float) -> void:
+func physics_process(delta: float) -> void:
+    if !_process: return
+
     if Input.is_action_just_pressed("melee"):
         _next_attack = true
 
+    _add_gravity(delta)
+    player.move_and_slide()
+
 
 func on_exit() -> void:
+    super.on_exit()
     _next_attack = false

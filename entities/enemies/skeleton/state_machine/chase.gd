@@ -14,7 +14,7 @@ func on_entry() -> void:
 
 func process(_delta: float) -> void:
     var enemy := owner.global_position.x as float
-    var player := GameManager.player.global_position.x
+    var player := GameManager.player.global_position.x as float
     if (abs(enemy - player) >= 0.01):
         owner.flip = enemy > player
 
@@ -25,7 +25,7 @@ func physics_process(_delta: float) -> void:
         return
 
     var eyes := _enemy.eyes.global_position
-    var player := GameManager.player.global_position
+    var player := GameManager.player.global_position as Vector2
     var distance := (eyes - player).length()
 
     if !_can_chase(distance, abs(eyes.x - player.x)):

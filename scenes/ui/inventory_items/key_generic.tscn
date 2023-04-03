@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://c7sll4kqh341s"]
+
+[ext_resource type="Texture2D" uid="uid://dciw7cbpyprte" path="res://assets/sprites/items/inventory_items.png" id="1_v4qx4"]
+[ext_resource type="Script" path="res://scenes/ui/inventory_items/inv_item.gd" id="2_gkw5u"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_552mq"]
+atlas = ExtResource("1_v4qx4")
+region = Rect2(0, 0, 16, 16)
+
+[node name="key_generic" type="Button"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.0
+offset_top = -12.0
+offset_right = 12.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+toggle_mode = true
+icon = SubResource("AtlasTexture_552mq")
+flat = true
+icon_alignment = 1
+script = ExtResource("2_gkw5u")

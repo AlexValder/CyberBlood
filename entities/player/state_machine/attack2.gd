@@ -7,7 +7,14 @@ func on_entry() -> void:
         player.player_anim.animation_finished \
             .connect(_animation_done, CONNECT_ONE_SHOT)
 
-    player.velocity = Vector2.ZERO
+    player.velocity.x = 0
+
+
+func physics_process(delta: float) -> void:
+    if !_process: return
+
+    _add_gravity(delta)
+    player.move_and_slide()
 
 
 func _animation_done(_anim: String) -> void:

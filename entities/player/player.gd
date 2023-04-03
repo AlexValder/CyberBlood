@@ -15,51 +15,41 @@ signal mana_changed(new_value)
 const GRAVITY := 350.0
 const CAT_SPEED := 150.0
 const WALK_SPEED := 120.0
+const CLIMB_SPEED := 90.0
 const FLY_SPEED := 200.0
-const JUMP := 210.0
+const JUMP := 215.0
 const CAT_JUMP := 260.0
 const ACCEL := 0.1
 
-const HUMAN_SHAPE_SIZE := {
-    radius = 12 / 2,
-    height = 44 / 2,
-}
-const BAT_SHAPE_SIZE := {
-    radius = 6 / 2,
-    height = 12 / 2,
-}
-const HUMAN_HURTBOX_SIZE := {
-    radius = 7,
-    height = 44,
-}
-const BAT_HURTBOX_SIZE := {
-    radius = 6,
-    height = 12,
-}
-
 @onready var sprite := $sprite as AnimatedSprite2D
 @onready var player_anim := $player_anim as AnimationPlayer
+@onready var ladder_point := $areas/ladder_point as Node2D
 @onready var _shape := $shape as CollisionShape2D
-@onready var _hurtbox := $hurtbox as HurtBox
+@onready var _hurtbox := $areas/hurtbox as HurtBox
 @onready var _camera := $camera as Camera2D
 @onready var _selected_form := $"%selected_form" as Label
+@onready var _money_bar = $"%money_bar"
+@onready var _reach_area := $areas/reachable as Area2D
+@onready var _climb_area := $areas/climb_area as Area2D
 
 @export var max_health: int = 50
 @export var max_mana: float = 100.0
 
 var current_health := max_health
 var current_mana := max_mana
+var money := 0
 var mana_recovery_rate := 1.0
 var flip := false:
     set(value):
         flip = value
         sprite.flip_h = value
-        $attack_hitboxes.scale.x = -1 if value else 1
+        $areas.scale.x = -1 if value else 1
 var _current_form := 0
 var _forms := [
     PlayerForms.BAT,
     PlayerForms.CAT,
 ]
+var inventory := []
 
 
 func next_form() -> void:
@@ -82,6 +72,34 @@ func tranform_name() -> String:
     return "idle"
 
 
+func disable_collision() -> void:
+    if _shape != null:
+        _shape.disabled = true
+
+    var areas := get_node_or_null("areas")
+    if areas == null: return
+    for child in areas.get_children():
+        if child.has_method("set_disabled"):
+            child.set_disabled(true)
+
+
+func enable_collision() -> void:
+    if _shape != null:
+        _shape.disabled = false
+
+    var areas := get_node_or_null("areas")
+    if areas == null: return
+    for child in areas.get_children():
+        if child.has_method("set_disabled"):
+            child.set_disabled(false)
+
+
+func increase_health(by: int) -> void:
+    max_health += by
+    player_health_changed.emit(current_health, max_health)
+    current_health = max_health
+
+
 func heal(value: int) -> void:
     player_health_changed.emit(
         current_health, min(max_health, current_health + value))
@@ -102,6 +120,49 @@ func damage(value: int) -> void:
         player_dies()
 
 
+func set_money(count: int) -> void:
+    money = count
+    _money_bar.set_money(count)
+
+
+func add_money(count: int) -> void:
+    money += count
+    _money_bar.add_money(count)
+
+
+func spend_money(count: int) -> void:
+    money -= count
+    _money_bar.remove_money(count)
+
+
+func can_drop_down() -> bool:
+    var space_state := get_world_2d().direct_space_state
+    # use global coordinates, not local to node
+    var params := PhysicsRayQueryParameters2D.new()
+    var from := self.global_position
+    var to := self.global_position
+    to.y += get_meta("human_shape_size").y + 1
+    params.from = from
+    params.to = to
+    params.hit_from_inside = false
+    params.collide_with_areas = true
+    params.collision_mask = 0b100000000
+    var result := space_state.intersect_ray(params)
+    return !result.is_empty()
+
+
+func start_drop_down() -> void:
+    Logger.debug("Starting drop down")
+    set_collision_mask_value(9, false)
+    get_tree().create_timer(0.5, true, true)\
+        .timeout.connect(stop_drop_down, CONNECT_ONE_SHOT)
+
+
+func stop_drop_down() -> void:
+    Logger.debug("Stopping drop down")
+    set_collision_mask_value(9, true)
+
+
 func player_dies() -> void:
     player_dead.emit()
 
@@ -109,9 +170,10 @@ func player_dies() -> void:
 func can_transform(form: PlayerForms) -> bool:
     match form:
         PlayerForms.HUMAN:
+            var metadata = get_meta("human_shape_size") as Vector2
             return _check_space(
-                HUMAN_SHAPE_SIZE.radius,
-                HUMAN_SHAPE_SIZE.height
+                metadata.x,
+                metadata.y
             )
         PlayerForms.BAT, PlayerForms.CAT:
             # the smallest form, no need to check for space
@@ -135,19 +197,25 @@ func play_anim(anim_name: String) -> void:
 
 
 func ensure_collision(form: PlayerForms) -> void:
+    var shape: Vector2
+    var hurtbox: Vector2
     match form:
         PlayerForms.HUMAN:
-            _shape.shape.radius = HUMAN_SHAPE_SIZE.radius * 2
-            _shape.shape.height = HUMAN_SHAPE_SIZE.height * 2
-            _hurtbox.shape.shape.radius = HUMAN_HURTBOX_SIZE.radius
-            _hurtbox.shape.shape.height = HUMAN_HURTBOX_SIZE.height
+            shape = get_meta("human_shape_size")
+            hurtbox = get_meta("human_hurtbox_size")
+
         PlayerForms.BAT, PlayerForms.CAT:
-            _shape.shape.radius = BAT_SHAPE_SIZE.radius * 2
-            _shape.shape.height = BAT_SHAPE_SIZE.height * 2
-            _hurtbox.shape.shape.radius = BAT_HURTBOX_SIZE.radius
-            _hurtbox.shape.shape.height = BAT_HURTBOX_SIZE.height
+            shape = get_meta("bat_shape_size")
+            hurtbox = get_meta("bat_hurtbox_size")
         _:
             push_error("Unknown form: %s" % form)
+            shape = Vector2.ZERO
+            hurtbox = Vector2.ZERO
+
+    _shape.shape.radius = shape.x * 2
+    _shape.shape.height = shape.y * 2
+    _hurtbox.shape.shape.radius = hurtbox.x
+    _hurtbox.shape.shape.height = hurtbox.y
 
     velocity.y += 2
     move_and_slide()
@@ -158,6 +226,27 @@ func set_limits(vec: Vector4i) -> void:
     _camera.limit_top = vec[1]
     _camera.limit_right = vec[2]
     _camera.limit_bottom = vec[3]
+
+
+func get_ladder() -> Ladder:
+    var areas := _climb_area.get_overlapping_areas()
+    for area in areas:
+        if area is Ladder:
+            return area as Ladder
+
+    return null
+
+
+func add_item_to_inv(item: String) -> void:
+    inventory.push_back(item)
+
+
+func remove_item_to_inv(item: String) -> void:
+    inventory.erase(item)
+
+
+func has_item_in_inv(item: String) -> bool:
+    return inventory.has(item)
 
 
 func _ready() -> void:
@@ -171,7 +260,19 @@ func _ready() -> void:
     mana_bar.value = current_mana
     mana_bar.update()
 
-    _camera.current = true
+    _camera.make_current()
+
+    _money_bar.set_money(money)
+
+
+func _unhandled_input(event: InputEvent) -> void:
+    if event.is_action_released("interact"):
+        var areas := _reach_area.get_overlapping_areas()
+        for area in areas:
+            var parent := area.get_parent()
+            if parent.has_method("interact"):
+                parent.interact()
+                break
 
 
 func _on_recovery_value_timeout(rate: float) -> void:
@@ -187,7 +288,7 @@ func _check_space(h_space: float, v_space: float) -> bool:
     # if not, remember how much we have and check the same to the right
     # sum of both has to be no less than required
 
-    var space_state := get_world_2d().get_direct_space_state()
+    var space_state := get_world_2d().direct_space_state
     var params: = PhysicsRayQueryParameters2D.new()
     params.from = self.global_position
     params.to = self.global_position + Vector2(2 * h_space, 0)

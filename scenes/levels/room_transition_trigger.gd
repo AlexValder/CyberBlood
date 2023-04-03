@@ -1,8 +1,12 @@
 extends Area2D
 class_name RoomTransitionTrigger
 
+## ID of a biome
 @export var biome: String
+## short ID of a room - unique per biome
 @export var roomId: String
+## if there are multiple entries to the room, set this
+@export var entryId: String = ""
 ## assumes scene root name is something like "biome_xxx",
 ## where xxx is room id.
 @onready var fromId: String = owner.name

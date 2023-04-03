@@ -1,0 +1,66 @@
+[gd_scene load_steps=8 format=3]
+
+[ext_resource type="Script" path="res://entities/tools/breakable.gd" id="1_y4kil"]
+[ext_resource type="Shader" path="res://assets/shaders/was_hit.gdshader" id="2_6num2"]
+[ext_resource type="Script" path="res://entities/tools/hurtbox.gd" id="2_wlpje"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3qxqv"]
+resource_local_to_scene = true
+shader = ExtResource("2_6num2")
+shader_parameter/tint = Color(1, 1, 1, 1)
+shader_parameter/mixture = 0.0
+
+[sub_resource type="Animation" id="Animation_1x03b"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("sprite:material:shader_parameter/mixture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_eqfr3"]
+resource_name = "on_hit"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("sprite:material:shader_parameter/mixture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [1.0, 0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_g458c"]
+_data = {
+"RESET": SubResource("Animation_1x03b"),
+"on_hit": SubResource("Animation_eqfr3")
+}
+
+[node name="breakable" type="Node2D"]
+texture_filter = 1
+script = ExtResource("1_y4kil")
+
+[node name="sprite" type="Node2D" parent="."]
+material = SubResource("ShaderMaterial_3qxqv")
+
+[node name="hurtbox" type="Area2D" parent="." node_paths=PackedStringArray("custom_owner")]
+script = ExtResource("2_wlpje")
+custom_owner = NodePath("")
+
+[node name="shape" type="CollisionShape2D" parent="hurtbox"]
+
+[node name="anim_player" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_g458c")
+}

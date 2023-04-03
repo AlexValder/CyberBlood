@@ -1,0 +1,129 @@
+[gd_scene load_steps=8 format=3 uid="uid://v0mqk05dn4pd"]
+
+[ext_resource type="Script" path="res://entities/props/unsteady.gd" id="1_hjlrl"]
+[ext_resource type="TileSet" uid="uid://b3k13y1c7g1ax" path="res://assets/tilesets/test_level.tres" id="1_sdr08"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mk714"]
+resource_local_to_scene = true
+size = Vector2(22, 11)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_25lft"]
+resource_local_to_scene = true
+
+[sub_resource type="Animation" id="Animation_5mfdt"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("shape:disabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("tilemap:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("area/shape:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_prawj"]
+resource_name = "destroy"
+length = 3.0
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("shape:disabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.45, 2.75),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("tilemap:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1.45, 2.75),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [true, false, true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("area/shape:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 2.75),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_t0bsh"]
+_data = {
+"RESET": SubResource("Animation_5mfdt"),
+"destroy": SubResource("Animation_prawj")
+}
+
+[node name="unsteady" type="StaticBody2D"]
+texture_filter = 1
+collision_layer = 256
+collision_mask = 134
+script = ExtResource("1_hjlrl")
+
+[node name="area" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 6
+
+[node name="shape" type="CollisionShape2D" parent="area"]
+position = Vector2(0, -5.5)
+shape = SubResource("RectangleShape2D_mk714")
+
+[node name="tilemap" type="TileMap" parent="."]
+tile_set = ExtResource("1_sdr08")
+format = 2
+layer_0/name = "platform"
+layer_0/z_index = 1
+
+[node name="shape" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_25lft")
+one_way_collision = true
+
+[node name="anim" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_t0bsh")
+}
+next/RESET = &"RESET"
+
+[connection signal="area_entered" from="area" to="." method="_on_someone_standing"]

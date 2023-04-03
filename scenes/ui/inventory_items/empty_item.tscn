@@ -1,0 +1,26 @@
+[gd_scene load_steps=6 format=3 uid="uid://dh4xp7556q2dl"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_rtiwc"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1oupk"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_hueey"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_a2dsm"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jwb63"]
+
+[node name="empty_item" type="Button"]
+custom_minimum_size = Vector2(32, 32)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/normal = SubResource("StyleBoxEmpty_rtiwc")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_1oupk")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_hueey")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_a2dsm")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_jwb63")
+disabled = true
+icon_alignment = 1

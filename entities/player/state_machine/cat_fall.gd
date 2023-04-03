@@ -2,6 +2,8 @@ extends CatFormState
 
 
 func physics_process(delta: float) -> void:
+    if !_process: return
+
     super.physics_process(delta)
 
     if player.is_on_floor():

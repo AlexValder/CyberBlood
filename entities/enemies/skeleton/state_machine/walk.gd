@@ -13,7 +13,7 @@ func physics_process(_delta: float) -> void:
 
     if GameManager.player != null:
         var eyes := _enemy.eyes.global_position
-        var player := GameManager.player.global_position
+        var player := GameManager.player.global_position as Vector2
         if (eyes - player).length() < _enemy.SEES_PLAYER_AT:
             pass
             state_change.emit(self.name, "watch")

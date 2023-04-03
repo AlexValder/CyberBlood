@@ -1,0 +1,123 @@
+[gd_scene load_steps=9 format=3 uid="uid://b76lfry7irli6"]
+
+[ext_resource type="Texture2D" uid="uid://d1j6bxkxha06w" path="res://assets/sprites/items/spikes.png" id="1_b7iv0"]
+[ext_resource type="Texture2D" uid="uid://cgvep8m0q617s" path="res://assets/sprites/items/spikes_clip.png" id="1_crpae"]
+[ext_resource type="Script" path="res://entities/props/spikes.gd" id="1_lja3j"]
+[ext_resource type="Script" path="res://entities/tools/lasting_hit_box.gd" id="4_vjy4d"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nv3uk"]
+size = Vector2(230, 209)
+
+[sub_resource type="Animation" id="Animation_xm7us"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("clip/sprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("damage/shape:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -13.5)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("damage/shape:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_gnbr7"]
+resource_name = "basic"
+length = 3.5
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("clip/sprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.8, 2.4, 2.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 226), Vector2(0, 226), Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("damage/shape:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.8, 2.6),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, -13.5), Vector2(0, 234), Vector2(0, -13.5)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("damage/shape:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.8, 2.6),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_hx30j"]
+_data = {
+"RESET": SubResource("Animation_xm7us"),
+"basic": SubResource("Animation_gnbr7")
+}
+
+[node name="spikes" type="Node2D"]
+script = ExtResource("1_lja3j")
+
+[node name="clip" type="Sprite2D" parent="."]
+clip_children = 1
+texture = ExtResource("1_crpae")
+
+[node name="sprite" type="Sprite2D" parent="clip"]
+texture = ExtResource("1_b7iv0")
+
+[node name="damage" type="Area2D" parent="."]
+collision_layer = 96
+collision_mask = 24
+script = ExtResource("4_vjy4d")
+damage_interval = 3.5
+damage = 10
+damages_enemy = true
+
+[node name="shape" type="CollisionShape2D" parent="damage"]
+position = Vector2(0, -13.5)
+shape = SubResource("RectangleShape2D_nv3uk")
+
+[node name="anim" type="AnimationPlayer" parent="."]
+autoplay = "basic"
+libraries = {
+"": SubResource("AnimationLibrary_hx30j")
+}

@@ -7,6 +7,8 @@ func on_entry() -> void:
 
 
 func physics_process(delta: float) -> void:
+    if !_process: return
+
     if is_zero_approx(player.velocity.y) and !player.is_on_ceiling():
         state_change.emit(self.name, "idle")
 
@@ -17,6 +19,12 @@ func physics_process(delta: float) -> void:
     if Input.is_action_just_pressed("jump"):
         state_change.emit(self.name, "double_jump")
 
+    if Input.is_action_just_pressed("up"):
+        state_change.emit(self.name, "climbing")
+
+    if Input.is_action_just_pressed("down"):
+        state_change.emit(self.name, "climbing")
+
     if player.velocity.y > 0:
         state_change.emit(self.name, "fall")
 
@@ -24,5 +32,8 @@ func physics_process(delta: float) -> void:
     _add_gravity(delta)
 
     player.move_and_slide()
+
+    if !is_zero_approx(player.get_platform_velocity().y):
+        state_change.emit(self.name, "idle")
 
     super.physics_process(delta)
