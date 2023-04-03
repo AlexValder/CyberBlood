@@ -1,15 +1,22 @@
-[gd_scene load_steps=7 format=3 uid="uid://dbyk0lq4defd3"]
+[gd_scene load_steps=10 format=3 uid="uid://dbyk0lq4defd3"]
 
 [ext_resource type="Script" path="res://scenes/levels/outskirts/outskirts.010.gd" id="1_ck78r"]
 [ext_resource type="TileSet" uid="uid://b3k13y1c7g1ax" path="res://assets/tilesets/test_level.tres" id="2_h5twg"]
 [ext_resource type="Script" path="res://scenes/levels/room_transition_trigger.gd" id="3_knuxf"]
 [ext_resource type="PackedScene" uid="uid://dvgdfojwi0xln" path="res://entities/items/key.tscn" id="4_qwo10"]
+[ext_resource type="FontFile" uid="uid://dfe63til8iyxx" path="res://assets/gui/fonts/m5x7.ttf" id="5_67xdx"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1yvfd"]
 size = Vector2(8, 80)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_82pjs"]
 size = Vector2(10, 64)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_d1v2n"]
+size = Vector2(57, 49)
+
+[sub_resource type="LabelSettings" id="LabelSettings_xvby4"]
+font = ExtResource("5_67xdx")
 
 [node name="outskirts_010" type="Node2D"]
 texture_filter = 1
@@ -88,4 +95,35 @@ position = Vector2(455, 401)
 key_id = "outskirts_gate_key"
 color_hint = Color(1, 0.862745, 0.517647, 1)
 
+[node name="debug_open_roots" type="Area2D" parent="env"]
+position = Vector2(409, 272)
+collision_layer = 0
+collision_mask = 2
+
+[node name="shape" type="CollisionShape2D" parent="env/debug_open_roots"]
+position = Vector2(28.5, 24.5)
+shape = SubResource("RectangleShape2D_d1v2n")
+
+[node name="bg" type="ColorRect" parent="env/debug_open_roots"]
+texture_filter = 1
+offset_right = 57.0
+offset_bottom = 49.0
+color = Color(0.552941, 0, 0, 0.270588)
+metadata/_edit_use_anchors_ = true
+
+[node name="label" type="Label" parent="env/debug_open_roots/bg"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Open
+roots"
+label_settings = SubResource("LabelSettings_xvby4")
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
 [connection signal="picked_up" from="env/key_00" to="." method="_on_key_picked_up" binds= ["outskirts_gate_key"]]
+[connection signal="body_entered" from="env/debug_open_roots" to="." method="_on_debug_open_roots_body_entered" unbinds=1]

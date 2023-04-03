@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://bapi7gsjmsc5v"]
+[gd_scene load_steps=10 format=3 uid="uid://bapi7gsjmsc5v"]
 
 [ext_resource type="Script" path="res://scenes/levels/outskirts/outskirts.011.gd" id="1_fn2jt"]
 [ext_resource type="TileSet" uid="uid://b3k13y1c7g1ax" path="res://assets/tilesets/test_level.tres" id="2_r110g"]
@@ -18,6 +18,9 @@ size = Vector2(8, 48)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4iepp"]
 size = Vector2(1134.5, 310)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sofce"]
+size = Vector2(160, 49)
 
 [node name="outskirts_011" type="Node2D"]
 texture_filter = 1
@@ -133,6 +136,21 @@ collision_mask = 2
 [node name="shape" type="CollisionShape2D" parent="env/hide_exit"]
 position = Vector2(-450.75, 0)
 shape = SubResource("RectangleShape2D_4iepp")
+
+[node name="roots" type="StaticBody2D" parent="env"]
+texture_filter = 1
+position = Vector2(720, 384)
+collision_mask = 0
+
+[node name="roots" type="TileMap" parent="env/roots"]
+texture_filter = 1
+tile_set = ExtResource("2_r110g")
+format = 2
+layer_0/tile_data = PackedInt32Array(0, 851968, 16, 1, 851968, 16, 2, 851968, 16, 65538, 851968, 16, 65537, 851968, 16, 65536, 851968, 16, 131072, 851968, 16, 131073, 851968, 16, 131074, 851968, 16, 131075, 851968, 16, 131076, 851968, 16, 65540, 851968, 16, 65539, 851968, 16, 3, 851968, 16, 4, 851968, 16, 65541, 851968, 16, 65542, 851968, 16, 6, 851968, 16, 5, 851968, 16, 131077, 851968, 16, 131078, 851968, 16, 131079, 851968, 16, 131080, 851968, 16, 65543, 851968, 16, 65544, 851968, 16, 131081, 851968, 16, 7, 851968, 16)
+
+[node name="shape" type="CollisionShape2D" parent="env/roots"]
+position = Vector2(80, 24.5)
+shape = SubResource("RectangleShape2D_sofce")
 
 [node name="enemies" type="Node" parent="."]
 

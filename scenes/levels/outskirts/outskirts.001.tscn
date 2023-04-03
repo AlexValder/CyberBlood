@@ -79,42 +79,6 @@ layer_0/z_index = 2
 layer_0/tile_data = PackedInt32Array(1114134, 262144, 65538, 1179670, 262144, 65537, 1245206, 262144, 65538, 1310742, 327680, 65537, 1376278, 327680, 65537, 1310743, 327680, 65538, 1245207, 262144, 65538, 1179671, 262144, 65538, 1376277, 327680, 65537, 1376276, 327680, 65537, 1376275, 327680, 65538, 1376274, 327680, 65538, 1376273, 327680, 65537, 1376272, 262144, 65537, 1376271, 327680, 65537, 1376270, 327680, 65538, 1376269, 327680, 65537, 1376268, 327680, 65537, 1376267, 327680, 65537, 1376266, 262144, 65538, 1441802, 327680, 65537, 1507338, 262144, 65538, 1507337, 262144, 65537, 1507336, 262144, 65537, 1507335, 327680, 65537, 1507334, 262144, 65538, 1507333, 262144, 65538, 1507332, 327680, 65538, 1507331, 327680, 65537, 1507330, 327680, 65537, 1441794, 327680, 65538, 1376258, 262144, 65537, 1310722, 327680, 65537, 1245186, 262144, 65537, 1179650, 262144, 65538, 1114114, 262144, 65537, 1114115, 262144, 65537, 1114116, 327680, 65537, 1114117, 262144, 65537, 1114118, 327680, 65537, 1114119, 327680, 65537, 1114120, 327680, 65537, 1114121, 262144, 65538, 1114122, 327680, 65537, 1114123, 262144, 65538, 1114124, 262144, 65537, 1114125, 327680, 65537, 1114126, 262144, 65537, 1114127, 327680, 65537, 1114128, 262144, 65538, 1114129, 262144, 65537, 1114130, 262144, 65538, 1114131, 262144, 65537, 1114132, 262144, 65538, 1114133, 327680, 65537, 1179669, 262144, 65538, 1245205, 327680, 65538, 1310741, 262144, 65537, 1310740, 327680, 65537, 1245204, 327680, 65537, 1179668, 327680, 65538, 1310739, 262144, 65537, 1310738, 262144, 65537, 1245202, 327680, 65537, 1179666, 262144, 65537, 1179667, 262144, 65537, 1245203, 327680, 65538, 1310737, 327680, 65537, 1245200, 262144, 65537, 1179664, 262144, 65538, 1179665, 262144, 65538, 1245201, 327680, 65537, 1245199, 327680, 65538, 1179663, 327680, 65537, 1310736, 262144, 65537, 1310735, 262144, 65538, 1310734, 262144, 65537, 1245198, 327680, 65537, 1179662, 327680, 65538, 1310733, 262144, 65538, 1245197, 327680, 65538, 1245196, 262144, 65537, 1179661, 262144, 65538, 1310732, 327680, 65537, 1310731, 262144, 65538, 1310730, 262144, 65538, 1245194, 262144, 65537, 1179658, 262144, 65537, 1179659, 262144, 65538, 1179660, 262144, 65537, 1310729, 327680, 65538, 1245192, 262144, 65538, 1245193, 262144, 65537, 1179657, 262144, 65537, 1245195, 327680, 65537, 1310728, 327680, 65537, 1310727, 327680, 65537, 1376263, 327680, 65538, 1376262, 327680, 65538, 1310726, 327680, 65538, 1310725, 262144, 65537, 1376264, 262144, 65537, 1441799, 327680, 65537, 1441798, 262144, 65537, 1441797, 327680, 65538, 1441801, 262144, 65538, 1376265, 262144, 65537, 1441800, 262144, 65538, 1441796, 327680, 65538, 1441795, 327680, 65538, 1376259, 262144, 65537, 1310724, 327680, 65538, 1376261, 262144, 65538, 1376260, 262144, 65538, 1310723, 262144, 65537, 1245188, 327680, 65537, 1245189, 262144, 65538, 1245187, 327680, 65538, 1179651, 262144, 65537, 1179654, 262144, 65538, 1179655, 327680, 65538, 1245191, 262144, 65537, 1245190, 262144, 65537, 1179652, 262144, 65538, 1179653, 262144, 65537, 1179656, 262144, 65537)
 metadata/_edit_lock_ = true
 
-[node name="breakable_wall" parent="tilemap" instance=ExtResource("3_ntunu")]
-position = Vector2(441, 616)
-required_hits = 3
-
-[node name="sprite" parent="tilemap/breakable_wall" index="0"]
-material = SubResource("ShaderMaterial_yr8nb")
-
-[node name="part_00" type="Sprite2D" parent="tilemap/breakable_wall/sprite" index="0"]
-use_parent_material = true
-position = Vector2(-1, -16)
-texture = SubResource("AtlasTexture_ggtpb")
-
-[node name="part_01" type="Sprite2D" parent="tilemap/breakable_wall/sprite" index="1"]
-use_parent_material = true
-position = Vector2(-1, 0)
-texture = SubResource("AtlasTexture_ggtpb")
-
-[node name="part_02" type="Sprite2D" parent="tilemap/breakable_wall/sprite" index="2"]
-use_parent_material = true
-position = Vector2(-1, 16)
-texture = SubResource("AtlasTexture_ggtpb")
-
-[node name="hurtbox" parent="tilemap/breakable_wall" index="1"]
-damaged_by_player = true
-
-[node name="shape" parent="tilemap/breakable_wall/hurtbox" index="0"]
-position = Vector2(-1, 0)
-shape = SubResource("RectangleShape2D_cilxs")
-
-[node name="collision" type="StaticBody2D" parent="tilemap/breakable_wall"]
-collision_mask = 455
-
-[node name="shape" type="CollisionShape2D" parent="tilemap/breakable_wall/collision"]
-position = Vector2(-1, 0)
-shape = SubResource("RectangleShape2D_cilxs")
-
 [node name="instr" type="Label" parent="tilemap"]
 z_index = 8
 offset_left = 494.0
@@ -138,6 +102,42 @@ position = Vector2(785, 616)
 position = Vector2(400, 608)
 
 [node name="env" type="Node" parent="."]
+
+[node name="breakable_wall" parent="env" instance=ExtResource("3_ntunu")]
+position = Vector2(441, 616)
+required_hits = 3
+
+[node name="sprite" parent="env/breakable_wall" index="0"]
+material = SubResource("ShaderMaterial_yr8nb")
+
+[node name="part_00" type="Sprite2D" parent="env/breakable_wall/sprite" index="0"]
+use_parent_material = true
+position = Vector2(-1, -16)
+texture = SubResource("AtlasTexture_ggtpb")
+
+[node name="part_01" type="Sprite2D" parent="env/breakable_wall/sprite" index="1"]
+use_parent_material = true
+position = Vector2(-1, 0)
+texture = SubResource("AtlasTexture_ggtpb")
+
+[node name="part_02" type="Sprite2D" parent="env/breakable_wall/sprite" index="2"]
+use_parent_material = true
+position = Vector2(-1, 16)
+texture = SubResource("AtlasTexture_ggtpb")
+
+[node name="hurtbox" parent="env/breakable_wall" index="1"]
+damaged_by_player = true
+
+[node name="shape" parent="env/breakable_wall/hurtbox" index="0"]
+position = Vector2(-1, 0)
+shape = SubResource("RectangleShape2D_cilxs")
+
+[node name="collision" type="StaticBody2D" parent="env/breakable_wall"]
+collision_mask = 455
+
+[node name="shape" type="CollisionShape2D" parent="env/breakable_wall/collision"]
+position = Vector2(-1, 0)
+shape = SubResource("RectangleShape2D_cilxs")
 
 [node name="chest00" parent="env" instance=ExtResource("7_spqx7")]
 position = Vector2(73, 356)
@@ -180,10 +180,10 @@ roomId = "000"
 [node name="shape" type="CollisionShape2D" parent="room_transitions/outskirts_000"]
 shape = SubResource("RectangleShape2D_2yucu")
 
-[connection signal="breakable_broken" from="tilemap/breakable_wall" to="." method="_on_breakable_wall_broken"]
+[connection signal="breakable_broken" from="env/breakable_wall" to="." method="_on_breakable_wall_broken"]
 [connection signal="body_entered" from="env/corridor_hide" to="." method="_on_corridor_hide_body_entered" binds= ["tilemap/hiding"]]
 [connection signal="body_exited" from="env/corridor_hide" to="." method="_on_corridor_hide_body_exited" binds= ["tilemap/hiding"]]
 [connection signal="body_entered" from="env/secret_hide" to="." method="_on_corridor_hide_body_entered" binds= ["tilemap/secret_room"]]
 [connection signal="body_exited" from="env/secret_hide" to="." method="_on_corridor_hide_body_exited" binds= ["tilemap/secret_room"]]
 
-[editable path="tilemap/breakable_wall"]
+[editable path="env/breakable_wall"]

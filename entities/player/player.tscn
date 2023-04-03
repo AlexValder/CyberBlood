@@ -759,7 +759,6 @@ theme = ExtResource("19_7otby")
 metadata/_edit_lock_ = true
 
 [node name="inventory" parent="GUI/HUD" instance=ExtResource("20_uirxe")]
-visible = false
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.1

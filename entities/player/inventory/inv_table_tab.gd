@@ -11,6 +11,9 @@ const _PATHS := {
 
 
 func grab_gamepad_focus() -> void:
+    if _table == null:
+        return
+
     if _table.get_child_count() == 0:
         return
 
