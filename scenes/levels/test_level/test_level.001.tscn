@@ -1,12 +1,13 @@
-[gd_scene load_steps=22 format=3 uid="uid://birkcbjniu6gu"]
+[gd_scene load_steps=23 format=3 uid="uid://birkcbjniu6gu"]
 
 [ext_resource type="Script" path="res://scenes/levels/test_level/test_level.001.gd" id="1_0r26u"]
 [ext_resource type="TileSet" uid="uid://b3k13y1c7g1ax" path="res://assets/tilesets/test_level.tres" id="2_yxa60"]
 [ext_resource type="PackedScene" uid="uid://bq1a54kry2chn" path="res://entities/items/food_pickup.tscn" id="3_fgdrh"]
 [ext_resource type="Script" path="res://scenes/levels/test_level/food_spawner.gd" id="4_b06wj"]
 [ext_resource type="FontFile" uid="uid://dgw8oojx04n8d" path="res://assets/gui/fonts/m3x6.ttf" id="5_otcsy"]
-[ext_resource type="PackedScene" path="res://entities/enemies/skeleton/skeleton.tscn" id="6_wnu8g"]
+[ext_resource type="PackedScene" uid="uid://dl03gx0p4nru6" path="res://entities/enemies/skeleton/skeleton.tscn" id="6_wnu8g"]
 [ext_resource type="Texture2D" uid="uid://cln4pod4sv5jm" path="res://assets/parallax/test_level/sky.png" id="7_hynif"]
+[ext_resource type="PackedScene" uid="uid://dlmdk4552u0jg" path="res://entities/enemies/giant_bat/giant_bat.tscn" id="7_pp5kn"]
 [ext_resource type="Script" path="res://scenes/levels/room_transition_trigger.gd" id="7_q03bs"]
 [ext_resource type="Texture2D" uid="uid://cqyp5igqnkan3" path="res://assets/parallax/test_level/far-clouds.png" id="8_pd4ot"]
 [ext_resource type="Texture2D" uid="uid://bddhe45qqwyyg" path="res://assets/parallax/test_level/near-clouds.png" id="9_6doqb"]
@@ -162,15 +163,15 @@ position = Vector2(537, 9)
 
 [node name="skeleton01" parent="enemies" groups=["enemies"] instance=ExtResource("6_wnu8g")]
 position = Vector2(415, 226)
-spawn_pickup_chance = 30
 
 [node name="skeleton02" parent="enemies" groups=["enemies"] instance=ExtResource("6_wnu8g")]
-position = Vector2(346, 115)
-spawn_pickup_chance = 30
+position = Vector2(51, 65)
 
 [node name="skeleton03" parent="enemies" groups=["enemies"] instance=ExtResource("6_wnu8g")]
 position = Vector2(956, 326)
-spawn_pickup_chance = 30
+
+[node name="giant_bat" parent="enemies" instance=ExtResource("7_pp5kn")]
+position = Vector2(221, 61)
 
 [node name="room_transitions" type="Node" parent="."]
 

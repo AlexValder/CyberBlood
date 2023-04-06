@@ -1,0 +1,158 @@
+[gd_scene load_steps=22 format=3 uid="uid://dlmdk4552u0jg"]
+
+[ext_resource type="Script" path="res://entities/enemies/giant_bat/giant_bat.gd" id="1_1tdks"]
+[ext_resource type="Texture2D" uid="uid://dgo7nj16hbdwu" path="res://assets/sprites/player/bat.png" id="2_2v45f"]
+[ext_resource type="Theme" uid="uid://brlh53bypvlrb" path="res://assets/gui/themes/default.tres" id="3_ik27i"]
+[ext_resource type="Script" path="res://entities/tools/lasting_hit_box.gd" id="3_jsn6e"]
+[ext_resource type="FontFile" uid="uid://dgw8oojx04n8d" path="res://assets/gui/fonts/m3x6.ttf" id="4_4tr88"]
+[ext_resource type="Script" path="res://entities/tools/hurtbox.gd" id="4_7oaus"]
+[ext_resource type="Script" path="res://entities/enemies/health.gd" id="5_ys74h"]
+[ext_resource type="Script" path="res://entities/enemies/giant_bat/state_machine/state_machine.gd" id="6_b6e2k"]
+[ext_resource type="Script" path="res://entities/enemies/giant_bat/state_machine/idle.gd" id="7_j42n8"]
+[ext_resource type="Script" path="res://entities/enemies/giant_bat/state_machine/death.gd" id="10_dcawo"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i68hy"]
+atlas = ExtResource("2_2v45f")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e1wje"]
+atlas = ExtResource("2_2v45f")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ldgwr"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i68hy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e1wje")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_n0tp0"]
+radius = 7.0
+height = 24.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_wl4ia"]
+radius = 8.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_dj7tj"]
+radius = 8.0
+
+[sub_resource type="Animation" id="Animation_jt2cj"]
+resource_name = "idle"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_qe7ry"]
+_data = {
+"idle": SubResource("Animation_jt2cj")
+}
+
+[sub_resource type="LabelSettings" id="LabelSettings_3m8y0"]
+font = ExtResource("4_4tr88")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ajat4"]
+bg_color = Color(0.196078, 0, 0, 1)
+anti_aliasing = false
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lag6g"]
+bg_color = Color(1, 0, 0.0980392, 1)
+border_width_top = 2
+border_width_bottom = 2
+border_color = Color(1, 0, 0.0980392, 1)
+
+[node name="giant_bat" type="CharacterBody2D"]
+texture_filter = 1
+collision_layer = 4
+script = ExtResource("1_1tdks")
+enemy_name = "giant bat"
+max_health = 10
+spawn_food_chance = 40
+spawn_money_chance = 60
+
+[node name="sprite" type="AnimatedSprite2D" parent="."]
+self_modulate = Color(1, 0, 0, 1)
+sprite_frames = SubResource("SpriteFrames_ldgwr")
+
+[node name="navigation" type="Node2D" parent="."]
+
+[node name="eyes" type="Marker2D" parent="navigation"]
+position = Vector2(3, -1)
+
+[node name="hitbox" type="Area2D" parent="."]
+script = ExtResource("3_jsn6e")
+damage_interval = 1.5
+damage = 5
+
+[node name="shape" type="CollisionShape2D" parent="hitbox"]
+rotation = 1.57079
+shape = SubResource("CapsuleShape2D_n0tp0")
+debug_color = Color(0.898039, 0.270588, 0.427451, 0.419608)
+
+[node name="hurtbox" type="Area2D" parent="."]
+script = ExtResource("4_7oaus")
+damaged_by_player = true
+damaged_by_enemy = false
+
+[node name="shape" type="CollisionShape2D" parent="hurtbox"]
+rotation = -1.57079
+shape = SubResource("CapsuleShape2D_wl4ia")
+debug_color = Color(0.27451, 0.631373, 0, 0.419608)
+
+[node name="shape" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_dj7tj")
+
+[node name="anim_player" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_qe7ry")
+}
+
+[node name="vbox" type="VBoxContainer" parent="."]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -35.0
+offset_right = 20.0
+offset_bottom = -15.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_vertical = 0
+theme = ExtResource("3_ik27i")
+theme_override_constants/separation = 0
+
+[node name="name" type="Label" parent="vbox"]
+layout_mode = 2
+text = "name"
+label_settings = SubResource("LabelSettings_3m8y0")
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="health" type="ProgressBar" parent="vbox"]
+layout_mode = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_ajat4")
+theme_override_styles/fill = SubResource("StyleBoxFlat_lag6g")
+max_value = 20.0
+value = 10.0
+show_percentage = false
+script = ExtResource("5_ys74h")
+
+[node name="state_machine" type="Node2D" parent="."]
+script = ExtResource("6_b6e2k")
+idle_range = null
+walk_range = null
+
+[node name="idle" type="Node" parent="state_machine"]
+script = ExtResource("7_j42n8")
+
+[node name="death" type="Node" parent="state_machine"]
+script = ExtResource("10_dcawo")
+
+[connection signal="enemy_damaged" from="." to="vbox/health" method="_on_enemy_damaged"]
+[connection signal="enemy_died" from="." to="state_machine" method="_on_skeleton_enemy_died"]
+[connection signal="enemy_hurt" from="." to="state_machine" method="_on_skeleton_enemy_hurt"]
