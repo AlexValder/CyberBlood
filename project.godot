@@ -163,4 +163,5 @@ common/enable_object_picking=false
 
 [rendering]
 
+rendering_device/driver="opengl3"
 environment/defaults/default_clear_color=Color(0, 0, 0, 1)
