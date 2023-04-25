@@ -92,6 +92,7 @@ shape = SubResource("RectangleShape2D_tiywl")
 [node name="save" parent="env" instance=ExtResource("4_1hw25")]
 
 [node name="key_hole" parent="env" instance=ExtResource("5_er1ex")]
+key_id = "outskirts_tomb_key"
 
 [connection signal="interacted" from="env/key_hole" to="." method="_on_key_hole_interacted"]
 
