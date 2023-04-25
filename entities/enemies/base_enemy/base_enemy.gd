@@ -19,6 +19,8 @@ signal enemy_damaged(old_value, new_value)
 @onready var eyes := $navigation/eyes as Marker2D
 @onready var flip := false:
     set(value):
+        if value == flip:
+            return
         flip = value
         _sprite.flip_h = value
         change_scale(value)
