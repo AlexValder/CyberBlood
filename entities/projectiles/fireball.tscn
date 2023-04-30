@@ -1,0 +1,59 @@
+[gd_scene load_steps=7 format=3 uid="uid://d1eqp080iqtr7"]
+
+[ext_resource type="Script" path="res://entities/projectiles/fireball.gd" id="1_iit41"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_oalyj"]
+radius = 5.0
+
+[sub_resource type="Gradient" id="Gradient_0me7f"]
+offsets = PackedFloat32Array(0.102041, 0.331633, 0.459184)
+colors = PackedColorArray(1, 0.498039, 0.0823529, 1, 0.567568, 0.567568, 0.567568, 0.567568, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_60spc"]
+gradient = SubResource("Gradient_0me7f")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
+[sub_resource type="Gradient" id="Gradient_2xw4r"]
+offsets = PackedFloat32Array(0, 0.777174, 1)
+colors = PackedColorArray(1, 0, 0.113725, 1, 0.904321, 0.538628, 0.201596, 1, 1, 1, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_snwwy"]
+resource_local_to_scene = true
+gradient = SubResource("Gradient_2xw4r")
+fill = 1
+fill_from = Vector2(0.303419, 0.307692)
+fill_to = Vector2(0.235043, 0.175214)
+
+[node name="fireball" type="Area2D"]
+scale = Vector2(0.6, 0.6)
+collision_layer = 0
+collision_mask = 121
+script = ExtResource("1_iit41")
+speed = 1.4
+damage = 5
+
+[node name="timer" type="Timer" parent="."]
+wait_time = 10.0
+one_shot = true
+
+[node name="shape" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_oalyj")
+
+[node name="light" type="PointLight2D" parent="."]
+scale = Vector2(0.5, 0.5)
+texture = SubResource("GradientTexture2D_60spc")
+texture_scale = 3.0
+
+[node name="polygon2d" type="Polygon2D" parent="."]
+light_mask = 0
+z_index = 1
+texture_repeat = 1
+scale = Vector2(0.5, 0.5)
+texture = SubResource("GradientTexture2D_snwwy")
+texture_offset = Vector2(20, 20)
+polygon = PackedVector2Array(-10, 0, -9, -4, -7, -7, -4, -9, 0, -10, 4, -9, 7, -7, 9, -4, 10, 0, 9, 4, 7, 7, 4, 9, 0, 10, -4, 9, -7, 7, -9, 4)
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="timeout" from="timer" to="." method="_on_life_timer_timeout"]

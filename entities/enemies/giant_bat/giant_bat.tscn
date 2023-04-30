@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://dogn0fds04qpy"]
+[gd_scene load_steps=26 format=3 uid="uid://dogn0fds04qpy"]
 
 [ext_resource type="Script" path="res://entities/enemies/giant_bat/giant_bat.gd" id="1_1tdks"]
 [ext_resource type="Texture2D" uid="uid://dgo7nj16hbdwu" path="res://assets/sprites/player/bat.png" id="2_2v45f"]
@@ -11,6 +11,7 @@
 [ext_resource type="Script" path="res://entities/enemies/giant_bat/state_machine/idle.gd" id="7_j42n8"]
 [ext_resource type="Script" path="res://entities/enemies/giant_bat/state_machine/death.gd" id="10_dcawo"]
 [ext_resource type="Script" path="res://entities/enemies/giant_bat/state_machine/track.gd" id="11_4asmc"]
+[ext_resource type="Script" path="res://entities/enemies/giant_bat/state_machine/fire_attack.gd" id="12_um5oq"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_i68hy"]
 atlas = ExtResource("2_2v45f")
@@ -120,6 +121,9 @@ scale = Vector2(1.2, 1.2)
 [node name="eyes" type="Marker2D" parent="navigation"]
 position = Vector2(3, -1)
 
+[node name="fire" type="Marker2D" parent="navigation"]
+position = Vector2(5, 0)
+
 [node name="hitbox" type="Area2D" parent="."]
 scale = Vector2(1.2, 1.2)
 script = ExtResource("3_jsn6e")
@@ -199,6 +203,9 @@ script = ExtResource("10_dcawo")
 
 [node name="track" type="Node" parent="state_machine"]
 script = ExtResource("11_4asmc")
+
+[node name="fire_attack" type="Node" parent="state_machine"]
+script = ExtResource("12_um5oq")
 
 [connection signal="enemy_damaged" from="." to="vbox/health" method="_on_enemy_damaged"]
 [connection signal="enemy_died" from="." to="state_machine" method="_on_skeleton_enemy_died"]

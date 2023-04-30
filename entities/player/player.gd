@@ -31,6 +31,7 @@ const ACCEL := 0.1
 @onready var _money_bar = $"%money_bar"
 @onready var _reach_area := $areas/reachable as Area2D
 @onready var _climb_area := $areas/climb_area as Area2D
+@onready var _firepoint := $areas/firepoint as Node2D
 
 @export var max_health: int = 50
 @export var max_mana: float = 100.0
@@ -70,6 +71,15 @@ func tranform_name() -> String:
 
     push_error("Form unknown: %d" % _forms[_current_form])
     return "idle"
+
+
+func shoot_fireball() -> void:
+    var fireball := FireBall.spawn_fireball()
+    fireball.direction_movement = Vector2.LEFT if flip else Vector2.RIGHT
+    fireball.speed = 2.5
+    add_sibling(fireball)
+    fireball.make_player()
+    fireball.global_position = _firepoint.global_position
 
 
 func disable_collision() -> void:

@@ -6,17 +6,20 @@ func on_entry() -> void:
     _process = true
 
 
-func physics_process(delta: float) -> void:
+func physics_process(_delta: float) -> void:
     if !_process: return
 
     var distance := GameManager.player.global_position - _enemy.global_position
-    var len := distance.length()
-    if len >= _enemy.WATCH_DISTANCE:
+    var leng := distance.length()
+    if leng >= _enemy.WATCH_DISTANCE:
         state_change.emit(self.name, "idle")
 
-    _enemy.flip = distance.x < 0
+    if distance.x > _enemy.THRESHOLD && _enemy.flip:
+        _enemy.flip = false
+    elif distance.x < -_enemy.THRESHOLD && !_enemy.flip:
+        _enemy.flip = true
 
-    if abs(distance.x) >= _enemy.THRESHOLD:
+    if leng >= _enemy.ORBIT_DISTANCE && abs(distance.x) >= _enemy.THRESHOLD:
         _enemy.velocity.x = lerp(
             _enemy.velocity.x,
             _enemy.FOLLOW_SPEED * (-1 if _enemy.flip else 1),
@@ -25,7 +28,7 @@ func physics_process(delta: float) -> void:
     else:
         _enemy.velocity.x = lerp(_enemy.velocity.x, 0.0, sin(_enemy.ACCEL * 2))
 
-    if abs(distance.y) >= _enemy.THRESHOLD:
+    if leng >= _enemy.ORBIT_DISTANCE && abs(distance.y) >= _enemy.THRESHOLD:
         _enemy.velocity.y = lerp(
             _enemy.velocity.y,
             _enemy.FOLLOW_SPEED * .55 * \

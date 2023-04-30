@@ -621,7 +621,7 @@ position = Vector2(9, -4.5)
 shape = SubResource("RectangleShape2D_eui4v")
 
 [node name="climb_area" type="Area2D" parent="areas"]
-collision_layer = 2
+collision_layer = 0
 collision_mask = 256
 
 [node name="shape" type="CollisionShape2D" parent="areas/climb_area"]
@@ -641,6 +641,7 @@ debug_color = Color(0.960784, 0, 0.509804, 0.419608)
 [node name="attack_hitboxes" type="Node2D" parent="areas"]
 
 [node name="attack1" type="Area2D" parent="areas/attack_hitboxes"]
+collision_layer = 0
 monitoring = false
 script = ExtResource("12_1wwyk")
 damage = 5
@@ -652,6 +653,7 @@ polygon = PackedVector2Array(-18, -43, -1, -24, 4, 18, 33, 18, 65, 10, 83, 0, 89
 disabled = true
 
 [node name="attack2" type="Area2D" parent="areas/attack_hitboxes"]
+collision_layer = 0
 monitoring = false
 script = ExtResource("12_1wwyk")
 damage = 7
@@ -664,6 +666,9 @@ disabled = true
 
 [node name="ladder_point" type="Marker2D" parent="areas"]
 position = Vector2(0, 12)
+
+[node name="firepoint" type="Marker2D" parent="areas"]
+position = Vector2(9, 0)
 
 [node name="sprite" type="AnimatedSprite2D" parent="."]
 z_index = 5
@@ -731,6 +736,10 @@ script = ExtResource("23_gesux")
 
 [node name="bat_form" type="Node" parent="state_machine"]
 script = ExtResource("19_gv58d")
+
+[node name="timer" type="Timer" parent="state_machine/bat_form"]
+wait_time = 0.5
+one_shot = true
 
 [node name="cat_idle" type="Node" parent="state_machine"]
 script = ExtResource("28_3b24y")
@@ -877,5 +886,6 @@ text = "selected form: BAT"
 [connection signal="player_hurt" from="." to="state_machine" method="_on_player_damaged"]
 [connection signal="timeout" from="timers/recovery_value" to="." method="_on_recovery_value_timeout" binds= [1.0]]
 [connection signal="timeout" from="timers/recovery_value" to="GUI/HUD/vbox/mana_bar" method="_on_recovery_value_timeout" binds= [1.0]]
+[connection signal="timeout" from="state_machine/bat_form/timer" to="state_machine/bat_form" method="_on_timer_timeout"]
 
 [editable path="GUI/HUD/inventory"]
