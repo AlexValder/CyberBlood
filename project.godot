@@ -44,12 +44,10 @@ window/stretch/scale=3.0
 [editor]
 
 naming/node_name_casing=1
-version_control/plugin_name="GitPlugin"
-version_control/autoload_on_startup=true
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/bloody_logger/plugin.cfg", "res://addons/Todo_Manager/plugin.cfg", "res://addons/AS2P/plugin.cfg", "res://addons/godot-sqlite/plugin.cfg")
+enabled=PackedStringArray("res://addons/bloody_logger/plugin.cfg", "res://addons/Todo_Manager/plugin.cfg", "res://addons/godot-sqlite/plugin.cfg", "res://addons/AS2P/plugin.cfg")
 
 [input]
 
@@ -163,4 +161,5 @@ common/enable_object_picking=false
 
 [rendering]
 
+rendering_device/driver="opengl3"
 environment/defaults/default_clear_color=Color(0, 0, 0, 1)

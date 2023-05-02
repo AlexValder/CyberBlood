@@ -8,7 +8,7 @@ func physics_process(_delta: float) -> void:
     if Input.is_action_just_pressed("change_form"):
         state_change.emit(self.name, player.tranform_name())
 
-    if Input.is_action_just_pressed("next_form"):
+    if Input.is_action_just_released("next_form"):
         player.next_form()
 
 # Some of reused logic

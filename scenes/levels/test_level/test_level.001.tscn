@@ -1,18 +1,24 @@
-[gd_scene load_steps=22 format=3 uid="uid://birkcbjniu6gu"]
+[gd_scene load_steps=24 format=3 uid="uid://birkcbjniu6gu"]
 
 [ext_resource type="Script" path="res://scenes/levels/test_level/test_level.001.gd" id="1_0r26u"]
 [ext_resource type="TileSet" uid="uid://b3k13y1c7g1ax" path="res://assets/tilesets/test_level.tres" id="2_yxa60"]
 [ext_resource type="PackedScene" uid="uid://bq1a54kry2chn" path="res://entities/items/food_pickup.tscn" id="3_fgdrh"]
 [ext_resource type="Script" path="res://scenes/levels/test_level/food_spawner.gd" id="4_b06wj"]
 [ext_resource type="FontFile" uid="uid://dgw8oojx04n8d" path="res://assets/gui/fonts/m3x6.ttf" id="5_otcsy"]
-[ext_resource type="PackedScene" path="res://entities/enemies/skeleton/skeleton.tscn" id="6_wnu8g"]
+[ext_resource type="PackedScene" uid="uid://dl03gx0p4nru6" path="res://entities/enemies/skeleton/skeleton.tscn" id="6_wnu8g"]
 [ext_resource type="Texture2D" uid="uid://cln4pod4sv5jm" path="res://assets/parallax/test_level/sky.png" id="7_hynif"]
+[ext_resource type="PackedScene" uid="uid://dogn0fds04qpy" path="res://entities/enemies/giant_bat/giant_bat.tscn" id="7_pp5kn"]
 [ext_resource type="Script" path="res://scenes/levels/room_transition_trigger.gd" id="7_q03bs"]
 [ext_resource type="Texture2D" uid="uid://cqyp5igqnkan3" path="res://assets/parallax/test_level/far-clouds.png" id="8_pd4ot"]
 [ext_resource type="Texture2D" uid="uid://bddhe45qqwyyg" path="res://assets/parallax/test_level/near-clouds.png" id="9_6doqb"]
 [ext_resource type="Texture2D" uid="uid://b372jrcaoebk7" path="res://assets/parallax/test_level/far-mountains.png" id="10_6uney"]
 [ext_resource type="Texture2D" uid="uid://x1qteawyx0qy" path="res://assets/parallax/test_level/mountains.png" id="11_5n7r6"]
 [ext_resource type="Texture2D" uid="uid://cawwavqbgqnmo" path="res://assets/parallax/test_level/trees.png" id="12_drxky"]
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_rv1l0"]
+vertices = PackedVector2Array(1134, 2, 1134, 381, 994, 381, 994, 364, 974, 706, 1149, 706, 1149, 748, 36, 748, 36, 579, 946, 579, 974, 364, 946, 366, 925, 366, 925, 381, 2, 381, 2, 165, 420, 165, 420, 140, 3, 140, 3, 115, 131, 115, 131, 92, 4, 92, 4, 3)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 5, 6, 7), PackedInt32Array(4, 7, 8, 9), PackedInt32Array(10, 4, 9, 11), PackedInt32Array(12, 13, 14, 15, 16), PackedInt32Array(17, 18, 19, 20), PackedInt32Array(21, 22, 23, 0), PackedInt32Array(17, 20, 21, 0), PackedInt32Array(17, 0, 3, 10), PackedInt32Array(17, 10, 11, 12, 16)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(4, 3, 4, 92, 131, 92, 131, 115, 3, 115, 3, 140, 420, 140, 420, 165, 2, 165, 2, 381, 925, 381, 925, 366, 946, 366, 946, 579, 36, 579, 36, 748, 1149, 748, 1149, 706, 974, 706, 974, 364, 994, 364, 994, 381, 1134, 381, 1134, 2)])
 
 [sub_resource type="Gradient" id="Gradient_lj6fs"]
 offsets = PackedFloat32Array(0, 0.533333, 0.8375, 1)
@@ -78,6 +84,10 @@ script = ExtResource("1_0r26u")
 biome = "test_level"
 id = "001"
 
+[node name="nav_reg" type="NavigationRegion2D" parent="."]
+visible = false
+navigation_polygon = SubResource("NavigationPolygon_rv1l0")
+
 [node name="tilemap" type="TileMap" parent="."]
 texture_filter = 1
 tile_set = ExtResource("2_yxa60")
@@ -107,7 +117,7 @@ libraries = {
 [node name="spawnpoints" type="Node" parent="."]
 
 [node name="initial" type="Marker2D" parent="spawnpoints"]
-position = Vector2(607, 46)
+position = Vector2(184, 710)
 
 [node name="test_level_002" type="Marker2D" parent="spawnpoints"]
 position = Vector2(1140, 728)
@@ -160,17 +170,11 @@ position = Vector2(537, 9)
 
 [node name="enemies" type="Node" parent="."]
 
-[node name="skeleton01" parent="enemies" groups=["enemies"] instance=ExtResource("6_wnu8g")]
-position = Vector2(415, 226)
-spawn_pickup_chance = 30
+[node name="giant_bat" parent="enemies" instance=ExtResource("7_pp5kn")]
+position = Vector2(474, 149)
 
-[node name="skeleton02" parent="enemies" groups=["enemies"] instance=ExtResource("6_wnu8g")]
-position = Vector2(346, 115)
-spawn_pickup_chance = 30
-
-[node name="skeleton03" parent="enemies" groups=["enemies"] instance=ExtResource("6_wnu8g")]
-position = Vector2(956, 326)
-spawn_pickup_chance = 30
+[node name="skeleton00" parent="enemies" instance=ExtResource("6_wnu8g")]
+position = Vector2(1039, 353)
 
 [node name="room_transitions" type="Node" parent="."]
 
@@ -182,6 +186,17 @@ roomId = "002"
 
 [node name="shape" type="CollisionShape2D" parent="room_transitions/room_transition_002"]
 shape = SubResource("RectangleShape2D_5br3w")
+
+[node name="env" type="Node" parent="."]
+
+[node name="fireball_player_spawner" type="Marker2D" parent="env"]
+position = Vector2(45, 711)
+
+[node name="fireball_enemy_spawner" type="Marker2D" parent="env"]
+position = Vector2(45, 678)
+
+[node name="timer" type="Timer" parent="env"]
+autostart = true
 
 [node name="prlxBg" type="ParallaxBackground" parent="."]
 scroll_ignore_camera_zoom = true
@@ -246,7 +261,7 @@ metadata/_edit_lock_ = true
 
 [node name="rocks" type="Sprite2D" parent="prlxBg/mounts2"]
 texture_repeat = 2
-position = Vector2(0, 122)
+position = Vector2(0, 128)
 texture = ExtResource("11_5n7r6")
 centered = false
 region_enabled = true
@@ -268,3 +283,4 @@ region_rect = Rect2(0, 0, 1000, 240)
 metadata/_edit_lock_ = true
 
 [connection signal="body_entered" from="pickups/food_spawner" to="pickups/food_spawner" method="_on_body_entered"]
+[connection signal="timeout" from="env/timer" to="." method="_on_timer_timeout"]
