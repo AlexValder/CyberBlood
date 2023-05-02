@@ -14,7 +14,7 @@ config/name="CyberBlood"
 run/main_scene="res://scenes/ui/main_menu.tscn"
 config/use_custom_user_dir=true
 config/custom_user_dir_name="CyberBlood"
-config/features=PackedStringArray("4.1", "Forward Plus")
+config/features=PackedStringArray("4.0", "Forward Plus")
 config/icon="res://icon.svg"
 config/version="0.0.0.8"
 
@@ -47,7 +47,7 @@ naming/node_name_casing=1
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/bloody_logger/plugin.cfg", "res://addons/Todo_Manager/plugin.cfg", "res://addons/godot-sqlite/plugin.cfg", "res://addons/AS2P/plugin.cfg")
+enabled=PackedStringArray("res://addons/bloody_logger/plugin.cfg")
 
 [input]
 
@@ -162,4 +162,5 @@ common/enable_object_picking=false
 [rendering]
 
 rendering_device/driver="opengl3"
+renderer/rendering_method="gl_compatibility"
 environment/defaults/default_clear_color=Color(0, 0, 0, 1)
