@@ -26,16 +26,7 @@ func on_entry() -> void:
 
 func get_off_ladder() -> void:
     player.set_collision_mask_value(9, true)
-
-    var tween = get_tree().create_tween() as Tween
-    tween\
-        .tween_property(
-            player, "global_position:x", _ladder.get_center(), 0.3)\
-        .set_ease(Tween.EASE_OUT)\
-        .set_trans(Tween.TRANS_QUAD)
-    tween.play()
-
-    state_change.emit(self.name, "idle")
+    state_change.emit(self.name, "fall")
 
 
 func can_enter(_dic: Dictionary) -> bool:
