@@ -190,7 +190,7 @@ shape = SubResource("RectangleShape2D_5br3w")
 [node name="env" type="Node" parent="."]
 
 [node name="fireball_player_spawner" type="Marker2D" parent="env"]
-position = Vector2(45, 711)
+position = Vector2(45, 698)
 
 [node name="fireball_enemy_spawner" type="Marker2D" parent="env"]
 position = Vector2(45, 678)

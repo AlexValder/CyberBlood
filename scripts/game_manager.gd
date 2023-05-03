@@ -29,8 +29,6 @@ func start_game(index: int) -> void:
     create_player()
 
     var level: String
-    
-    
     if SavesManager.save_exists(_save_index):
         save_data = SavesManager.get_save(_save_index)
         save_data.apply_player_data(player)
@@ -41,11 +39,10 @@ func start_game(index: int) -> void:
     else:
         save_data = PlayerSave.new()
         save_data.update_player_data(player)
-        level = LEVELS["outskirts"].format(FIRST_LEVEL_FORMAT) 
+        level = LEVELS["outskirts"].format(FIRST_LEVEL_FORMAT)
         save_data.map.biome = FIRST_LEVEL_FORMAT.biome
         save_data.map.id = FIRST_LEVEL_FORMAT.id
         save_data.map.current = "Start level"
-        
 
     get_tree().root.add_child(player)
     get_tree().change_scene_to_file(level)
