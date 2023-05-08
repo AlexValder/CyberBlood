@@ -1,4 +1,4 @@
-[gd_scene load_steps=77 format=3 uid="uid://dl03gx0p4nru6"]
+[gd_scene load_steps=75 format=3 uid="uid://dl03gx0p4nru6"]
 
 [ext_resource type="Script" path="res://entities/enemies/skeleton/skeleton.gd" id="1_scjn5"]
 [ext_resource type="Texture2D" uid="uid://c7mjgj1m4msdg" path="res://assets/sprites/skeleton/attack1.png" id="2_c4jyl"]
@@ -9,7 +9,6 @@
 [ext_resource type="Texture2D" uid="uid://cj15wm8b87it2" path="res://assets/sprites/skeleton/idle.png" id="7_0ry2l"]
 [ext_resource type="Texture2D" uid="uid://cncew50i1r5dq" path="res://assets/sprites/skeleton/shield.png" id="8_rn4c5"]
 [ext_resource type="Texture2D" uid="uid://bw4ktn7mnf6hm" path="res://assets/sprites/skeleton/walk.png" id="9_2pu0v"]
-[ext_resource type="Script" path="res://entities/tools/lasting_hit_box.gd" id="10_5gru8"]
 [ext_resource type="Script" path="res://entities/tools/hitbox.gd" id="10_318o1"]
 [ext_resource type="Script" path="res://entities/tools/hurtbox.gd" id="11_3grk0"]
 [ext_resource type="AnimationLibrary" uid="uid://b65l0ee570q2f" path="res://assets/animations/skeleton.res" id="12_jvxvn"]
@@ -364,9 +363,6 @@ animations = [{
 "speed": 10.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_kikka"]
-size = Vector2(25, 49)
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1ojch"]
 size = Vector2(25, 50)
 
@@ -400,16 +396,6 @@ max_health = 10
 [node name="sprite" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_it3it")
 animation = &"attack2"
-
-[node name="hitbox" type="Area2D" parent="."]
-script = ExtResource("10_5gru8")
-damage_interval = 1.5
-damage = 5
-
-[node name="shape" type="CollisionShape2D" parent="hitbox"]
-position = Vector2(3.5, 1.5)
-shape = SubResource("RectangleShape2D_kikka")
-debug_color = Color(0.898039, 0.270588, 0.427451, 0.419608)
 
 [node name="hurtbox" type="Area2D" parent="."]
 script = ExtResource("11_3grk0")
