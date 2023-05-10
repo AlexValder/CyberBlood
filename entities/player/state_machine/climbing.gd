@@ -3,6 +3,7 @@ extends PlayerState
 var _ladder: Ladder
 var _getting_up := true
 
+const CLIMB_OFFSET = 0.25
 
 func on_entry() -> void:
     _process = true
@@ -17,15 +18,33 @@ func on_entry() -> void:
     var tween = get_tree().create_tween() as Tween
     tween\
         .tween_property(
-            player, "global_position:x", _ladder.get_player_center(), 0.2)\
+            player, "global_position:x", climbing_player_offset(CLIMB_OFFSET), 0.2)\
         .set_ease(Tween.EASE_OUT)\
         .set_trans(Tween.TRANS_QUAD)
     tween.tween_callback(func(): _getting_up = false)
     tween.play()
 
+func climbing_player_offset(offset: float) -> float:
+    if _ladder.facing_left:
+        return _ladder.get_player_center() -\
+        (_ladder.get_ladder_length() * offset)
+    else:
+        return _ladder.get_player_center() +\
+        (_ladder.get_ladder_length() * offset)
+    
 
 func get_off_ladder() -> void:
     player.set_collision_mask_value(9, true)
+    
+#    var tween = get_tree().create_tween() as Tween
+#    tween\
+#        .tween_property(
+#            player, "global_position:x", _ladder.get_center(), 0.3)\
+#        .set_ease(Tween.EASE_OUT)\
+#        .set_trans(Tween.TRANS_QUAD)
+#    tween.play()
+#
+#    state_change.emit(self.name, "idle")
     state_change.emit(self.name, "fall")
 
 
