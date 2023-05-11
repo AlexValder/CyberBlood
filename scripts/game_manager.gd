@@ -44,6 +44,7 @@ func start_game(index: int) -> void:
         save_data.map.id = FIRST_LEVEL_FORMAT.id
         save_data.map.current = "Start level"
 
+
     get_tree().root.add_child(player)
     get_tree().change_scene_to_file(level)
     _playing = true

@@ -17,6 +17,10 @@ func get_center() -> float:
     return _node.global_position.x
 
 
+func get_ladder_width() -> float:
+    return _shape.size.x
+
+
 func get_player_center() -> float:
     if facing_left:
         return _node.global_position.x + _shape.size.x
