@@ -202,7 +202,7 @@ text = "Save Game"
 disable_3d = true
 initial_position = 2
 title = "Controls"
-size = Vector2i(227, 242)
+size = Vector2i(238, 248)
 extend_to_title = true
 content_scale_mode = 1
 content_scale_aspect = 3
@@ -214,8 +214,8 @@ self_modulate = Color(0.54902, 0.172549, 0.333333, 1)
 texture_filter = 1
 offset_left = 4.0
 offset_top = 4.0
-offset_right = 223.0
-offset_bottom = 238.0
+offset_right = 234.0
+offset_bottom = 244.0
 theme = ExtResource("2_aq74w")
 alignment = 1
 
@@ -280,6 +280,7 @@ text = "Esc / Start - quit the game"
 horizontal_alignment = 1
 
 [node name="close" type="Button" parent="controls/vbox"]
+custom_minimum_size = Vector2(0, 22)
 layout_mode = 2
 text = "close"
 
