@@ -59,6 +59,7 @@ position = Vector2(2216, -176)
 script = ExtResource("3_03eq5")
 biome = "outskirts"
 roomId = "005"
+direction = 0
 
 [node name="shape" type="CollisionPolygon2D" parent="room_transitions/outskirts_005"]
 polygon = PackedVector2Array(-60, 15, -60, -5, 60, -5, 60, 15, 56, -3, -56, -3)

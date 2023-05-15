@@ -72,6 +72,7 @@ position = Vector2(1048, 184)
 script = ExtResource("3_knuxf")
 biome = "outskirts"
 roomId = "009"
+direction = 3
 
 [node name="shape" type="CollisionShape2D" parent="room_transitions/outskirts_009"]
 position = Vector2(4, 0)

@@ -680,7 +680,6 @@ offset = Vector2(0, -22)
 
 [node name="shape" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_u0rr4")
-disabled = true
 
 [node name="camera" type="Camera2D" parent="."]
 position = Vector2(0, 22)
