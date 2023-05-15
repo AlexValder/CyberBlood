@@ -53,7 +53,7 @@ func physics_process(_delta: float) -> void:
 
     var speed = player.velocity.length() * -signf(player.velocity.y)
     player.player_anim.speed_scale = speed / player.CLIMB_SPEED
-    
+
     if !_getting_up:
         _check_vertical_movement(player.CLIMB_SPEED)
         player.velocity.x = 0

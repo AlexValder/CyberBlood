@@ -74,6 +74,7 @@ position = Vector2(344, 520)
 script = ExtResource("3_bmdut")
 biome = "outskirts"
 roomId = "003"
+direction = 1
 
 [node name="shape" type="CollisionShape2D" parent="room_transitions/outskirts_003"]
 shape = SubResource("RectangleShape2D_5yvde")
@@ -83,6 +84,7 @@ position = Vector2(3320, 521)
 script = ExtResource("3_bmdut")
 biome = "outskirts"
 roomId = "008"
+direction = 1
 
 [node name="shape" type="CollisionShape2D" parent="room_transitions/outskirts_008"]
 shape = SubResource("RectangleShape2D_tiywl")

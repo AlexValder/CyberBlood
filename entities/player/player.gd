@@ -85,23 +85,14 @@ func shoot_fireball() -> void:
 func disable_collision() -> void:
     if _shape != null:
         _shape.disabled = true
-
-    var areas := get_node_or_null("areas")
-    if areas == null: return
-    for child in areas.get_children():
-        if child.has_method("set_disabled"):
-            child.set_disabled(true)
+    collision_layer = 0
 
 
 func enable_collision() -> void:
     if _shape != null:
         _shape.disabled = false
+    collision_layer = 2
 
-    var areas := get_node_or_null("areas")
-    if areas == null: return
-    for child in areas.get_children():
-        if child.has_method("set_disabled"):
-            child.set_disabled(false)
 
 
 func increase_health(by: int) -> void:

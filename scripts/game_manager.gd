@@ -87,7 +87,7 @@ func dev_change_room(biome: String, id: String) -> void:
 
 
 func change_room(trigger: RoomTransitionTrigger) -> void:
-    last_room = [trigger.fromId, trigger.entryId]
+    last_room = [trigger.fromId, trigger.entryId, trigger.get_dir()]
     get_tree().change_scene_to_file(trigger.get_room_path())
 
 

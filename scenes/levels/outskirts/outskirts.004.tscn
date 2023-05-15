@@ -6,7 +6,7 @@
 [ext_resource type="Script" path="res://scenes/levels/room_transition_trigger.gd" id="3_pa7v2"]
 [ext_resource type="PackedScene" uid="uid://dgl3bhcduh1j0" path="res://entities/props/chest.tscn" id="5_5trgl"]
 [ext_resource type="PackedScene" uid="uid://b76lfry7irli6" path="res://entities/props/spikes.tscn" id="6_j6sx5"]
-[ext_resource type="PackedScene" uid="uid://lk4w2osu85mu" path="res://entities/enemies/skeleton/skeleton.tscn" id="7_jevv7"]
+[ext_resource type="PackedScene" uid="uid://dl03gx0p4nru6" path="res://entities/enemies/skeleton/skeleton.tscn" id="7_jevv7"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vrd7w"]
 size = Vector2(10, 112)
