@@ -18,12 +18,12 @@ func change_scale(flip_sprite: bool) -> void:
 
 func play_anim(anim_name: String, speed := 1.0) -> void:
     var player_anim := "giant_bat/" + anim_name
-    if _sprite.sprite_frames.has_animation(anim_name):
-        anim_player.pause()
-        _sprite.play(anim_name, speed)
-    elif anim_player.has_animation(player_anim):
+    if anim_player.has_animation(player_anim):
         _sprite.pause()
         anim_player.play(player_anim, -1, speed)
+    elif _sprite.sprite_frames.has_animation(anim_name):
+        anim_player.pause()
+        _sprite.play(anim_name, speed)
 
 
 func fire_fireball() -> void:
