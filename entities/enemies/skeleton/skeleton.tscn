@@ -395,7 +395,7 @@ max_health = 10
 
 [node name="sprite" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_it3it")
-animation = &"attack2"
+animation = &"death"
 
 [node name="hurtbox" type="Area2D" parent="."]
 script = ExtResource("11_3grk0")

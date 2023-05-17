@@ -1,21 +1,15 @@
 extends BaseEnemy
 class_name GiantBat
 
-const SEE_DISTANCE := 100.0
+const SEE_DISTANCE := 130.0
 const ORBIT_DISTANCE := 50.0
-const WATCH_DISTANCE := 200.0
+const WATCH_DISTANCE := 250.0
 const FOLLOW_DISTANCE := 10.0
-const FOLLOW_SPEED := 140.0
+const FOLLOW_SPEED := 150.0
 const ACCEL := 0.8
 const THRESHOLD := 0.7
 
 @onready var _firepoint := $navigation/fire as Marker2D
-
-
-func _draw() -> void:
-    draw_arc(Vector2.ZERO, SEE_DISTANCE, 0, TAU, 48, Color.YELLOW)
-    draw_arc(Vector2.ZERO, WATCH_DISTANCE, 0, TAU, 48, Color.RED)
-    draw_arc(Vector2.ZERO, ORBIT_DISTANCE, 0, TAU, 48, Color.DARK_BLUE)
 
 
 func change_scale(flip_sprite: bool) -> void:

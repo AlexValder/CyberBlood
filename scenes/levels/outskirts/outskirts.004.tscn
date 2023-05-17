@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://raqn18g2h3u"]
+[gd_scene load_steps=10 format=3 uid="uid://raqn18g2h3u"]
 
 [ext_resource type="Script" path="res://scenes/levels/outskirts/outskirts.004.gd" id="1_ibt3s"]
 [ext_resource type="TileSet" uid="uid://b3k13y1c7g1ax" path="res://assets/tilesets/test_level.tres" id="2_7yjs8"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://dgl3bhcduh1j0" path="res://entities/props/chest.tscn" id="5_5trgl"]
 [ext_resource type="PackedScene" uid="uid://b76lfry7irli6" path="res://entities/props/spikes.tscn" id="6_j6sx5"]
 [ext_resource type="PackedScene" uid="uid://dl03gx0p4nru6" path="res://entities/enemies/skeleton/skeleton.tscn" id="7_jevv7"]
+[ext_resource type="PackedScene" uid="uid://dogn0fds04qpy" path="res://entities/enemies/giant_bat/giant_bat.tscn" id="8_rvynd"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vrd7w"]
 size = Vector2(10, 112)
@@ -116,3 +117,39 @@ position = Vector2(651, 1369)
 
 [node name="skeleton2" parent="enemies" instance=ExtResource("7_jevv7")]
 position = Vector2(476, 1341)
+
+[node name="giant_bat" parent="enemies" instance=ExtResource("8_rvynd")]
+position = Vector2(348, 431)
+
+[node name="giant_bat2" parent="enemies" instance=ExtResource("8_rvynd")]
+position = Vector2(419, 494)
+
+[node name="giant_bat3" parent="enemies" instance=ExtResource("8_rvynd")]
+position = Vector2(502, 456)
+
+[node name="giant_bat4" parent="enemies" instance=ExtResource("8_rvynd")]
+position = Vector2(434, 406)
+
+[node name="giant_bat5" parent="enemies" instance=ExtResource("8_rvynd")]
+position = Vector2(517, 499)
+
+[node name="giant_bat6" parent="enemies" instance=ExtResource("8_rvynd")]
+position = Vector2(603, 464)
+
+[node name="giant_bat7" parent="enemies" instance=ExtResource("8_rvynd")]
+position = Vector2(593, 527)
+
+[node name="giant_bat8" parent="enemies" instance=ExtResource("8_rvynd")]
+position = Vector2(1190, 1147)
+
+[node name="giant_bat9" parent="enemies" instance=ExtResource("8_rvynd")]
+position = Vector2(1223, 1200)
+
+[node name="giant_bat10" parent="enemies" instance=ExtResource("8_rvynd")]
+position = Vector2(1261, 1157)
+
+[node name="giant_bat11" parent="enemies" instance=ExtResource("8_rvynd")]
+position = Vector2(921, 1109)
+
+[node name="giant_bat12" parent="enemies" instance=ExtResource("8_rvynd")]
+position = Vector2(921, 1109)
