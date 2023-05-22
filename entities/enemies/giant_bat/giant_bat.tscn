@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://m22bytp3ihx"]
+[gd_scene load_steps=29 format=3 uid="uid://m22bytp3ihx"]
 
 [ext_resource type="Script" path="res://entities/enemies/giant_bat/giant_bat.gd" id="1_1tdks"]
 [ext_resource type="Texture2D" uid="uid://dgo7nj16hbdwu" path="res://assets/sprites/player/bat.png" id="2_2v45f"]
@@ -16,6 +16,7 @@
 [ext_resource type="Script" path="res://entities/enemies/giant_bat/state_machine/track.gd" id="11_4asmc"]
 [ext_resource type="Script" path="res://entities/enemies/giant_bat/state_machine/awoke.gd" id="11_ea5pl"]
 [ext_resource type="Script" path="res://entities/enemies/giant_bat/state_machine/fire_attack.gd" id="12_um5oq"]
+[ext_resource type="Script" path="res://entities/enemies/giant_bat/state_machine/ram_attack.gd" id="17_3rh0s"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_i68hy"]
 atlas = ExtResource("2_2v45f")
@@ -94,9 +95,8 @@ spawn_money_chance = 60
 [node name="sprite" type="AnimatedSprite2D" parent="."]
 self_modulate = Color(1, 0, 0, 1)
 z_index = 5
-scale = Vector2(0.035, 0.035)
 sprite_frames = SubResource("SpriteFrames_ldgwr")
-animation = &"idle"
+animation = &"awoke"
 frame = 1
 
 [node name="navigation" type="Node2D" parent="."]
@@ -195,6 +195,13 @@ script = ExtResource("12_um5oq")
 
 [node name="timer" type="Timer" parent="state_machine/fire_attack"]
 wait_time = 0.5
+one_shot = true
+autostart = true
+
+[node name="ram_attack" type="Node" parent="state_machine"]
+script = ExtResource("17_3rh0s")
+
+[node name="timer" type="Timer" parent="state_machine/ram_attack"]
 one_shot = true
 autostart = true
 

@@ -10,6 +10,7 @@ const ACCEL := 0.8
 const THRESHOLD := 0.7
 
 @onready var _firepoint := $navigation/fire as Marker2D
+@export var awake := false
 
 
 func change_scale(flip_sprite: bool) -> void:

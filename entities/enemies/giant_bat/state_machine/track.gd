@@ -38,6 +38,9 @@ func physics_process(_delta: float) -> void:
     else:
         _enemy.velocity.y = lerp(_enemy.velocity.y, 0.0, _enemy.ACCEL)
 
+    if leng <= _enemy.SEE_DISTANCE:
+        state_change.emit(self.name, "ram_attack")
+
     if abs(distance.y) < 0.6:
         state_change.emit(self.name, "fire_attack")
 
