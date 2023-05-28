@@ -1,5 +1,7 @@
 extends EnemyState
 
+const RAM_TIME := 0.3
+
 @onready var _timer := $timer as Timer
 
 
@@ -14,7 +16,7 @@ func on_entry() -> void:
 
     if !_enemy.anim_player.animation_finished.is_connected(_animation_done):
         _enemy.anim_player.animation_finished \
-            .connect(_animation_done.bind(_get_distance()), CONNECT_ONE_SHOT)
+            .connect(_animation_done, CONNECT_ONE_SHOT)
 
 
 func physics_process(_delta: float) -> void:
@@ -23,12 +25,13 @@ func physics_process(_delta: float) -> void:
     _enemy.move_and_slide()
 
 
-func _animation_done(_anim: String, dis: Vector2) -> void:
+func _animation_done(_anim: String) -> void:
     var origin := _enemy.global_position
-    var end := origin + 2 * dis
+    var end := origin + _get_distance().normalized() * \
+        (3 * _enemy.ORBIT_DISTANCE as float)
 
     var tween := create_tween()
-    tween.tween_property(_enemy, "global_position", end, 0.3)
+    tween.tween_property(_enemy, "global_position", end, RAM_TIME)
     tween.tween_callback(_tween_done)
     tween.play()
 

@@ -97,7 +97,6 @@ self_modulate = Color(1, 0, 0, 1)
 z_index = 5
 sprite_frames = SubResource("SpriteFrames_ldgwr")
 animation = &"awoke"
-frame = 1
 
 [node name="navigation" type="Node2D" parent="."]
 scale = Vector2(1.2, 1.2)
