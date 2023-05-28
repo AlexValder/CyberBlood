@@ -39,7 +39,6 @@ func reverse() -> void:
     direction_movement *= -1
 
 
-
 func _ready() -> void:
     super._ready()
     _set_collision()
@@ -74,14 +73,18 @@ func _on_body_entered(body: Node2D) -> void:
 
 
 func _on_area_entered(area: Area2D) -> void:
-    if area.owner.has_method("damage"):
-        area.owner.damage(damage)
-        self.queue_free()
     if area is HitBox:
         var hitbox := area as HitBox
         if hitbox.damages_enemy && damages_player \
         || hitbox.damages_player && damages_enemy:
             reverse()
+    elif area is HurtBox:
+        var hurtbox := area as HurtBox
+        if hurtbox.damaged_by_enemy && damages_player \
+        || hurtbox.damaged_by_player && damages_enemy \
+        && hurtbox.owner.has_method("damage"):
+            hurtbox.owner.damage(damage)
+            self.queue_free()
 
 
 func _on_life_timer_timeout() -> void:

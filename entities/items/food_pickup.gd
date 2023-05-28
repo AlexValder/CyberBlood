@@ -16,6 +16,8 @@ static func get_pickup() -> FoodPickup:
 func action(values: Dictionary) -> void:
     if values.body.has_method("heal"):
         values.body.heal(values.restores)
+    if values.body.has_method("give_manaw"):
+        values.body.give_mana(values.restores)
 
 
 func _ready() -> void:

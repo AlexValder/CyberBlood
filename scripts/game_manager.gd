@@ -29,8 +29,6 @@ func start_game(index: int) -> void:
     create_player()
 
     var level: String
-
-
     if SavesManager.save_exists(_save_index):
         save_data = SavesManager.get_save(_save_index)
         save_data.apply_player_data(player)
