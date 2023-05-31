@@ -31,6 +31,7 @@ const ACCEL := 0.1
 @onready var _money_bar = $"%money_bar"
 @onready var _reach_area := $areas/reachable as Area2D
 @onready var _climb_area := $areas/climb_area as Area2D
+@onready var _jumpdown := $areas/jumpdown as Area2D
 @onready var _firepoint := $areas/firepoint as Node2D
 
 @export var max_health: int = 50
@@ -141,19 +142,9 @@ func spend_money(count: int) -> void:
 
 
 func can_drop_down() -> bool:
-    var space_state := get_world_2d().direct_space_state
-    # use global coordinates, not local to node
-    var params := PhysicsRayQueryParameters2D.new()
-    var from := self.global_position
-    var to := self.global_position
-    to.y += get_meta("human_shape_size").y + 1
-    params.from = from
-    params.to = to
-    params.hit_from_inside = false
-    params.collide_with_areas = true
-    params.collision_mask = 0b100000000
-    var result := space_state.intersect_ray(params)
-    return !result.is_empty()
+    if !is_on_floor(): return false
+
+    return !_jumpdown.has_overlapping_areas()
 
 
 func start_drop_down() -> void:
