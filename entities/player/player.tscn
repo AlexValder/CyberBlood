@@ -1,4 +1,4 @@
-[gd_scene load_steps=113 format=3 uid="uid://dooql4yvspt51"]
+[gd_scene load_steps=114 format=3 uid="uid://dooql4yvspt51"]
 
 [ext_resource type="Script" path="res://entities/player/player.gd" id="1_spune"]
 [ext_resource type="Texture2D" uid="uid://cjy71jbvm5o5c" path="res://assets/sprites/player/player_attack1.png" id="2_pdbal"]
@@ -47,6 +47,9 @@ size = Vector2(20, 44)
 resource_local_to_scene = true
 radius = 6.0
 height = 44.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rpynj"]
+size = Vector2(25, 4)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_bhs6d"]
 atlas = ExtResource("2_pdbal")
@@ -669,6 +672,16 @@ position = Vector2(0, 12)
 
 [node name="firepoint" type="Marker2D" parent="areas"]
 position = Vector2(9, 0)
+
+[node name="jumpdown" type="Area2D" parent="areas"]
+position = Vector2(-2, 22)
+collision_layer = 0
+collision_mask = 256
+monitorable = false
+
+[node name="shape" type="CollisionShape2D" parent="areas/jumpdown"]
+position = Vector2(1.5, 0)
+shape = SubResource("RectangleShape2D_rpynj")
 
 [node name="sprite" type="AnimatedSprite2D" parent="."]
 z_index = 5
