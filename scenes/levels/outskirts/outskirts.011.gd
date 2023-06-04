@@ -9,3 +9,4 @@ func _ready() -> void:
     var roots = GameManager.save_data.get_map_change(biome, id, "roots")
     if roots == "1":
         _roots.queue_free()
+        _roots = null
