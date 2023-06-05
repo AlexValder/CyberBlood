@@ -28,10 +28,11 @@ fill_to = Vector2(0.235043, 0.175214)
 [node name="fireball" type="Area2D"]
 scale = Vector2(0.6, 0.6)
 collision_layer = 0
-collision_mask = 121
+input_pickable = false
 script = ExtResource("1_iit41")
 speed = 1.4
 damage = 5
+damages_player = false
 
 [node name="timer" type="Timer" parent="."]
 wait_time = 10.0

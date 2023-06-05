@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://raqn18g2h3u"]
+[gd_scene load_steps=10 format=3 uid="uid://raqn18g2h3u"]
 
 [ext_resource type="Script" path="res://scenes/levels/outskirts/outskirts.004.gd" id="1_ibt3s"]
 [ext_resource type="TileSet" uid="uid://b3k13y1c7g1ax" path="res://assets/tilesets/test_level.tres" id="2_7yjs8"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://dgl3bhcduh1j0" path="res://entities/props/chest.tscn" id="5_5trgl"]
 [ext_resource type="PackedScene" uid="uid://b76lfry7irli6" path="res://entities/props/spikes.tscn" id="6_j6sx5"]
 [ext_resource type="PackedScene" uid="uid://dl03gx0p4nru6" path="res://entities/enemies/skeleton/skeleton.tscn" id="7_jevv7"]
+[ext_resource type="PackedScene" uid="uid://m22bytp3ihx" path="res://entities/enemies/giant_bat/giant_bat.tscn" id="8_rvynd"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vrd7w"]
 size = Vector2(10, 112)
@@ -115,4 +116,40 @@ scale = Vector2(0.092, 0.092)
 position = Vector2(651, 1369)
 
 [node name="skeleton2" parent="enemies" instance=ExtResource("7_jevv7")]
-position = Vector2(476, 1341)
+position = Vector2(17, 1161)
+
+[node name="giant_bat" parent="enemies" instance=ExtResource("8_rvynd")]
+position = Vector2(-117, 361)
+
+[node name="giant_bat2" parent="enemies" instance=ExtResource("8_rvynd")]
+position = Vector2(-174, 360)
+
+[node name="giant_bat3" parent="enemies" instance=ExtResource("8_rvynd")]
+position = Vector2(289, 649)
+
+[node name="giant_bat4" parent="enemies" instance=ExtResource("8_rvynd")]
+position = Vector2(602, 729)
+
+[node name="giant_bat5" parent="enemies" instance=ExtResource("8_rvynd")]
+position = Vector2(448, 744)
+
+[node name="giant_bat6" parent="enemies" instance=ExtResource("8_rvynd")]
+position = Vector2(331, 953)
+
+[node name="giant_bat7" parent="enemies" instance=ExtResource("8_rvynd")]
+position = Vector2(476, 922)
+
+[node name="giant_bat8" parent="enemies" instance=ExtResource("8_rvynd")]
+position = Vector2(1314, 1128)
+
+[node name="giant_bat9" parent="enemies" instance=ExtResource("8_rvynd")]
+position = Vector2(1184, 1096)
+
+[node name="giant_bat10" parent="enemies" instance=ExtResource("8_rvynd")]
+position = Vector2(1232, 1113)
+
+[node name="giant_bat11" parent="enemies" instance=ExtResource("8_rvynd")]
+position = Vector2(807, 1065)
+
+[node name="giant_bat12" parent="enemies" instance=ExtResource("8_rvynd")]
+position = Vector2(488, 1208)

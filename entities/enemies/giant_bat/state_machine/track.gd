@@ -2,7 +2,7 @@ extends EnemyState
 
 
 func on_entry() -> void:
-    _enemy.play_anim("idle", 1.75)
+    _enemy.play_anim("awoke", 1.75)
     _process = true
 
 
@@ -12,7 +12,7 @@ func physics_process(_delta: float) -> void:
     var distance := GameManager.player.global_position - _enemy.global_position
     var leng := distance.length()
     if leng >= _enemy.WATCH_DISTANCE:
-        state_change.emit(self.name, "idle")
+        state_change.emit(self.name, "awoke")
 
     if distance.x > _enemy.THRESHOLD && _enemy.flip:
         _enemy.flip = false
@@ -37,5 +37,11 @@ func physics_process(_delta: float) -> void:
         )
     else:
         _enemy.velocity.y = lerp(_enemy.velocity.y, 0.0, _enemy.ACCEL)
+
+    if leng <= _enemy.SEE_DISTANCE:
+        state_change.emit(self.name, "ram_attack")
+
+    if abs(distance.y) < 0.6:
+        state_change.emit(self.name, "fire_attack")
 
     _enemy.move_and_slide()

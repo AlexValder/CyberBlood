@@ -94,7 +94,6 @@ func enable_collision() -> void:
     collision_layer = 2
 
 
-
 func increase_health(by: int) -> void:
     max_health += by
     player_health_changed.emit(current_health, max_health)
@@ -105,6 +104,11 @@ func heal(value: int) -> void:
     player_health_changed.emit(
         current_health, min(max_health, current_health + value))
     current_health = min(max_health, current_health + value)
+
+
+func give_mana(value: int) -> void:
+    mana_changed.emit(min(max_mana, current_mana + value))
+    current_mana = min(max_mana, current_mana + value)
 
 
 func damage(value: int) -> void:

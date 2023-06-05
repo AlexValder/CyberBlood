@@ -30,7 +30,8 @@ func _ready() -> void:
     self.area_exited.connect(_on_area_exited, CONNECT_PERSIST)
 
 
-func _on_area_entered(hitbox: HitBox) -> void:
+func _on_area_entered(area: Area2D) -> void:
+    var hitbox := area as HitBox
     if hitbox == null:
         return
 
@@ -51,7 +52,8 @@ func _on_area_entered(hitbox: HitBox) -> void:
         _timer.start(interval)
 
 
-func _on_area_exited(hitbox: HitBox) -> void:
+func _on_area_exited(area: Area2D) -> void:
+    var hitbox := area as HitBox
     if hitbox == null:
         return
 
