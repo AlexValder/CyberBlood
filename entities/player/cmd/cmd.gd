@@ -1,48 +1,54 @@
 extends Control
+class_name CommandLine
 
-var LineEditString : LineEdit = null
-var RichTextLabelWindow : RichTextLabel = null
+@onready var inputString : LineEdit = get_node("/root/CommandLine/Window/vBoxContainer/lineEdit")
+@onready var RichTextLabelWindow : RichTextLabel = get_node("/root/CommandLine/Window/vBoxContainer/richTextLabel")
+#@onready var mouseInput := Input.mouse_mode
 
 enum ConsoleFunctions {
+    EXCEPTION,
     PRINT,
-    CLEAR,
+    CLEAR
 }
 
-
 func _ready():
-    LineEditString = $ConsoleWindow/lineEdit
-    RichTextLabelWindow = $ConsoleWindow/richTextLabel
-    $ConsoleWindow.visible = false
-    Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
-    
-# Called when the node enters the scene tree for the first time.
-func _input(event):
+    self.visible = false
+
+
+func _process(delta):
+    pass
+
+
+func _input(_event):
     if Input.is_action_just_pressed("~"):
-        $ConsoleWindow.visible = !$ConsoleWindow.visible
-        if $ConsoleWindow.visible:
-            Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+        self.visible = !self.visible
+        if self.visible:
+            inputString.grab_focus()
+            get_tree().get_root().set_input_as_handled()
+            self.accept_event()
         else:
-            Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
+            inputString.release_focus()
 
 
-func getFunction(inputString: String) -> Array:
-    inputString = inputString.lstrip(" ").rstrip(" ")
-    var wordsArr = inputString.split(" ", true, 1)
+
+func getFunction(input: String) -> Array:
+    input = input.lstrip(" ").rstrip(" ")
+    var wordsArr = input.split(" ", true, 1)
     match wordsArr[0].to_lower():
         "print":
             wordsArr[0] = str(ConsoleFunctions.PRINT)
         "clear":
             wordsArr[0] = str(ConsoleFunctions.CLEAR)
         _:
-            consolePrint("Function \""
-                    + wordsArr[0] + "\" does not exist")
-            wordsArr[0] = str(-1)
+            badCommandMsg(wordsArr[0])
+            wordsArr[0] = str(ConsoleFunctions.EXCEPTION)
     return wordsArr
 
 
 func runFunction(inputArray: Array) -> void:
-    var argsArr: Array = []
     match (inputArray[0].to_int()):
+        ConsoleFunctions.EXCEPTION:
+            pass
         ConsoleFunctions.PRINT:
             if (
                     inputArray.size() != 1
@@ -56,7 +62,6 @@ func runFunction(inputArray: Array) -> void:
                 consolePrint("No arguments in \"PRINT\" or wrong format of arguments.\n"+\
                         "Please enter the text and enclose it in "+\
                         "double quotation marks on both sides.")
-                        
         ConsoleFunctions.CLEAR:
             consoleClear()
 
@@ -70,8 +75,10 @@ func consoleClear() -> void:
     RichTextLabelWindow.clear()
 
 
+func badCommandMsg(cmd : String) -> void:
+    consolePrint("Function \"" + cmd + "\" does not exist")
+
+
 func _on_line_edit_text_submitted(new_text):
-    print(new_text) # Replace with function body.
     runFunction(getFunction(new_text))
-#    RichTextLabelWindow.newline()
-    LineEditString.clear()
+    inputString.clear()

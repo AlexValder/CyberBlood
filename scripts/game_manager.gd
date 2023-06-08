@@ -2,6 +2,9 @@ extends Node
 
 signal debug_toggled(debug)
 
+@onready var _cmd =\
+        preload("res://entities/player/console/console.tscn").instantiate()
+
 const LEVELS := {
     "menu": "res://scenes/ui/main_menu.tscn",
     "outskirts": "res://scenes/levels/{biome}/{biome}.{id}.tscn",
@@ -127,6 +130,7 @@ func toggle_debug_info(debug: bool) -> void:
 
 
 func _ready() -> void:
+    get_tree().get_root().add_child.call_deferred(_cmd)
     self.process_mode = Node.PROCESS_MODE_ALWAYS
     create_player()
     randomize()
