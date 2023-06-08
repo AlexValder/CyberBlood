@@ -3,7 +3,7 @@ extends Node
 signal debug_toggled(debug)
 
 @onready var _cmd =\
-        preload("res://entities/player/console/console.tscn").instantiate()
+        preload("res://entities/player/cmd/cmd.tscn").instantiate()
 
 const LEVELS := {
     "menu": "res://scenes/ui/main_menu.tscn",
