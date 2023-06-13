@@ -4,3 +4,11 @@
 
 [node name="base_level" type="Node2D"]
 script = ExtResource("1_pg14d")
+
+[node name="spawnpoints" type="Node2D" parent="."]
+
+[node name="room_transitions" type="Node2D" parent="."]
+
+[node name="env" type="Node2D" parent="."]
+
+[node name="enemies" type="Node2D" parent="."]

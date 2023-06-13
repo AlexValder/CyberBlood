@@ -1,24 +1,25 @@
-[gd_scene load_steps=8 format=3 uid="uid://boo4n3lwipjua"]
+[gd_scene load_steps=9 format=3 uid="uid://boo4n3lwipjua"]
 
+[ext_resource type="PackedScene" uid="uid://d3caregm4htcf" path="res://scenes/levels/base_level.tscn" id="1_jno1y"]
 [ext_resource type="Script" path="res://scenes/levels/outskirts/outskirts.002.gd" id="1_siwby"]
 [ext_resource type="TileSet" uid="uid://b3k13y1c7g1ax" path="res://assets/tilesets/test_level.tres" id="2_bw1et"]
 [ext_resource type="Script" path="res://scenes/levels/room_transition_trigger.gd" id="3_gxcsg"]
 [ext_resource type="PackedScene" uid="uid://dgl3bhcduh1j0" path="res://entities/props/chest.tscn" id="4_gvg72"]
 [ext_resource type="PackedScene" uid="uid://doatqussduypd" path="res://entities/items/health_upgrade.tscn" id="5_4yws2"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_ita5c"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nlahv"]
 size = Vector2(7, 176)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_tynpi"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2mgkr"]
 size = Vector2(256, 112)
 
-[node name="outskirts_002" type="Node2D"]
-position = Vector2(108, 88)
+[node name="outskirts_002" instance=ExtResource("1_jno1y")]
+position = Vector2(150, 139)
 script = ExtResource("1_siwby")
 biome = "outskirts"
 id = "002"
 
-[node name="tilemap" type="TileMap" parent="."]
+[node name="tilemap" type="TileMap" parent="." index="0"]
 texture_filter = 1
 tile_set = ExtResource("2_bw1et")
 format = 2
@@ -41,7 +42,73 @@ layer_2/z_index = 0
 layer_2/tile_data = PackedInt32Array(589894, 262144, 65537, 655430, 262144, 65537, 655431, 327680, 65537, 720969, 262144, 65537, 720970, 327680, 65538, 655435, 262144, 65537)
 metadata/_edit_lock_ = true
 
-[node name="secret_area" type="TileMap" parent="tilemap"]
+[node name="initial" type="Marker2D" parent="spawnpoints" index="0"]
+position = Vector2(250, 257)
+
+[node name="outskirts_001" type="Marker2D" parent="spawnpoints" index="1"]
+position = Vector2(10, 282)
+
+[node name="outskirts_003" type="Marker2D" parent="spawnpoints" index="2"]
+position = Vector2(2369, 762)
+
+[node name="outskirts_001" type="Area2D" parent="room_transitions" index="0"]
+position = Vector2(-15, 280)
+script = ExtResource("3_gxcsg")
+biome = "outskirts"
+roomId = "001"
+
+[node name="shape" type="CollisionShape2D" parent="room_transitions/outskirts_001" index="0"]
+shape = SubResource("RectangleShape2D_nlahv")
+
+[node name="outskirts_003" type="Area2D" parent="room_transitions" index="1"]
+position = Vector2(2388, 760)
+script = ExtResource("3_gxcsg")
+biome = "outskirts"
+roomId = "003"
+direction = 3
+
+[node name="shape" type="CollisionShape2D" parent="room_transitions/outskirts_003" index="0"]
+position = Vector2(0, -64)
+shape = SubResource("RectangleShape2D_nlahv")
+
+[node name="chest00" parent="env" index="0" instance=ExtResource("4_gvg72")]
+position = Vector2(1207, 180)
+contains = {
+"food": 0,
+"money": 34,
+"special": {}
+}
+
+[node name="chest01" parent="env" index="1" instance=ExtResource("4_gvg72")]
+position = Vector2(1249, 180)
+contains = {
+"food": 0,
+"money": 126,
+"special": {}
+}
+
+[node name="chest02" parent="env" index="2" instance=ExtResource("4_gvg72")]
+position = Vector2(1291, 180)
+contains = {
+"food": 2,
+"money": 0,
+"special": {}
+}
+
+[node name="health_upgrade" parent="env" index="3" instance=ExtResource("5_4yws2")]
+position = Vector2(718, 776)
+collision_layer = 128
+
+[node name="secret_area" type="Area2D" parent="env" index="4"]
+position = Vector2(1248, 136)
+collision_layer = 0
+collision_mask = 2
+
+[node name="shape" type="CollisionShape2D" parent="env/secret_area" index="0"]
+shape = SubResource("RectangleShape2D_2mgkr")
+
+[node name="sprite" type="TileMap" parent="env/secret_area" index="1"]
+position = Vector2(-1248, -136)
 tile_set = ExtResource("2_bw1et")
 collision_animatable = true
 format = 2
@@ -49,79 +116,6 @@ layer_0/name = "secret_room"
 layer_0/z_index = 2
 layer_0/tile_data = PackedInt32Array(327750, 262144, 65538, 393286, 262144, 65538, 458822, 327680, 65537, 524358, 262144, 65537, 589894, 262144, 65537, 655430, 327680, 65538, 720966, 327680, 65538, 786502, 262144, 65538, 327751, 262144, 65537, 393287, 262144, 65537, 458823, 327680, 65537, 524359, 262144, 65537, 589895, 262144, 65538, 655431, 327680, 65537, 720967, 327680, 65537, 786503, 327680, 65537, 327752, 262144, 65537, 393288, 327680, 65537, 458824, 327680, 65538, 524360, 262144, 65537, 589896, 262144, 65537, 655432, 262144, 65537, 720968, 327680, 65538, 786504, 327680, 65538, 327753, 262144, 65537, 393289, 262144, 65537, 458825, 262144, 65538, 524361, 262144, 65537, 589897, 327680, 65537, 655433, 327680, 65537, 720969, 262144, 65537, 786505, 262144, 65537, 327754, 327680, 65538, 393290, 262144, 65538, 458826, 262144, 65538, 524362, 262144, 65537, 589898, 327680, 65538, 655434, 262144, 65537, 720970, 327680, 65538, 786506, 327680, 65538, 327755, 262144, 65537, 393291, 262144, 65538, 458827, 327680, 65537, 524363, 262144, 65537, 589899, 262144, 65538, 655435, 327680, 65537, 720971, 327680, 65538, 786507, 327680, 65537, 327756, 262144, 65537, 393292, 327680, 65538, 458828, 262144, 65538, 524364, 327680, 65537, 589900, 327680, 65537, 655436, 262144, 65538, 720972, 262144, 65537, 786508, 262144, 65537, 327757, 262144, 65538, 393293, 327680, 65538, 458829, 327680, 65538, 524365, 327680, 65537, 589901, 327680, 65538, 655437, 262144, 65537, 720973, 262144, 65538, 786509, 262144, 65538, 327758, 262144, 65537, 393294, 327680, 65538, 458830, 327680, 65537, 524366, 262144, 65538, 589902, 262144, 65538, 655438, 262144, 65538, 720974, 327680, 65538, 786510, 262144, 65537, 327759, 262144, 65537, 393295, 262144, 65537, 458831, 327680, 65538, 524367, 327680, 65537, 589903, 262144, 65537, 655439, 262144, 65537, 720975, 262144, 65537, 786511, 262144, 65538, 327760, 262144, 65538, 393296, 327680, 65537, 458832, 262144, 65537, 524368, 262144, 65538, 589904, 327680, 65537, 655440, 327680, 65537, 720976, 327680, 65538, 786512, 327680, 65537, 327761, 327680, 65538, 393297, 327680, 65537, 458833, 327680, 65538, 524369, 262144, 65538, 589905, 262144, 65538, 655441, 327680, 65537, 720977, 327680, 65538, 786513, 327680, 65537, 327762, 262144, 65537, 393298, 327680, 65538, 458834, 327680, 65537, 524370, 262144, 65537, 589906, 262144, 65538, 655442, 262144, 65538, 720978, 327680, 65537, 786514, 262144, 65537, 327763, 327680, 65537, 393299, 262144, 65538, 458835, 327680, 65538, 524371, 262144, 65538, 589907, 262144, 65538, 655443, 327680, 65537, 720979, 327680, 65538, 786515, 262144, 65537, 327764, 327680, 65537, 393300, 327680, 65537, 458836, 327680, 65537, 524372, 327680, 65538, 589908, 327680, 65538, 655444, 327680, 65537, 720980, 262144, 65538, 786516, 262144, 65537, 327765, 262144, 65538, 393301, 327680, 65538, 458837, 327680, 65537, 524373, 262144, 65537, 589909, 262144, 65537, 655445, 327680, 65538, 720981, 327680, 65537, 786517, 327680, 65537, 327766, 327680, 65538, 393302, 262144, 65537, 458838, 327680, 65537, 524374, 327680, 65537, 589910, 327680, 65537, 655446, 327680, 65538, 720982, 262144, 65537, 786518, 327680, 65538, 262215, 327680, 65537, 262216, 262144, 65537, 262217, 327680, 65538, 262218, 262144, 65538, 262219, 327680, 65537, 262220, 327680, 65538, 262221, 262144, 65538, 262222, 327680, 65537, 262223, 262144, 65537, 262224, 327680, 65538, 262225, 327680, 65537, 262226, 262144, 65537, 262227, 327680, 65537, 262228, 262144, 65538, 262229, 262144, 65538, 262230, 327680, 65537, 393285, 327680, 65538, 327749, 327680, 65538, 262213, 262144, 65537, 262214, 327680, 65537)
 
-[node name="spawnpoints" type="Node" parent="."]
-
-[node name="initial" type="Marker2D" parent="spawnpoints"]
-position = Vector2(364, 344)
-
-[node name="outskirts_001" type="Marker2D" parent="spawnpoints"]
-position = Vector2(124, 369)
-
-[node name="outskirts_003" type="Marker2D" parent="spawnpoints"]
-position = Vector2(2483, 849)
-
-[node name="room_transitions" type="Node" parent="."]
-
-[node name="outskirts_001" type="Area2D" parent="room_transitions"]
-position = Vector2(97, 368)
-script = ExtResource("3_gxcsg")
-biome = "outskirts"
-roomId = "001"
-
-[node name="shape" type="CollisionShape2D" parent="room_transitions/outskirts_001"]
-shape = SubResource("RectangleShape2D_ita5c")
-
-[node name="outskirts_003" type="Area2D" parent="room_transitions"]
-position = Vector2(2500, 848)
-script = ExtResource("3_gxcsg")
-biome = "outskirts"
-roomId = "003"
-direction = 3
-
-[node name="shape" type="CollisionShape2D" parent="room_transitions/outskirts_003"]
-position = Vector2(0, -64)
-shape = SubResource("RectangleShape2D_ita5c")
-
-[node name="secret_area" type="Area2D" parent="."]
-position = Vector2(1248, 136)
-collision_layer = 0
-collision_mask = 2
-
-[node name="shape" type="CollisionShape2D" parent="secret_area"]
-shape = SubResource("RectangleShape2D_tynpi")
-
-[node name="env" type="Node" parent="."]
-
-[node name="chest00" parent="env" instance=ExtResource("4_gvg72")]
-position = Vector2(1312, 268)
-contains = {
-"food": 0,
-"money": 34,
-"special": {}
-}
-
-[node name="chest01" parent="env" instance=ExtResource("4_gvg72")]
-position = Vector2(1354, 268)
-contains = {
-"food": 0,
-"money": 126,
-"special": {}
-}
-
-[node name="chest02" parent="env" instance=ExtResource("4_gvg72")]
-position = Vector2(1396, 268)
-contains = {
-"food": 2,
-"money": 0,
-"special": {}
-}
-
-[node name="health_upgrade" parent="env" instance=ExtResource("5_4yws2")]
-position = Vector2(817, 864)
-collision_layer = 128
-
-[node name="enemies" type="Node" parent="."]
-
-[connection signal="body_entered" from="secret_area" to="." method="_on_secret_area_body_entered"]
-[connection signal="body_exited" from="secret_area" to="." method="_on_secret_area_body_exited"]
 [connection signal="picked_up" from="env/health_upgrade" to="." method="_on_health_upgrade_picked_up"]
+[connection signal="body_entered" from="env/secret_area" to="." method="_on_secret_area_body_entered"]
+[connection signal="body_exited" from="env/secret_area" to="." method="_on_secret_area_body_exited"]

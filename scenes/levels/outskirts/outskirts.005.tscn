@@ -1,5 +1,6 @@
 [gd_scene load_steps=43 format=3 uid="uid://dx3dbjmm6dat1"]
 
+[ext_resource type="PackedScene" uid="uid://d3caregm4htcf" path="res://scenes/levels/base_level.tscn" id="1_bjg18"]
 [ext_resource type="Script" path="res://scenes/levels/outskirts/outskirts.005.gd" id="1_g1bs6"]
 [ext_resource type="TileSet" uid="uid://b3k13y1c7g1ax" path="res://assets/tilesets/test_level.tres" id="2_lyn37"]
 [ext_resource type="Script" path="res://scenes/levels/room_transition_trigger.gd" id="3_rekwg"]
@@ -10,78 +11,74 @@
 [ext_resource type="Shader" path="res://assets/shaders/was_hit.gdshader" id="8_u4ki4"]
 [ext_resource type="PackedScene" uid="uid://b2k3uvu7d2kn2" path="res://entities/props/door.tscn" id="9_6xf2s"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_spoic"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8h5ai"]
 size = Vector2(13, 96)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_hlwt3"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ie2os"]
 size = Vector2(112, 8)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_bhkbx"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6cdra"]
 size = Vector2(10, 64)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_5v34l"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kxbo4"]
 resource_local_to_scene = true
 size = Vector2(16, 176)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_osjgf"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sotr3"]
 resource_local_to_scene = true
 size = Vector2(16, 144)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_4enem"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_anl8k"]
 resource_local_to_scene = true
 size = Vector2(16, 176)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_mylj4"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ylykh"]
 resource_local_to_scene = true
 size = Vector2(16, 80)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_igq7k"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qs3qd"]
 resource_local_to_scene = true
 size = Vector2(16, 160)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_002fv"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dgq6r"]
 resource_local_to_scene = true
 size = Vector2(16, 160)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_s03hw"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fuxcb"]
 resource_local_to_scene = true
 size = Vector2(16, 96)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_5hlhh"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tmtgc"]
 size = Vector2(624, 64)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_eqsuw"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_dwig5"]
 resource_local_to_scene = true
 shader = ExtResource("8_u4ki4")
 shader_parameter/tint = Color(1, 1, 1, 1)
 shader_parameter/mixture = 0.0
 
-[sub_resource type="Gradient" id="Gradient_sjgw2"]
-colors = PackedColorArray(0.388235, 0.439216, 0.286275, 1, 0.580392, 0.580392, 0.580392, 1)
+[sub_resource type="Gradient" id="Gradient_7wu1a"]
+colors = PackedColorArray(0.197937, 0.197937, 0.197937, 1, 0.537011, 0.537011, 0.537011, 1)
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_mi8jq"]
-noise_type = 5
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_8l6un"]
 
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_hju6i"]
-color_ramp = SubResource("Gradient_sjgw2")
-noise = SubResource("FastNoiseLite_mi8jq")
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_vykbq"]
+color_ramp = SubResource("Gradient_7wu1a")
+noise = SubResource("FastNoiseLite_8l6un")
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_ay67w"]
-size = Vector2(48, 16)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_pulme"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sy7h8"]
 size = Vector2(48, 16)
 
 [sub_resource type="Gradient" id="Gradient_8mhl2"]
 colors = PackedColorArray(1, 1, 0.643137, 1, 1, 1, 1, 1)
 
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_u0ppj"]
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_3iqqo"]
 gradient = SubResource("Gradient_8mhl2")
 fill = 1
 fill_from = Vector2(0.307692, 0.692308)
 repeat = 2
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_5rmbt"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_pi14j"]
 resource_local_to_scene = true
 shader = ExtResource("8_u4ki4")
 shader_parameter/tint = Color(1, 1, 1, 1)
@@ -93,14 +90,14 @@ colors = PackedColorArray(0.180392, 0.792157, 0.607843, 1, 0.180392, 0.792157, 0
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_dgb44"]
 frequency = 0.003
 
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_gddy8"]
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_0g4gt"]
 color_ramp = SubResource("Gradient_63akp")
 noise = SubResource("FastNoiseLite_dgb44")
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_8o0nk"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_s3xgb"]
 size = Vector2(4, 41)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_375qd"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pscnp"]
 size = Vector2(96, 10)
 
 [sub_resource type="Gradient" id="Gradient_ynw8q"]
@@ -108,31 +105,31 @@ colors = PackedColorArray(0.311416, 0.22054, 0, 1, 0.216946, 0.0812767, 0.004049
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_q1jrq"]
 
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_awqfp"]
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_sk4le"]
 color_ramp = SubResource("Gradient_ynw8q")
 noise = SubResource("FastNoiseLite_q1jrq")
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_fvmpg"]
+[sub_resource type="Gradient" id="Gradient_jsxyt"]
+colors = PackedColorArray(0, 0, 0, 1, 0.499743, 0.179927, 0, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_xdpoy"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_h12we"]
+color_ramp = SubResource("Gradient_jsxyt")
+noise = SubResource("FastNoiseLite_xdpoy")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_s07tk"]
 size = Vector2(10, 48)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_2vtqy"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ikwhm"]
 size = Vector2(16, 48)
 
-[sub_resource type="Gradient" id="Gradient_tge00"]
-colors = PackedColorArray(0.483009, 0.320921, 0.0978578, 1, 0.291921, 0.22014, 0.175171, 1)
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_57b7e"]
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_d3unq"]
-color_ramp = SubResource("Gradient_tge00")
-noise = SubResource("FastNoiseLite_57b7e")
-
-[node name="outskirts_005" type="Node2D"]
+[node name="outskirts_005" instance=ExtResource("1_bjg18")]
 script = ExtResource("1_g1bs6")
 biome = "outskirts"
 id = "005"
 
-[node name="tilemap" type="TileMap" parent="."]
+[node name="tilemap" type="TileMap" parent="." index="0"]
 texture_filter = 3
 tile_set = ExtResource("2_lyn37")
 format = 2
@@ -155,7 +152,7 @@ layer_2/z_index = 0
 layer_2/tile_data = PackedInt32Array()
 metadata/_edit_lock_ = true
 
-[node name="hiding" type="TileMap" parent="tilemap"]
+[node name="hiding" type="TileMap" parent="tilemap" index="0"]
 position = Vector2(1168, 944)
 tile_set = ExtResource("2_lyn37")
 format = 2
@@ -163,144 +160,138 @@ layer_0/z_index = 10
 layer_0/tile_data = PackedInt32Array(0, 851968, 131088, 1, 851968, 131088, 2, 851968, 131088, 65538, 851968, 131088, 65539, 851968, 131088, 3, 851968, 131088, 4, 851968, 131088, 65535, 851968, 131088, 131071, 851968, 131088, 196607, 851968, 131088, 262143, 851968, 131088, -65535, 851968, 131088, -65534, 851968, 131088, -65533, 851968, 131088, -131069, 851968, 131088, -131070, 851968, 131088, -196605, 851968, 131088, 327679, 851968, 131088, 393215, 851968, 131088, 262144, 851968, 131088, 262145, 851968, 131088, 262146, 851968, 131088, 393214, 851968, 131088, 458750, 851968, 131088, 327680, 851968, 131088, 458751, 851968, 131088, 524287, 851968, 131088, 589822, 851968, 131088, 524286, 851968, 131088, 65536, 262144, 65538, 131072, 262144, 65538, 131073, 327680, 65538, 65537, 327680, 65538, 196609, 262144, 65537, 196608, 327680, 65538, 196610, 262144, 65537, 196611, 327680, 65537, 131075, 327680, 65537, 196612, 262144, 65537, 262148, 327680, 65538, 262147, 327680, 65538, 131074, 262144, 65537, 131076, 262144, 65538, 65540, 262144, 65538, 65541, 327680, 65537, 5, 327680, 65537, -65531, 262144, 65537, -65532, 327680, 65537, -65530, 327680, 65537, -65529, 262144, 65537, -65528, 327680, 65538, -65527, 327680, 65538, -65526, 262144, 65538, 9, 262144, 65537, 65545, 262144, 65537, 65544, 327680, 65537, 131080, 327680, 65538, 196616, 327680, 65537, 196615, 327680, 65537, 196614, 327680, 65537, 196613, 262144, 65538, 262149, 262144, 65538, 262150, 262144, 65537, 262151, 327680, 65538, 262152, 327680, 65537, 262153, 262144, 65538, 131077, 262144, 65537, 131078, 327680, 65538, 65542, 262144, 65538, 65543, 262144, 65537, 7, 262144, 65537, 8, 262144, 65538, 131079, 262144, 65537, 6, 327680, 65537, 131081, 327680, 65537, 262154, 327680, 65537, 262155, 327680, 65537, 262156, 262144, 65538, 262157, 327680, 65538, 262158, 327680, 65537, 262159, 327680, 65538, 262160, 327680, 65538, 262161, 262144, 65538, 262162, 262144, 65538, 262163, 327680, 65538, 262164, 262144, 65538, 262165, 327680, 65537, 262166, 327680, 65538, 262167, 327680, 65537, 262168, 327680, 65537, 262169, 262144, 65537, 262170, 327680, 65537, 262171, 262144, 65538, 262172, 262144, 65538, 262173, 262144, 65538, 262174, 327680, 65538, 262175, 262144, 65538, 262176, 262144, 65538, 262177, 327680, 65537, 262178, 327680, 65537, 262179, 262144, 65537, 262180, 327680, 65537, 262181, 327680, 65538, 262182, 262144, 65537, 196646, 262144, 65537, 131110, 327680, 65537, 65574, 327680, 65537, 38, 262144, 65537, -65498, 327680, 65538, -65499, 327680, 65538, -65500, 262144, 65537, -65501, 262144, 65538, -65502, 327680, 65537, -65503, 262144, 65537, -65504, 262144, 65538, -65505, 327680, 65537, -65506, 262144, 65538, -65507, 327680, 65537, -65508, 262144, 65537, -65509, 262144, 65537, -65510, 327680, 65538, -131046, 327680, 65538, -65525, 327680, 65537, -65524, 262144, 65537, -65523, 327680, 65537, -65522, 262144, 65537, -65521, 327680, 65538, -65520, 327680, 65537, -65519, 327680, 65538, 17, 262144, 65538, 18, 262144, 65537, 19, 262144, 65537, 20, 262144, 65538, 21, 262144, 65538, 22, 262144, 65538, 23, 262144, 65538, 24, 327680, 65537, 25, 262144, 65538, 26, 327680, 65538, -65511, 327680, 65538, -65512, 262144, 65537, -65513, 327680, 65537, -65514, 327680, 65538, -65515, 327680, 65538, -65516, 262144, 65537, -65517, 327680, 65538, -65518, 262144, 65538, 14, 327680, 65538, 13, 327680, 65537, 12, 262144, 65538, 11, 327680, 65538, 196624, 327680, 65537, 131088, 327680, 65537, 65552, 262144, 65538, 16, 262144, 65538, 15, 327680, 65537, 65551, 327680, 65538, 65550, 327680, 65538, 65549, 262144, 65538, 65548, 327680, 65537, 65547, 327680, 65538, 65546, 262144, 65537, 10, 262144, 65538, 131082, 262144, 65537, 196618, 327680, 65537, 196617, 262144, 65538, 196619, 262144, 65537, 131083, 262144, 65537, 131084, 327680, 65537, 196620, 327680, 65537, 196621, 327680, 65538, 131085, 327680, 65538, 131086, 262144, 65538, 196622, 262144, 65537, 196623, 327680, 65537, 131087, 262144, 65538, 65553, 262144, 65537, 131089, 327680, 65537, 196625, 327680, 65537, 196626, 262144, 65538, 131090, 262144, 65537, 65554, 327680, 65537, 65555, 262144, 65537, 131091, 262144, 65538, 196627, 262144, 65537, 196628, 262144, 65538, 131092, 262144, 65538, 65556, 327680, 65538, 65557, 262144, 65537, 131093, 327680, 65537, 196629, 327680, 65538, 196630, 262144, 65537, 131094, 262144, 65538, 65558, 262144, 65537, 65559, 262144, 65538, 131095, 262144, 65537, 196631, 262144, 65537, 196632, 262144, 65538, 131096, 262144, 65537, 65560, 327680, 65537, 65561, 327680, 65538, 131097, 262144, 65538, 196633, 262144, 65537, 196634, 327680, 65538, 131098, 327680, 65538, 65562, 262144, 65537, 65563, 262144, 65537, 27, 327680, 65538, 28, 327680, 65537, 65564, 327680, 65538, 131100, 327680, 65537, 131099, 327680, 65537, 196635, 327680, 65537, 196636, 262144, 65537, 196637, 327680, 65538, 131101, 262144, 65538, 65565, 262144, 65538, 29, 262144, 65538, 30, 262144, 65537, 65566, 327680, 65537, 131102, 262144, 65538, 196638, 262144, 65537, 196639, 262144, 65538, 131103, 327680, 65538, 65567, 327680, 65538, 31, 262144, 65538, 32, 327680, 65537, 65568, 262144, 65538, 131104, 327680, 65538, 196640, 262144, 65537, 196641, 262144, 65538, 131105, 262144, 65537, 65569, 262144, 65538, 33, 327680, 65537, 34, 262144, 65538, 65570, 327680, 65538, 131106, 262144, 65537, 196642, 327680, 65537, 196643, 262144, 65537, 131107, 327680, 65538, 65571, 327680, 65537, 35, 327680, 65538, 36, 327680, 65538, 65572, 262144, 65538, 131108, 262144, 65538, 196644, 327680, 65538, 196645, 262144, 65538, 131109, 262144, 65538, 65573, 262144, 65538, 37, 327680, 65538)
 metadata/_edit_lock_ = true
 
-[node name="roots" type="TileMap" parent="tilemap"]
+[node name="roots" type="TileMap" parent="tilemap" index="1"]
 position = Vector2(1104, 944)
 tile_set = ExtResource("2_lyn37")
 format = 2
 layer_0/tile_data = PackedInt32Array(0, 851968, 16, 196607, 851968, 16, 131071, 851968, 16, 65536, 851968, 16, 131072, 851968, 16, 196608, 851968, 16, 196609, 851968, 16, 131073, 851968, 16, 65537, 851968, 16, 1, 851968, 16, 2, 851968, 16, 65538, 851968, 16, 131074, 851968, 16, 196610, 851968, 16)
 metadata/_edit_lock_ = true
 
-[node name="instr_1" type="Label" parent="tilemap"]
+[node name="instr_1" type="Label" parent="tilemap" index="2"]
 offset_left = 558.0
 offset_top = 524.0
 offset_right = 646.0
 offset_bottom = 550.0
 text = "Arachne #2"
 
-[node name="spawnpoints" type="Node" parent="."]
-
-[node name="initial" type="Marker2D" parent="spawnpoints"]
+[node name="initial" type="Marker2D" parent="spawnpoints" index="0"]
 position = Vector2(385, 558)
 
-[node name="outskirts_003" type="Marker2D" parent="spawnpoints"]
+[node name="outskirts_003" type="Marker2D" parent="spawnpoints" index="1"]
 position = Vector2(1782, 184)
 
-[node name="outskirts_006" type="Marker2D" parent="spawnpoints"]
+[node name="outskirts_006" type="Marker2D" parent="spawnpoints" index="2"]
 position = Vector2(-24, 1272)
 
-[node name="outskirts_011" type="Marker2D" parent="spawnpoints"]
+[node name="outskirts_011" type="Marker2D" parent="spawnpoints" index="3"]
 position = Vector2(1775, 976)
 
-[node name="room_transitions" type="Node" parent="."]
-
-[node name="outskirts_003" type="Area2D" parent="room_transitions"]
+[node name="outskirts_003" type="Area2D" parent="room_transitions" index="0"]
 position = Vector2(1805, 160)
 script = ExtResource("3_rekwg")
 biome = "outskirts"
 roomId = "003"
 direction = 3
 
-[node name="shape" type="CollisionShape2D" parent="room_transitions/outskirts_003"]
-shape = SubResource("RectangleShape2D_spoic")
+[node name="shape" type="CollisionShape2D" parent="room_transitions/outskirts_003" index="0"]
+shape = SubResource("RectangleShape2D_8h5ai")
 
-[node name="outskirts_006" type="Area2D" parent="room_transitions"]
+[node name="outskirts_006" type="Area2D" parent="room_transitions" index="1"]
 position = Vector2(-8, 1324)
 script = ExtResource("3_rekwg")
 biome = "outskirts"
 roomId = "006"
 direction = 1
 
-[node name="shape" type="CollisionShape2D" parent="room_transitions/outskirts_006"]
-shape = SubResource("RectangleShape2D_hlwt3")
+[node name="shape" type="CollisionShape2D" parent="room_transitions/outskirts_006" index="0"]
+shape = SubResource("RectangleShape2D_ie2os")
 
-[node name="outskirts_011" type="Area2D" parent="room_transitions"]
+[node name="outskirts_011" type="Area2D" parent="room_transitions" index="2"]
 position = Vector2(1804, 976)
 script = ExtResource("3_rekwg")
 biome = "outskirts"
 roomId = "011"
 direction = 3
 
-[node name="shape" type="CollisionShape2D" parent="room_transitions/outskirts_011"]
-shape = SubResource("RectangleShape2D_bhkbx")
+[node name="shape" type="CollisionShape2D" parent="room_transitions/outskirts_011" index="0"]
+shape = SubResource("RectangleShape2D_6cdra")
 
-[node name="env" type="Node" parent="."]
-
-[node name="ladder_00" parent="env" instance=ExtResource("4_t5qqu")]
+[node name="ladder_00" parent="env" index="0" instance=ExtResource("4_t5qqu")]
 position = Vector2(-448, 422)
 facing_left = true
 
 [node name="shape" parent="env/ladder_00" index="0"]
 position = Vector2(8, 24)
-shape = SubResource("RectangleShape2D_5v34l")
+shape = SubResource("RectangleShape2D_kxbo4")
 
 [node name="sprite" parent="env/ladder_00" index="1"]
 layer_0/tile_data = PackedInt32Array(393216, 1114112, 18, 327680, 1114112, 18, 262144, 1114112, 18, 196608, 1114112, 18, 131072, 1114112, 18, 65536, 1114112, 18, 0, 1114112, 18, -65536, 1114112, 18, -262144, 1114112, 18, -196608, 1114112, 18, -131072, 1114112, 18)
 
-[node name="ladder_01" parent="env" instance=ExtResource("4_t5qqu")]
+[node name="ladder_01" parent="env" index="1" instance=ExtResource("4_t5qqu")]
 position = Vector2(-64, 486)
 
 [node name="shape" parent="env/ladder_01" index="0"]
 position = Vector2(8, 56)
-shape = SubResource("RectangleShape2D_osjgf")
+shape = SubResource("RectangleShape2D_sotr3")
 
 [node name="sprite" parent="env/ladder_01" index="1"]
 layer_0/tile_data = PackedInt32Array(458752, 1114112, 18, 393216, 1114112, 18, 327680, 1114112, 18, 262144, 1114112, 18, 196608, 1114112, 18, 131072, 1114112, 18, 65536, 1114112, 18, 0, 1114112, 18, -65536, 1114112, 18)
 
-[node name="ladder_02" parent="env" instance=ExtResource("4_t5qqu")]
+[node name="ladder_02" parent="env" index="2" instance=ExtResource("4_t5qqu")]
 position = Vector2(-384, 614)
 facing_left = true
 
 [node name="shape" parent="env/ladder_02" index="0"]
 position = Vector2(8, 24)
-shape = SubResource("RectangleShape2D_4enem")
+shape = SubResource("RectangleShape2D_anl8k")
 
 [node name="sprite" parent="env/ladder_02" index="1"]
 layer_0/tile_data = PackedInt32Array(393216, 1114112, 18, 327680, 1114112, 18, 262144, 1114112, 18, 196608, 1114112, 18, 131072, 1114112, 18, 65536, 1114112, 18, 0, 1114112, 18, -65536, 1114112, 18, -196608, 1114112, 18, -131072, 1114112, 18, -262144, 1114112, 18)
 
-[node name="ladder_03" parent="env" instance=ExtResource("4_t5qqu")]
+[node name="ladder_03" parent="env" index="3" instance=ExtResource("4_t5qqu")]
 position = Vector2(192, 614)
 facing_left = true
 
 [node name="shape" parent="env/ladder_03" index="0"]
 position = Vector2(8, 72)
-shape = SubResource("RectangleShape2D_mylj4")
+shape = SubResource("RectangleShape2D_ylykh")
 
 [node name="sprite" parent="env/ladder_03" index="1"]
 layer_0/tile_data = PackedInt32Array(393216, 1114112, 18, 327680, 1114112, 18, 262144, 1114112, 18, 196608, 1114112, 18, 131072, 1114112, 18)
 
-[node name="ladder_04" parent="env" instance=ExtResource("4_t5qqu")]
+[node name="ladder_04" parent="env" index="4" instance=ExtResource("4_t5qqu")]
 position = Vector2(-192, 902)
 
 [node name="shape" parent="env/ladder_04" index="0"]
 position = Vector2(8, 32)
-shape = SubResource("RectangleShape2D_igq7k")
+shape = SubResource("RectangleShape2D_qs3qd")
 
 [node name="sprite" parent="env/ladder_04" index="1"]
 layer_0/tile_data = PackedInt32Array(393216, 1114112, 18, 327680, 1114112, 18, 262144, 1114112, 18, 196608, 1114112, 18, 131072, 1114112, 18, 65536, 1114112, 18, 0, 1114112, 18, -65536, 1114112, 18, -196608, 1114112, 18, -131072, 1114112, 18)
 
-[node name="ladder_05" parent="env" instance=ExtResource("4_t5qqu")]
+[node name="ladder_05" parent="env" index="5" instance=ExtResource("4_t5qqu")]
 position = Vector2(-320, 870)
 facing_left = true
 
 [node name="shape" parent="env/ladder_05" index="0"]
 position = Vector2(8, 64)
-shape = SubResource("RectangleShape2D_002fv")
+shape = SubResource("RectangleShape2D_dgq6r")
 
 [node name="sprite" parent="env/ladder_05" index="1"]
 layer_0/tile_data = PackedInt32Array(458752, 1114112, 18, 393216, 1114112, 18, 327680, 1114112, 18, 262144, 1114112, 18, 196608, 1114112, 18, 131072, 1114112, 18, 65536, 1114112, 18, 0, 1114112, 18, -65536, 1114112, 18, 524288, 1114112, 18)
 
-[node name="ladder_06" parent="env" instance=ExtResource("4_t5qqu")]
+[node name="ladder_06" parent="env" index="6" instance=ExtResource("4_t5qqu")]
 position = Vector2(-672, 758)
 facing_left = true
 
 [node name="shape" parent="env/ladder_06" index="0"]
 position = Vector2(8, 32)
-shape = SubResource("RectangleShape2D_s03hw")
+shape = SubResource("RectangleShape2D_fuxcb")
 
 [node name="sprite" parent="env/ladder_06" index="1"]
 layer_0/tile_data = PackedInt32Array(262144, 1114112, 18, 196608, 1114112, 18, 131072, 1114112, 18, 65536, 1114112, 18, 0, 1114112, 18, -65536, 1114112, 18)
 
-[node name="chest00" parent="env" instance=ExtResource("5_o6tw8")]
+[node name="chest00" parent="env" index="7" instance=ExtResource("5_o6tw8")]
 position = Vector2(81, 644)
 contains = {
 "food": 1,
@@ -308,7 +299,7 @@ contains = {
 "special": {}
 }
 
-[node name="chest01" parent="env" instance=ExtResource("5_o6tw8")]
+[node name="chest01" parent="env" index="8" instance=ExtResource("5_o6tw8")]
 position = Vector2(28, 852)
 contains = {
 "food": 0,
@@ -316,7 +307,7 @@ contains = {
 "special": {}
 }
 
-[node name="chest02" parent="env" instance=ExtResource("5_o6tw8")]
+[node name="chest02" parent="env" index="9" instance=ExtResource("5_o6tw8")]
 position = Vector2(-653, 548)
 contains = {
 "food": 1,
@@ -324,7 +315,7 @@ contains = {
 "special": {}
 }
 
-[node name="chest03" parent="env" instance=ExtResource("5_o6tw8")]
+[node name="chest03" parent="env" index="10" instance=ExtResource("5_o6tw8")]
 position = Vector2(-653, 356)
 contains = {
 "food": 0,
@@ -332,7 +323,7 @@ contains = {
 "special": {}
 }
 
-[node name="chest04" parent="env" instance=ExtResource("5_o6tw8")]
+[node name="chest04" parent="env" index="11" instance=ExtResource("5_o6tw8")]
 position = Vector2(62, 324)
 contains = {
 "food": 0,
@@ -340,33 +331,32 @@ contains = {
 "special": {}
 }
 
-[node name="save" parent="env" instance=ExtResource("6_6t8e6")]
+[node name="save" parent="env" index="12" instance=ExtResource("6_6t8e6")]
 offset_left = 1245.0
 offset_top = 273.0
 offset_right = 1305.0
 offset_bottom = 333.0
 
-[node name="corridor_hide" type="Area2D" parent="env"]
+[node name="corridor_hide" type="Area2D" parent="env" index="13"]
 position = Vector2(1168, 944)
 collision_layer = 0
 collision_mask = 2
 
-[node name="shape" type="CollisionShape2D" parent="env/corridor_hide"]
+[node name="shape" type="CollisionShape2D" parent="env/corridor_hide" index="0"]
 position = Vector2(312, 32)
-shape = SubResource("RectangleShape2D_5hlhh")
+shape = SubResource("RectangleShape2D_tmtgc")
 
-[node name="breakable_floor" parent="env" instance=ExtResource("7_3pjvi")]
+[node name="breakable_floor" parent="env" index="14" instance=ExtResource("7_3pjvi")]
 position = Vector2(528, 624)
 required_hits = 2
 
 [node name="sprite" parent="env/breakable_floor" index="0"]
-material = SubResource("ShaderMaterial_eqsuw")
+material = SubResource("ShaderMaterial_dwig5")
 
 [node name="textureRect" type="TextureRect" parent="env/breakable_floor/sprite" index="0"]
 use_parent_material = true
 offset_right = 48.0
 offset_bottom = 16.0
-texture = SubResource("NoiseTexture2D_hju6i")
 expand_mode = 1
 
 [node name="hurtbox" parent="env/breakable_floor" index="1"]
@@ -374,39 +364,44 @@ collision_mask = 6
 damaged_by_player = true
 damaged_by_enemy = false
 
-[node name="shape" parent="env/breakable_floor/hurtbox" index="0"]
+[node name="sprite" type="Sprite2D" parent="env/breakable_floor/hurtbox" index="0"]
+position = Vector2(24, 8.00001)
+scale = Vector2(0.09375, 0.0312501)
+texture = SubResource("NoiseTexture2D_vykbq")
+
+[node name="collision" type="StaticBody2D" parent="env/breakable_floor/hurtbox" index="1"]
+
+[node name="shape" type="CollisionShape2D" parent="env/breakable_floor/hurtbox/collision" index="0"]
 position = Vector2(24, 8)
-shape = SubResource("RectangleShape2D_ay67w")
+shape = SubResource("RectangleShape2D_sy7h8")
 
-[node name="static" type="StaticBody2D" parent="env/breakable_floor"]
-
-[node name="shape" type="CollisionShape2D" parent="env/breakable_floor/static"]
+[node name="shape" parent="env/breakable_floor/hurtbox" index="2"]
 position = Vector2(24, 8)
-shape = SubResource("RectangleShape2D_pulme")
+shape = SubResource("RectangleShape2D_sy7h8")
 
-[node name="bell" type="AnimatableBody2D" parent="env"]
+[node name="bell" type="AnimatableBody2D" parent="env" index="15"]
 position = Vector2(-240, 248)
 collision_mask = 32
 
-[node name="shape" type="CollisionPolygon2D" parent="env/bell"]
+[node name="shape" type="CollisionPolygon2D" parent="env/bell" index="0"]
 polygon = PackedVector2Array(0, -1, 12, 4, 24, 18, 26, 50, 30, 63, 43, 72, 44, 80, -44, 80, -43, 72, -30, 63, -26, 50, -24, 18, -12, 4)
 
-[node name="polygon2d" type="Polygon2D" parent="env/bell"]
+[node name="polygon2d" type="Polygon2D" parent="env/bell" index="1"]
 color = Color(0.180392, 0.792157, 0.760784, 1)
-texture = SubResource("GradientTexture2D_u0ppj")
+texture = SubResource("GradientTexture2D_3iqqo")
 polygon = PackedVector2Array(0, -1, 12, 4, 24, 18, 26, 50, 30, 63, 43, 72, 44, 80, -44, 80, -43, 72, -30, 63, -26, 50, -24, 18, -12, 4)
 
-[node name="chain" parent="env/bell" instance=ExtResource("7_3pjvi")]
+[node name="chain" parent="env/bell" index="2" instance=ExtResource("7_3pjvi")]
 
 [node name="sprite" parent="env/bell/chain" index="0"]
-material = SubResource("ShaderMaterial_5rmbt")
+material = SubResource("ShaderMaterial_pi14j")
 
 [node name="texture" type="TextureRect" parent="env/bell/chain/sprite" index="0"]
 offset_left = -2.0
 offset_top = -41.0
 offset_right = 2.0
 offset_bottom = 1.0
-texture = SubResource("NoiseTexture2D_gddy8")
+texture = SubResource("NoiseTexture2D_0g4gt")
 expand_mode = 1
 
 [node name="hurtbox" parent="env/bell/chain" index="1"]
@@ -415,40 +410,38 @@ damaged_by_enemy = false
 
 [node name="shape" parent="env/bell/chain/hurtbox" index="0"]
 position = Vector2(0, -20)
-shape = SubResource("RectangleShape2D_8o0nk")
+shape = SubResource("RectangleShape2D_s3xgb")
 
-[node name="floor" type="StaticBody2D" parent="env"]
+[node name="floor" type="StaticBody2D" parent="env" index="16"]
 position = Vector2(-288, 752)
 collision_mask = 0
 
-[node name="shape" type="CollisionShape2D" parent="env/floor"]
+[node name="shape" type="CollisionShape2D" parent="env/floor" index="0"]
 position = Vector2(48, 5)
-shape = SubResource("RectangleShape2D_375qd")
+shape = SubResource("RectangleShape2D_pscnp")
 
-[node name="texture" type="TextureRect" parent="env/floor"]
+[node name="texture" type="TextureRect" parent="env/floor" index="1"]
 offset_right = 96.0
 offset_bottom = 10.0
-texture = SubResource("NoiseTexture2D_awqfp")
+texture = SubResource("NoiseTexture2D_sk4le")
 expand_mode = 1
 
-[node name="door" parent="env" instance=ExtResource("9_6xf2s")]
+[node name="door" parent="env" index="17" instance=ExtResource("9_6xf2s")]
 position = Vector2(-544, 704)
 opened_from_left = true
 
+[node name="sprite" type="Sprite2D" parent="env/door" index="0"]
+position = Vector2(8, 24)
+scale = Vector2(0.0195313, 0.0937499)
+texture = SubResource("NoiseTexture2D_h12we")
+
 [node name="shape" parent="env/door/static" index="0"]
 position = Vector2(8, 24)
-shape = SubResource("RectangleShape2D_fvmpg")
+shape = SubResource("RectangleShape2D_s07tk")
 
 [node name="shape" parent="env/door/interactable" index="0"]
 position = Vector2(8, 24)
-shape = SubResource("RectangleShape2D_2vtqy")
-
-[node name="texture" type="TextureRect" parent="env/door"]
-offset_left = 3.0
-offset_right = 13.0
-offset_bottom = 48.0
-texture = SubResource("NoiseTexture2D_d3unq")
-expand_mode = 1
+shape = SubResource("RectangleShape2D_ikwhm")
 
 [connection signal="body_entered" from="env/corridor_hide" to="." method="_on_corridor_hide_body_entered" binds= ["tilemap/hiding"]]
 [connection signal="body_exited" from="env/corridor_hide" to="." method="_on_corridor_hide_body_exited" binds= ["tilemap/hiding"]]

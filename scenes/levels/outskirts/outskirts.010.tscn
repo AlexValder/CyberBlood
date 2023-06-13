@@ -1,30 +1,30 @@
-[gd_scene load_steps=10 format=3 uid="uid://dbyk0lq4defd3"]
+[gd_scene load_steps=11 format=3 uid="uid://dbyk0lq4defd3"]
 
 [ext_resource type="Script" path="res://scenes/levels/outskirts/outskirts.010.gd" id="1_ck78r"]
+[ext_resource type="PackedScene" uid="uid://d3caregm4htcf" path="res://scenes/levels/base_level.tscn" id="1_tges5"]
 [ext_resource type="TileSet" uid="uid://b3k13y1c7g1ax" path="res://assets/tilesets/test_level.tres" id="2_h5twg"]
 [ext_resource type="Script" path="res://scenes/levels/room_transition_trigger.gd" id="3_knuxf"]
 [ext_resource type="PackedScene" uid="uid://dvgdfojwi0xln" path="res://entities/items/key.tscn" id="4_qwo10"]
 [ext_resource type="FontFile" uid="uid://dfe63til8iyxx" path="res://assets/gui/fonts/m5x7.ttf" id="5_67xdx"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_1yvfd"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2f2ei"]
 size = Vector2(8, 80)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_82pjs"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h82yt"]
 size = Vector2(10, 64)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_d1v2n"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_con62"]
 size = Vector2(57, 49)
 
-[sub_resource type="LabelSettings" id="LabelSettings_xvby4"]
+[sub_resource type="LabelSettings" id="LabelSettings_2erpa"]
 font = ExtResource("5_67xdx")
 
-[node name="outskirts_010" type="Node2D"]
-texture_filter = 1
+[node name="outskirts_010" instance=ExtResource("1_tges5")]
 script = ExtResource("1_ck78r")
 biome = "outskirts"
 id = "010"
 
-[node name="tilemap" type="TileMap" parent="."]
+[node name="tilemap" type="TileMap" parent="." index="0"]
 texture_filter = 1
 tile_set = ExtResource("2_h5twg")
 format = 2
@@ -54,65 +54,57 @@ layer_3/z_index = 10
 layer_3/tile_data = PackedInt32Array(1769514, 131072, 12, 1769515, 65536, 12, 1769516, 65536, 12, 1769517, 131072, 12, 1769518, 131072, 12, 1769519, 131072, 12, 1769520, 131072, 12, 1769521, 65536, 12, 1769522, 65536, 12, 1769523, 65536, 12)
 metadata/_edit_lock_ = true
 
-[node name="spawnpoints" type="Node" parent="."]
-
-[node name="initial" type="Marker2D" parent="spawnpoints"]
+[node name="initial" type="Marker2D" parent="spawnpoints" index="0"]
 position = Vector2(744, 408)
 
-[node name="outskirts_009" type="Marker2D" parent="spawnpoints"]
+[node name="outskirts_009" type="Marker2D" parent="spawnpoints" index="1"]
 position = Vector2(1032, 200)
 
-[node name="outskirts_011" type="Marker2D" parent="spawnpoints"]
+[node name="outskirts_011" type="Marker2D" parent="spawnpoints" index="2"]
 position = Vector2(-216, 232)
 
-[node name="room_transitions" type="Node" parent="."]
-
-[node name="outskirts_009" type="Area2D" parent="room_transitions"]
+[node name="outskirts_009" type="Area2D" parent="room_transitions" index="0"]
 position = Vector2(1048, 184)
 script = ExtResource("3_knuxf")
 biome = "outskirts"
 roomId = "009"
 direction = 3
 
-[node name="shape" type="CollisionShape2D" parent="room_transitions/outskirts_009"]
+[node name="shape" type="CollisionShape2D" parent="room_transitions/outskirts_009" index="0"]
 position = Vector2(4, 0)
-shape = SubResource("RectangleShape2D_1yvfd")
+shape = SubResource("RectangleShape2D_2f2ei")
 
-[node name="outskirts_011" type="Area2D" parent="room_transitions"]
+[node name="outskirts_011" type="Area2D" parent="room_transitions" index="1"]
 position = Vector2(-235, 224)
 script = ExtResource("3_knuxf")
 biome = "outskirts"
 roomId = "011"
 
-[node name="shape" type="CollisionShape2D" parent="room_transitions/outskirts_011"]
-shape = SubResource("RectangleShape2D_82pjs")
+[node name="shape" type="CollisionShape2D" parent="room_transitions/outskirts_011" index="0"]
+shape = SubResource("RectangleShape2D_h82yt")
 
-[node name="enemies" type="Node" parent="."]
-
-[node name="env" type="Node" parent="."]
-
-[node name="key_00" parent="env" instance=ExtResource("4_qwo10")]
+[node name="key_00" parent="env" index="0" instance=ExtResource("4_qwo10")]
 position = Vector2(455, 401)
 key_id = "outskirts_gate_key"
 color_hint = Color(1, 0.862745, 0.517647, 1)
 
-[node name="debug_open_roots" type="Area2D" parent="env"]
+[node name="debug_open_roots" type="Area2D" parent="env" index="1"]
 position = Vector2(409, 272)
 collision_layer = 0
 collision_mask = 2
 
-[node name="shape" type="CollisionShape2D" parent="env/debug_open_roots"]
+[node name="shape" type="CollisionShape2D" parent="env/debug_open_roots" index="0"]
 position = Vector2(28.5, 24.5)
-shape = SubResource("RectangleShape2D_d1v2n")
+shape = SubResource("RectangleShape2D_con62")
 
-[node name="bg" type="ColorRect" parent="env/debug_open_roots"]
+[node name="bg" type="ColorRect" parent="env/debug_open_roots" index="1"]
 texture_filter = 1
 offset_right = 57.0
 offset_bottom = 49.0
 color = Color(0.552941, 0, 0, 0.270588)
 metadata/_edit_use_anchors_ = true
 
-[node name="label" type="Label" parent="env/debug_open_roots/bg"]
+[node name="label" type="Label" parent="env/debug_open_roots/bg" index="0"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -121,7 +113,7 @@ grow_horizontal = 2
 grow_vertical = 2
 text = "Open
 roots"
-label_settings = SubResource("LabelSettings_xvby4")
+label_settings = SubResource("LabelSettings_2erpa")
 horizontal_alignment = 1
 vertical_alignment = 1
 metadata/_edit_use_anchors_ = true

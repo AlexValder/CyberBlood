@@ -1,25 +1,25 @@
-[gd_scene load_steps=7 format=3 uid="uid://bc6jghk2v0g1f"]
+[gd_scene load_steps=8 format=3 uid="uid://bc6jghk2v0g1f"]
 
 [ext_resource type="Script" path="res://scenes/levels/outskirts/outskirts.012.gd" id="1_wpvog"]
+[ext_resource type="PackedScene" uid="uid://d3caregm4htcf" path="res://scenes/levels/base_level.tscn" id="1_ywexn"]
 [ext_resource type="TileSet" uid="uid://b3k13y1c7g1ax" path="res://assets/tilesets/test_level.tres" id="2_xs05h"]
 [ext_resource type="Script" path="res://scenes/levels/room_transition_trigger.gd" id="3_skv7v"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_hq3g8"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ubxai"]
 size = Vector2(8, 80)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_b8av5"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_q1jka"]
 size = Vector2(8, 48)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_x0k7n"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4c7kc"]
 size = Vector2(11, 48)
 
-[node name="outskirts_012" type="Node2D"]
-texture_filter = 1
+[node name="outskirts_012" instance=ExtResource("1_ywexn")]
 script = ExtResource("1_wpvog")
 biome = "outskirts"
 id = "012"
 
-[node name="tilemap" type="TileMap" parent="."]
+[node name="tilemap" type="TileMap" parent="." index="0"]
 texture_filter = 1
 tile_set = ExtResource("2_xs05h")
 format = 2
@@ -42,7 +42,7 @@ layer_2/z_index = 5
 layer_2/tile_data = PackedInt32Array(1966086, 0, 12, 1966087, 0, 12, 1966088, 0, 12, 1966089, 0, 12, 1966090, 0, 12, 1966119, 0, 12, 1966120, 0, 12, 1966121, 0, 12, 1966122, 0, 12, 1966123, 0, 12)
 metadata/_edit_lock_ = true
 
-[node name="instr_1" type="Label" parent="tilemap"]
+[node name="instr_1" type="Label" parent="tilemap" index="0"]
 z_index = 2
 offset_left = -5.0
 offset_top = 431.0
@@ -51,7 +51,7 @@ offset_bottom = 483.0
 text = "you come
 out of here"
 
-[node name="instr_2" type="Label" parent="tilemap"]
+[node name="instr_2" type="Label" parent="tilemap" index="1"]
 z_index = 2
 offset_left = 266.0
 offset_top = 359.0
@@ -60,7 +60,7 @@ offset_bottom = 411.0
 text = "Rooteater
 bossfight!"
 
-[node name="instr_3" type="Label" parent="tilemap"]
+[node name="instr_3" type="Label" parent="tilemap" index="2"]
 z_index = 2
 offset_left = 572.0
 offset_top = 294.0
@@ -68,7 +68,7 @@ offset_right = 683.0
 offset_bottom = 346.0
 text = "Charlie is here"
 
-[node name="instr_4" type="Label" parent="tilemap"]
+[node name="instr_4" type="Label" parent="tilemap" index="3"]
 z_index = 2
 offset_left = 552.0
 offset_top = 60.0
@@ -76,47 +76,39 @@ offset_right = 722.0
 offset_bottom = 112.0
 text = "Charlie leaves here =>"
 
-[node name="spawnpoints" type="Node" parent="."]
-
-[node name="initial" type="Marker2D" parent="spawnpoints"]
+[node name="initial" type="Marker2D" parent="spawnpoints" index="0"]
 position = Vector2(88, 168)
 
-[node name="outskirts_011_1" type="Marker2D" parent="spawnpoints"]
+[node name="outskirts_011_1" type="Marker2D" parent="spawnpoints" index="1"]
 position = Vector2(8, 168)
 
-[node name="outskirts_011_2" type="Marker2D" parent="spawnpoints"]
+[node name="outskirts_011_2" type="Marker2D" parent="spawnpoints" index="2"]
 position = Vector2(8, 456)
 
-[node name="room_transition" type="Node" parent="."]
-
-[node name="outskirts_011_1" type="Area2D" parent="room_transition"]
+[node name="outskirts_011_1" type="Area2D" parent="room_transitions" index="0"]
 position = Vector2(-10, 151)
 script = ExtResource("3_skv7v")
 biome = "outskirts"
 roomId = "011"
 entryId = "1"
 
-[node name="shape" type="CollisionShape2D" parent="room_transition/outskirts_011_1"]
+[node name="shape" type="CollisionShape2D" parent="room_transitions/outskirts_011_1" index="0"]
 position = Vector2(-2, 1)
-shape = SubResource("RectangleShape2D_hq3g8")
+shape = SubResource("RectangleShape2D_ubxai")
 
-[node name="outskirts_011_2" type="Area2D" parent="room_transition"]
+[node name="outskirts_011_2" type="Area2D" parent="room_transitions" index="1"]
 position = Vector2(-12, 456)
 script = ExtResource("3_skv7v")
 biome = "outskirts"
 roomId = "011"
 entryId = "2"
 
-[node name="shape" type="CollisionShape2D" parent="room_transition/outskirts_011_2"]
-shape = SubResource("RectangleShape2D_b8av5")
+[node name="shape" type="CollisionShape2D" parent="room_transitions/outskirts_011_2" index="0"]
+shape = SubResource("RectangleShape2D_q1jka")
 
-[node name="enemies" type="Node" parent="."]
-
-[node name="env" type="Node" parent="."]
-
-[node name="barrier" type="StaticBody2D" parent="env"]
+[node name="barrier" type="StaticBody2D" parent="env" index="0"]
 position = Vector2(779, 73)
 
-[node name="shape" type="CollisionShape2D" parent="env/barrier"]
+[node name="shape" type="CollisionShape2D" parent="env/barrier" index="0"]
 position = Vector2(-5, -1)
-shape = SubResource("RectangleShape2D_x0k7n")
+shape = SubResource("RectangleShape2D_4c7kc")
