@@ -1,6 +1,6 @@
 extends BaseLevel
 
-@onready var _secret_area := $tilemap/secret_area as TileMap
+@onready var _secret_area := $env/secret_area/sprite as TileMap
 
 
 func _ready() -> void:

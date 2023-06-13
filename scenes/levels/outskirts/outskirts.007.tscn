@@ -1,24 +1,24 @@
-[gd_scene load_steps=8 format=3 uid="uid://cjq7wggvt1fmx"]
+[gd_scene load_steps=9 format=3 uid="uid://cjq7wggvt1fmx"]
 
 [ext_resource type="Script" path="res://scenes/levels/outskirts/outskirts.007.gd" id="1_8s4cr"]
+[ext_resource type="PackedScene" uid="uid://d3caregm4htcf" path="res://scenes/levels/base_level.tscn" id="1_7438y"]
 [ext_resource type="TileSet" uid="uid://b3k13y1c7g1ax" path="res://assets/tilesets/test_level.tres" id="2_s14nm"]
 [ext_resource type="Script" path="res://scenes/levels/room_transition_trigger.gd" id="3_bmdut"]
 [ext_resource type="PackedScene" uid="uid://tjw1sq3hmc1e" path="res://entities/props/save.tscn" id="4_1hw25"]
 [ext_resource type="PackedScene" uid="uid://6c0p0rgqbnwr" path="res://scenes/levels/key_hole.tscn" id="5_er1ex"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_5yvde"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_asa71"]
 size = Vector2(112, 6)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_tiywl"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_f2l4p"]
 size = Vector2(48, 8)
 
-[node name="outskirts_007" type="Node2D"]
-texture_filter = 1
+[node name="outskirts_007" instance=ExtResource("1_7438y")]
 script = ExtResource("1_8s4cr")
 biome = "outskirts"
 id = "007"
 
-[node name="tilemap" type="TileMap" parent="."]
+[node name="tilemap" type="TileMap" parent="." index="0"]
 texture_filter = 1
 tile_set = ExtResource("2_s14nm")
 format = 2
@@ -40,7 +40,7 @@ layer_2/z_index = 2
 layer_2/tile_data = PackedInt32Array()
 metadata/_edit_lock_ = true
 
-[node name="instr" type="Label" parent="tilemap"]
+[node name="instr" type="Label" parent="tilemap" index="0"]
 offset_left = 3181.0
 offset_top = 355.0
 offset_right = 3457.0
@@ -50,50 +50,44 @@ text = "это гробница: для открытия
 и подсказка насчет лунного света"
 horizontal_alignment = 1
 
-[node name="tomb" type="TileMap" parent="tilemap"]
+[node name="tomb" type="TileMap" parent="tilemap" index="1"]
 z_index = 1
 tile_set = ExtResource("2_s14nm")
 format = 2
 layer_0/tile_data = PackedInt32Array(1835214, 196608, 7, 1835215, 196608, 7, 1835216, 196608, 7)
 
-[node name="spawnpoints" type="Node" parent="."]
-
-[node name="initial" type="Marker2D" parent="spawnpoints"]
+[node name="initial" type="Marker2D" parent="spawnpoints" index="0"]
 position = Vector2(1707, 184)
 
-[node name="outskirts_003" type="Marker2D" parent="spawnpoints"]
+[node name="outskirts_003" type="Marker2D" parent="spawnpoints" index="1"]
 position = Vector2(408, 472)
 
-[node name="outskirts_008" type="Marker2D" parent="spawnpoints"]
+[node name="outskirts_008" type="Marker2D" parent="spawnpoints" index="2"]
 position = Vector2(3320, 456)
 
-[node name="room_transitions" type="Node" parent="."]
-
-[node name="outskirts_003" type="Area2D" parent="room_transitions"]
+[node name="outskirts_003" type="Area2D" parent="room_transitions" index="0"]
 position = Vector2(344, 520)
 script = ExtResource("3_bmdut")
 biome = "outskirts"
 roomId = "003"
 direction = 1
 
-[node name="shape" type="CollisionShape2D" parent="room_transitions/outskirts_003"]
-shape = SubResource("RectangleShape2D_5yvde")
+[node name="shape" type="CollisionShape2D" parent="room_transitions/outskirts_003" index="0"]
+shape = SubResource("RectangleShape2D_asa71")
 
-[node name="outskirts_008" type="Area2D" parent="room_transitions"]
+[node name="outskirts_008" type="Area2D" parent="room_transitions" index="1"]
 position = Vector2(3320, 521)
 script = ExtResource("3_bmdut")
 biome = "outskirts"
 roomId = "008"
 direction = 1
 
-[node name="shape" type="CollisionShape2D" parent="room_transitions/outskirts_008"]
-shape = SubResource("RectangleShape2D_tiywl")
+[node name="shape" type="CollisionShape2D" parent="room_transitions/outskirts_008" index="0"]
+shape = SubResource("RectangleShape2D_f2l4p")
 
-[node name="env" type="Node" parent="."]
+[node name="save" parent="env" index="0" instance=ExtResource("4_1hw25")]
 
-[node name="save" parent="env" instance=ExtResource("4_1hw25")]
-
-[node name="key_hole" parent="env" instance=ExtResource("5_er1ex")]
+[node name="key_hole" parent="env" index="1" instance=ExtResource("5_er1ex")]
 key_id = "outskirts_tomb_key"
 
 [connection signal="interacted" from="env/key_hole" to="." method="_on_key_hole_interacted"]

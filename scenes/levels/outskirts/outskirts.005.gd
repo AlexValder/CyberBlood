@@ -23,8 +23,8 @@ func _ready() -> void:
         _shortcut.queue_free()
         _shortcut = null
 
-    var floor = GameManager.save_data.get_map_change(biome, id, "floor")
-    if floor == "1":
+    var break_floor = GameManager.save_data.get_map_change(biome, id, "floor")
+    if break_floor == "1":
         _chain.queue_free()
         _chain = null
         _floor.queue_free()
