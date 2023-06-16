@@ -4,10 +4,11 @@ class_name BaseLevel
 @export var biome := ""
 @export var id := ""
 
+@onready var spawnpoints := $spawnpoints as Node2D
+@onready var enemies := $enemies as Node2D
 @onready var _tiles := $tilemap as TileMap
-@onready var _spawnpoints := $spawnpoints as Node
 @onready var _initial_spawn :=\
-    _spawnpoints.get_node_or_null("initial") as Marker2D
+    spawnpoints.get_node_or_null("initial") as Marker2D
 
 var _tween: Tween
 
@@ -61,6 +62,8 @@ func _ready() -> void:
     GameManager.player.set_limits(get_extends())
     GameManager.player.disable_collision()
 
+    #EnemyManager.populate(self)
+
     var spawn: Vector2
     if GameManager.last_room.size() > 0:
         spawn = _get_spawn(GameManager.last_room[0], GameManager.last_room[1])
@@ -75,9 +78,9 @@ func _ready() -> void:
 func _get_spawn(roomId: String, entryId: String) -> Vector2:
     var node: Node2D
     if entryId == null || entryId.length() == 0:
-        node = _spawnpoints.get_node(roomId)
+        node = spawnpoints.get_node(roomId)
     else:
-        node = _spawnpoints.get_node("%s_%s" % [roomId, entryId])
+        node = spawnpoints.get_node("%s_%s" % [roomId, entryId])
 
     return node.global_position
 

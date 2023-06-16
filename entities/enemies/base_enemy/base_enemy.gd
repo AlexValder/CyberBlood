@@ -30,6 +30,12 @@ func change_scale(_flip: bool) -> void:
     pass
 
 
+func toggle_stop(enemy_enabled: bool) -> void:
+    set_physics_process(enemy_enabled)
+    if has_node("state_machine"):
+        $state_machine.set_physics_process(enemy_enabled)
+
+
 func damage(value: int) -> void:
     if current_health <= 0:
         return
@@ -69,10 +75,10 @@ func _try_spawn_pickup() -> void:
     var chance = randi_range(0, 99)
     if chance <= min(spawn_food_chance, spawn_money_chance):
         var pickup := FoodPickup.get_pickup()
-        pickup.global_position = self.global_position
+        pickup.position = self.position
         call_deferred("add_sibling", pickup)
     elif chance <= max(spawn_food_chance, spawn_money_chance):
         var pickups := MoneyPickup.get_pickup(cost)
         for pickup in pickups:
-            pickup.global_position = self.global_position
+            pickup.position = self.position
             call_deferred("add_sibling", pickup)

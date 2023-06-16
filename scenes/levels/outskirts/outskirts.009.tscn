@@ -6,7 +6,7 @@
 [ext_resource type="Script" path="res://scenes/levels/room_transition_trigger.gd" id="4_h2wso"]
 [ext_resource type="PackedScene" uid="uid://dgl3bhcduh1j0" path="res://entities/props/chest.tscn" id="5_eucy1"]
 [ext_resource type="PackedScene" uid="uid://1rditrx2n81e" path="res://entities/props/ladder.tscn" id="6_iuki5"]
-[ext_resource type="PackedScene" uid="uid://dl03gx0p4nru6" path="res://entities/enemies/skeleton/skeleton.tscn" id="7_fbxwo"]
+[ext_resource type="PackedScene" uid="uid://i6dl50fn0ypu" path="res://entities/enemies/spawner/enemy_spawner.tscn" id="7_1ogcq"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5yp6s"]
 size = Vector2(11, 80)
@@ -107,7 +107,7 @@ shape = SubResource("RectangleShape2D_4tx8t")
 [node name="sprite" parent="env/ladder01" index="1"]
 layer_0/tile_data = PackedInt32Array(-1, 1114112, 18, 65535, 1114112, 18, 131071, 1114112, 18, 196607, 1114112, 18, 262143, 1114112, 18, 327679, 1114112, 18, 393215, 1114112, 18, 458751, 1114112, 18, 524287, 1114112, 18, 589823, 1114112, 18, 655359, 1114112, 18, 720895, 1114112, 18, 786431, 1114112, 18)
 
-[node name="skeleton_00" parent="enemies" index="0" instance=ExtResource("7_fbxwo")]
+[node name="enemy_spawner_00" parent="enemies" index="0" instance=ExtResource("7_1ogcq")]
 position = Vector2(907, 661)
 
 [editable path="env/ladder00"]
