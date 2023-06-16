@@ -21,10 +21,10 @@ config/version="0.0.0.8"
 [autoload]
 
 Logger="*res://addons/bloody_logger/logger.gd"
-GameManager="*res://scripts/game_manager.gd"
-Constants="*res://scripts/constants.gd"
 Settings="*res://scripts/settings.gd"
+GameManager="*res://scripts/game_manager.gd"
 Database="*res://scripts/database.gd"
+EnemyManager="*res://scripts/enemy_manager.gd"
 
 [debug]
 

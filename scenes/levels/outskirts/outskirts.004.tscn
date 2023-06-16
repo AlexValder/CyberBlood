@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://raqn18g2h3u"]
+[gd_scene load_steps=10 format=3 uid="uid://raqn18g2h3u"]
 
 [ext_resource type="PackedScene" uid="uid://d3caregm4htcf" path="res://scenes/levels/base_level.tscn" id="1_0reuf"]
 [ext_resource type="Script" path="res://scenes/levels/outskirts/outskirts.004.gd" id="1_ibt3s"]
@@ -7,8 +7,7 @@
 [ext_resource type="Script" path="res://scenes/levels/room_transition_trigger.gd" id="3_pa7v2"]
 [ext_resource type="PackedScene" uid="uid://dgl3bhcduh1j0" path="res://entities/props/chest.tscn" id="5_5trgl"]
 [ext_resource type="PackedScene" uid="uid://b76lfry7irli6" path="res://entities/props/spikes.tscn" id="6_j6sx5"]
-[ext_resource type="PackedScene" uid="uid://dl03gx0p4nru6" path="res://entities/enemies/skeleton/skeleton.tscn" id="7_jevv7"]
-[ext_resource type="PackedScene" uid="uid://m22bytp3ihx" path="res://entities/enemies/giant_bat/giant_bat.tscn" id="8_rvynd"]
+[ext_resource type="PackedScene" uid="uid://i6dl50fn0ypu" path="res://entities/enemies/spawner/enemy_spawner.tscn" id="8_dv3ka"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_k1h80"]
 size = Vector2(10, 112)
@@ -104,44 +103,64 @@ scale = Vector2(0.092, 0.092)
 position = Vector2(517, 1447)
 scale = Vector2(0.092, 0.092)
 
-[node name="skeleton" parent="enemies" index="0" instance=ExtResource("7_jevv7")]
+[node name="enemy_spawner_00" parent="enemies" index="0" instance=ExtResource("8_dv3ka")]
 position = Vector2(651, 1369)
 
-[node name="skeleton2" parent="enemies" index="1" instance=ExtResource("7_jevv7")]
+[node name="enemy_spawner_01" parent="enemies" index="1" instance=ExtResource("8_dv3ka")]
 position = Vector2(17, 1161)
 
-[node name="giant_bat" parent="enemies" index="2" instance=ExtResource("8_rvynd")]
+[node name="enemy_spawner_02" parent="enemies" index="2" instance=ExtResource("8_dv3ka")]
 position = Vector2(-117, 361)
+enemy_type = 1
 
-[node name="giant_bat2" parent="enemies" index="3" instance=ExtResource("8_rvynd")]
+[node name="enemy_spawner_03" parent="enemies" index="3" instance=ExtResource("8_dv3ka")]
 position = Vector2(-174, 360)
+enemy_type = 1
 
-[node name="giant_bat3" parent="enemies" index="4" instance=ExtResource("8_rvynd")]
+[node name="enemy_spawner_04" parent="enemies" index="4" instance=ExtResource("8_dv3ka")]
 position = Vector2(289, 649)
+enemy_type = 1
 
-[node name="giant_bat4" parent="enemies" index="5" instance=ExtResource("8_rvynd")]
+[node name="enemy_spawner_05" parent="enemies" index="5" instance=ExtResource("8_dv3ka")]
 position = Vector2(602, 729)
+enemy_type = 1
 
-[node name="giant_bat5" parent="enemies" index="6" instance=ExtResource("8_rvynd")]
+[node name="enemy_spawner_06" parent="enemies" index="6" instance=ExtResource("8_dv3ka")]
 position = Vector2(448, 744)
+enemy_type = 1
 
-[node name="giant_bat6" parent="enemies" index="7" instance=ExtResource("8_rvynd")]
+[node name="enemy_spawner_07" parent="enemies" index="7" instance=ExtResource("8_dv3ka")]
 position = Vector2(331, 953)
+enemy_type = 1
 
-[node name="giant_bat7" parent="enemies" index="8" instance=ExtResource("8_rvynd")]
-position = Vector2(476, 922)
+[node name="enemy_spawner_08" parent="enemies" index="8" instance=ExtResource("8_dv3ka")]
+position = Vector2(477, 923)
+enemy_type = 1
 
-[node name="giant_bat8" parent="enemies" index="9" instance=ExtResource("8_rvynd")]
+[node name="enemy_spawner_09" parent="enemies" index="9" instance=ExtResource("8_dv3ka")]
 position = Vector2(1314, 1128)
+enemy_type = 1
 
-[node name="giant_bat9" parent="enemies" index="10" instance=ExtResource("8_rvynd")]
+[node name="enemy_spawner_10" parent="enemies" index="10" instance=ExtResource("8_dv3ka")]
 position = Vector2(1184, 1096)
+enemy_type = 1
 
-[node name="giant_bat10" parent="enemies" index="11" instance=ExtResource("8_rvynd")]
+[node name="enemy_spawner_11" parent="enemies" index="11" instance=ExtResource("8_dv3ka")]
+position = Vector2(1184, 1096)
+enemy_type = 1
+
+[node name="enemy_spawner_12" parent="enemies" index="12" instance=ExtResource("8_dv3ka")]
 position = Vector2(1232, 1113)
+enemy_type = 1
 
-[node name="giant_bat11" parent="enemies" index="12" instance=ExtResource("8_rvynd")]
+[node name="enemy_spawner_13" parent="enemies" index="13" instance=ExtResource("8_dv3ka")]
 position = Vector2(807, 1065)
+enemy_type = 1
 
-[node name="giant_bat12" parent="enemies" index="13" instance=ExtResource("8_rvynd")]
-position = Vector2(488, 1208)
+[node name="enemy_spawner_14" parent="enemies" index="14" instance=ExtResource("8_dv3ka")]
+position = Vector2(473, 1280)
+enemy_type = 1
+options = {
+"awake": true
+}
+always_spawn = true

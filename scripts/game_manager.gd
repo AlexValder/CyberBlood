@@ -63,6 +63,8 @@ func save_game(current_room := true) -> void:
         return
 
     save_data.update_player_data(player)
+    EnemyManager.clear_killed()
+
 
     if current_room:
         var level := get_tree().current_scene as BaseLevel
@@ -90,6 +92,8 @@ func change_room(trigger: RoomTransitionTrigger) -> void:
 
 
 func quit_to_menu() -> void:
+    EnemyManager.clear_killed()
+
     _playing = false
     remove_player()
     save_data = null
