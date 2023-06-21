@@ -78,6 +78,7 @@ layer_2/tile_data = PackedInt32Array()
 metadata/_edit_lock_ = true
 
 [node name="hide" type="TileMap" parent="tilemap" index="0"]
+visible = false
 position = Vector2(804, 690)
 tile_set = ExtResource("2_cd3d3")
 format = 2
@@ -193,13 +194,10 @@ position = Vector2(-10, 0)
 layer_0/tile_data = PackedInt32Array(-65536, 1114112, 18, 0, 1114112, 18, 65536, 1114112, 18, 131072, 1114112, 18, 196608, 1114112, 18, 262144, 1114112, 18, 327680, 1114112, 18, 393216, 1114112, 18, 655360, 1114112, 18, 589824, 1114112, 18, 524288, 1114112, 18, 458752, 1114112, 18)
 
 [node name="save" parent="env" index="4" instance=ExtResource("6_v7igv")]
-offset_left = 504.0
-offset_top = 689.0
-offset_right = 564.0
-offset_bottom = 749.0
+position = Vector2(536, 738)
 
 [node name="lever" parent="env" index="5" instance=ExtResource("7_2cr1w")]
-position = Vector2(908, 695)
+position = Vector2(897, 704)
 
 [node name="trap_door" type="StaticBody2D" parent="env" index="6"]
 position = Vector2(840, 470)

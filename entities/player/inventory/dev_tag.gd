@@ -53,4 +53,4 @@ func _on_show_debug_box_toggled(button_pressed: bool) -> void:
 
 
 func _on_save_game_button_up() -> void:
-    GameManager.save_game()
+    GameManager.save_game(true, true)

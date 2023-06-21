@@ -5,14 +5,11 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2pjj6"]
 size = Vector2(48, 80)
 
-[node name="key_hole" type="Node2D"]
-position = Vector2(3320, 408)
-script = ExtResource("1_0usa8")
-
-[node name="interactable" type="Area2D" parent="."]
+[node name="key_hole" type="Area2D"]
 collision_layer = 128
 collision_mask = 2
+script = ExtResource("1_0usa8")
 
-[node name="shape" type="CollisionShape2D" parent="interactable"]
+[node name="shape" type="CollisionShape2D" parent="."]
 position = Vector2(0, 14)
 shape = SubResource("RectangleShape2D_2pjj6")

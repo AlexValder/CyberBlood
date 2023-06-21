@@ -1,4 +1,4 @@
-extends Node
+extends Area2D
 class_name Interactable
 
 signal interacted(is_on_load)

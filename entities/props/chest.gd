@@ -8,7 +8,7 @@ extends Interactable
 
 
 func interact() -> void:
-    $interactable/shape.disabled = true
+    $shape.disabled = true
     $anim_player.play("open")
 
     if contains.food > 0:
@@ -23,7 +23,7 @@ func interact() -> void:
 
 
 func disable() -> void:
-    $interactable/shape.disabled = true
+    $shape.disabled = true
     $anim_player.play("open")
     $anim_player.seek($anim_player.current_animation_length, true)
 

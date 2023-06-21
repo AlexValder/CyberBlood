@@ -58,7 +58,7 @@ func reload_level() -> void:
     get_tree().root.add_child(player)
 
 
-func save_game(current_room := true) -> void:
+func save_game(current_room := true, dev := false) -> void:
     if player == null || !_playing:
         return
 
@@ -72,6 +72,7 @@ func save_game(current_room := true) -> void:
         save_data.map.id = level.id
         save_data.map.current = level.get_save_name()
 
+    save_data.map.dev = "1" if dev else "0"
     SavesManager.save_state(_save_index, save_data)
 
 

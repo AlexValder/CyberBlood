@@ -165,7 +165,7 @@ sync_to_physics = false
 points = Array[NodePath]([NodePath("../0"), NodePath("../1")])
 
 [node name="lever01" parent="env" index="13" instance=ExtResource("7_u8an7")]
-position = Vector2(971, 631)
+position = Vector2(969, 640)
 
 [connection signal="interacted" from="env/lever01" to="env/elevator" method="_on_elevator_started"]
 

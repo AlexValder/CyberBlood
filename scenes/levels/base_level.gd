@@ -9,6 +9,7 @@ class_name BaseLevel
 @onready var _tiles := $tilemap as TileMap
 @onready var _initial_spawn :=\
     spawnpoints.get_node_or_null("initial") as Marker2D
+@onready var _save_spawn := _try_get_save_spawn() as Vector2
 
 var _tween: Tween
 
@@ -62,13 +63,15 @@ func _ready() -> void:
     GameManager.player.set_limits(get_extends())
     GameManager.player.disable_collision()
 
-    #EnemyManager.populate(self)
-
     var spawn: Vector2
     if GameManager.last_room.size() > 0:
         spawn = _get_spawn(GameManager.last_room[0], GameManager.last_room[1])
-    else:
+    elif !GameManager.save_data.map.has("dev") ||\
+        GameManager.save_data.map.dev == "1":
+
         spawn = _initial_spawn.global_position
+    else:
+        spawn = _save_spawn
     GameManager.player.global_position = spawn
     GameManager.player.enable_collision()
 
@@ -83,6 +86,14 @@ func _get_spawn(roomId: String, entryId: String) -> Vector2:
         node = spawnpoints.get_node("%s_%s" % [roomId, entryId])
 
     return node.global_position
+
+
+func _try_get_save_spawn() -> Vector2:
+    var save := get_node_or_null("env/save") as Node2D
+    if save == null:
+        return Vector2.ZERO
+
+    return save.global_position
 
 
 func _on_prop_interacted(iname: String, index: String) -> void:
