@@ -1,7 +1,7 @@
 extends Interactable
 class_name Lever
 
-@onready var _handle := $handle as Node2D
+@onready var _handle := $base/handle as Node2D
 
 
 func interact() -> void:
@@ -13,6 +13,6 @@ func interact() -> void:
 
 func disable() -> void:
     _handle.rotation_degrees = 60
-    $interactable/shape.disabled = true
+    $shape.disabled = true
     # to ensure the action was started
     interacted.emit()

@@ -1,14 +1,38 @@
-[gd_scene format=3 uid="uid://tjw1sq3hmc1e"]
+[gd_scene load_steps=3 format=3 uid="uid://tjw1sq3hmc1e"]
 
-[node name="save" type="ColorRect"]
+[ext_resource type="Script" path="res://entities/props/save.gd" id="1_11atr"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_b3ccd"]
+
+[node name="save" type="Area2D"]
+collision_layer = 128
+collision_mask = 2
+script = ExtResource("1_11atr")
+
+[node name="timer" type="Timer" parent="."]
+one_shot = true
+
+[node name="shape" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_b3ccd")
+
+[node name="save" type="ColorRect" parent="."]
 custom_minimum_size = Vector2(60, 60)
-offset_left = 1678.0
-offset_top = 136.0
-offset_right = 1738.0
-offset_bottom = 196.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -30.0
+offset_top = -30.0
+offset_right = 30.0
+offset_bottom = 30.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 color = Color(0, 0.12549, 0.462745, 1)
 
-[node name="label" type="Label" parent="."]
+[node name="label" type="Label" parent="save"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -18,3 +42,5 @@ grow_vertical = 2
 text = "save"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[connection signal="timeout" from="timer" to="." method="_restore"]

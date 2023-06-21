@@ -118,11 +118,11 @@ colors = PackedColorArray(0, 0, 0, 1, 0.499743, 0.179927, 0, 1)
 color_ramp = SubResource("Gradient_jsxyt")
 noise = SubResource("FastNoiseLite_xdpoy")
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_te2pr"]
+size = Vector2(16, 48)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_s07tk"]
 size = Vector2(10, 48)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_ikwhm"]
-size = Vector2(16, 48)
 
 [node name="outskirts_005" instance=ExtResource("1_bjg18")]
 script = ExtResource("1_g1bs6")
@@ -332,10 +332,7 @@ contains = {
 }
 
 [node name="save" parent="env" index="12" instance=ExtResource("6_6t8e6")]
-offset_left = 1245.0
-offset_top = 273.0
-offset_right = 1305.0
-offset_bottom = 333.0
+position = Vector2(-96, 722)
 
 [node name="corridor_hide" type="Area2D" parent="env" index="13"]
 position = Vector2(1168, 944)
@@ -435,13 +432,13 @@ position = Vector2(8, 24)
 scale = Vector2(0.0195313, 0.0937499)
 texture = SubResource("NoiseTexture2D_h12we")
 
+[node name="shape" parent="env/door" index="1"]
+position = Vector2(8, 24)
+shape = SubResource("RectangleShape2D_te2pr")
+
 [node name="shape" parent="env/door/static" index="0"]
 position = Vector2(8, 24)
 shape = SubResource("RectangleShape2D_s07tk")
-
-[node name="shape" parent="env/door/interactable" index="0"]
-position = Vector2(8, 24)
-shape = SubResource("RectangleShape2D_ikwhm")
 
 [connection signal="body_entered" from="env/corridor_hide" to="." method="_on_corridor_hide_body_entered" binds= ["tilemap/hiding"]]
 [connection signal="body_exited" from="env/corridor_hide" to="." method="_on_corridor_hide_body_exited" binds= ["tilemap/hiding"]]

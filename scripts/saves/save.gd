@@ -16,10 +16,12 @@ var quests := {
 }
 var map := {
     "current" : "",
+    "dev": "",
     "outskirts": {},
 }
 
 static func create_save(p: Player, level: BaseLevel) -> PlayerSave:
+
     var state := PlayerSave.new()
 
     state.player.max_health = p.max_health

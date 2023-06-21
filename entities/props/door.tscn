@@ -2,16 +2,14 @@
 
 [ext_resource type="Script" path="res://entities/props/door.gd" id="1_8df70"]
 
-[node name="door" type="Node2D"]
+[node name="interactable" type="Area2D"]
+collision_layer = 128
+collision_mask = 2
 script = ExtResource("1_8df70")
+
+[node name="shape" type="CollisionShape2D" parent="."]
 
 [node name="static" type="StaticBody2D" parent="."]
 collision_mask = 0
 
 [node name="shape" type="CollisionShape2D" parent="static"]
-
-[node name="interactable" type="Area2D" parent="."]
-collision_layer = 128
-collision_mask = 2
-
-[node name="shape" type="CollisionShape2D" parent="interactable"]

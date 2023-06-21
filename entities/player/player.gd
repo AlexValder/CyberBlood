@@ -265,10 +265,8 @@ func _unhandled_input(event: InputEvent) -> void:
     if event.is_action_released("interact"):
         var areas := _reach_area.get_overlapping_areas()
         for area in areas:
-            var parent := area.get_parent()
-            if parent.has_method("interact"):
-                parent.interact()
-                break
+            if area is Interactable:
+                (area as Interactable).interact()
 
 
 func _on_recovery_value_timeout(rate: float) -> void:

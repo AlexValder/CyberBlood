@@ -7,24 +7,24 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2ubmy"]
 size = Vector2(93.3334, 86.3334)
 
-[node name="base" type="Sprite2D"]
+[node name="lever" type="Area2D"]
+collision_layer = 128
+collision_mask = 2
+script = ExtResource("2_8cepp")
+
+[node name="shape" type="CollisionShape2D" parent="."]
+position = Vector2(0, -27)
+shape = SubResource("RectangleShape2D_2ubmy")
+
+[node name="base" type="Sprite2D" parent="."]
 texture_filter = 1
 position = Vector2(0, -9)
 scale = Vector2(0.428571, 0.428571)
 texture = ExtResource("1_uhxma")
-script = ExtResource("2_8cepp")
 
-[node name="handle" type="Sprite2D" parent="."]
+[node name="handle" type="Sprite2D" parent="base"]
 show_behind_parent = true
 position = Vector2(0, 18.6667)
 rotation = -1.0472
 texture = ExtResource("3_1x7dh")
 offset = Vector2(0, -60)
-
-[node name="interactable" type="Area2D" parent="."]
-collision_layer = 128
-collision_mask = 2
-
-[node name="shape" type="CollisionShape2D" parent="interactable"]
-position = Vector2(-7.00001, -22.1667)
-shape = SubResource("RectangleShape2D_2ubmy")

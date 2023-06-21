@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://dbyk0lq4defd3"]
+[gd_scene load_steps=12 format=3 uid="uid://dbyk0lq4defd3"]
 
 [ext_resource type="Script" path="res://scenes/levels/outskirts/outskirts.010.gd" id="1_ck78r"]
 [ext_resource type="PackedScene" uid="uid://d3caregm4htcf" path="res://scenes/levels/base_level.tscn" id="1_tges5"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" path="res://scenes/levels/room_transition_trigger.gd" id="3_knuxf"]
 [ext_resource type="PackedScene" uid="uid://dvgdfojwi0xln" path="res://entities/items/key.tscn" id="4_qwo10"]
 [ext_resource type="FontFile" uid="uid://dfe63til8iyxx" path="res://assets/gui/fonts/m5x7.ttf" id="5_67xdx"]
+[ext_resource type="PackedScene" uid="uid://tjw1sq3hmc1e" path="res://entities/props/save.tscn" id="7_8dd01"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2f2ei"]
 size = Vector2(8, 80)
@@ -117,6 +118,9 @@ label_settings = SubResource("LabelSettings_2erpa")
 horizontal_alignment = 1
 vertical_alignment = 1
 metadata/_edit_use_anchors_ = true
+
+[node name="save" parent="env" index="2" instance=ExtResource("7_8dd01")]
+position = Vector2(552, 386)
 
 [connection signal="picked_up" from="env/key_00" to="." method="_on_key_picked_up" binds= ["outskirts_gate_key"]]
 [connection signal="body_entered" from="env/debug_open_roots" to="." method="_on_debug_open_roots_body_entered" unbinds=1]
