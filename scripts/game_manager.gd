@@ -7,6 +7,7 @@ const LEVELS := {
     "outskirts": "res://scenes/levels/{biome}/{biome}.{id}.tscn",
 }
 const FIRST_LEVEL_FORMAT := {"biome" = "outskirts","id" = "000"}
+const FRESH_SAVE_NAME := "Start level"
 
 var _playing := false
 var _prev_state := false
@@ -39,10 +40,10 @@ func start_game(index: int) -> void:
     else:
         save_data = PlayerSave.new()
         save_data.update_player_data(player)
-        level = LEVELS["outskirts"].format(FIRST_LEVEL_FORMAT)
+        level = LEVELS[FIRST_LEVEL_FORMAT.biome].format(FIRST_LEVEL_FORMAT)
         save_data.map.biome = FIRST_LEVEL_FORMAT.biome
         save_data.map.id = FIRST_LEVEL_FORMAT.id
-        save_data.map.current = "Start level"
+        save_data.map.current = FRESH_SAVE_NAME
 
 
     get_tree().root.add_child(player)
@@ -119,7 +120,17 @@ func remove_player() -> void:
 
 func player_dies() -> void:
     await get_tree().create_timer(3).timeout
-    reload_level()
+
+    last_room = []
+    EnemyManager.clear_killed()
+
+    var biome := save_data.map.biome as String
+    var id := save_data.map.id as String
+    var level = LEVELS[biome].format({"biome" = biome, "id" = id})
+
+    create_player()
+    get_tree().root.add_child(player)
+    get_tree().change_scene_to_file(level)
 
 
 func should_show_debug() -> bool:
