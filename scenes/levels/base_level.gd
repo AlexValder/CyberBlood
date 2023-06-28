@@ -66,9 +66,7 @@ func _ready() -> void:
     var spawn: Vector2
     if GameManager.last_room.size() > 0:
         spawn = _get_spawn(GameManager.last_room[0], GameManager.last_room[1])
-    elif !GameManager.save_data.map.has("dev") ||\
-        GameManager.save_data.map.dev == "1":
-
+    elif _is_dev() || _is_game_beginning():
         spawn = _initial_spawn.global_position
     else:
         spawn = _save_spawn
@@ -91,7 +89,7 @@ func _get_spawn(roomId: String, entryId: String) -> Vector2:
 func _try_get_save_spawn() -> Vector2:
     var save := get_node_or_null("env/save") as Node2D
     if save == null:
-        return Vector2.ZERO
+        return _initial_spawn.global_position
 
     return save.global_position
 
@@ -123,3 +121,11 @@ func _on_corridor_hide_body_exited(player: Player, path: NodePath) -> void:
         _tween.kill()
     _tween = create_tween()
     _tween.tween_property(get_node(path), "modulate:a", 1.0, 0.5)
+
+
+func _is_dev() -> bool:
+    return GameManager.save_data.map.get("dev", "0") == "1"
+
+
+func _is_game_beginning() -> bool:
+    return GameManager.save_data.map.current == GameManager.FRESH_SAVE_NAME
