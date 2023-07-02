@@ -61,6 +61,7 @@ tab_alignment = 1
 script = ExtResource("2_y0taj")
 
 [node name="Inventory" type="ScrollContainer" parent="tabs"]
+visible = false
 layout_mode = 2
 follow_focus = true
 script = ExtResource("4_py8qt")
@@ -143,7 +144,6 @@ size_flags_vertical = 5
 text = "Quit to Main Menu"
 
 [node name="DevTab" type="ScrollContainer" parent="tabs"]
-visible = false
 layout_mode = 2
 follow_focus = true
 script = ExtResource("4_ionlx")
@@ -193,10 +193,6 @@ text = "Open saves folder"
 layout_mode = 2
 button_pressed = true
 text = "Show Debug Info"
-
-[node name="save_game" type="Button" parent="tabs/DevTab/grid"]
-layout_mode = 2
-text = "Save Game"
 
 [node name="controls" type="PopupPanel" parent="."]
 disable_3d = true
@@ -294,6 +290,5 @@ text = "close"
 [connection signal="button_up" from="tabs/DevTab/grid/open_folder_button" to="tabs/DevTab" method="_on_open_folder_button_released"]
 [connection signal="button_up" from="tabs/DevTab/grid/open_saves_button" to="tabs/DevTab" method="_on_open_saves_button_released"]
 [connection signal="toggled" from="tabs/DevTab/grid/show_debug_box" to="tabs/DevTab" method="_on_show_debug_box_toggled"]
-[connection signal="button_up" from="tabs/DevTab/grid/save_game" to="tabs/DevTab" method="_on_save_game_button_up"]
 [connection signal="about_to_popup" from="controls" to="controls" method="_on_about_to_popup"]
 [connection signal="button_up" from="controls/vbox/close" to="." method="_on_popup_close_button_up" binds= ["controls"]]
