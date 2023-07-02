@@ -16,7 +16,6 @@ var quests := {
 }
 var map := {
     "current" : "",
-    "dev": "",
     "outskirts": {},
 }
 
