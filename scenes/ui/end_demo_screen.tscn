@@ -1,0 +1,130 @@
+[gd_scene load_steps=12 format=3 uid="uid://dhhiinhhbgdft"]
+
+[ext_resource type="Theme" uid="uid://brlh53bypvlrb" path="res://assets/gui/themes/default.tres" id="1_e5hiu"]
+[ext_resource type="Script" path="res://scenes/ui/end_demo_screen.gd" id="1_hgupt"]
+[ext_resource type="Texture2D" uid="uid://c2tjsvpaeert2" path="res://assets/gui/icons/kickstarter.svg" id="2_387ty"]
+[ext_resource type="FontFile" uid="uid://tsuf6m2i73oc" path="res://assets/gui/fonts/Beholden-Bold.ttf" id="3_txivm"]
+[ext_resource type="Texture2D" uid="uid://88x6cegohp5g" path="res://assets/gui/icons/steam.svg" id="5_ofoum"]
+[ext_resource type="Texture2D" uid="uid://uuga7yuuldau" path="res://assets/gui/icons/itch.io.svg" id="6_ijl5n"]
+[ext_resource type="Texture2D" uid="uid://cku63pxwcyo5j" path="res://assets/gui/icons/discord.svg" id="7_wyfwp"]
+[ext_resource type="Texture2D" uid="uid://dpqs6l5dwfger" path="res://assets/gui/icons/twitter.svg" id="8_8dbyt"]
+[ext_resource type="Texture2D" uid="uid://l0o6hae3f6dy" path="res://assets/gui/icons/telegram.svg" id="9_2hucs"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_0xbi6"]
+font = ExtResource("3_txivm")
+font_size = 64
+
+[sub_resource type="LabelSettings" id="LabelSettings_loc6d"]
+font_size = 32
+
+[node name="end_demo_screen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_e5hiu")
+script = ExtResource("1_hgupt")
+
+[node name="panel_cont" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="vbox" type="VBoxContainer" parent="panel_cont"]
+layout_mode = 2
+theme_override_constants/separation = 50
+alignment = 1
+
+[node name="thanks" type="Label" parent="panel_cont/vbox"]
+layout_mode = 2
+text = "Thank you for playing!"
+label_settings = SubResource("LabelSettings_0xbi6")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="gen" type="Label" parent="panel_cont/vbox"]
+layout_mode = 2
+text = "This is the end of the demo.
+We hope you enjoyed it, and we ask to consider to support us on <>, follow us on social media and wishlist on Steam! <3"
+label_settings = SubResource("LabelSettings_loc6d")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="hflow_socials" type="HFlowContainer" parent="panel_cont/vbox"]
+layout_mode = 2
+theme_override_constants/h_separation = 0
+theme_override_constants/v_separation = 0
+alignment = 1
+
+[node name="kickstarter" type="TextureButton" parent="panel_cont/vbox/hflow_socials"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+texture_normal = ExtResource("2_387ty")
+stretch_mode = 0
+
+[node name="steam" type="TextureButton" parent="panel_cont/vbox/hflow_socials"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+texture_normal = ExtResource("5_ofoum")
+stretch_mode = 0
+
+[node name="itch_io" type="TextureButton" parent="panel_cont/vbox/hflow_socials"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+texture_normal = ExtResource("6_ijl5n")
+stretch_mode = 0
+
+[node name="discord" type="TextureButton" parent="panel_cont/vbox/hflow_socials"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+texture_normal = ExtResource("7_wyfwp")
+stretch_mode = 0
+
+[node name="twitter" type="TextureButton" parent="panel_cont/vbox/hflow_socials"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+texture_normal = ExtResource("8_8dbyt")
+stretch_mode = 0
+
+[node name="telegram" type="TextureButton" parent="panel_cont/vbox/hflow_socials"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+texture_normal = ExtResource("9_2hucs")
+stretch_mode = 0
+
+[node name="hflow_game" type="HFlowContainer" parent="panel_cont/vbox"]
+layout_mode = 2
+theme_override_constants/h_separation = 20
+alignment = 1
+
+[node name="continue" type="Button" parent="panel_cont/vbox/hflow_game"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Return to last save"
+flat = true
+
+[node name="quit" type="Button" parent="panel_cont/vbox/hflow_game"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Quit to main menu"
+flat = true
+
+[connection signal="button_up" from="panel_cont/vbox/hflow_socials/kickstarter" to="." method="_on_socials_button_up" binds= ["https://www.kickstarter.com/"]]
+[connection signal="button_up" from="panel_cont/vbox/hflow_socials/steam" to="." method="_on_socials_button_up" binds= ["https://store.steampowered.com/"]]
+[connection signal="button_up" from="panel_cont/vbox/hflow_socials/itch_io" to="." method="_on_socials_button_up" binds= ["https://itch.io/"]]
+[connection signal="button_up" from="panel_cont/vbox/hflow_socials/discord" to="." method="_on_socials_button_up" binds= ["https://discord.com/"]]
+[connection signal="button_up" from="panel_cont/vbox/hflow_socials/twitter" to="." method="_on_socials_button_up" binds= ["https://twitter.com/?lang=uk"]]
+[connection signal="button_up" from="panel_cont/vbox/hflow_socials/telegram" to="." method="_on_socials_button_up" binds= ["https://t.me/cyberblood_the_game"]]
