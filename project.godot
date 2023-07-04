@@ -16,7 +16,7 @@ config/use_custom_user_dir=true
 config/custom_user_dir_name="CyberBlood"
 config/features=PackedStringArray("4.1", "Forward Plus")
 config/icon="res://icon.svg"
-config/version="0.0.0.8"
+config/version="0.0.0.9"
 
 [autoload]
 

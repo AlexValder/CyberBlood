@@ -61,7 +61,6 @@ tab_alignment = 1
 script = ExtResource("2_y0taj")
 
 [node name="Inventory" type="ScrollContainer" parent="tabs"]
-visible = false
 layout_mode = 2
 follow_focus = true
 script = ExtResource("4_py8qt")
@@ -144,6 +143,7 @@ size_flags_vertical = 5
 text = "Quit to Main Menu"
 
 [node name="DevTab" type="ScrollContainer" parent="tabs"]
+visible = false
 layout_mode = 2
 follow_focus = true
 script = ExtResource("4_ionlx")
@@ -210,8 +210,8 @@ self_modulate = Color(0.54902, 0.172549, 0.333333, 1)
 texture_filter = 1
 offset_left = 4.0
 offset_top = 4.0
-offset_right = 234.0
-offset_bottom = 244.0
+offset_right = 266.0
+offset_bottom = 285.0
 theme = ExtResource("2_aq74w")
 alignment = 1
 
