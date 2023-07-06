@@ -5,6 +5,7 @@ signal debug_toggled(debug)
 const LEVELS := {
     "menu": "res://scenes/ui/main_menu.tscn",
     "outskirts": "res://scenes/levels/{biome}/{biome}.{id}.tscn",
+    "demo_end": "res://scenes/ui/end_demo_screen.tscn",
 }
 const FIRST_LEVEL_FORMAT := {"biome" = "outskirts","id" = "000"}
 const FRESH_SAVE_NAME := "Start level"
@@ -24,7 +25,7 @@ var debug_disabled: bool = !should_show_debug():
 var last_room := []
 
 
-func start_game(index: int) -> void:
+func start_game(index: int = _save_index) -> void:
     _save_index = index
 
     create_player()
@@ -102,6 +103,16 @@ func quit_to_menu() -> void:
     last_room = []
     get_tree().paused = false
     get_tree().change_scene_to_file(LEVELS["menu"])
+
+
+func demo_ends() -> void:
+    EnemyManager.clear_killed()
+
+    _playing = false
+    remove_player()
+    last_room = []
+    get_tree().paused = false
+    get_tree().change_scene_to_file(LEVELS["demo_end"])
 
 
 func create_player() -> void:

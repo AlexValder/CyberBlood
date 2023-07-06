@@ -1,4 +1,4 @@
-[gd_scene load_steps=115 format=3 uid="uid://dooql4yvspt51"]
+[gd_scene load_steps=116 format=3 uid="uid://dooql4yvspt51"]
 
 [ext_resource type="Script" path="res://entities/player/player.gd" id="1_spune"]
 [ext_resource type="Texture2D" uid="uid://cjy71jbvm5o5c" path="res://assets/sprites/player/player_attack1.png" id="2_pdbal"]
@@ -586,6 +586,7 @@ bg_color = Color(0.180392, 0.0117647, 0.0156863, 1)
 bg_color = Color(1, 0.0901961, 0.0901961, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_pxxtw"]
+font_size = 32
 outline_size = 1
 outline_color = Color(1, 0, 0, 1)
 
@@ -596,15 +597,19 @@ bg_color = Color(0.0901961, 0.00392157, 0.439216, 1)
 bg_color = Color(0.0705882, 0, 1, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_psi58"]
+font_size = 32
 outline_size = 1
 outline_color = Color(0, 0, 1, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_763cv"]
-font_size = 20
+font_size = 32
 outline_size = 1
 outline_color = Color(0.478431, 0.478431, 0, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_xhfyu"]
+font_size = 36
+
+[sub_resource type="LabelSettings" id="LabelSettings_jmt7q"]
 font_size = 32
 
 [node name="player" type="CharacterBody2D"]
@@ -703,6 +708,7 @@ shape = SubResource("CapsuleShape2D_u0rr4")
 
 [node name="camera" type="Camera2D" parent="."]
 position = Vector2(0, 22)
+zoom = Vector2(3, 3)
 limit_left = 0
 limit_right = 1150
 limit_bottom = 500
@@ -794,6 +800,10 @@ anchor_top = 0.1
 anchor_right = 0.9
 anchor_bottom = 0.9
 
+[node name="vbox" parent="GUI/HUD/inventory/controls" index="1"]
+offset_right = 521.0
+offset_bottom = 445.0
+
 [node name="fps" type="Label" parent="GUI/HUD"]
 layout_mode = 0
 anchor_left = 1.0
@@ -812,12 +822,11 @@ offset_left = 5.0
 offset_top = 5.0
 offset_right = 205.0
 offset_bottom = 45.0
-theme_override_constants/separation = 10
+theme_override_constants/separation = 20
 
 [node name="health_bar" type="ProgressBar" parent="GUI/HUD/vbox"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(200, 6)
-layout_direction = 2
+custom_minimum_size = Vector2(500, 24)
 layout_mode = 2
 theme_override_styles/background = SubResource("StyleBoxFlat_h6rjw")
 theme_override_styles/fill = SubResource("StyleBoxFlat_srnvl")
@@ -844,8 +853,7 @@ vertical_alignment = 1
 
 [node name="mana_bar" type="ProgressBar" parent="GUI/HUD/vbox"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(200, 6)
-layout_direction = 2
+custom_minimum_size = Vector2(500, 24)
 layout_mode = 2
 theme_override_styles/background = SubResource("StyleBoxFlat_yuuum")
 theme_override_styles/fill = SubResource("StyleBoxFlat_7fxjf")
@@ -900,6 +908,7 @@ offset_right = 45.0
 offset_bottom = -5.0
 grow_vertical = 0
 text = "selected form: BAT"
+label_settings = SubResource("LabelSettings_jmt7q")
 
 [connection signal="mana_changed" from="." to="GUI/HUD/vbox/mana_bar" method="_on_player_mana_changed"]
 [connection signal="player_dead" from="." to="state_machine" method="_on_player_dead"]

@@ -39,7 +39,6 @@ window/size/resizable=false
 window/size/borderless=true
 window/stretch/mode="canvas_items"
 window/stretch/aspect="keep_height"
-window/stretch/scale=3.0
 
 [editor]
 

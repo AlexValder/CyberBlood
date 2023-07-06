@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://ro156l6j1t77"]
+[gd_scene load_steps=11 format=3 uid="uid://ro156l6j1t77"]
 
 [ext_resource type="Theme" uid="uid://brlh53bypvlrb" path="res://assets/gui/themes/default.tres" id="2_aq74w"]
 [ext_resource type="Script" path="res://entities/player/inventory/inventory.gd" id="2_hiw33"]
@@ -17,8 +17,6 @@ corner_radius_top_left = 10
 corner_radius_top_right = 10
 corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
-
-[sub_resource type="LabelSettings" id="LabelSettings_47qm0"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_5y4ma"]
 font_size = 24
@@ -80,7 +78,6 @@ alignment = 1
 [node name="title" type="Label" parent="tabs/Inventory/hbox/hbox"]
 layout_mode = 2
 text = "Items"
-label_settings = SubResource("LabelSettings_47qm0")
 horizontal_alignment = 1
 
 [node name="items" type="GridContainer" parent="tabs/Inventory/hbox/hbox"]
@@ -210,8 +207,8 @@ self_modulate = Color(0.54902, 0.172549, 0.333333, 1)
 texture_filter = 1
 offset_left = 4.0
 offset_top = 4.0
-offset_right = 266.0
-offset_bottom = 285.0
+offset_right = 521.0
+offset_bottom = 445.0
 theme = ExtResource("2_aq74w")
 alignment = 1
 

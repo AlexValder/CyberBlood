@@ -8,3 +8,7 @@ func _ready() -> void:
         biome, id, "outskirts_tomb_key")
     if key == "1":
         $env/key_00.queue_free()
+
+
+func _on_gates_opened() -> void:
+    GameManager.demo_ends()
