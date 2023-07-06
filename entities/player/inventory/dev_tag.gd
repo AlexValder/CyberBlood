@@ -25,7 +25,7 @@ func _fill_up_levels() -> void:
             _levels_options.add_item(room_name)
 
     var popup := _levels_options.get_popup()
-    popup.max_size.y = 100
+    popup.max_size.y = 500
     popup.canvas_item_default_texture_filter =\
         Viewport.DEFAULT_CANVAS_ITEM_TEXTURE_FILTER_NEAREST
 

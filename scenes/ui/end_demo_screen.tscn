@@ -111,12 +111,16 @@ theme_override_constants/h_separation = 20
 alignment = 1
 
 [node name="continue" type="Button" parent="panel_cont/vbox/hflow_game"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(300, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
 text = "Return to last save"
 flat = true
 
 [node name="quit" type="Button" parent="panel_cont/vbox/hflow_game"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(300, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
 text = "Quit to main menu"
@@ -128,3 +132,5 @@ flat = true
 [connection signal="button_up" from="panel_cont/vbox/hflow_socials/discord" to="." method="_on_socials_button_up" binds= ["https://discord.com/"]]
 [connection signal="button_up" from="panel_cont/vbox/hflow_socials/twitter" to="." method="_on_socials_button_up" binds= ["https://twitter.com/?lang=uk"]]
 [connection signal="button_up" from="panel_cont/vbox/hflow_socials/telegram" to="." method="_on_socials_button_up" binds= ["https://t.me/cyberblood_the_game"]]
+[connection signal="button_up" from="panel_cont/vbox/hflow_game/continue" to="." method="_on_continue_button_up"]
+[connection signal="button_up" from="panel_cont/vbox/hflow_game/quit" to="." method="_on_quit_button_up"]

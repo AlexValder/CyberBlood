@@ -70,5 +70,6 @@ position = Vector2(568, 315)
 key_id = "outskirts_gate_key"
 
 [connection signal="picked_up" from="env/key_00" to="." method="_on_key_picked_up" binds= ["outskirts_tomb_key"]]
+[connection signal="interacted" from="env/key_hole" to="." method="_on_gates_opened"]
 
 [editable path="env/key_hole"]
