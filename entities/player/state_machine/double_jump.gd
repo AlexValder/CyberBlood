@@ -7,8 +7,6 @@ func on_entry() -> void:
 
 
 func physics_process(delta: float) -> void:
-    if !_process: return
-
     if is_zero_approx(player.velocity.y) and !player.is_on_ceiling():
         state_change.emit(self.name, "idle")
 
@@ -24,6 +22,9 @@ func physics_process(delta: float) -> void:
 
     if Input.is_action_just_pressed("down"):
         state_change.emit(self.name, "climbing")
+
+    if Input.is_action_pressed("dash"):
+        state_change.emit(self.name, "dash")
 
     _check_horizontal_movement(player.WALK_SPEED)
     _add_gravity(delta)

@@ -2,8 +2,6 @@ extends PlayerState
 
 
 func physics_process(delta: float) -> void:
-    if !_process: return
-
     if !player.is_on_floor():
         state_change.emit(self.name, "fall")
 
@@ -14,6 +12,9 @@ func physics_process(delta: float) -> void:
 
     if Input.is_action_just_pressed("jump"):
         state_change.emit(self.name, "jump")
+
+    if Input.is_action_pressed("dash"):
+        state_change.emit(self.name, "dash")
 
     player.move_and_slide()
 

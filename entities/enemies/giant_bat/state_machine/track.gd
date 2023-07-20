@@ -3,12 +3,9 @@ extends EnemyState
 
 func on_entry() -> void:
     _enemy.play_anim("awoke", 1.75)
-    _process = true
 
 
 func physics_process(_delta: float) -> void:
-    if !_process: return
-
     var distance := GameManager.player.global_position - _enemy.global_position
     var leng := distance.length()
     if leng >= _enemy.WATCH_DISTANCE:

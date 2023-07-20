@@ -1,4 +1,4 @@
-[gd_scene load_steps=116 format=3 uid="uid://dooql4yvspt51"]
+[gd_scene load_steps=118 format=3 uid="uid://dooql4yvspt51"]
 
 [ext_resource type="Script" path="res://entities/player/player.gd" id="1_spune"]
 [ext_resource type="Texture2D" uid="uid://cjy71jbvm5o5c" path="res://assets/sprites/player/player_attack1.png" id="2_pdbal"]
@@ -35,6 +35,8 @@
 [ext_resource type="Script" path="res://entities/player/state_machine/cat_jump.gd" id="30_mx1dt"]
 [ext_resource type="Script" path="res://entities/player/state_machine/cat_fall.gd" id="31_3t60f"]
 [ext_resource type="Script" path="res://entities/player/state_machine/climbing.gd" id="31_hjw76"]
+[ext_resource type="Script" path="res://entities/player/state_machine/double_jump.gd" id="31_n2s1d"]
+[ext_resource type="Script" path="res://entities/player/state_machine/dash.gd" id="32_451t1"]
 [ext_resource type="Script" path="res://entities/player/hud/money_bar.gd" id="37_b7hqt"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_eui4v"]
@@ -778,6 +780,19 @@ script = ExtResource("30_mx1dt")
 [node name="cat_fall" type="Node" parent="state_machine"]
 script = ExtResource("31_3t60f")
 
+[node name="double_jump" type="Node" parent="state_machine"]
+script = ExtResource("31_n2s1d")
+
+[node name="dash" type="Node" parent="state_machine"]
+script = ExtResource("32_451t1")
+
+[node name="timer" type="Timer" parent="state_machine/dash"]
+wait_time = 1.5
+one_shot = true
+
+[node name="cooldown" type="Timer" parent="state_machine/dash"]
+one_shot = true
+
 [node name="GUI" type="CanvasLayer" parent="."]
 
 [node name="HUD" type="Control" parent="GUI"]
@@ -799,10 +814,6 @@ anchor_left = 0.1
 anchor_top = 0.1
 anchor_right = 0.9
 anchor_bottom = 0.9
-
-[node name="vbox" parent="GUI/HUD/inventory/controls" index="1"]
-offset_right = 521.0
-offset_bottom = 445.0
 
 [node name="fps" type="Label" parent="GUI/HUD"]
 layout_mode = 0
@@ -917,5 +928,7 @@ label_settings = SubResource("LabelSettings_jmt7q")
 [connection signal="timeout" from="timers/recovery_value" to="." method="_on_recovery_value_timeout" binds= [1.0]]
 [connection signal="timeout" from="timers/recovery_value" to="GUI/HUD/vbox/mana_bar" method="_on_recovery_value_timeout" binds= [1.0]]
 [connection signal="timeout" from="state_machine/bat_form/timer" to="state_machine/bat_form" method="_on_timer_timeout"]
+[connection signal="timeout" from="state_machine/dash/timer" to="state_machine/dash" method="_on_dash_end"]
+[connection signal="timeout" from="state_machine/dash/cooldown" to="state_machine/dash" method="_on_cooldown_timeout"]
 
 [editable path="GUI/HUD/inventory"]

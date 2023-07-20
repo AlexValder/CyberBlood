@@ -11,8 +11,6 @@ func on_entry() -> void:
 
 
 func physics_process(delta: float) -> void:
-    if !_process: return
-
     _add_gravity(delta)
     _enemy.move_and_slide()
 
