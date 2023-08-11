@@ -34,6 +34,15 @@ func physics_process(_delta: float) -> void:
     if !_is_dashing:
         return
 
+    # dash cancel
+    if Input.is_action_just_pressed("jump"):
+        _timer.stop()
+        if player.velocity.y <= 0:
+            state_change.emit(self.name, "double_jump")
+        else:
+            state_change.emit(self.name, "final_fall")
+        return
+
     if Input.is_action_just_pressed("melee"):
         var diff := Time.get_ticks_msec() - _start_dash
         print(diff)
@@ -52,7 +61,6 @@ func physics_process(_delta: float) -> void:
 
 
 func on_exit() -> void:
-    player.velocity.x = 0
     _timer.stop()
     _cooldown.start(DASH_COOLDOWN)
 
@@ -63,5 +71,4 @@ func _on_cooldown_timeout() -> void:
 
 func _on_dash_end() -> void:
     _is_dashing = false
-    player.velocity.x = 0
     state_change.emit(self.name, "idle")
