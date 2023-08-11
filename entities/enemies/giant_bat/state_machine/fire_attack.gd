@@ -17,8 +17,6 @@ func on_entry() -> void:
 
 
 func physics_process(_delta: float) -> void:
-    if !_process: return
-
     _enemy.move_and_slide()
 
 
@@ -27,5 +25,4 @@ func _animation_done(_anim: String) -> void:
 
 
 func on_exit() -> void:
-    super.on_exit()
     _timer.start()

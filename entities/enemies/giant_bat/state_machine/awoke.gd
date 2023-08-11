@@ -22,11 +22,9 @@ func physics_process(_delta: float) -> void:
 
 
 func on_exit() -> void:
-    super.on_exit()
     _timer.stop()
 
 
 func _on_flip_timer_timeout() -> void:
     _enemy.flip = !_enemy.flip
-    if _process:
-        _timer.start(randf_range(0.1, 2.5))
+    _timer.start(randf_range(0.1, 2.5))

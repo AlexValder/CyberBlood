@@ -193,9 +193,10 @@ text = "Show Debug Info"
 
 [node name="controls" type="PopupPanel" parent="."]
 disable_3d = true
-initial_position = 2
 title = "Controls"
-size = Vector2i(238, 248)
+initial_position = 2
+size = Vector2i(525, 489)
+visible = true
 extend_to_title = true
 content_scale_mode = 1
 content_scale_aspect = 3
@@ -208,7 +209,7 @@ texture_filter = 1
 offset_left = 4.0
 offset_top = 4.0
 offset_right = 521.0
-offset_bottom = 445.0
+offset_bottom = 485.0
 theme = ExtResource("2_aq74w")
 alignment = 1
 
@@ -258,6 +259,12 @@ horizontal_alignment = 1
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 text = "Mouse Wheel / LT - form selection"
+horizontal_alignment = 1
+
+[node name="label10" type="Label" parent="controls/vbox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+text = "Z / RT - dash"
 horizontal_alignment = 1
 
 [node name="label07" type="Label" parent="controls/vbox"]

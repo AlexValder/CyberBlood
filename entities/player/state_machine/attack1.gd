@@ -22,8 +22,6 @@ func _animation_done(_anim: String) -> void:
 
 
 func physics_process(delta: float) -> void:
-    if !_process: return
-
     if Input.is_action_just_pressed("melee"):
         _next_attack = true
 
@@ -32,5 +30,4 @@ func physics_process(delta: float) -> void:
 
 
 func on_exit() -> void:
-    super.on_exit()
     _next_attack = false

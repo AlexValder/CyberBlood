@@ -7,8 +7,6 @@ func on_entry() -> void:
 
 
 func physics_process(delta: float) -> void:
-    if !_process: return
-
     if !player.is_on_floor():
         state_change.emit(self.name, "fall")
 
@@ -33,6 +31,9 @@ func physics_process(delta: float) -> void:
 
     if Input.is_action_pressed("right"):
         state_change.emit(self.name, "run")
+
+    if Input.is_action_pressed("dash"):
+        state_change.emit(self.name, "dash")
 
     player.move_and_slide()
     super.physics_process(delta)
