@@ -16,8 +16,17 @@ var quests := {
 }
 var map := {
     "current" : "",
-    "outskirts": {},
 }
+
+
+func _init() -> void:
+    # populating map dict
+    const levels_path := "res://scenes/levels/"
+    var levels := DirAccess.get_directories_at(levels_path)
+    for level in levels:
+        if !level.is_empty():
+            map[level] = {}
+
 
 static func create_save(p: Player, level: BaseLevel) -> PlayerSave:
 

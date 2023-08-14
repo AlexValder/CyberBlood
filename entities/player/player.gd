@@ -12,14 +12,14 @@ signal player_hurt
 signal player_health_changed(old_value, new_value)
 signal mana_changed(new_value)
 
-const GRAVITY := 350.0
-const CAT_SPEED := 150.0
-const WALK_SPEED := 120.0
-const CLIMB_SPEED := 90.0
-const FLY_SPEED := 200.0
-const JUMP := 215.0
-const CAT_JUMP := 260.0
-const ACCEL := 0.1
+const GRAVITY := 350.0*3
+const CAT_SPEED := 150.0*3
+const WALK_SPEED := 120.0*3.25
+const CLIMB_SPEED := 90.0*3
+const FLY_SPEED := 200.0*3.5
+const JUMP := 215.0*3.5
+const CAT_JUMP := 260.0*3
+const ACCEL := 0.1*3
 
 @onready var sprite := $sprite as AnimatedSprite2D
 @onready var player_anim := $player_anim as AnimationPlayer

@@ -1,7 +1,7 @@
 extends PlayerState
 
-const DASH_SPEED := 400.0
-const DASH_DEACEL := 10.0
+const DASH_SPEED := 400.0*2
+const DASH_DEACEL := 10.0*2
 const DASH_TIME := 1.0
 const DASH_COOLDOWN := 0.5
 
