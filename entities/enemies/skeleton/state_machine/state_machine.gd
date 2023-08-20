@@ -1,9 +1,9 @@
 extends EnemyStateMachine
 
 ## using vector for range, X is minimum, Y is maximum
-@export var idle_range := Vector2(1.5, 3.5)
+@export var idle_range := Vector2(4.5, 10.5)
 ## using vector for range, X is minimum, Y is maximum
-@export var walk_range := Vector2(2.5, 5.1)
+@export var walk_range := Vector2(7.5, 15.3)
 
 @onready var _owner := self.owner as BaseEnemy
 @onready var _patrol_timer := $patrolling_timer as Timer

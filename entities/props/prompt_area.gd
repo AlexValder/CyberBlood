@@ -1,21 +1,15 @@
-extends RoomTransitionTrigger
-class_name BgDoor
+extends Area2D
+class_name OneShotPrompt
 
 
-@onready var _prompt := $"prompt" as ButtonPrompt
+@onready var _prompt := $prompt as ButtonPrompt
+@export_range(0.1, 2.0, 0.1) var fade_in := 0.1
+@export_range(0.1, 2.0, 0.1) var fade_out := 0.1
 
 var _tween: Tween
 
 
-func interact() -> void:
-    GameManager.change_room(self)
-
-
-func _ready() -> void:
-    fromId = owner.name
-
-
-func _on_body_entered(_node: Node2D) -> void:
+func _on_player_entered() -> void:
     if is_instance_valid(_tween):
         _tween.kill()
 
@@ -24,7 +18,7 @@ func _on_body_entered(_node: Node2D) -> void:
     _tween.play()
 
 
-func _on_body_exited(_node: Node2D) -> void:
+func _on_player_exited() -> void:
     if is_instance_valid(_tween):
         _tween.kill()
 

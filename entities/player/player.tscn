@@ -1,4 +1,4 @@
-[gd_scene load_steps=116 format=3 uid="uid://dooql4yvspt51"]
+[gd_scene load_steps=115 format=3 uid="uid://dooql4yvspt51"]
 
 [ext_resource type="Script" path="res://entities/player/player.gd" id="1_spune"]
 [ext_resource type="Texture2D" uid="uid://cjy71jbvm5o5c" path="res://assets/sprites/player/player_attack1.png" id="2_pdbal"]
@@ -31,7 +31,6 @@
 [ext_resource type="Script" path="res://entities/player/state_machine/hurt.gd" id="23_gesux"]
 [ext_resource type="Script" path="res://entities/player/hud/mana_bar.gd" id="23_th253"]
 [ext_resource type="Script" path="res://entities/player/state_machine/climbing.gd" id="31_hjw76"]
-[ext_resource type="Script" path="res://entities/player/state_machine/double_jump.gd" id="31_n2s1d"]
 [ext_resource type="Script" path="res://entities/player/state_machine/dash.gd" id="32_451t1"]
 [ext_resource type="Script" path="res://entities/player/state_machine/dash_attack.gd" id="33_i0mfo"]
 [ext_resource type="Script" path="res://entities/player/hud/money_bar.gd" id="37_b7hqt"]
@@ -784,9 +783,6 @@ script = ExtResource("19_gv58d")
 [node name="timer" type="Timer" parent="state_machine/bat_form"]
 wait_time = 0.5
 one_shot = true
-
-[node name="double_jump" type="Node" parent="state_machine"]
-script = ExtResource("31_n2s1d")
 
 [node name="dash" type="Node" parent="state_machine"]
 script = ExtResource("32_451t1")

@@ -1,8 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://coycpipb5hm11"]
+[gd_scene load_steps=4 format=3 uid="uid://coycpipb5hm11"]
 
 [ext_resource type="FontFile" uid="uid://cok7kpyxwfkbj" path="res://assets/gui/fonts/Blazma-Regular.ttf" id="1_17u0v"]
 [ext_resource type="Script" path="res://entities/props/prompt.gd" id="1_o08ux"]
-[ext_resource type="Texture2D" uid="uid://byvxn63ichvyj" path="res://assets/gui/icons/inputs/xbox/x.png" id="2_xtadx"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_gx63v"]
 font = ExtResource("1_17u0v")
@@ -33,13 +32,12 @@ grow_vertical = 2
 [node name="button" type="TextureRect" parent="hbox"]
 z_index = 3
 layout_mode = 2
-texture = ExtResource("2_xtadx")
 expand_mode = 3
-stretch_mode = 5
 
 [node name="label" type="Label" parent="hbox"]
 z_index = 3
 layout_mode = 2
+size_flags_horizontal = 3
 text = "testїєэйыąęł"
 label_settings = SubResource("LabelSettings_gx63v")
 uppercase = true

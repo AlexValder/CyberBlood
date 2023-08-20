@@ -77,7 +77,7 @@ func tranform_name() -> String:
 func shoot_fireball() -> void:
     var fireball := FireBall.spawn_fireball()
     fireball.direction_movement = Vector2.LEFT if flip else Vector2.RIGHT
-    fireball.speed = 2.5
+    fireball.speed = 6.5
     add_sibling(fireball)
     fireball.make_player()
     fireball.global_position = _firepoint.global_position

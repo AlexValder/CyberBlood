@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://entities/projectiles/fireball.gd" id="1_iit41"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_oalyj"]
-radius = 5.0
+radius = 20.0
 
 [sub_resource type="Gradient" id="Gradient_0me7f"]
 offsets = PackedFloat32Array(0.102041, 0.331633, 0.459184)
@@ -30,7 +30,6 @@ scale = Vector2(0.6, 0.6)
 collision_layer = 0
 input_pickable = false
 script = ExtResource("1_iit41")
-speed = 1.4
 damage = 5
 damages_player = false
 
@@ -42,7 +41,7 @@ one_shot = true
 shape = SubResource("CircleShape2D_oalyj")
 
 [node name="light" type="PointLight2D" parent="."]
-scale = Vector2(0.5, 0.5)
+scale = Vector2(1.5, 1.5)
 texture = SubResource("GradientTexture2D_60spc")
 texture_scale = 3.0
 
@@ -50,7 +49,7 @@ texture_scale = 3.0
 light_mask = 0
 z_index = 1
 texture_repeat = 1
-scale = Vector2(0.5, 0.5)
+scale = Vector2(2, 2)
 texture = SubResource("GradientTexture2D_snwwy")
 texture_offset = Vector2(20, 20)
 polygon = PackedVector2Array(-10, 0, -9, -4, -7, -7, -4, -9, 0, -10, 4, -9, 7, -7, 9, -4, 10, 0, 9, 4, 7, 7, 4, 9, 0, 10, -4, 9, -7, 7, -9, 4)

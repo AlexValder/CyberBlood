@@ -13,11 +13,21 @@ var _is_joy_connected := false
 
 
 func get_button_path(action: String) -> String:
-    # get action
-
+    assert(!action.contains("+"))
     return ICON_PATHS.format({
         "platform" = get_folder(prompt_style),
         "button" = get_button(action)})
+
+
+func get_multiple_paths(action: String) -> PackedStringArray:
+    assert(action.contains("+"))
+    var actions := action.split("+", false)
+
+    var buttons := [] as PackedStringArray
+    for line in actions:
+        buttons.push_back(get_button_path(line))
+
+    return buttons
 
 
 func get_folder(prompt: PromptStyle) -> String:
@@ -44,9 +54,8 @@ func get_button(action: String) -> String:
                 var e := event as InputEventKey
                 return _get_keycode(e.physical_keycode)
             else:
-                var e := event as InputEventMouse
-                print(e.as_text())
-                return e.as_text()
+                var e := event as InputEventMouseButton
+                return _get_mouse(e.button_index)
         elif _is_joy_connected && _is_controller(event):
             break
     return ""
@@ -97,3 +106,19 @@ func _get_keycode(keycode: int) -> String:
             return "bracket_right"
         _:
             return OS.get_keycode_string(keycode).to_lower()
+
+
+func _get_mouse(button: int) -> String:
+    match button:
+        MouseButton.MOUSE_BUTTON_LEFT:
+            return "lmb"
+        MouseButton.MOUSE_BUTTON_RIGHT:
+            return "rmb"
+        MouseButton.MOUSE_BUTTON_MIDDLE:
+            return "mmb"
+        MouseButton.MOUSE_BUTTON_WHEEL_UP:
+            return "wheel_up"
+        MouseButton.MOUSE_BUTTON_WHEEL_DOWN:
+            return "wheel_down"
+        _:
+            return "mouse"

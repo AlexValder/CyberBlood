@@ -4,8 +4,7 @@ signal debug_toggled(debug)
 
 const LEVELS := {
     "menu": "res://scenes/ui/main_menu.tscn",
-    "outskirts": "res://scenes/levels/{biome}/{biome}.{id}.tscn",
-    "garbage": "res://scenes/levels/{biome}/{biome}.{id}.tscn",
+    "game": "res://scenes/levels/{biome}/{biome}.{id}.tscn",
     "demo_end": "res://scenes/ui/end_demo_screen.tscn",
 }
 const FIRST_LEVEL_FORMAT := {"biome" = "garbage", "id" = "000"}
@@ -38,11 +37,11 @@ func start_game(index: int = _save_index) -> void:
         var biome := save_data.map.biome as String
         var id := save_data.map.id as String
 
-        level = LEVELS[biome].format({"biome" = biome, "id" = id})
+        level = LEVELS["game"].format({"biome" = biome, "id" = id})
     else:
         save_data = PlayerSave.new()
         save_data.update_player_data(player)
-        level = LEVELS[FIRST_LEVEL_FORMAT.biome].format(FIRST_LEVEL_FORMAT)
+        level = LEVELS["game"].format(FIRST_LEVEL_FORMAT)
         save_data.map.biome = FIRST_LEVEL_FORMAT.biome
         save_data.map.id = FIRST_LEVEL_FORMAT.id
         save_data.map.current = FRESH_SAVE_NAME
@@ -137,7 +136,7 @@ func player_dies() -> void:
 
     var biome := save_data.map.biome as String
     var id := save_data.map.id as String
-    var level = LEVELS[biome].format({"biome" = biome, "id" = id})
+    var level = LEVELS["game"].format({"biome" = biome, "id" = id})
 
     create_player()
     get_tree().root.add_child(player)
