@@ -19,7 +19,6 @@ shape = SubResource("RectangleShape2D_2ubmy")
 [node name="base" type="Sprite2D" parent="."]
 texture_filter = 1
 position = Vector2(0, -9)
-scale = Vector2(0.428571, 0.428571)
 texture = ExtResource("1_uhxma")
 
 [node name="handle" type="Sprite2D" parent="base"]

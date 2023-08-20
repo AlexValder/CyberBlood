@@ -49,7 +49,7 @@ var flip := false:
 var _current_form := 0
 var _forms := [
     PlayerForms.BAT,
-    PlayerForms.CAT,
+    #PlayerForms.CAT, <- removing until improved
 ]
 var inventory := []
 
@@ -267,6 +267,7 @@ func _unhandled_input(event: InputEvent) -> void:
         for area in areas:
             if area is Interactable:
                 (area as Interactable).interact()
+                return
 
 
 func _on_recovery_value_timeout(rate: float) -> void:

@@ -1,0 +1,44 @@
+[gd_scene load_steps=6 format=3 uid="uid://br3aqvxmmawbp"]
+
+[ext_resource type="Texture2D" uid="uid://bmlw1oalcf7qk" path="res://assets/textures/door.png" id="1_ueg2e"]
+[ext_resource type="Script" path="res://entities/props/passive_room_transition_trigger.gd" id="3_hgkjq"]
+[ext_resource type="PackedScene" uid="uid://coycpipb5hm11" path="res://entities/props/prompt.tscn" id="4_81irl"]
+
+[sub_resource type="GDScript" id="GDScript_1atj7"]
+script/source = "extends Interactable
+
+
+func interact() -> void:
+    get_parent().interact()
+"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sckky"]
+size = Vector2(170, 200)
+
+[node name="bg_door" type="Area2D"]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("3_hgkjq")
+
+[node name="prompt" parent="." instance=ExtResource("4_81irl")]
+modulate = Color(1, 1, 1, 0)
+offset_top = -81.0
+offset_bottom = -81.0
+text = "enter"
+action = "interact"
+
+[node name="sprite" type="Sprite2D" parent="."]
+texture = ExtResource("1_ueg2e")
+
+[node name="interactable" type="Area2D" parent="."]
+collision_layer = 128
+collision_mask = 2
+script = SubResource("GDScript_1atj7")
+
+[node name="shape" type="CollisionShape2D" parent="interactable"]
+position = Vector2(0, 27)
+shape = SubResource("RectangleShape2D_sckky")
+
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]
+[connection signal="body_entered" from="interactable" to="." method="_on_body_entered"]
+[connection signal="body_exited" from="interactable" to="." method="_on_body_exited"]

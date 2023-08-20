@@ -26,6 +26,7 @@ func _add_label() -> void:
     label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
     label.label_settings = LabelSettings.new()
     label.label_settings.font = load("res://assets/gui/fonts/m5x7.ttf")
+    label.label_settings.font_size = 32
     label.label_settings.outline_size = 2
     label.label_settings.outline_color = Color.BLACK
     label.theme = load("res://assets/gui/themes/default.tres")

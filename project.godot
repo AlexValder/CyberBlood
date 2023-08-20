@@ -26,6 +26,7 @@ Settings="*res://scripts/settings.gd"
 GameManager="*res://scripts/game_manager.gd"
 Database="*res://scripts/database.gd"
 EnemyManager="*res://scripts/enemy_manager.gd"
+Controls="*res://scripts/controls.gd"
 
 [debug]
 
@@ -161,7 +162,7 @@ dash={
 2d_physics/layer_5="enemy_hurtbox"
 2d_physics/layer_6="player_hitbox"
 2d_physics/layer_7="enemy_hitbox"
-2d_physics/layer_8="pickups"
+2d_physics/layer_8="interactable"
 2d_physics/layer_9="fall_through"
 
 [physics]

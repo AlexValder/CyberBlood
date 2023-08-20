@@ -48,7 +48,7 @@ func collect_interactables() -> void:
         var iname: String
         var index: String
         if rec == "1":
-            inter.disable()
+            inter.disable(false)
         elif inter.name.begins_with("chest") \
             || inter.name.begins_with("lever"):
             iname = inter.name.substr(0, 5)

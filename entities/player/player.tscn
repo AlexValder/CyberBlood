@@ -1,4 +1,4 @@
-[gd_scene load_steps=120 format=3 uid="uid://dooql4yvspt51"]
+[gd_scene load_steps=116 format=3 uid="uid://dooql4yvspt51"]
 
 [ext_resource type="Script" path="res://entities/player/player.gd" id="1_spune"]
 [ext_resource type="Texture2D" uid="uid://cjy71jbvm5o5c" path="res://assets/sprites/player/player_attack1.png" id="2_pdbal"]
@@ -30,10 +30,6 @@
 [ext_resource type="Script" path="res://entities/player/hud/health_bar.gd" id="22_2246v"]
 [ext_resource type="Script" path="res://entities/player/state_machine/hurt.gd" id="23_gesux"]
 [ext_resource type="Script" path="res://entities/player/hud/mana_bar.gd" id="23_th253"]
-[ext_resource type="Script" path="res://entities/player/state_machine/cat_idle.gd" id="28_3b24y"]
-[ext_resource type="Script" path="res://entities/player/state_machine/cat_walk.gd" id="29_y8xmx"]
-[ext_resource type="Script" path="res://entities/player/state_machine/cat_jump.gd" id="30_mx1dt"]
-[ext_resource type="Script" path="res://entities/player/state_machine/cat_fall.gd" id="31_3t60f"]
 [ext_resource type="Script" path="res://entities/player/state_machine/climbing.gd" id="31_hjw76"]
 [ext_resource type="Script" path="res://entities/player/state_machine/double_jump.gd" id="31_n2s1d"]
 [ext_resource type="Script" path="res://entities/player/state_machine/dash.gd" id="32_451t1"]
@@ -41,7 +37,7 @@
 [ext_resource type="Script" path="res://entities/player/hud/money_bar.gd" id="37_b7hqt"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_eui4v"]
-size = Vector2(162, 159)
+size = Vector2(94, 159)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hbsry"]
 size = Vector2(20, 44)
@@ -639,7 +635,7 @@ collision_layer = 0
 collision_mask = 128
 
 [node name="shape" type="CollisionShape2D" parent="areas/reachable"]
-position = Vector2(27, -13.5)
+position = Vector2(0, -13.5)
 shape = SubResource("RectangleShape2D_eui4v")
 
 [node name="climb_area" type="Area2D" parent="areas"]
@@ -788,18 +784,6 @@ script = ExtResource("19_gv58d")
 [node name="timer" type="Timer" parent="state_machine/bat_form"]
 wait_time = 0.5
 one_shot = true
-
-[node name="cat_idle" type="Node" parent="state_machine"]
-script = ExtResource("28_3b24y")
-
-[node name="cat_walk" type="Node" parent="state_machine"]
-script = ExtResource("29_y8xmx")
-
-[node name="cat_jump" type="Node" parent="state_machine"]
-script = ExtResource("30_mx1dt")
-
-[node name="cat_fall" type="Node" parent="state_machine"]
-script = ExtResource("31_3t60f")
 
 [node name="double_jump" type="Node" parent="state_machine"]
 script = ExtResource("31_n2s1d")
