@@ -1,5 +1,5 @@
 extends Area2D
-class_name OneShotPrompt
+class_name PromptArea
 
 
 @onready var _prompt := $prompt as ButtonPrompt

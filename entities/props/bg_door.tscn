@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://br3aqvxmmawbp"]
+[gd_scene load_steps=8 format=3 uid="uid://br3aqvxmmawbp"]
 
 [ext_resource type="Script" path="res://entities/props/bg_door.gd" id="1_b4n3y"]
 [ext_resource type="Texture2D" uid="uid://bmlw1oalcf7qk" path="res://assets/textures/door.png" id="1_ueg2e"]
 [ext_resource type="PackedScene" uid="uid://drd5rilybenfj" path="res://entities/props/prompt_area.tscn" id="3_jxk18"]
+[ext_resource type="PackedScene" uid="uid://6c0p0rgqbnwr" path="res://scenes/levels/key_hole.tscn" id="4_265fw"]
 
 [sub_resource type="GDScript" id="GDScript_1atj7"]
 script/source = "extends Interactable
@@ -38,6 +39,8 @@ shape = SubResource("RectangleShape2D_sckky")
 [node name="prompt_area" parent="." instance=ExtResource("3_jxk18")]
 
 [node name="prompt" parent="prompt_area" index="0"]
+offset_top = -58.0
+offset_bottom = -58.0
 text = "enter"
 action = "interact"
 
@@ -45,4 +48,12 @@ action = "interact"
 position = Vector2(0, 27)
 shape = SubResource("RectangleShape2D_wve1c")
 
+[node name="key_hole" parent="." instance=ExtResource("4_265fw")]
+
+[node name="shape" parent="key_hole" index="0"]
+position = Vector2(-1, 50.5)
+
+[connection signal="interacted" from="key_hole" to="." method="unlock"]
+
 [editable path="prompt_area"]
+[editable path="key_hole"]

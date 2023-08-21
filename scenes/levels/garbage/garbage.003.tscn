@@ -1,13 +1,18 @@
-[gd_scene load_steps=7 format=3 uid="uid://cewtey3jb6tvg"]
+[gd_scene load_steps=10 format=3 uid="uid://cewtey3jb6tvg"]
 
 [ext_resource type="PackedScene" uid="uid://d3caregm4htcf" path="res://scenes/levels/base_level.tscn" id="1_fp175"]
 [ext_resource type="TileSet" uid="uid://bb2jpr5ukmfal" path="res://assets/tilesets/prototype.tres" id="2_5kep0"]
 [ext_resource type="Script" path="res://scenes/levels/room_transition_trigger.gd" id="3_cjk2x"]
 [ext_resource type="PackedScene" uid="uid://dgl3bhcduh1j0" path="res://entities/props/chest.tscn" id="4_scmte"]
+[ext_resource type="Texture2D" uid="uid://n6l7mop4fjoi" path="res://assets/textures/statue.png" id="5_4jqwm"]
 [ext_resource type="Script" path="res://entities/enemies/spawner/enemy_spawner.gd" id="5_sq063"]
+[ext_resource type="PackedScene" uid="uid://drd5rilybenfj" path="res://entities/props/prompt_area.tscn" id="6_834c1"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_h45f7"]
 size = Vector2(48, 560)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2yqob"]
+size = Vector2(260, 193)
 
 [node name="garbage_003" instance=ExtResource("1_fp175")]
 biome = "garbage"
@@ -48,6 +53,22 @@ position = Vector2(-6091, 1369)
 [node name="chest01" parent="env" index="1" instance=ExtResource("4_scmte")]
 position = Vector2(-5174, 1369)
 
+[node name="statue" type="Sprite2D" parent="env" index="2"]
+position = Vector2(-5638, 1876)
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("5_4jqwm")
+
+[node name="prompt_area" parent="env" index="3" instance=ExtResource("6_834c1")]
+position = Vector2(-5633, 1994)
+
+[node name="prompt" parent="env/prompt_area" index="0"]
+text = "inspect"
+action = "interact"
+
+[node name="shape" parent="env/prompt_area" index="1"]
+position = Vector2(0, 86.5)
+shape = SubResource("RectangleShape2D_2yqob")
+
 [node name="bat_00" type="Marker2D" parent="enemies" index="0"]
 position = Vector2(-4371, 1685)
 gizmo_extents = 30.0
@@ -82,3 +103,5 @@ gizmo_extents = 30.0
 script = ExtResource("5_sq063")
 enemy_type = 1
 always_spawn = true
+
+[editable path="env/prompt_area"]

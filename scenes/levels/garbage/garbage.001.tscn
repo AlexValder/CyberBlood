@@ -94,7 +94,9 @@ position = Vector2(3907, 1957)
 
 [node name="bg_door" parent="env" index="1" instance=ExtResource("6_t0wbn")]
 position = Vector2(5950, 1280)
-biome = "garbage"
+locked = true
+key_id = "rooteater_key"
+biome = "research_lab"
 roomId = "000"
 
 [node name="chest00" parent="env" index="2" instance=ExtResource("7_08y8q")]
@@ -159,6 +161,8 @@ shape = SubResource("RectangleShape2D_q6gmj")
 [node name="skeleton_00" type="Marker2D" parent="enemies" index="0"]
 position = Vector2(2243, 440)
 script = ExtResource("9_3mvs0")
+
+[connection signal="unlocked" from="env/bg_door" to="." method="_on_research_lab_door_unlocked"]
 
 [editable path="env/prompt_area_00"]
 [editable path="env/prompt_area_01"]
