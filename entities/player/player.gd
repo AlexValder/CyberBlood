@@ -222,6 +222,7 @@ func set_limits(vec: Vector4i) -> void:
     _camera.limit_top = vec[1]
     _camera.limit_right = vec[2]
     _camera.limit_bottom = vec[3]
+    _camera.reset_smoothing()
 
 
 func get_ladder() -> Ladder:

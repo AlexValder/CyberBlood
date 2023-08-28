@@ -12,7 +12,8 @@ class_name BaseLevel
 
 var _tween: Tween
 
-
+## Camera limits - depends on level
+# override and/or call `super.get_extends()` to modify
 func get_extends() -> Vector4i:
     var tiles := get_node_or_null("tilemap") as TileMap
     if tiles == null:
