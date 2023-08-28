@@ -7,10 +7,11 @@ func on_entry() -> void:
         player.player_anim.animation_finished \
             .connect(_animation_done, CONNECT_ONE_SHOT)
 
-    player.velocity.x = 0
-
 
 func physics_process(delta: float) -> void:
+    if player.is_on_floor():
+        player.velocity.x = lerp(player.velocity.x, 0.0, player.ACCEL)
+
     _add_gravity(delta)
     player.move_and_slide()
 

@@ -3,7 +3,8 @@ extends PlayerState
 
 func on_entry() -> void:
     super.on_entry()
-    player.velocity = Vector2.ZERO
+    player.velocity = lerp(player.velocity, Vector2
+    .ZERO, player.ACCEL)
 
 
 func physics_process(delta: float) -> void:
@@ -36,4 +37,5 @@ func physics_process(delta: float) -> void:
         state_change.emit(self.name, "dash")
 
     player.move_and_slide()
+    player.velocity = lerp(player.velocity, Vector2.ZERO, player.ACCEL)
     super.physics_process(delta)

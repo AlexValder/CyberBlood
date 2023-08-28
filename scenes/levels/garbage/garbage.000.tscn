@@ -10,7 +10,7 @@
 size = Vector2(143, 610)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_p0w38"]
-size = Vector2(190, 180)
+size = Vector2(258, 180)
 
 [node name="garbage_000" instance=ExtResource("1_5ag0r")]
 script = ExtResource("2_opw4n")
@@ -55,7 +55,7 @@ text = "jump"
 action = "jump"
 
 [node name="shape" parent="env/prompt_area" index="1"]
-position = Vector2(28, 41)
+position = Vector2(-6, 41)
 shape = SubResource("RectangleShape2D_p0w38")
 
 [editable path="env/prompt_area"]
