@@ -827,7 +827,10 @@ anchor_top = 0.1
 anchor_right = 0.9
 anchor_bottom = 0.9
 
-[node name="controls" parent="GUI/HUD/inventory" index="1"]
+[node name="Inventory" parent="GUI/HUD/inventory/tabs" index="1"]
+visible = true
+
+[node name="Game" parent="GUI/HUD/inventory/tabs" index="2"]
 visible = false
 
 [node name="fps" type="Label" parent="GUI/HUD"]

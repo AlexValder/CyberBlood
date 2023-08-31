@@ -7,8 +7,16 @@ class_name ButtonPrompt
 @onready var _label := $hbox/label as Label
 
 
-func _ready() -> void:
-    set_text(text)
+func load_image(path: String, button: TextureRect) -> void:
+    var image = load(path)
+    button.texture = image
+
+
+func set_text(txt: String) -> void:
+    _label.text = txt
+
+
+func _setup() -> void:
     if !action.contains("+"):
         load_image(Controls.get_button_path(action), _button)
     else:
@@ -28,10 +36,17 @@ func _ready() -> void:
             load_image(paths[i + 1], b)
 
 
-func load_image(path: String, button: TextureRect) -> void:
-    var image = load(path)
-    button.texture = image
+func _ready() -> void:
+    Controls.input_changed.connect(_change_input)
+
+    set_text(text)
+    _setup()
 
 
-func set_text(txt: String) -> void:
-    _label.text = txt
+func _change_input() -> void:
+    var children := $hbox.get_children()
+    for child in children:
+        if child != _button && child != _label:
+            child.queue_free()
+
+    _setup()

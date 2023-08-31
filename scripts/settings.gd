@@ -4,10 +4,12 @@ const FILE_NAME := "user://settings.ini"
 const DEFAULTS := {
     "game" = {
         "show_fps" = true,
-        "version" = "0.0.0.1"
+        "controller_pref" = "xbox",
+        "version" = "0.0.0.2",
     },
     "graphics" = {
         "fullscreen" = true,
+        "vsync" = true,
     },
 }
 

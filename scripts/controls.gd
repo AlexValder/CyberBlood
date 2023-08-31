@@ -1,11 +1,11 @@
 extends Node
 
+signal input_changed
+
 const ICON_PATHS := "res://assets/gui/icons/inputs/{platform}/{button}.png"
 enum PromptStyle {
     Keyboard,
-    Xbox,
-    Playstation,
-    Switch,
+    Controller,
 }
 
 var prompt_style := PromptStyle.Keyboard
@@ -34,12 +34,10 @@ func get_folder(prompt: PromptStyle) -> String:
     match prompt:
         PromptStyle.Keyboard:
             return "keyboard"
-        PromptStyle.Xbox:
-            return "xbox"
-        PromptStyle.Playstation:
-            return "playstation"
-        PromptStyle.Switch:
-            return "switch"
+        PromptStyle.Controller:
+            var conf := Settings.get_game("controller_pref") as String
+            if conf == "xbox" || conf == "switch" || conf == "playstation":
+                return conf
     return "keyboard"
 
 
@@ -56,9 +54,21 @@ func get_button(action: String) -> String:
             else:
                 var e := event as InputEventMouseButton
                 return _get_mouse(e.button_index)
-        elif _is_joy_connected && _is_controller(event):
-            break
+        elif prompt_style == PromptStyle.Controller && _is_controller(event):
+            if event is InputEventJoypadMotion:
+                var e := event as InputEventJoypadMotion
+                return _get_axis(e.axis, e.axis_value)
+            else:
+                var e := event as InputEventJoypadButton
+                return _get_button(e.button_index)
     return ""
+
+
+func change_style(style: String) -> void:
+    assert(style == "xbox" || style == "playstation" || style == "switch")
+
+    Settings.set_game("controller_pref", style)
+    input_changed.emit()
 
 
 func _ready() -> void:
@@ -67,11 +77,14 @@ func _ready() -> void:
 
 
 func _input(event: InputEvent) -> void:
+    var old_style := prompt_style
     if _is_keyboard(event):
         prompt_style = PromptStyle.Keyboard
     else:
-        # TODO: custom controller prompt
-        prompt_style = PromptStyle.Xbox
+        prompt_style = PromptStyle.Controller
+
+    if old_style != prompt_style:
+        input_changed.emit()
 
 
 func _on_joy_connected(device_id: int, connected: bool) -> void:
@@ -122,3 +135,73 @@ func _get_mouse(button: int) -> String:
             return "wheel_down"
         _:
             return "mouse"
+
+
+func _get_axis(axis: JoyAxis, value: float) -> String:
+    match axis:
+        JOY_AXIS_LEFT_X:
+            if is_zero_approx(value):
+                return "left_stick_h"
+            elif value > 0:
+                return "left_stick_right"
+            else:
+                return "left_stick_left"
+        JOY_AXIS_RIGHT_X:
+            if is_zero_approx(value):
+                return "right_stick_h"
+            elif value > 0:
+                return "right_stick_right"
+            else:
+                return "right_stick_left"
+        JOY_AXIS_LEFT_Y:
+            if is_zero_approx(value):
+                return "left_stick_v"
+            elif value < 0:
+                return "left_stick_up"
+            else:
+                return "left_stick_down"
+        JOY_AXIS_RIGHT_Y:
+            if is_zero_approx(value):
+                return "right_stick_v"
+            elif value < 0:
+                return "right_stick_up"
+            else:
+                return "right_stick_down"
+        JOY_AXIS_TRIGGER_LEFT:
+            return "lt"
+        JOY_AXIS_TRIGGER_RIGHT:
+            return "rt"
+    return ""
+
+
+func _get_button(index: JoyButton) -> String:
+    match index:
+        JOY_BUTTON_A:
+            return "a"
+        JOY_BUTTON_B:
+            return "b"
+        JOY_BUTTON_X:
+            return "x"
+        JOY_BUTTON_Y:
+            return "y"
+        JOY_BUTTON_DPAD_DOWN:
+            return "dpad_down"
+        JOY_BUTTON_DPAD_LEFT:
+            return "dpad_left"
+        JOY_BUTTON_DPAD_RIGHT:
+            return "dpad_right"
+        JOY_BUTTON_DPAD_UP:
+            return "dpad_up"
+        JOY_BUTTON_START:
+            return "system_right"
+        JOY_BUTTON_BACK:
+            return "system_left"
+        JOY_BUTTON_RIGHT_SHOULDER:
+            return "rb"
+        JOY_BUTTON_LEFT_SHOULDER:
+            return "lb"
+        JOY_BUTTON_LEFT_STICK:
+            return "l"
+        JOY_BUTTON_RIGHT_STICK:
+            return "r"
+    return ""
