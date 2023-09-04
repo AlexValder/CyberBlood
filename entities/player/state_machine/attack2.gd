@@ -10,7 +10,7 @@ func on_entry() -> void:
 
 func physics_process(delta: float) -> void:
     if player.is_on_floor():
-        player.velocity.x = lerp(player.velocity.x, 0.0, player.ACCEL)
+        player.velocity.x = lerpf(player.velocity.x, 0.0, player.ACCEL)
 
     _add_gravity(delta)
     player.move_and_slide()

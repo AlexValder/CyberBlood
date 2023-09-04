@@ -22,8 +22,8 @@ func physics_process(delta: float) -> void:
         state_change.emit(self.name, "dash")
 
     _check_horizontal_movement(player.WALK_SPEED)
+    _add_gravity(delta)
 
-    player.velocity.y += delta * player.GRAVITY
     player.move_and_slide()
 
     super.physics_process(delta)

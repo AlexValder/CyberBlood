@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3]
+[gd_scene load_steps=8 format=3 uid="uid://b2e8mukeo5w42"]
 
 [ext_resource type="Script" path="res://entities/tools/breakable.gd" id="1_y4kil"]
 [ext_resource type="Shader" path="res://assets/shaders/was_hit.gdshader" id="2_6num2"]
@@ -54,9 +54,8 @@ script = ExtResource("1_y4kil")
 [node name="sprite" type="Node2D" parent="."]
 material = SubResource("ShaderMaterial_3qxqv")
 
-[node name="hurtbox" type="Area2D" parent="." node_paths=PackedStringArray("custom_owner")]
+[node name="hurtbox" type="Area2D" parent="."]
 script = ExtResource("2_wlpje")
-custom_owner = NodePath("")
 
 [node name="shape" type="CollisionShape2D" parent="hurtbox"]
 

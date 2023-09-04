@@ -17,23 +17,23 @@ func physics_process(_delta: float) -> void:
         _enemy.flip = true
 
     if leng >= _enemy.ORBIT_DISTANCE && abs(distance.x) >= _enemy.THRESHOLD:
-        _enemy.velocity.x = lerp(
+        _enemy.velocity.x = lerpf(
             _enemy.velocity.x,
             _enemy.FOLLOW_SPEED * (-1 if _enemy.flip else 1),
             _enemy.ACCEL
         )
     else:
-        _enemy.velocity.x = lerp(_enemy.velocity.x, 0.0, sin(_enemy.ACCEL * 2))
+        _enemy.velocity.x = lerpf(_enemy.velocity.x, 0.0, sin(_enemy.ACCEL * 2))
 
     if leng >= _enemy.ORBIT_DISTANCE && abs(distance.y) >= _enemy.THRESHOLD:
-        _enemy.velocity.y = lerp(
+        _enemy.velocity.y = lerpf(
             _enemy.velocity.y,
             _enemy.FOLLOW_SPEED * .55 * \
                 (-1 if distance.y < _enemy.THRESHOLD else 1),
             _enemy.ACCEL
         )
     else:
-        _enemy.velocity.y = lerp(_enemy.velocity.y, 0.0, _enemy.ACCEL)
+        _enemy.velocity.y = lerpf(_enemy.velocity.y, 0.0, _enemy.ACCEL)
 
     if leng <= _enemy.SEE_DISTANCE:
         state_change.emit(self.name, "ram_attack")
