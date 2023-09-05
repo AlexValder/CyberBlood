@@ -7,5 +7,4 @@ func _on_player_mana_changed(new_value: int) -> void:
 
 
 func _on_recovery_value_timeout(rate: float) -> void:
-    if self.value < self.max_value:
-        set_current_value(self.value + rate)
+    set_current_value(min(self.value + rate, self.max_value))

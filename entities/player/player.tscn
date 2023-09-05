@@ -938,7 +938,6 @@ label_settings = SubResource("LabelSettings_jmt7q")
 [connection signal="player_health_changed" from="." to="GUI/HUD/vbox/health_bar" method="_on_character_health_change"]
 [connection signal="player_hurt" from="." to="state_machine" method="_on_player_damaged"]
 [connection signal="timeout" from="timers/recovery_value" to="." method="_on_recovery_value_timeout" binds= [1.0]]
-[connection signal="timeout" from="timers/recovery_value" to="GUI/HUD/vbox/mana_bar" method="_on_recovery_value_timeout" binds= [1.0]]
 [connection signal="timeout" from="state_machine/bat_form/timer" to="state_machine/bat_form" method="_on_timer_timeout"]
 [connection signal="timeout" from="state_machine/dash/timer" to="state_machine/dash" method="_on_dash_end"]
 [connection signal="timeout" from="state_machine/dash/cooldown" to="state_machine/dash" method="_on_cooldown_timeout"]

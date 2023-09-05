@@ -5,7 +5,7 @@ const RED_GRADIENT := "res://assets/textures/fireball_red.tres"
 const BLUE_GRADIENT := "res://assets/textures/fireball_blue.tres"
 
 @export var direction_movement := Vector2.RIGHT
-@export var speed := 15.0
+@export var speed := 7.0
 
 @onready var _polygon := $polygon2d as Polygon2D
 
