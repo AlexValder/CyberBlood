@@ -8,7 +8,7 @@ var _disabled := false
 
 
 func _init() -> void:
-    _label_settings.font_size = 8
+    _label_settings.font_size = 16
     _label_settings.font_color = Color.GOLD
     _label_settings.outline_color = Color.BLACK
     _label_settings.outline_size = 2
@@ -26,7 +26,7 @@ func interact() -> void:
     _disabled = true
 
 
-func disable() -> void:
+func disable(_emit: bool) -> void:
     _disabled = true
 
 
@@ -43,7 +43,7 @@ func show_notification() -> void:
     label.label_settings = _label_settings
     add_child(label)
     label.anchors_preset = Control.LayoutPreset.PRESET_CENTER_TOP
-    label.position.y -= 10
+    label.position.y -= 50
     get_tree().create_timer(1.5).timeout.connect(hide_label.bind(label))
 
 

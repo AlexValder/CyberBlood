@@ -12,14 +12,14 @@ signal player_hurt
 signal player_health_changed(old_value, new_value)
 signal mana_changed(new_value)
 
-const GRAVITY := 350.0
-const CAT_SPEED := 150.0
-const WALK_SPEED := 120.0
-const CLIMB_SPEED := 90.0
-const FLY_SPEED := 200.0
-const JUMP := 215.0
-const CAT_JUMP := 260.0
-const ACCEL := 0.1
+const GRAVITY := 1050.0
+const CAT_SPEED := 450.0
+const WALK_SPEED := 390.0
+const CLIMB_SPEED := 270.0
+const FLY_SPEED := 700.0
+const JUMP := 752.5
+const CAT_JUMP := 780.3
+const ACCEL := 0.5
 
 @onready var sprite := $sprite as AnimatedSprite2D
 @onready var player_anim := $player_anim as AnimationPlayer
@@ -49,7 +49,7 @@ var flip := false:
 var _current_form := 0
 var _forms := [
     PlayerForms.BAT,
-    PlayerForms.CAT,
+    #PlayerForms.CAT, <- removing until improved
 ]
 var inventory := []
 
@@ -77,7 +77,7 @@ func tranform_name() -> String:
 func shoot_fireball() -> void:
     var fireball := FireBall.spawn_fireball()
     fireball.direction_movement = Vector2.LEFT if flip else Vector2.RIGHT
-    fireball.speed = 2.5
+    fireball.speed = 6.5
     add_sibling(fireball)
     fireball.make_player()
     fireball.global_position = _firepoint.global_position
@@ -222,6 +222,7 @@ func set_limits(vec: Vector4i) -> void:
     _camera.limit_top = vec[1]
     _camera.limit_right = vec[2]
     _camera.limit_bottom = vec[3]
+    _camera.reset_smoothing()
 
 
 func get_ladder() -> Ladder:
@@ -267,6 +268,7 @@ func _unhandled_input(event: InputEvent) -> void:
         for area in areas:
             if area is Interactable:
                 (area as Interactable).interact()
+                return
 
 
 func _on_recovery_value_timeout(rate: float) -> void:

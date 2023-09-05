@@ -9,8 +9,6 @@ func on_entry() -> void:
         player.player_anim.animation_finished \
             .connect(_animation_done, CONNECT_ONE_SHOT)
 
-    player.velocity.x = 0
-
 
 func _animation_done(_anim: String) -> void:
     if _next_attack:
@@ -24,6 +22,9 @@ func _animation_done(_anim: String) -> void:
 func physics_process(delta: float) -> void:
     if Input.is_action_just_pressed("melee"):
         _next_attack = true
+
+    if player.is_on_floor():
+        player.velocity.x = lerpf(player.velocity.x, 0.0, player.ACCEL)
 
     _add_gravity(delta)
     player.move_and_slide()

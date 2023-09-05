@@ -36,4 +36,5 @@ func physics_process(delta: float) -> void:
         state_change.emit(self.name, "dash")
 
     player.move_and_slide()
+    player.velocity.x = lerpf(player.velocity.x, 0.0, player.ACCEL)
     super.physics_process(delta)

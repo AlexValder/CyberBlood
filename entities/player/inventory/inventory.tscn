@@ -126,6 +126,18 @@ button_pressed = true
 text = "Show FPS"
 alignment = 1
 
+[node name="prompt_style" type="OptionButton" parent="tabs/Game/grid"]
+layout_mode = 2
+alignment = 1
+item_count = 3
+selected = 0
+popup/item_0/text = "Xbox"
+popup/item_0/id = 0
+popup/item_1/text = "Playstation"
+popup/item_1/id = 1
+popup/item_2/text = "Switch"
+popup/item_2/id = 2
+
 [node name="hsep" type="HSeparator" parent="tabs/Game/grid"]
 layout_mode = 2
 
@@ -196,7 +208,6 @@ disable_3d = true
 title = "Controls"
 initial_position = 2
 size = Vector2i(525, 489)
-visible = true
 extend_to_title = true
 content_scale_mode = 1
 content_scale_aspect = 3
@@ -288,6 +299,7 @@ text = "close"
 [connection signal="visibility_changed" from="tabs" to="tabs" method="_on_visibility_changed"]
 [connection signal="visibility_changed" from="tabs/Inventory" to="tabs/Inventory" method="_on_visibility_changed"]
 [connection signal="toggled" from="tabs/Game/grid/fps" to="tabs/Game" method="_on_fps_toggled"]
+[connection signal="item_selected" from="tabs/Game/grid/prompt_style" to="tabs/Game" method="_on_prompt_style_item_selected"]
 [connection signal="button_up" from="tabs/Game/grid/controls" to="." method="_on_popup_open_button_up" binds= ["controls"]]
 [connection signal="button_up" from="tabs/Game/grid/quit" to="tabs/Game" method="_on_quit_button_up"]
 [connection signal="button_up" from="tabs/DevTab/grid/change_level_button" to="tabs/DevTab" method="_on_change_level_button_released"]

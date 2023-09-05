@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://drd5rilybenfj"]
+
+[ext_resource type="Script" path="res://entities/props/prompt_area.gd" id="1_lnn5p"]
+[ext_resource type="PackedScene" uid="uid://coycpipb5hm11" path="res://entities/props/prompt.tscn" id="2_l4004"]
+
+[node name="prompt_area" type="Area2D"]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("1_lnn5p")
+
+[node name="prompt" parent="." instance=ExtResource("2_l4004")]
+modulate = Color(1, 1, 1, 0)
+offset_top = -1.0
+offset_bottom = -1.0
+
+[node name="shape" type="CollisionShape2D" parent="."]
+
+[connection signal="body_entered" from="." to="." method="_on_player_entered" unbinds=1]
+[connection signal="body_exited" from="." to="." method="_on_player_exited" unbinds=1]

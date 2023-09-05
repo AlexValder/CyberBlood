@@ -1,13 +1,13 @@
 extends BaseEnemy
 class_name GiantBat
 
-const SEE_DISTANCE := 130.0
-const ORBIT_DISTANCE := 50.0
-const WATCH_DISTANCE := 250.0
-const FOLLOW_DISTANCE := 10.0
-const FOLLOW_SPEED := 150.0
+const SEE_DISTANCE := 390.0
+const ORBIT_DISTANCE := 150.0
+const WATCH_DISTANCE := 750.0
+const FOLLOW_DISTANCE := 30.0
+const FOLLOW_SPEED := 450.0
 const ACCEL := 0.8
-const THRESHOLD := 0.7
+const THRESHOLD := 2.5
 
 @onready var _firepoint := $navigation/fire as Marker2D
 @export var awake := false
@@ -30,6 +30,7 @@ func play_anim(anim_name: String, speed := 1.0) -> void:
 func fire_fireball() -> void:
     var fireball := FireBall.spawn_fireball()
     fireball.direction_movement = Vector2.LEFT if flip else Vector2.RIGHT
+    fireball.speed = 8.0
     add_sibling(fireball)
     fireball.global_position = _firepoint.global_position
     fireball.make_enemy()

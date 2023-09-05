@@ -26,6 +26,7 @@ func _add_label() -> void:
     label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
     label.label_settings = LabelSettings.new()
     label.label_settings.font = load("res://assets/gui/fonts/m5x7.ttf")
+    label.label_settings.font_size = 32
     label.label_settings.outline_size = 2
     label.label_settings.outline_color = Color.BLACK
     label.theme = load("res://assets/gui/themes/default.tres")
@@ -80,13 +81,17 @@ func _physics_process(delta: float) -> void:
 func _on_state_change(old_state: String, new_state: String) -> void:
     var state := get_node_or_null(new_state) as State
     if state == null || !state.can_enter({"prev" = old_state}):
+        Logger.debug("Failed to enter to %s" % new_state)
         return
 
     if !_current_state.can_leave({"next" = state.name}):
+        Logger.debug("Failed to leave %s" % _current_state.name)
         return
 
     if _status != null:
         _status.text = state.name
+
+    Logger.debug("%s -> %s" % [_current_state.name, state.name])
     _current_state.on_exit()
     _current_state = state
     _current_state.on_entry()

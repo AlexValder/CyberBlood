@@ -22,7 +22,7 @@ func interact() -> void:
     interacted.emit()
 
 
-func disable() -> void:
+func disable(_emit: bool) -> void:
     $shape.disabled = true
     $anim_player.play("open")
     $anim_player.seek($anim_player.current_animation_length, true)
@@ -34,7 +34,7 @@ func spawn_food(count: int) -> void:
         add_sibling(pickup)
         pickup.global_position = self.global_position
         pickup.apply_central_impulse(
-            Vector2(randf_range(-150.0, 150.0), -150.0))
+            Vector2(randf_range(-300.0, 300.0), -300.0))
 
 
 func spawn_money(count: int) -> void:
@@ -43,4 +43,4 @@ func spawn_money(count: int) -> void:
         add_sibling(pickup)
         pickup.global_position = self.global_position
         pickup.apply_central_impulse(
-            Vector2(randf_range(-150.0, 150.0), -150.0))
+            Vector2(randf_range(-300.0, 300.0), -300.0))

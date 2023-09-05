@@ -1,7 +1,7 @@
 extends Area2D
 class_name Interactable
 
-signal interacted(is_on_load)
+signal interacted
 
 
 func interact() -> void:
@@ -9,5 +9,5 @@ func interact() -> void:
 
 
 ## Call to switch to already interacted mode
-func disable() -> void:
+func disable(_emit: bool) -> void:
     pass

@@ -11,8 +11,9 @@ func interact() -> void:
     interacted.emit()
 
 
-func disable() -> void:
+func disable(emit := true) -> void:
     _handle.rotation_degrees = 60
     $shape.disabled = true
     # to ensure the action was started
-    interacted.emit()
+    if emit:
+        interacted.emit()

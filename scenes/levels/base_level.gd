@@ -6,21 +6,22 @@ class_name BaseLevel
 
 @onready var spawnpoints := $spawnpoints as Node2D
 @onready var enemies := $enemies as Node2D
-@onready var _tiles := $tilemap as TileMap
 @onready var _initial_spawn :=\
     spawnpoints.get_node_or_null("initial") as Marker2D
 @onready var _save_spawn := _try_get_save_spawn() as Vector2
 
 var _tween: Tween
 
-
+## Camera limits - depends on level
+# override and/or call `super.get_extends()` to modify
 func get_extends() -> Vector4i:
-    if _tiles == null:
+    var tiles := get_node_or_null("tilemap") as TileMap
+    if tiles == null:
         return Vector4i(0, 0, 500, 500)
 
-    var limits := _tiles.get_used_rect() as Rect2
-    var size := _tiles.tile_set.tile_size as Vector2
-    var offset := _tiles.global_position
+    var limits := tiles.get_used_rect() as Rect2
+    var size := tiles.tile_set.tile_size as Vector2
+    var offset := tiles.global_position
     var limit_left := int(limits.position.x * size.x) + int(offset.x)
     var limit_top := int(limits.position.y * size.y) + int(offset.y)
     var limit_right := int(limits.end.x * size.x) + int(offset.x)
@@ -48,7 +49,7 @@ func collect_interactables() -> void:
         var iname: String
         var index: String
         if rec == "1":
-            inter.disable()
+            inter.disable(true)
         elif inter.name.begins_with("chest") \
             || inter.name.begins_with("lever"):
             iname = inter.name.substr(0, 5)

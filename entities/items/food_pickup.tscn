@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://dmrpmcj8412fu" path="res://entities/tools/pickup.tscn" id="1_lxbun"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kxlbf"]
-size = Vector2(15, 14)
+size = Vector2(45, 42)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_aasse"]
 resource_local_to_scene = true
@@ -13,9 +13,10 @@ atlas = ExtResource("1_fl6vw")
 region = Rect2(0, 0, 16, 16)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_rbu2o"]
-radius = 8.0
+radius = 24.0
 
 [node name="pickup" instance=ExtResource("1_lxbun")]
+mass = 3.0
 script = ExtResource("1_hqxtr")
 _index = 0
 file_data = "res://data/food.json"
@@ -25,6 +26,7 @@ position = Vector2(-0.5, 0)
 shape = SubResource("RectangleShape2D_kxlbf")
 
 [node name="sprite" parent="." index="1"]
+scale = Vector2(3, 3)
 texture = SubResource("AtlasTexture_aasse")
 
 [node name="shape" parent="box" index="0"]

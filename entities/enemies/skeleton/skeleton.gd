@@ -1,12 +1,12 @@
 extends BaseEnemy
 class_name Skeleton
 
-const GRAVITY := 240.0
-const WALK_SPEED := 70.0
-const CHASE_SPEED := 100.0
-const SEES_PLAYER_AT := 200.0
-const KEEPS_SEEING := 400.0
-const ATTACK_DISTANCE := 70.0
+const GRAVITY := 240.0*2.5
+const WALK_SPEED := 70.0*3
+const CHASE_SPEED := 100.0*3
+const SEES_PLAYER_AT := 200.0*3
+const KEEPS_SEEING := 400.0*3
+const ATTACK_DISTANCE := 70.0*3
 const ACCEL := 5.0
 
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=120 format=3 uid="uid://dooql4yvspt51"]
+[gd_scene load_steps=115 format=3 uid="uid://dooql4yvspt51"]
 
 [ext_resource type="Script" path="res://entities/player/player.gd" id="1_spune"]
 [ext_resource type="Texture2D" uid="uid://cjy71jbvm5o5c" path="res://assets/sprites/player/player_attack1.png" id="2_pdbal"]
@@ -30,26 +30,21 @@
 [ext_resource type="Script" path="res://entities/player/hud/health_bar.gd" id="22_2246v"]
 [ext_resource type="Script" path="res://entities/player/state_machine/hurt.gd" id="23_gesux"]
 [ext_resource type="Script" path="res://entities/player/hud/mana_bar.gd" id="23_th253"]
-[ext_resource type="Script" path="res://entities/player/state_machine/cat_idle.gd" id="28_3b24y"]
-[ext_resource type="Script" path="res://entities/player/state_machine/cat_walk.gd" id="29_y8xmx"]
-[ext_resource type="Script" path="res://entities/player/state_machine/cat_jump.gd" id="30_mx1dt"]
-[ext_resource type="Script" path="res://entities/player/state_machine/cat_fall.gd" id="31_3t60f"]
 [ext_resource type="Script" path="res://entities/player/state_machine/climbing.gd" id="31_hjw76"]
-[ext_resource type="Script" path="res://entities/player/state_machine/double_jump.gd" id="31_n2s1d"]
 [ext_resource type="Script" path="res://entities/player/state_machine/dash.gd" id="32_451t1"]
 [ext_resource type="Script" path="res://entities/player/state_machine/dash_attack.gd" id="33_i0mfo"]
 [ext_resource type="Script" path="res://entities/player/hud/money_bar.gd" id="37_b7hqt"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_eui4v"]
-size = Vector2(54, 53)
+size = Vector2(94, 159)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hbsry"]
 size = Vector2(20, 44)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_62iio"]
 resource_local_to_scene = true
-radius = 6.0
-height = 44.0
+radius = 18.0
+height = 132.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_6xauv"]
 radius = 29.0
@@ -579,8 +574,8 @@ animations = [{
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_u0rr4"]
 resource_local_to_scene = true
-radius = 12.0
-height = 44.0
+radius = 36.0
+height = 132.0
 
 [sub_resource type="LabelSettings" id="LabelSettings_vummm"]
 outline_size = 2
@@ -625,12 +620,12 @@ collision_layer = 2
 collision_mask = 257
 collision_priority = 5.0
 floor_constant_speed = true
-floor_snap_length = 0.5
+floor_snap_length = 25.0
 script = ExtResource("1_spune")
-metadata/human_shape_size = Vector2(6, 22)
-metadata/bat_shape_size = Vector2(3, 7)
-metadata/human_hurtbox_size = Vector2(7, 44)
-metadata/bat_hurtbox_size = Vector2(6, 12)
+metadata/human_shape_size = Vector2(18, 66)
+metadata/bat_shape_size = Vector2(9, 21)
+metadata/human_hurtbox_size = Vector2(21, 132)
+metadata/bat_hurtbox_size = Vector2(18, 36)
 
 [node name="areas" type="Node2D" parent="."]
 
@@ -639,7 +634,7 @@ collision_layer = 0
 collision_mask = 128
 
 [node name="shape" type="CollisionShape2D" parent="areas/reachable"]
-position = Vector2(9, -4.5)
+position = Vector2(0, -13.5)
 shape = SubResource("RectangleShape2D_eui4v")
 
 [node name="climb_area" type="Area2D" parent="areas"]
@@ -647,7 +642,8 @@ collision_layer = 0
 collision_mask = 256
 
 [node name="shape" type="CollisionShape2D" parent="areas/climb_area"]
-position = Vector2(-4, 0)
+position = Vector2(-12, 0)
+scale = Vector2(3, 3)
 shape = SubResource("RectangleShape2D_hbsry")
 
 [node name="hurtbox" type="Area2D" parent="areas" node_paths=PackedStringArray("custom_owner")]
@@ -671,6 +667,7 @@ damages_enemy = true
 damages_player = false
 
 [node name="shape" type="CollisionPolygon2D" parent="areas/attack_hitboxes/attack1"]
+scale = Vector2(3, 3)
 polygon = PackedVector2Array(-18, -43, -1, -24, 4, 18, 33, 18, 65, 10, 83, 0, 89, -11, 88, -21, 78, -32, 59, -41, 20, -48)
 disabled = true
 
@@ -683,6 +680,7 @@ damages_enemy = true
 damages_player = false
 
 [node name="shape" type="CollisionPolygon2D" parent="areas/attack_hitboxes/attack2"]
+scale = Vector2(3, 3)
 polygon = PackedVector2Array(-11, -17, -15, -11, -15, -4, -5, 6, 10, 12, 28, 16, 51, 16, 73, 12, 89, 3, 94, -4, 94, -12, 88, -20, 75, -27, 56, -31)
 disabled = true
 
@@ -697,6 +695,7 @@ damages_player = false
 [node name="shape" type="CollisionShape2D" parent="areas/attack_hitboxes/dash_attack"]
 position = Vector2(-24, -15)
 rotation = 1.57079
+scale = Vector2(3, 3)
 shape = SubResource("CapsuleShape2D_6xauv")
 disabled = true
 
@@ -707,30 +706,27 @@ position = Vector2(0, 12)
 position = Vector2(9, 0)
 
 [node name="jumpdown" type="Area2D" parent="areas"]
-position = Vector2(-2, 22)
 collision_layer = 0
 collision_mask = 256
 monitorable = false
 
 [node name="shape" type="CollisionShape2D" parent="areas/jumpdown"]
-position = Vector2(1.5, 0)
+position = Vector2(0, 66)
+scale = Vector2(3, 3)
 shape = SubResource("RectangleShape2D_rpynj")
 
 [node name="sprite" type="AnimatedSprite2D" parent="."]
 z_index = 5
 texture_filter = 1
-position = Vector2(0, 22)
+scale = Vector2(3, 3)
 sprite_frames = SubResource("SpriteFrames_aejgj")
-animation = &"attack1"
-frame = 5
-offset = Vector2(0, -22)
+animation = &"run"
 
 [node name="shape" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_u0rr4")
 
 [node name="camera" type="Camera2D" parent="."]
 position = Vector2(0, 22)
-zoom = Vector2(3, 3)
 limit_left = 0
 limit_right = 1150
 limit_bottom = 500
@@ -787,21 +783,6 @@ script = ExtResource("19_gv58d")
 [node name="timer" type="Timer" parent="state_machine/bat_form"]
 wait_time = 0.5
 one_shot = true
-
-[node name="cat_idle" type="Node" parent="state_machine"]
-script = ExtResource("28_3b24y")
-
-[node name="cat_walk" type="Node" parent="state_machine"]
-script = ExtResource("29_y8xmx")
-
-[node name="cat_jump" type="Node" parent="state_machine"]
-script = ExtResource("30_mx1dt")
-
-[node name="cat_fall" type="Node" parent="state_machine"]
-script = ExtResource("31_3t60f")
-
-[node name="double_jump" type="Node" parent="state_machine"]
-script = ExtResource("31_n2s1d")
 
 [node name="dash" type="Node" parent="state_machine"]
 script = ExtResource("32_451t1")
