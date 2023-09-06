@@ -4,7 +4,7 @@
 [ext_resource type="TileSet" uid="uid://b3k13y1c7g1ax" path="res://assets/tilesets/test_level.tres" id="1_ot5yu"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_k44jo"]
-size = Vector2(112, 16)
+size = Vector2(336, 48)
 
 [node name="elevator" type="AnimatableBody2D"]
 texture_filter = 1
@@ -16,6 +16,7 @@ is_solid_on_start = true
 [node name="sprite" type="TileMap" parent="."]
 texture_filter = 1
 position = Vector2(-56, -8)
+scale = Vector2(3, 3)
 tile_set = ExtResource("1_ot5yu")
 format = 2
 layer_0/name = "elevator"
@@ -23,6 +24,7 @@ layer_0/z_index = 1
 layer_0/tile_data = PackedInt32Array(0, 131072, 31, 1, 131072, 31, 2, 131072, 31, 3, 131072, 31, 4, 131072, 31, 5, 131072, 31, 6, 131072, 31)
 
 [node name="shape" type="CollisionShape2D" parent="."]
+position = Vector2(112, 16)
 shape = SubResource("RectangleShape2D_k44jo")
 one_way_collision = true
 

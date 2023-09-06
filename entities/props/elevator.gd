@@ -4,6 +4,7 @@ class_name Elevator
 @export_group("Elevator Properties")
 @export var speed := 50.0
 @export var is_solid_on_start := false
+@export var started := false
 @export_group("Elevator Points")
 @export var points: Array[NodePath] = []
 
@@ -25,6 +26,9 @@ func _ready() -> void:
     else:
         current_point = self.global_position
         push_warning("No points for elevator...")
+
+    if started:
+        _on_elevator_started()
 
 
 func move_to_next() -> void:
