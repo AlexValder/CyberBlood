@@ -1,0 +1,25 @@
+[gd_scene load_steps=2 format=3 uid="uid://0xa1ql6icqsk"]
+
+[ext_resource type="Script" path="res://entities/props/shooter.gd" id="1_1gvau"]
+
+[node name="shooter" type="Marker2D"]
+script = ExtResource("1_1gvau")
+interval = 2.0
+
+[node name="timer" type="Timer" parent="."]
+
+[node name="bg" type="ColorRect" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -11.0
+offset_top = -11.0
+offset_right = 11.0
+offset_bottom = 11.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.447059, 0.447059, 0.447059, 1)
+
+[connection signal="timeout" from="timer" to="." method="_on_timer_timeout"]

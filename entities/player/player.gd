@@ -273,6 +273,7 @@ func _unhandled_input(event: InputEvent) -> void:
 
 func _on_recovery_value_timeout(rate: float) -> void:
     current_mana = min(max_mana, current_mana + rate)
+    mana_changed.emit(current_mana)
 
 
 func _check_space(h_space: float, v_space: float) -> bool:
