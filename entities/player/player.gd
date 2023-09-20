@@ -13,6 +13,7 @@ signal player_health_changed(old_value, new_value)
 signal mana_changed(new_value)
 
 const GRAVITY := 1050.0
+const GRAVITY_LIMIT := 700.0
 const CAT_SPEED := 450.0
 const WALK_SPEED := 390.0
 const CLIMB_SPEED := 270.0
@@ -24,9 +25,9 @@ const ACCEL := 0.5
 @onready var sprite := $sprite as AnimatedSprite2D
 @onready var player_anim := $player_anim as AnimationPlayer
 @onready var ladder_point := $areas/ladder_point as Node2D
+@onready var state_machine := $state_machine as PlayerStateMachine
 @onready var _shape := $shape as CollisionShape2D
 @onready var _hurtbox := $areas/hurtbox as HurtBox
-@onready var _camera := $camera as Camera2D
 @onready var _selected_form := $"%selected_form" as Label
 @onready var _money_bar = $"%money_bar"
 @onready var _reach_area := $areas/reachable as Area2D
@@ -217,14 +218,6 @@ func ensure_collision(form: PlayerForms) -> void:
     move_and_slide()
 
 
-func set_limits(vec: Vector4i) -> void:
-    _camera.limit_left = vec[0]
-    _camera.limit_top = vec[1]
-    _camera.limit_right = vec[2]
-    _camera.limit_bottom = vec[3]
-    _camera.reset_smoothing()
-
-
 func get_ladder() -> Ladder:
     var areas := _climb_area.get_overlapping_areas()
     for area in areas:
@@ -256,8 +249,6 @@ func _ready() -> void:
     mana_bar.max_value = max_mana
     mana_bar.value = current_mana
     mana_bar.update()
-
-    _camera.make_current()
 
     _money_bar.set_money(money)
 

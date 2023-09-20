@@ -1,6 +1,8 @@
 extends Node2D
 class_name StateMachine
 
+signal state_transition(from, to)
+
 @onready var _current_state := $idle as State
 @onready var _status := get_node_or_null("status") as Label
 
@@ -95,3 +97,5 @@ func _on_state_change(old_state: String, new_state: String) -> void:
     _current_state.on_exit()
     _current_state = state
     _current_state.on_entry()
+
+    state_transition.emit(old_state, new_state)

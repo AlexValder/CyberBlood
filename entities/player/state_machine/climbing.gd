@@ -62,7 +62,7 @@ func physics_process(_delta: float) -> void:
     elif Input.is_action_just_pressed("right"):
         state_change.emit(self.name, "idle")
 
-    if Input.is_action_pressed("dash"):
+    if Input.is_action_just_pressed("dash"):
         state_change.emit(self.name, "dash")
 
     player.move_and_slide()

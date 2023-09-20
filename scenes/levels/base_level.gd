@@ -61,7 +61,8 @@ func collect_interactables() -> void:
 func _ready() -> void:
     Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
     Logger.debug("Loaded level %s" % self.name)
-    GameManager.player.set_limits(get_extends())
+    GameManager.camera.position_smoothing_enabled = false
+    GameManager.camera.set_limits(get_extends())
     GameManager.player.disable_collision()
 
     var spawn: Vector2
@@ -73,6 +74,10 @@ func _ready() -> void:
         spawn = _save_spawn
     GameManager.player.global_position = spawn
     GameManager.player.enable_collision()
+
+    # HACK ?
+    get_tree().create_timer(0.1).timeout.connect(
+        func(): GameManager.camera.position_smoothing_enabled = true)
 
     collect_interactables()
 

@@ -32,7 +32,7 @@ func physics_process(delta: float) -> void:
     if Input.is_action_pressed("right"):
         state_change.emit(self.name, "run")
 
-    if Input.is_action_pressed("dash"):
+    if Input.is_action_just_pressed("dash"):
         state_change.emit(self.name, "dash")
 
     player.move_and_slide()

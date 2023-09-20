@@ -629,6 +629,9 @@ metadata/bat_hurtbox_size = Vector2(18, 36)
 
 [node name="areas" type="Node2D" parent="."]
 
+[node name="camera_target" type="Marker2D" parent="areas"]
+position = Vector2(493, 0)
+
 [node name="reachable" type="Area2D" parent="areas"]
 collision_layer = 0
 collision_mask = 128
@@ -720,17 +723,10 @@ z_index = 5
 texture_filter = 1
 scale = Vector2(3, 3)
 sprite_frames = SubResource("SpriteFrames_aejgj")
-animation = &"run"
+animation = &"attack1"
 
 [node name="shape" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_u0rr4")
-
-[node name="camera" type="Camera2D" parent="."]
-position = Vector2(0, 22)
-limit_left = 0
-limit_right = 1150
-limit_bottom = 500
-limit_smoothed = true
 
 [node name="timers" type="Node" parent="."]
 

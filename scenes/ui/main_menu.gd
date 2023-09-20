@@ -2,8 +2,8 @@ extends Control
 class_name MainMenu
 
 @onready var _play := $"%play" as Button
-@onready var _main := $main as Control
-@onready var _saves := $saves as Control
+@onready var _main := $gui/main as Control
+@onready var _saves := $gui/saves as Control
 
 
 func _ready() -> void:
@@ -12,7 +12,7 @@ func _ready() -> void:
     _main.visible = true
     _saves.visible = false
     _play.grab_focus()
-    $version.text =\
+    $gui/version.text =\
         "v%s" % ProjectSettings.get_setting("application/config/version")
 
 
