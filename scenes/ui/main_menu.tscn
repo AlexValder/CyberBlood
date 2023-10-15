@@ -20,18 +20,21 @@ grow_vertical = 2
 theme = ExtResource("1_ivq4l")
 script = ExtResource("2_sort7")
 
-[node name="bg" type="ColorRect" parent="."]
-layout_mode = 0
+[node name="gui" type="CanvasLayer" parent="."]
+
+[node name="bg" type="ColorRect" parent="gui"]
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("1_ivq4l")
 color = Color(0, 0.380392, 0.376471, 1)
 
-[node name="main" type="VBoxContainer" parent="."]
+[node name="main" type="VBoxContainer" parent="gui"]
 visible = false
 custom_minimum_size = Vector2(120, 0)
-layout_mode = 0
+anchors_preset = -1
 anchor_left = 0.4
 anchor_right = 0.6
 anchor_bottom = 1.0
@@ -39,45 +42,45 @@ offset_left = 1.0
 offset_right = -7.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("1_ivq4l")
 alignment = 1
 
-[node name="play" type="Button" parent="main"]
+[node name="play" type="Button" parent="gui/main"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
 text = "Start"
 
-[node name="quit" type="Button" parent="main"]
+[node name="quit" type="Button" parent="gui/main"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
 text = "Quit"
 
-[node name="version" type="Label" parent="."]
-layout_mode = 1
+[node name="version" type="Label" parent="gui"]
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_top = -13.0
+offset_top = -33.0
 offset_right = 40.0
 grow_vertical = 0
+theme = ExtResource("1_ivq4l")
 label_settings = SubResource("LabelSettings_alptr")
 
-[node name="copyright" type="Label" parent="."]
-layout_mode = 1
+[node name="copyright" type="Label" parent="gui"]
 anchors_preset = 3
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -40.0
-offset_top = -13.0
+offset_left = -291.0
+offset_top = -36.0
 grow_horizontal = 0
 grow_vertical = 0
+theme = ExtResource("1_ivq4l")
 text = "© Potato Studio, 2023"
 label_settings = SubResource("LabelSettings_alptr")
 
-[node name="saves" type="VBoxContainer" parent="."]
-layout_mode = 1
+[node name="saves" type="VBoxContainer" parent="gui"]
 anchors_preset = -1
 anchor_left = 0.15
 anchor_top = 0.15
@@ -85,196 +88,197 @@ anchor_right = 0.85
 anchor_bottom = 0.85
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("1_ivq4l")
 theme_override_constants/separation = 30
 alignment = 1
 script = ExtResource("3_yyuuo")
 
-[node name="grid" type="GridContainer" parent="saves"]
+[node name="grid" type="GridContainer" parent="gui/saves"]
 layout_mode = 2
 size_flags_vertical = 4
 theme_override_constants/h_separation = 20
 theme_override_constants/v_separation = 20
 columns = 2
 
-[node name="vbox_00" type="VBoxContainer" parent="saves/grid"]
+[node name="vbox_00" type="VBoxContainer" parent="gui/saves/grid"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="button" type="Button" parent="saves/grid/vbox_00"]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_font_sizes/font_size = 32
-text = "Save 1"
-
-[node name="panel" type="PanelContainer" parent="saves/grid/vbox_00"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="vbox" type="VBoxContainer" parent="saves/grid/vbox_00/panel"]
-layout_mode = 2
-alignment = 1
-
-[node name="last_place" type="Label" parent="saves/grid/vbox_00/panel/vbox"]
-layout_mode = 2
-label_settings = SubResource("LabelSettings_alptr")
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="last_time" type="Label" parent="saves/grid/vbox_00/panel/vbox"]
-layout_mode = 2
-label_settings = SubResource("LabelSettings_alptr")
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="percentage" type="Label" parent="saves/grid/vbox_00/panel/vbox"]
-layout_mode = 2
-label_settings = SubResource("LabelSettings_alptr")
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="del" type="Button" parent="saves/grid/vbox_00"]
-self_modulate = Color(1, 0.164706, 0.529412, 1)
-layout_mode = 2
-theme_override_font_sizes/font_size = 32
-text = "Remove"
-
-[node name="vbox_01" type="VBoxContainer" parent="saves/grid"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="button" type="Button" parent="saves/grid/vbox_01"]
+[node name="button" type="Button" parent="gui/saves/grid/vbox_00"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 32
 text = "Save 1"
 
-[node name="panel" type="PanelContainer" parent="saves/grid/vbox_01"]
+[node name="panel" type="PanelContainer" parent="gui/saves/grid/vbox_00"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="vbox" type="VBoxContainer" parent="saves/grid/vbox_01/panel"]
+[node name="vbox" type="VBoxContainer" parent="gui/saves/grid/vbox_00/panel"]
 layout_mode = 2
 alignment = 1
 
-[node name="last_place" type="Label" parent="saves/grid/vbox_01/panel/vbox"]
+[node name="last_place" type="Label" parent="gui/saves/grid/vbox_00/panel/vbox"]
 layout_mode = 2
 label_settings = SubResource("LabelSettings_alptr")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="last_time" type="Label" parent="saves/grid/vbox_01/panel/vbox"]
+[node name="last_time" type="Label" parent="gui/saves/grid/vbox_00/panel/vbox"]
 layout_mode = 2
 label_settings = SubResource("LabelSettings_alptr")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="percentage" type="Label" parent="saves/grid/vbox_01/panel/vbox"]
+[node name="percentage" type="Label" parent="gui/saves/grid/vbox_00/panel/vbox"]
 layout_mode = 2
 label_settings = SubResource("LabelSettings_alptr")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="del" type="Button" parent="saves/grid/vbox_01"]
+[node name="del" type="Button" parent="gui/saves/grid/vbox_00"]
 self_modulate = Color(1, 0.164706, 0.529412, 1)
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
 text = "Remove"
 
-[node name="vbox_02" type="VBoxContainer" parent="saves/grid"]
+[node name="vbox_01" type="VBoxContainer" parent="gui/saves/grid"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="button" type="Button" parent="saves/grid/vbox_02"]
+[node name="button" type="Button" parent="gui/saves/grid/vbox_01"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 32
 text = "Save 1"
 
-[node name="panel" type="PanelContainer" parent="saves/grid/vbox_02"]
+[node name="panel" type="PanelContainer" parent="gui/saves/grid/vbox_01"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="vbox" type="VBoxContainer" parent="saves/grid/vbox_02/panel"]
+[node name="vbox" type="VBoxContainer" parent="gui/saves/grid/vbox_01/panel"]
 layout_mode = 2
 alignment = 1
 
-[node name="last_place" type="Label" parent="saves/grid/vbox_02/panel/vbox"]
+[node name="last_place" type="Label" parent="gui/saves/grid/vbox_01/panel/vbox"]
 layout_mode = 2
 label_settings = SubResource("LabelSettings_alptr")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="last_time" type="Label" parent="saves/grid/vbox_02/panel/vbox"]
+[node name="last_time" type="Label" parent="gui/saves/grid/vbox_01/panel/vbox"]
 layout_mode = 2
 label_settings = SubResource("LabelSettings_alptr")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="percentage" type="Label" parent="saves/grid/vbox_02/panel/vbox"]
+[node name="percentage" type="Label" parent="gui/saves/grid/vbox_01/panel/vbox"]
 layout_mode = 2
 label_settings = SubResource("LabelSettings_alptr")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="del" type="Button" parent="saves/grid/vbox_02"]
+[node name="del" type="Button" parent="gui/saves/grid/vbox_01"]
 self_modulate = Color(1, 0.164706, 0.529412, 1)
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
 text = "Remove"
 
-[node name="vbox_03" type="VBoxContainer" parent="saves/grid"]
+[node name="vbox_02" type="VBoxContainer" parent="gui/saves/grid"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="button" type="Button" parent="saves/grid/vbox_03"]
+[node name="button" type="Button" parent="gui/saves/grid/vbox_02"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 32
 text = "Save 1"
 
-[node name="panel" type="PanelContainer" parent="saves/grid/vbox_03"]
+[node name="panel" type="PanelContainer" parent="gui/saves/grid/vbox_02"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="vbox" type="VBoxContainer" parent="saves/grid/vbox_03/panel"]
+[node name="vbox" type="VBoxContainer" parent="gui/saves/grid/vbox_02/panel"]
 layout_mode = 2
 alignment = 1
 
-[node name="last_place" type="Label" parent="saves/grid/vbox_03/panel/vbox"]
+[node name="last_place" type="Label" parent="gui/saves/grid/vbox_02/panel/vbox"]
 layout_mode = 2
 label_settings = SubResource("LabelSettings_alptr")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="last_time" type="Label" parent="saves/grid/vbox_03/panel/vbox"]
+[node name="last_time" type="Label" parent="gui/saves/grid/vbox_02/panel/vbox"]
 layout_mode = 2
 label_settings = SubResource("LabelSettings_alptr")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="percentage" type="Label" parent="saves/grid/vbox_03/panel/vbox"]
+[node name="percentage" type="Label" parent="gui/saves/grid/vbox_02/panel/vbox"]
 layout_mode = 2
 label_settings = SubResource("LabelSettings_alptr")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="del" type="Button" parent="saves/grid/vbox_03"]
+[node name="del" type="Button" parent="gui/saves/grid/vbox_02"]
 self_modulate = Color(1, 0.164706, 0.529412, 1)
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
 text = "Remove"
 
-[node name="back" type="Button" parent="saves"]
+[node name="vbox_03" type="VBoxContainer" parent="gui/saves/grid"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="button" type="Button" parent="gui/saves/grid/vbox_03"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 32
+text = "Save 1"
+
+[node name="panel" type="PanelContainer" parent="gui/saves/grid/vbox_03"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="vbox" type="VBoxContainer" parent="gui/saves/grid/vbox_03/panel"]
+layout_mode = 2
+alignment = 1
+
+[node name="last_place" type="Label" parent="gui/saves/grid/vbox_03/panel/vbox"]
+layout_mode = 2
+label_settings = SubResource("LabelSettings_alptr")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="last_time" type="Label" parent="gui/saves/grid/vbox_03/panel/vbox"]
+layout_mode = 2
+label_settings = SubResource("LabelSettings_alptr")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="percentage" type="Label" parent="gui/saves/grid/vbox_03/panel/vbox"]
+layout_mode = 2
+label_settings = SubResource("LabelSettings_alptr")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="del" type="Button" parent="gui/saves/grid/vbox_03"]
+self_modulate = Color(1, 0.164706, 0.529412, 1)
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Remove"
+
+[node name="back" type="Button" parent="gui/saves"]
 self_modulate = Color(1, 0, 0, 1)
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
 text = "Back"
 
-[connection signal="button_up" from="main/play" to="." method="_on_play_button_up"]
-[connection signal="button_up" from="main/quit" to="." method="_on_quit_button_up"]
-[connection signal="visibility_changed" from="saves" to="saves" method="_on_visibility_changed"]
-[connection signal="button_up" from="saves/back" to="." method="_on_back_button_up"]
+[connection signal="button_up" from="gui/main/play" to="." method="_on_play_button_up"]
+[connection signal="button_up" from="gui/main/quit" to="." method="_on_quit_button_up"]
+[connection signal="visibility_changed" from="gui/saves" to="gui/saves" method="_on_visibility_changed"]
+[connection signal="button_up" from="gui/saves/back" to="." method="_on_back_button_up"]

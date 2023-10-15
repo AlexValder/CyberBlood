@@ -17,6 +17,7 @@ var save_data: PlayerSave
 
 var player_scene := preload("res://entities/player/player.tscn") as PackedScene
 var player: Player
+var camera: PlayerCamera
 var debug_disabled: bool = !should_show_debug():
     set(_value):
         return
@@ -48,6 +49,11 @@ func start_game(index: int = _save_index) -> void:
 
 
     get_tree().root.add_child(player)
+
+    camera.player = player
+    camera.setup_player()
+    camera.enabled = true
+    camera.set_process(true)
     get_tree().change_scene_to_file(level)
     _playing = true
 
@@ -97,6 +103,7 @@ func quit_to_menu() -> void:
     EnemyManager.clear_killed()
 
     _playing = false
+
     remove_player()
     save_data = null
     _save_index = -1
@@ -127,6 +134,10 @@ func remove_player() -> void:
         player.queue_free()
         player = null
 
+    camera.set_process(false)
+    camera.enabled = false
+    camera.player = null
+
 
 func player_dies() -> void:
     await get_tree().create_timer(3).timeout
@@ -154,6 +165,12 @@ func toggle_debug_info(debug: bool) -> void:
 
 func _ready() -> void:
     self.process_mode = Node.PROCESS_MODE_ALWAYS
+
+    var scene := preload("res://entities/player/player_camera.tscn")\
+        as PackedScene
+    camera = scene.instantiate() as PlayerCamera
+    add_child(camera)
+
     create_player()
     randomize()
 

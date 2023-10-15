@@ -2,11 +2,18 @@ extends "res://entities/player/state_machine/dash.gd"
 
 
 func on_entry() -> void:
-    super.on_entry()
+    _start_dash = Time.get_ticks_msec()
+    _can_dash = false
+    _is_dashing = true
+    _dash_left = player.flip
+    player.velocity.y = 0
+    player.velocity.x = DASH_SPEED/1.5 if !_dash_left else -DASH_SPEED/1.5
+
     player.play_anim("dash_attack")
     if !player.player_anim.animation_finished.is_connected(_on_anim_finished):
         player.player_anim.animation_finished.connect(
             _on_anim_finished.unbind(1), CONNECT_ONE_SHOT)
+    _timer.start(DASH_TIME)
 
 
 func physics_process(_delta: float) -> void:

@@ -1,7 +1,7 @@
 extends PlayerState
 
-const DASH_SPEED := 400.0*2
-const DASH_DEACEL := 10.0*2
+const DASH_SPEED := 400.0*4
+const DASH_DEACEL := 10.0*3
 const DASH_TIME := 1.0
 const DASH_COOLDOWN := 0.5
 
@@ -55,7 +55,7 @@ func physics_process(_delta: float) -> void:
         player.velocity.x = max(player.velocity.x - DASH_DEACEL, 0)
 
     if is_zero_approx(player.velocity.x):
-        state_change.emit(self.name, "idle")
+        state_change.emit(self.name, "final_fall")
 
     player.move_and_slide()
 
@@ -71,4 +71,4 @@ func _on_cooldown_timeout() -> void:
 
 func _on_dash_end() -> void:
     _is_dashing = false
-    state_change.emit(self.name, "idle")
+    state_change.emit(self.name, "final_fall")

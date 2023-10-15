@@ -43,4 +43,5 @@ func _check_vertical_movement(
 
 
 func _add_gravity(delta: float) -> void:
-    player.velocity.y += delta * player.GRAVITY
+    player.velocity.y = clampf(player.velocity.y + delta * player.GRAVITY,
+        -player.GRAVITY_LIMIT*2, player.GRAVITY_LIMIT)
