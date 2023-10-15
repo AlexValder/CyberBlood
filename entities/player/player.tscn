@@ -1,7 +1,8 @@
-[gd_scene load_steps=115 format=3 uid="uid://dooql4yvspt51"]
+[gd_scene load_steps=116 format=3 uid="uid://dooql4yvspt51"]
 
 [ext_resource type="Script" path="res://entities/player/player.gd" id="1_spune"]
 [ext_resource type="Texture2D" uid="uid://cjy71jbvm5o5c" path="res://assets/sprites/player/player_attack1.png" id="2_pdbal"]
+[ext_resource type="Script" path="res://entities/player/camera_target.gd" id="2_uxpg1"]
 [ext_resource type="Texture2D" uid="uid://cc0cl24ubywtb" path="res://assets/sprites/player/player_attack2.png" id="3_35vxv"]
 [ext_resource type="Texture2D" uid="uid://dgo7nj16hbdwu" path="res://assets/sprites/player/bat.png" id="4_poivh"]
 [ext_resource type="Texture2D" uid="uid://ds0i8v75frjod" path="res://assets/sprites/player/player_death.png" id="5_l5gh2"]
@@ -631,6 +632,7 @@ metadata/bat_hurtbox_size = Vector2(18, 36)
 
 [node name="camera_target" type="Marker2D" parent="areas"]
 position = Vector2(309, 0)
+script = ExtResource("2_uxpg1")
 
 [node name="reachable" type="Area2D" parent="areas"]
 collision_layer = 0

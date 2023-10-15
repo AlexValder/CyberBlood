@@ -2,7 +2,7 @@ extends Camera2D
 class_name PlayerCamera
 
 var player: Player
-var _target: Node2D
+var _target: CameraTarget
 var _ignore_y := false
 
 
@@ -15,9 +15,9 @@ func set_limits(vec: Vector4i) -> void:
 
 func setup_player() -> void:
     player.state_machine.state_transition.connect(_on_state_change)
-    _target = player.get_node("areas/camera_target") as Node2D
+    _target = player.get_node("areas/camera_target") as CameraTarget
     assert(_target != null)
-    global_position = _target.global_position
+    global_position = _target.get_target_position()
 
 
 func _ready() -> void:
@@ -26,9 +26,9 @@ func _ready() -> void:
 
 
 func _process(_delta: float) -> void:
-    global_position.x = _target.global_position.x
+    global_position.x = _target.get_target_position().x
     if !_ignore_y:
-        global_position.y = _target.global_position.y
+        global_position.y = _target.get_target_position().y
 
 
 func _on_state_change(old: String, new: String) -> void:
