@@ -22,9 +22,6 @@ func _input(event: InputEvent) -> void:
         if e == null:
             return
 
-        print("e.relative = " + str(e.relative))
-        print("_shift = " + str(_shift))
-
         if !is_zero_approx(e.relative.x):
             _shift.x = clampf(
                 e.relative.x * MOUSE_HORIZONTAL_SHIFT,
