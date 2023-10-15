@@ -14,14 +14,10 @@ func set_limits(vec: Vector4i) -> void:
 
 
 func setup_player() -> void:
-#    position_smoothing_enabled = false
     player.state_machine.state_transition.connect(_on_state_change)
     _target = player.get_node("areas/camera_target") as Node2D
     assert(_target != null)
     global_position = _target.global_position
-    # HACK: timer T_T
-#    get_tree().create_timer(0.1).timeout.connect(
-#        func(): position_smoothing_enabled = true)
 
 
 func _ready() -> void:

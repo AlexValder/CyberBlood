@@ -630,7 +630,7 @@ metadata/bat_hurtbox_size = Vector2(18, 36)
 [node name="areas" type="Node2D" parent="."]
 
 [node name="camera_target" type="Marker2D" parent="areas"]
-position = Vector2(493, 0)
+position = Vector2(309, 0)
 
 [node name="reachable" type="Area2D" parent="areas"]
 collision_layer = 0

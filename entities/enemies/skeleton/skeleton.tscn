@@ -398,6 +398,7 @@ max_health = 10
 scale = Vector2(3, 3)
 sprite_frames = SubResource("SpriteFrames_it3it")
 animation = &"death"
+frame = 3
 
 [node name="hurtbox" type="Area2D" parent="."]
 script = ExtResource("11_3grk0")

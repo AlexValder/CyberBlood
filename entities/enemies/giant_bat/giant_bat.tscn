@@ -97,9 +97,9 @@ spawn_money_chance = 60
 [node name="sprite" type="AnimatedSprite2D" parent="."]
 self_modulate = Color(1, 0, 0, 1)
 z_index = 5
-scale = Vector2(0.035, 0.035)
 sprite_frames = SubResource("SpriteFrames_ldgwr")
-animation = &"idle"
+animation = &"awoke"
+frame = 1
 
 [node name="navigation" type="Node2D" parent="."]
 scale = Vector2(1.2, 1.2)
@@ -119,7 +119,6 @@ damage = 5
 [node name="shape" type="CollisionShape2D" parent="hitbox"]
 rotation = 1.57079
 shape = SubResource("CapsuleShape2D_n0tp0")
-disabled = true
 debug_color = Color(0.898039, 0.270588, 0.427451, 0.419608)
 
 [node name="hurtbox" type="Area2D" parent="."]
