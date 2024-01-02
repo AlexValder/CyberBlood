@@ -5,18 +5,24 @@ signal enemy_died
 signal enemy_hurt
 signal enemy_damaged(old_value, new_value)
 
+## Displayed name
 @export var enemy_name := "enemy"
+## Starting health
 @export var max_health := 20
-## Chance of spawning random pickup upon death
+## Chance of spawning random food upon death
 @export_range(0, 100, 0.1) var spawn_food_chance := 10
+## Chance of spawning money upon death
 @export_range(0, 100, 0.1) var spawn_money_chance := 90
+## How much money drops from them
 @export var cost := 5
 
 @onready var anim_player := $anim_player as AnimationPlayer
 @onready var current_health := max_health
 @onready var _sprite := $sprite as AnimatedSprite2D
 @onready var _health_bar := $vbox/health as ValueBar
+## from where enemy can "see"
 @onready var eyes := $navigation/eyes as Marker2D
+## Flipping of the sprite and the associated areas
 @onready var flip := false:
     set(value):
         if value == flip:

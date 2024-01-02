@@ -1,6 +1,5 @@
-[gd_scene load_steps=6 format=3 uid="uid://cpocsx316ce5q"]
+[gd_scene load_steps=5 format=3 uid="uid://cpocsx316ce5q"]
 
-[ext_resource type="Theme" uid="uid://brlh53bypvlrb" path="res://assets/gui/themes/default.tres" id="1_ivq4l"]
 [ext_resource type="Script" path="res://scenes/ui/main_menu.gd" id="2_sort7"]
 [ext_resource type="Script" path="res://scenes/ui/saves_menu.gd" id="3_yyuuo"]
 [ext_resource type="FontFile" uid="uid://c810ylaelom1c" path="res://assets/gui/fonts/Beholden-Medium-Italic.ttf" id="4_nodgv"]
@@ -17,7 +16,6 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = ExtResource("1_ivq4l")
 script = ExtResource("2_sort7")
 
 [node name="gui" type="CanvasLayer" parent="."]
@@ -28,7 +26,6 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = ExtResource("1_ivq4l")
 color = Color(0, 0.380392, 0.376471, 1)
 
 [node name="main" type="VBoxContainer" parent="gui"]
@@ -42,7 +39,6 @@ offset_left = 1.0
 offset_right = -7.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = ExtResource("1_ivq4l")
 alignment = 1
 
 [node name="play" type="Button" parent="gui/main"]
@@ -63,7 +59,6 @@ anchor_bottom = 1.0
 offset_top = -33.0
 offset_right = 40.0
 grow_vertical = 0
-theme = ExtResource("1_ivq4l")
 label_settings = SubResource("LabelSettings_alptr")
 
 [node name="copyright" type="Label" parent="gui"]
@@ -76,7 +71,6 @@ offset_left = -291.0
 offset_top = -36.0
 grow_horizontal = 0
 grow_vertical = 0
-theme = ExtResource("1_ivq4l")
 text = "© Potato Studio, 2023"
 label_settings = SubResource("LabelSettings_alptr")
 
@@ -88,7 +82,6 @@ anchor_right = 0.85
 anchor_bottom = 0.85
 grow_horizontal = 2
 grow_vertical = 2
-theme = ExtResource("1_ivq4l")
 theme_override_constants/separation = 30
 alignment = 1
 script = ExtResource("3_yyuuo")

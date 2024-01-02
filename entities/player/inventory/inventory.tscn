@@ -221,7 +221,6 @@ offset_left = 4.0
 offset_top = 4.0
 offset_right = 521.0
 offset_bottom = 485.0
-theme = ExtResource("2_aq74w")
 alignment = 1
 
 [node name="label00" type="Label" parent="controls/vbox"]

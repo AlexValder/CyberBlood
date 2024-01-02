@@ -51,6 +51,10 @@ static func create_save(p: Player, level: BaseLevel) -> PlayerSave:
     return state
 
 
+static func apply_save(save: PlayerSave, p: Player) -> void:
+    save.apply_player_data(p)
+
+
 static func from_dictionary(dict: Dictionary) -> PlayerSave:
     var state := PlayerSave.new()
 

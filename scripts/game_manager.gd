@@ -151,6 +151,10 @@ func player_dies() -> void:
 
     create_player()
     get_tree().root.add_child(player)
+    camera.player = player
+    camera.setup_player()
+    camera.enabled = true
+    camera.set_process(true)
     get_tree().change_scene_to_file(level)
 
 

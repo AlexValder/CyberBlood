@@ -1,8 +1,7 @@
-[gd_scene load_steps=29 format=3 uid="uid://m22bytp3ihx"]
+[gd_scene load_steps=28 format=3 uid="uid://m22bytp3ihx"]
 
 [ext_resource type="Script" path="res://entities/enemies/giant_bat/giant_bat.gd" id="1_1tdks"]
 [ext_resource type="Texture2D" uid="uid://dgo7nj16hbdwu" path="res://assets/sprites/player/bat.png" id="2_2v45f"]
-[ext_resource type="Theme" uid="uid://brlh53bypvlrb" path="res://assets/gui/themes/default.tres" id="3_ik27i"]
 [ext_resource type="Script" path="res://entities/tools/lasting_hit_box.gd" id="3_jsn6e"]
 [ext_resource type="Texture2D" uid="uid://b3c504ckwxbeo" path="res://assets/sprites/bat/bat_idle_1.png" id="3_xuqke"]
 [ext_resource type="FontFile" uid="uid://dgw8oojx04n8d" path="res://assets/gui/fonts/m3x6.ttf" id="4_4tr88"]
@@ -155,7 +154,6 @@ offset_bottom = -50.0
 grow_horizontal = 2
 grow_vertical = 0
 size_flags_vertical = 0
-theme = ExtResource("3_ik27i")
 theme_override_constants/separation = 0
 
 [node name="name" type="Label" parent="vbox"]

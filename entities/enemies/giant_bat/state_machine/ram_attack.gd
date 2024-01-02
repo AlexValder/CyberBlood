@@ -26,7 +26,8 @@ func physics_process(_delta: float) -> void:
 
 
 func _animation_done(anim: String) -> void:
-    if anim != self.name:
+    var anim_name := anim.substr(anim.find("/") + 1)
+    if anim_name != self.name:
         return
 
     var origin := _enemy.global_position
@@ -36,7 +37,7 @@ func _animation_done(anim: String) -> void:
     if _tween != null:
         _tween.kill()
         _tween = null
-    var _tween := create_tween()
+    _tween = create_tween()
     _tween.tween_property(_enemy, "global_position", end, RAM_TIME)
     _tween.tween_callback(_tween_done)
     _tween.play()

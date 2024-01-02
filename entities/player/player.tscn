@@ -20,10 +20,10 @@
 [ext_resource type="AnimationLibrary" uid="uid://cnrmytbtaho83" path="res://assets/animations/player.res" id="13_0r7r0"]
 [ext_resource type="Script" path="res://entities/player/state_machine/jump.gd" id="13_644fc"]
 [ext_resource type="Script" path="res://entities/player/state_machine/fall.gd" id="15_7d756"]
+[ext_resource type="AnimationLibrary" uid="uid://tskwh3icfm46" path="res://assets/animations/player_effects.res" id="16_0x7we"]
 [ext_resource type="Script" path="res://entities/player/state_machine/final_fall.gd" id="16_vo0hw"]
 [ext_resource type="Script" path="res://entities/player/state_machine/attack1.gd" id="17_x42d2"]
 [ext_resource type="Script" path="res://entities/player/state_machine/attack2.gd" id="18_eich7"]
-[ext_resource type="Theme" uid="uid://brlh53bypvlrb" path="res://assets/gui/themes/default.tres" id="19_7otby"]
 [ext_resource type="Script" path="res://entities/player/state_machine/bat_form.gd" id="19_gv58d"]
 [ext_resource type="PackedScene" uid="uid://ro156l6j1t77" path="res://entities/player/inventory/inventory.tscn" id="20_uirxe"]
 [ext_resource type="Script" path="res://entities/player/hud/fps.gd" id="21_mk2i7"]
@@ -739,7 +739,8 @@ autostart = true
 [node name="player_anim" type="AnimationPlayer" parent="."]
 playback_process_mode = 0
 libraries = {
-"player": ExtResource("13_0r7r0")
+"player": ExtResource("13_0r7r0"),
+"player_effects": ExtResource("16_0x7we")
 }
 
 [node name="state_machine" type="Node2D" parent="."]
@@ -814,7 +815,6 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = ExtResource("19_7otby")
 metadata/_edit_lock_ = true
 
 [node name="inventory" parent="GUI/HUD" instance=ExtResource("20_uirxe")]
@@ -832,12 +832,11 @@ anchor_right = 1.0
 offset_left = -40.0
 offset_bottom = 26.0
 grow_horizontal = 0
-theme = ExtResource("19_7otby")
 text = "FPS: "
 label_settings = SubResource("LabelSettings_vummm")
 script = ExtResource("21_mk2i7")
 
-[node name="vbox" type="VBoxContainer" parent="GUI/HUD"]
+[node name="player_health" type="VBoxContainer" parent="GUI/HUD"]
 layout_mode = 0
 offset_left = 5.0
 offset_top = 5.0
@@ -845,7 +844,7 @@ offset_right = 205.0
 offset_bottom = 45.0
 theme_override_constants/separation = 20
 
-[node name="health_bar" type="ProgressBar" parent="GUI/HUD/vbox"]
+[node name="health_bar" type="ProgressBar" parent="GUI/HUD/player_health"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(500, 24)
 layout_mode = 2
@@ -856,7 +855,7 @@ value = 50.0
 show_percentage = false
 script = ExtResource("22_2246v")
 
-[node name="value" type="Label" parent="GUI/HUD/vbox/health_bar"]
+[node name="value" type="Label" parent="GUI/HUD/player_health/health_bar"]
 z_index = 2
 layout_mode = 1
 anchors_preset = 14
@@ -872,7 +871,7 @@ label_settings = SubResource("LabelSettings_pxxtw")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="mana_bar" type="ProgressBar" parent="GUI/HUD/vbox"]
+[node name="mana_bar" type="ProgressBar" parent="GUI/HUD/player_health"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(500, 24)
 layout_mode = 2
@@ -882,7 +881,7 @@ step = 0.05
 show_percentage = false
 script = ExtResource("23_th253")
 
-[node name="value" type="Label" parent="GUI/HUD/vbox/mana_bar"]
+[node name="value" type="Label" parent="GUI/HUD/player_health/mana_bar"]
 z_index = 2
 layout_mode = 0
 anchor_top = 0.5
@@ -897,19 +896,19 @@ label_settings = SubResource("LabelSettings_psi58")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="money_bar" type="HBoxContainer" parent="GUI/HUD/vbox"]
+[node name="money_bar" type="HBoxContainer" parent="GUI/HUD/player_health"]
 unique_name_in_owner = true
 layout_mode = 2
 script = ExtResource("37_b7hqt")
 
-[node name="total" type="Label" parent="GUI/HUD/vbox/money_bar"]
+[node name="total" type="Label" parent="GUI/HUD/player_health/money_bar"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "$ %d"
 label_settings = SubResource("LabelSettings_763cv")
 vertical_alignment = 1
 
-[node name="adding" type="Label" parent="GUI/HUD/vbox/money_bar"]
+[node name="adding" type="Label" parent="GUI/HUD/player_health/money_bar"]
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 text = "+ 0"
@@ -931,9 +930,9 @@ grow_vertical = 0
 text = "selected form: BAT"
 label_settings = SubResource("LabelSettings_jmt7q")
 
-[connection signal="mana_changed" from="." to="GUI/HUD/vbox/mana_bar" method="_on_player_mana_changed"]
+[connection signal="mana_changed" from="." to="GUI/HUD/player_health/mana_bar" method="_on_player_mana_changed"]
 [connection signal="player_dead" from="." to="state_machine" method="_on_player_dead"]
-[connection signal="player_health_changed" from="." to="GUI/HUD/vbox/health_bar" method="_on_character_health_change"]
+[connection signal="player_health_changed" from="." to="GUI/HUD/player_health/health_bar" method="_on_character_health_change"]
 [connection signal="player_hurt" from="." to="state_machine" method="_on_player_damaged"]
 [connection signal="timeout" from="timers/recovery_value" to="." method="_on_recovery_value_timeout" binds= [1.0]]
 [connection signal="timeout" from="state_machine/bat_form/timer" to="state_machine/bat_form" method="_on_timer_timeout"]

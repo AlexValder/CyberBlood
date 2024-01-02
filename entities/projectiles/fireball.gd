@@ -1,8 +1,8 @@
 extends HitBox
 class_name FireBall
 
-const RED_GRADIENT := "res://assets/textures/fireball_red.tres"
-const BLUE_GRADIENT := "res://assets/textures/fireball_blue.tres"
+const RED_GRADIENT := "res://assets/sprites/items/fireball_red.tres"
+const BLUE_GRADIENT := "res://assets/sprites/items/fireball_blue.tres"
 
 @export var direction_movement := Vector2.RIGHT
 @export var speed := 7.0

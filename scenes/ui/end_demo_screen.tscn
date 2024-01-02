@@ -1,6 +1,5 @@
-[gd_scene load_steps=12 format=3 uid="uid://dhhiinhhbgdft"]
+[gd_scene load_steps=11 format=3 uid="uid://dhhiinhhbgdft"]
 
-[ext_resource type="Theme" uid="uid://brlh53bypvlrb" path="res://assets/gui/themes/default.tres" id="1_e5hiu"]
 [ext_resource type="Script" path="res://scenes/ui/end_demo_screen.gd" id="1_hgupt"]
 [ext_resource type="Texture2D" uid="uid://c2tjsvpaeert2" path="res://assets/gui/icons/kickstarter.svg" id="2_387ty"]
 [ext_resource type="FontFile" uid="uid://tsuf6m2i73oc" path="res://assets/gui/fonts/Beholden-Bold.ttf" id="3_txivm"]
@@ -24,7 +23,6 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = ExtResource("1_e5hiu")
 script = ExtResource("1_hgupt")
 
 [node name="panel_cont" type="PanelContainer" parent="."]

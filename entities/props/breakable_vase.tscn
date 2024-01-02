@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://c8043u3m848vk"]
 
-[ext_resource type="PackedScene" path="res://entities/tools/breakable.tscn" id="1_1gkyg"]
+[ext_resource type="PackedScene" uid="uid://b2e8mukeo5w42" path="res://entities/tools/breakable.tscn" id="1_1gkyg"]
 [ext_resource type="Script" path="res://entities/props/breakable_vase.gd" id="2_aorrx"]
 [ext_resource type="Shader" path="res://assets/shaders/was_hit.gdshader" id="2_k3dca"]
 [ext_resource type="Texture2D" uid="uid://bs2qnhu50u1ja" path="res://assets/sprites/items/vase.png" id="3_4dl1x"]

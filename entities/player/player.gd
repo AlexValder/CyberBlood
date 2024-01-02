@@ -1,6 +1,7 @@
 extends CharacterBody2D
 class_name Player
 
+## Forms player can transform into.
 enum PlayerForms {
     HUMAN,
     BAT,
@@ -12,10 +13,13 @@ signal player_hurt
 signal player_health_changed(old_value, new_value)
 signal mana_changed(new_value)
 
+## Used to pull player down.
 const GRAVITY := 1050.0
+## Used to limit player's vertical speed.
 const GRAVITY_LIMIT := 700.0
 const CAT_SPEED := 450.0
 const WALK_SPEED := 390.0
+## Ladder climbing speed
 const CLIMB_SPEED := 270.0
 const FLY_SPEED := 700.0
 const JUMP := 752.5
@@ -35,7 +39,9 @@ const ACCEL := 0.5
 @onready var _jumpdown := $areas/jumpdown as Area2D
 @onready var _firepoint := $areas/firepoint as Node2D
 
+## Max possible health (can be increased).
 @export var max_health: int = 50
+## Max possible mana (can be increased).
 @export var max_mana: float = 100.0
 
 var current_health := max_health
@@ -54,7 +60,12 @@ var _forms := [
 ]
 var inventory := []
 
+######
+# PUBLIC METHODS
+######
 
+## Call to cycle between available forms.
+# You can only cycle in one direction.
 func next_form() -> void:
     _current_form += 1
     if _current_form >= _forms.size():
@@ -63,7 +74,7 @@ func next_form() -> void:
     _selected_form.text =\
         "selected form: %s" % PlayerForms.keys()[_forms[_current_form]]
 
-
+## Returns default state name for the current form.
 func tranform_name() -> String:
     match _forms[_current_form]:
         PlayerForms.BAT:
@@ -74,7 +85,8 @@ func tranform_name() -> String:
     push_error("Form unknown: %d" % _forms[_current_form])
     return "idle"
 
-
+## Shoot fireball in bat form.
+## TODO: more projectile types
 func shoot_fireball() -> void:
     var fireball := FireBall.spawn_fireball()
     fireball.direction_movement = Vector2.LEFT if flip else Vector2.RIGHT
@@ -83,36 +95,36 @@ func shoot_fireball() -> void:
     fireball.make_player()
     fireball.global_position = _firepoint.global_position
 
-
+## Disables player's collision.
 func disable_collision() -> void:
     if _shape != null:
         _shape.disabled = true
     collision_layer = 0
 
-
+## Enables player's collision.
 func enable_collision() -> void:
     if _shape != null:
         _shape.disabled = false
     collision_layer = 2
 
-
+## Increase player's MAX health. Also completely heals the player.
 func increase_health(by: int) -> void:
     max_health += by
     player_health_changed.emit(current_health, max_health)
     current_health = max_health
 
-
+## Heals player, but not above maximum health.
 func heal(value: int) -> void:
     player_health_changed.emit(
         current_health, min(max_health, current_health + value))
     current_health = min(max_health, current_health + value)
 
-
+## Gain mana, but not above maximum mana.
 func give_mana(value: int) -> void:
     mana_changed.emit(min(max_mana, current_mana + value))
     current_mana = min(max_mana, current_mana + value)
 
-
+## Deal damage to the player.
 func damage(value: int) -> void:
     if current_health <= 0:
         return
@@ -126,44 +138,45 @@ func damage(value: int) -> void:
     if current_health <= 0:
         player_dies()
 
-
+## Set money to a specific value.
 func set_money(count: int) -> void:
     money = count
     _money_bar.set_money(count)
 
-
+## Add number of money to current money.
 func add_money(count: int) -> void:
     money += count
     _money_bar.add_money(count)
 
-
+## Reduce number of money. NOTE: doesn't check if overdraw.
 func spend_money(count: int) -> void:
     money -= count
     _money_bar.remove_money(count)
 
-
+## Returns true if player can drop through the surface he stands on.
 func can_drop_down() -> bool:
     if !is_on_floor(): return false
 
     return !_jumpdown.has_overlapping_areas()
 
-
+## Start dropping down, will automatically call stop_drop_down.
 func start_drop_down() -> void:
     Logger.debug("Starting drop down")
     set_collision_mask_value(9, false)
+    ## HACK: re-enable after 0.5
     get_tree().create_timer(0.5, true, true)\
         .timeout.connect(stop_drop_down, CONNECT_ONE_SHOT)
 
-
+## Stop dropping down, no need to call in general.
 func stop_drop_down() -> void:
     Logger.debug("Stopping drop down")
     set_collision_mask_value(9, true)
 
-
+## Call when player dies.
 func player_dies() -> void:
     player_dead.emit()
 
-
+## Return true, if player can tranform to `form`.
 func can_transform(form: PlayerForms) -> bool:
     match form:
         PlayerForms.HUMAN:
@@ -178,21 +191,21 @@ func can_transform(form: PlayerForms) -> bool:
 
     return false
 
-
+## Check if there is enough mana.
 func has_mana(value: int) -> bool:
     return current_mana >= value
 
-
+## Spend mana (error if not enough).
 func use_mana(value: int) -> void:
     assert(has_mana(value))
     mana_changed.emit(current_mana - value)
     current_mana -= value
 
-
+## Play animation with name `anim_name` from available libraries.
 func play_anim(anim_name: String) -> void:
     player_anim.play("player/" + anim_name)
 
-
+## Change player's collision shape based on `form`.
 func ensure_collision(form: PlayerForms) -> void:
     var shape: Vector2
     var hurtbox: Vector2
@@ -217,7 +230,7 @@ func ensure_collision(form: PlayerForms) -> void:
     velocity.y += 2
     move_and_slide()
 
-
+## Get ladder player is currently on. Returns null, if not on a ladder.
 func get_ladder() -> Ladder:
     var areas := _climb_area.get_overlapping_areas()
     for area in areas:
@@ -226,18 +239,21 @@ func get_ladder() -> Ladder:
 
     return null
 
-
+## Adds `item` to inventory.
 func add_item_to_inv(item: String) -> void:
     inventory.push_back(item)
 
-
+## Removes `item` from inventory (error if not found).
 func remove_item_to_inv(item: String) -> void:
     inventory.erase(item)
 
-
+## Returns true if player has `item`.
 func has_item_in_inv(item: String) -> bool:
     return inventory.has(item)
 
+######
+# PRIVATE METHODS
+######
 
 func _ready() -> void:
     var health_bar := $"%health_bar" as HealthBar

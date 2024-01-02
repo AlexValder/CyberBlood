@@ -10,6 +10,18 @@ var _shift := Vector2.ZERO
 var _mouse_used := false
 
 
+######
+# PUBLIC METHODS
+######
+
+## Returns target's current position with shift applied.
+func get_target_position() -> Vector2:
+    return global_position + _shift
+
+######
+# PRIVATE METHODS
+######
+
 func _input(event: InputEvent) -> void:
     # TODO: fix junkiness
     if event.is_action_pressed("camera_toggle"):
@@ -34,13 +46,9 @@ func _input(event: InputEvent) -> void:
         _shift = Vector2.ZERO
 
 
-func _unhandled_input(event: InputEvent) -> void:
+func _unhandled_input(_event: InputEvent) -> void:
     if !_mouse_used:
         var shift := Input.get_vector(
             "camera_left", "camera_right", "camera_up", "camera_down")
         _shift.x = shift.x * CAMERA_HORIZONTAL_SHIFT
         _shift.y = shift.y * CAMERA_VERTICAL_SHIFT
-
-
-func get_target_position() -> Vector2:
-    return global_position + _shift

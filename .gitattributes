@@ -5,4 +5,5 @@
 assets/animations/skeleton.res filter=lfs diff=lfs merge=lfs -text
 assets/animations/player.res filter=lfs diff=lfs merge=lfs -text
 assets/animations/player_effects.res filter=lfs diff=lfs merge=lfs -text
+assets/animations/giant_bat.res filter=lfs diff=lfs merge=lfs -text
 *.ttf filter=lfs diff=lfs merge=lfs -text

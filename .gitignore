@@ -27,3 +27,5 @@ addons/*
 !addons/bloody_logger
 addons/bloody_logger/*
 !addons/bloody_logger/plugin.cfg
+
+.obsidian

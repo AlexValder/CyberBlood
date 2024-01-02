@@ -11,13 +11,13 @@ config_version=5
 [application]
 
 config/name="CyberBlood"
+config/version="0.0.0.9"
 config/tags=PackedStringArray("game", "2d")
 run/main_scene="res://scenes/ui/main_menu.tscn"
 config/use_custom_user_dir=true
 config/custom_user_dir_name="CyberBlood"
-config/features=PackedStringArray("4.1", "Forward Plus")
+config/features=PackedStringArray("4.2", "Forward Plus")
 config/icon="res://icon.svg"
-config/version="0.0.0.9"
 
 [autoload]
 
@@ -53,6 +53,12 @@ enabled=PackedStringArray("res://addons/AS2P/plugin.cfg", "res://addons/Todo_Man
 [filesystem]
 
 import/blender/enabled=false
+
+[gui]
+
+theme/custom="res://assets/gui/themes/default.tres"
+theme/custom_font="res://assets/gui/fonts/Beholden-Regular.ttf"
+theme/default_font_generate_mipmaps=true
 
 [input]
 

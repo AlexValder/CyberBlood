@@ -1,4 +1,4 @@
-[gd_scene load_steps=75 format=3 uid="uid://dl03gx0p4nru6"]
+[gd_scene load_steps=74 format=3 uid="uid://dl03gx0p4nru6"]
 
 [ext_resource type="Script" path="res://entities/enemies/skeleton/skeleton.gd" id="1_scjn5"]
 [ext_resource type="Texture2D" uid="uid://c7mjgj1m4msdg" path="res://assets/sprites/skeleton/attack1.png" id="2_c4jyl"]
@@ -17,7 +17,6 @@
 [ext_resource type="Script" path="res://entities/enemies/skeleton/state_machine/state_machine.gd" id="14_noadi"]
 [ext_resource type="Script" path="res://entities/enemies/skeleton/state_machine/death.gd" id="15_jtmg2"]
 [ext_resource type="Script" path="res://entities/enemies/skeleton/state_machine/walk.gd" id="15_owcli"]
-[ext_resource type="Theme" uid="uid://brlh53bypvlrb" path="res://assets/gui/themes/default.tres" id="16_850ak"]
 [ext_resource type="Script" path="res://entities/enemies/skeleton/state_machine/fall.gd" id="16_kdtjt"]
 [ext_resource type="FontFile" uid="uid://dgw8oojx04n8d" path="res://assets/gui/fonts/m3x6.ttf" id="17_4oug7"]
 [ext_resource type="Script" path="res://entities/enemies/skeleton/state_machine/watch.gd" id="19_yluc4"]
@@ -525,7 +524,6 @@ offset_bottom = -76.0
 grow_horizontal = 2
 grow_vertical = 0
 size_flags_vertical = 0
-theme = ExtResource("16_850ak")
 theme_override_constants/separation = 0
 
 [node name="name" type="Label" parent="vbox"]
