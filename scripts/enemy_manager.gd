@@ -13,6 +13,15 @@ func _ready() -> void:
         _keys[i] = _keys[i].to_lower()
 
 
+func repopulate(level: BaseLevel) -> void:
+    var children := level.enemies.get_children()
+    for child in children:
+        var spawner := child as EnemySpawner
+        if spawner == null: continue
+
+        spawner.spawn_enemy()
+
+
 func get_enemy_path(value: Constants.ENEMY_TYPE) -> String:
     return "res://entities/enemies/{e}/{e}.tscn".format({"e" = _keys[value]})
 
