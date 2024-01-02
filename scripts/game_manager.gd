@@ -7,6 +7,7 @@ const LEVELS := {
     "game": "res://scenes/levels/{biome}/{biome}.{id}.tscn",
     "demo_end": "res://scenes/ui/end_demo_screen.tscn",
 }
+const DEATH_SCREEN := "res://scenes/ui/death_screen.tscn"
 const FIRST_LEVEL_FORMAT := {"biome" = "garbage", "id" = "000"}
 const FRESH_SAVE_NAME := "Start level"
 
@@ -15,6 +16,7 @@ var _prev_state := false
 var _save_index := -1
 var save_data: PlayerSave
 
+var death_screen := preload(DEATH_SCREEN).instantiate() as DeathScreen
 var player_scene := preload("res://entities/player/player.tscn") as PackedScene
 var player: Player
 var camera: PlayerCamera
@@ -73,9 +75,10 @@ func save_game(current_room := true) -> void:
     save_data.update_player_data(player)
     EnemyManager.clear_killed()
 
+    var level := get_tree().current_scene as BaseLevel
+    EnemyManager.repopulate(level)
 
     if current_room:
-        var level := get_tree().current_scene as BaseLevel
         save_data.map.biome = level.biome
         save_data.map.id = level.id
         save_data.map.current = level.get_save_name()
@@ -140,7 +143,10 @@ func remove_player() -> void:
 
 
 func player_dies() -> void:
-    await get_tree().create_timer(3).timeout
+    death_screen.visible = true
+    death_screen.play()
+    await death_screen.death_screen_done
+    death_screen.visible = false
 
     last_room = []
     EnemyManager.clear_killed()
@@ -174,6 +180,8 @@ func _ready() -> void:
         as PackedScene
     camera = scene.instantiate() as PlayerCamera
     add_child(camera)
+    death_screen.visible = false
+    add_child(death_screen)
 
     create_player()
     randomize()

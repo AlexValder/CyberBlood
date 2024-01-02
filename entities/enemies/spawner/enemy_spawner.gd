@@ -8,10 +8,10 @@ class_name EnemySpawner
 
 func _ready() -> void:
     if always_spawn || !EnemyManager.was_killed(owner.name, self.name):
-        _spawn_enemy()
+        spawn_enemy()
 
 
-func _spawn_enemy() -> void:
+func spawn_enemy() -> void:
     var enemy := EnemyManager.load_enemy(enemy_type, options)
     enemy.enemy_died.connect(_on_enemy_died, CONNECT_ONE_SHOT)
 
