@@ -29,7 +29,6 @@ func _init() -> void:
 
 
 static func create_save(p: Player, level: BaseLevel) -> PlayerSave:
-
     var state := PlayerSave.new()
 
     state.player.max_health = p.max_health
@@ -102,7 +101,7 @@ func apply_player_data(p: Player) -> void:
     p.current_health = max(self.player.max_health, p.max_health)
     p.max_mana = max(self.player.max_mana, p.max_mana)
     p.current_mana = max(self.player.max_mana, p.max_mana)
-    p.money = self.player.money
+    p.set_money(self.player.money)
     p.inventory = self.player.inventory.duplicate()
 
 

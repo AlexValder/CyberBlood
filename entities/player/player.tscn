@@ -737,7 +737,7 @@ wait_time = 2.0
 autostart = true
 
 [node name="player_anim" type="AnimationPlayer" parent="."]
-playback_process_mode = 0
+callback_mode_process = 0
 libraries = {
 "player": ExtResource("13_0r7r0"),
 "player_effects": ExtResource("16_0x7we")

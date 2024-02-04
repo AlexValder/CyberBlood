@@ -49,4 +49,4 @@ func _init() -> void:
 
 
 func _on_body_entered(_node: Node2D) -> void:
-    GameManager.call_deferred("change_room", self)
+    GameManager.level_manager.call_deferred("change_room", self)
