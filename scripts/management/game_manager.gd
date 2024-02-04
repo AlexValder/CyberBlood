@@ -2,21 +2,11 @@ extends Node
 
 signal debug_toggled(debug)
 
-const LEVELS := {
-    "menu": "res://scenes/ui/main_menu.tscn",
-    "game": "res://scenes/levels/{biome}/{biome}.{id}.tscn",
-    "demo_end": "res://scenes/ui/end_demo_screen.tscn",
-}
-const DEATH_SCREEN := "res://scenes/ui/death_screen.tscn"
-const FIRST_LEVEL_FORMAT := {"biome" = "garbage", "id" = "000"}
-const FRESH_SAVE_NAME := "Start level"
-
-var _playing := false
 var _prev_state := false
 var _save_index := -1
 var save_data: PlayerSave
 
-var death_screen := preload(DEATH_SCREEN).instantiate() as DeathScreen
+var death_screen := preload(LevelManager.DEATH_SCREEN).instantiate() as DeathScreen
 var player_scene := preload("res://entities/player/player.tscn") as PackedScene
 var player: Player
 var camera: PlayerCamera
@@ -25,60 +15,40 @@ var debug_disabled: bool = !should_show_debug():
         return
     get:
         return debug_disabled
-var last_room := []
+
+var level_manager: LevelManager
 
 
 func start_game(index: int = _save_index) -> void:
     _save_index = index
-
-    create_player()
-
-    var level: String
-    if SavesManager.save_exists(_save_index):
-        save_data = SavesManager.get_save(_save_index)
-        save_data.apply_player_data(player)
-        var biome := save_data.map.biome as String
-        var id := save_data.map.id as String
-
-        level = LEVELS["game"].format({"biome" = biome, "id" = id})
-    else:
-        save_data = PlayerSave.new()
-        save_data.update_player_data(player)
-        level = LEVELS["game"].format(FIRST_LEVEL_FORMAT)
-        save_data.map.biome = FIRST_LEVEL_FORMAT.biome
-        save_data.map.id = FIRST_LEVEL_FORMAT.id
-        save_data.map.current = FRESH_SAVE_NAME
-
-
+    add_player()
     get_tree().root.add_child(player)
 
     camera.player = player
     camera.setup_player()
     camera.enabled = true
     camera.set_process(true)
-    get_tree().change_scene_to_file(level)
-    _playing = true
+    level_manager.start_level(player, _save_index)
 
 
 func reload_level() -> void:
-    create_player()
+    add_player()
     save_data.apply_player_data(player)
-    last_room = []
+    level_manager.reset_last_room()
     get_tree().reload_current_scene()
     get_tree().root.add_child(player)
 
 
-func save_game(current_room := true) -> void:
-    if player == null || !_playing:
+func save_game(save_current_room := true) -> void:
+    if player == null || !level_manager.playing:
         return
 
     save_data.update_player_data(player)
-    EnemyManager.clear_killed()
-
     var level := get_tree().current_scene as BaseLevel
     EnemyManager.repopulate(level)
+    EnemyManager.clear_killed()
 
-    if current_room:
+    if save_current_room:
         save_data.map.biome = level.biome
         save_data.map.id = level.id
         save_data.map.current = level.get_save_name()
@@ -86,49 +56,24 @@ func save_game(current_room := true) -> void:
     SavesManager.save_state(_save_index, save_data)
 
 
-func dev_change_room(biome: String, id: String) -> void:
-    last_room = []
-
-    var path := "res://scenes/levels/{biome}/{biome}.{id}.tscn".format({
-        "biome" = biome,
-        "id" = id,
-    })
-
-    get_tree().change_scene_to_file(path)
-
-
-func change_room(trigger: RoomTransitionTrigger) -> void:
-    last_room = [trigger.fromId, trigger.entryId, trigger.get_dir()]
-    get_tree().change_scene_to_file(trigger.get_room_path())
-
-
 func quit_to_menu() -> void:
     EnemyManager.clear_killed()
-
-    _playing = false
-
     remove_player()
     save_data = null
     _save_index = -1
-    last_room = []
-    get_tree().paused = false
-    get_tree().change_scene_to_file(LEVELS["menu"])
+    level_manager.quit_to_menu()
 
 
 func demo_ends() -> void:
     EnemyManager.clear_killed()
-
-    _playing = false
     remove_player()
-    last_room = []
-    get_tree().paused = false
-    get_tree().change_scene_to_file(LEVELS["demo_end"])
+    level_manager.demo_ends()
 
 
-func create_player() -> void:
+func add_player() -> void:
     remove_player()
 
-    player = player_scene.instantiate()
+    player = player_scene.instantiate() as Player
     player.player_dead.connect(player_dies, CONNECT_ONE_SHOT)
 
 
@@ -148,20 +93,19 @@ func player_dies() -> void:
     await death_screen.death_screen_done
     death_screen.visible = false
 
-    last_room = []
+    level_manager.reset_last_room()
     EnemyManager.clear_killed()
 
-    var biome := save_data.map.biome as String
-    var id := save_data.map.id as String
-    var level = LEVELS["game"].format({"biome" = biome, "id" = id})
-
-    create_player()
+    add_player()
     get_tree().root.add_child(player)
     camera.player = player
     camera.setup_player()
     camera.enabled = true
     camera.set_process(true)
-    get_tree().change_scene_to_file(level)
+
+    var biome := save_data.map.biome as String
+    var id := save_data.map.id as String
+    level_manager.load_level(biome, id)
 
 
 func should_show_debug() -> bool:
@@ -176,14 +120,16 @@ func toggle_debug_info(debug: bool) -> void:
 func _ready() -> void:
     self.process_mode = Node.PROCESS_MODE_ALWAYS
 
-    var scene := preload("res://entities/player/player_camera.tscn")\
-        as PackedScene
-    camera = scene.instantiate() as PlayerCamera
+    level_manager = LevelManager.new()
+    add_child(level_manager)
+
+    var camera_scene = preload("res://entities/player/player_camera.tscn")
+    camera = camera_scene.instantiate() as PlayerCamera
     add_child(camera)
     death_screen.visible = false
     add_child(death_screen)
 
-    create_player()
+    add_player()
     randomize()
 
     _prepare_user_folder()

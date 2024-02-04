@@ -66,8 +66,9 @@ func _ready() -> void:
     GameManager.player.disable_collision()
 
     var spawn: Vector2
-    if GameManager.last_room.size() > 0:
-        spawn = _get_spawn(GameManager.last_room[0], GameManager.last_room[1])
+    if GameManager.level_manager.has_last_room():
+        var last_room := GameManager.level_manager.last_room
+        spawn = _get_spawn(last_room.fromId, last_room.entryId)
     elif _is_dev() || _is_game_beginning():
         spawn = _initial_spawn.global_position
     else:
@@ -134,4 +135,4 @@ func _is_dev() -> bool:
 
 
 func _is_game_beginning() -> bool:
-    return GameManager.save_data.map.current == GameManager.FRESH_SAVE_NAME
+    return GameManager.save_data.map.current == LevelManager.FRESH_SAVE_NAME

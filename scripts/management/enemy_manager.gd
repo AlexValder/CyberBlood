@@ -19,7 +19,8 @@ func repopulate(level: BaseLevel) -> void:
         var spawner := child as EnemySpawner
         if spawner == null: continue
 
-        spawner.spawn_enemy()
+        if was_killed(level.name, spawner.name):
+            spawner.spawn_enemy()
 
 
 func get_enemy_path(value: Constants.ENEMY_TYPE) -> String:

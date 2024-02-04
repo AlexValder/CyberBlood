@@ -37,7 +37,7 @@ func _on_change_level_button_released() -> void:
 
     Logger.debug("Switch to: Biome=%s, id=%s" % [biome, id])
 
-    GameManager.dev_change_room(biome, id)
+    GameManager.level_manager.dev_change_room(biome, id)
 
 
 func _on_open_folder_button_released() -> void:

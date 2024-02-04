@@ -26,10 +26,10 @@ func physics_process(delta: float) -> void:
     if Input.is_action_just_pressed("down"):
         state_change.emit(self.name, "climbing")
 
-    if Input.is_action_pressed("left"):
+    if Input.is_action_pressed("left") and player.is_on_floor():
         state_change.emit(self.name, "run")
 
-    if Input.is_action_pressed("right"):
+    if Input.is_action_pressed("right") and player.is_on_floor():
         state_change.emit(self.name, "run")
 
     if Input.is_action_just_pressed("dash"):

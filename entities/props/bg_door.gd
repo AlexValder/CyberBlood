@@ -12,7 +12,7 @@ signal unlocked
 
 
 func interact() -> void:
-    GameManager.change_room(self)
+    GameManager.level_manager.change_room(self)
 
 
 func _ready() -> void:
