@@ -6,7 +6,6 @@ var _target: CameraTarget
 var _ignore_y := false
 
 @onready var _timer := $timer as Timer
-@onready var _label := $canvas/label as RichTextLabel
 
 ######
 # PUBLIC METHODS
@@ -47,17 +46,17 @@ func _on_state_change(old: String, new: String) -> void:
         "jump", "double_jump":
             _toggle_ignore_y(true)
         "idle":
-            pass
+            if player.is_on_floor():
+                _timer.stop()
+                _toggle_ignore_y(false)
         "fall", "double_fall":
-            _start_restore_timer(1.5)
+            _start_restore_timer(0.6)
         _:
             _timer.stop()
             _toggle_ignore_y(false)
 
 
 func _toggle_ignore_y(new_ignore_y: bool) -> void:
-    _label.text = "Camera Y: " + ("[color=green]TRUE[/color]" if !new_ignore_y\
-        else "[color=red]FALSE[/color]")
     _ignore_y = new_ignore_y
 
 

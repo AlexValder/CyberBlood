@@ -44,10 +44,9 @@ func save_game(save_current_room := true) -> void:
         return
 
     save_data.update_player_data(player)
-    EnemyManager.clear_killed()
-
     var level := get_tree().current_scene as BaseLevel
     EnemyManager.repopulate(level)
+    EnemyManager.clear_killed()
 
     if save_current_room:
         save_data.map.biome = level.biome
